@@ -1,0 +1,79 @@
+.container {
+  @include flex-column;
+  min-height: calc(100vh - 100px);
+}
+
+.header {
+  @include flex-layout;
+  padding: 24px 16px 0;
+  width: 100%;
+  gap: 14px;
+}
+
+.wallet {
+  @include flex-center;
+  margin-left: auto;
+  gap: 10px;
+  border-radius: 48px;
+  padding: 8px 24px 8px 16px;
+  background: #1c2744;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  text-decoration-line: none;
+}
+
+.settings {
+  @include flex-center;
+  padding: 8px;
+  border-radius: 50%;
+  background: #1c2744;
+}
+
+.miner {
+  margin: 20px auto auto;
+}
+
+.slider {
+  width: 100vw;
+  overflow: hidden;
+  margin-top: 15px;
+  position: relative;
+}
+
+.swiper {
+  @include flex-layout;
+}
+
+.slide {
+  width: calc(100% - 32px);
+  flex-shrink: 0;
+  margin-inline: 16px;
+}
+
+.buttons {
+  @include flex-layout(space-between, center);
+  position: absolute;
+  translate: 0 -50%;
+  top: 50%;
+  left: 26px;
+  right: 26px;
+}
+
+.button {
+  @include flex-center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  &.left svg {
+    rotate: 180deg;
+  }
+
+  &.right {
+    margin-left: auto;
+  }
+}

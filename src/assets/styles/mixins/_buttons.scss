@@ -1,0 +1,15 @@
+@mixin button {
+  border-radius: 8px;
+  padding: 12px;
+  border: none;
+}
+
+@mixin primary-button {
+  @include button;
+  background: $primary;
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 150%;
+  letter-spacing: 0.01em;
+}

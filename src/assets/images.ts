@@ -1,0 +1,28 @@
+// ReactSVG
+export { EarnIcon } from "./ReactSVG/EarnIcon";
+export { FriendsIcon } from "./ReactSVG/FriendsIcon";
+export { MainIcon } from "./ReactSVG/MainIcon";
+export { MineIcon } from "./ReactSVG/MineIcon";
+export { WalletIcon } from "./ReactSVG/WalletIcon";
+export { SettingIcon } from "./ReactSVG/SettingIcon";
+export { ChevronRightIcon } from "./ReactSVG/ChevronRightIcon";
+
+export { default as defaultAvatar } from "./images/Avatar.png";
+
+// onboarding
+export { default as inviteImage } from "./images/onboarding/invite.png";
+export { default as miningImage } from "./images/onboarding/mining.png";
+export { default as earningImage } from "./images/onboarding/earning.png";
+export { default as fortuneWheelImage } from "./images/onboarding/fortune-wheel.png";
+export { default as waletImage } from "./images/onboarding/walet.png";
+
+// main
+export { default as minerImage } from "./images/main/miner.png";
+// slider
+export { default as slide1Image } from "./images/main/slider/slide-1.png";
+
+
+// balance
+export { default as heartImage } from "./images/balance/heart.png";
+export { default as thumbImage } from "./images/balance/thumb.png";
+
