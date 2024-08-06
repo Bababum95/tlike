@@ -21,8 +21,10 @@ export { default as minerImage } from "./images/main/miner.png";
 // slider
 export { default as slide1Image } from "./images/main/slider/slide-1.png";
 
-
 // balance
 export { default as heartImage } from "./images/balance/heart.png";
 export { default as thumbImage } from "./images/balance/thumb.png";
 
+// mine
+export { default as byNftImage } from "./images/mine/by-nft.png";
+export { default as nftEmptyImage } from "./images/mine/empty.png";

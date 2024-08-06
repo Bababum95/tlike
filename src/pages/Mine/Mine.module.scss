@@ -1,0 +1,111 @@
+.container {
+  @include flex-column;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.header {
+  @include flex-layout;
+  padding: 24px 16px 20px;
+  width: 100%;
+  gap: 14px;
+
+  .buttons {
+    @include flex-layout(flex-end, stretch);
+    margin-left: auto;
+    border-radius: 44px;
+    padding: 2px;
+    width: 198px;
+    height: 40px;
+    background: $section;
+    position: relative;
+  }
+
+  .button {
+    @include flex-center;
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #fff;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .background {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    background: rgba(0, 122, 255, 0.35);
+    border: 1px solid $primary;
+    border-radius: 40px;
+    width: 97px;
+
+    &.mining {
+      left: 2px;
+    }
+
+    &.upgrades {
+      right: 2px;
+    }
+  }
+}
+
+.main {
+  padding: 0 16px;
+}
+
+.by-nft {
+  margin: 14px auto 0;
+}
+
+.title {
+  margin: 14px 16px;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+}
+
+.empty {
+  @include flex-column;
+  align-items: center;
+  background-color: $section;
+  padding: 32px;
+  border-radius: 16px;
+  position: relative;
+  @include border-gradient;
+
+  .title {
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+    margin: 24px 0 4px;
+  }
+
+  .button {
+    @include primary-button;
+    width: 100%;
+    margin-top: 24px;
+  }
+}
+
+.text {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 153%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: $hint;
+  margin: 0;
+
+  span {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: $primary;
+  }
+}
