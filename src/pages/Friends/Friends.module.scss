@@ -1,0 +1,81 @@
+.page {
+  @include flex-column;
+  padding: 24px 16px 100px;
+  min-height: 100vh;
+}
+
+h1.title {
+  font-weight: 600;
+  font-size: 24px;
+  background: linear-gradient(49deg, #007aff 0%, #93c6ff 56%, #007aff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+h2.title {
+  @include h2;
+  margin: 28px 8px 18px;
+}
+
+.hint {
+  margin: 0 0 38px;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: $hint;
+}
+
+.list {
+  @include flex-column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 14px;
+}
+
+.item {
+  @include flex-layout(flex-start, center);
+  padding: 14px 16px;
+  gap: 16px;
+  border-radius: 16px;
+  position: relative;
+  background-color: $section;
+  @include border-gradient;
+
+  &-title {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    margin: 0 0 4px;
+  }
+
+  &-text {
+    margin: 0;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    color: $primary;
+  }
+}
+
+.invite {
+  @include flex-layout(flex-start, stretch);
+  width: 100%;
+  gap: 8px;
+
+  &-button {
+    @include primary-button;
+    flex: 1;
+  }
+}
+
+.copy {
+  @include flex-center;
+  @include primary-button;
+  width: 50px;
+  height: 50px;
+}

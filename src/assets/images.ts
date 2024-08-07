@@ -6,8 +6,16 @@ export { MineIcon } from "./ReactSVG/MineIcon";
 export { WalletIcon } from "./ReactSVG/WalletIcon";
 export { SettingIcon } from "./ReactSVG/SettingIcon";
 export { ChevronRightIcon } from "./ReactSVG/ChevronRightIcon";
+export { TelegramLogoIcon } from "./ReactSVG/TelegramLogoIcon";
+export { TelegramPremiumIcon } from "./ReactSVG/TelegramPremiumIcon";
+export { CopyIcon } from "./ReactSVG/CopyIcon";
+
+// Animations
+export { default as minerAnimation } from "./animations/miner.mp4";
+export { default as onboardingAnimation } from "./animations/Onboarding.gif";
 
 export { default as defaultAvatar } from "./images/Avatar.png";
+export { default as emptyImage } from "./images/empty.png";
 
 // onboarding
 export { default as inviteImage } from "./images/onboarding/invite.png";
@@ -27,4 +35,3 @@ export { default as thumbImage } from "./images/balance/thumb.png";
 
 // mine
 export { default as byNftImage } from "./images/mine/by-nft.png";
-export { default as nftEmptyImage } from "./images/mine/empty.png";

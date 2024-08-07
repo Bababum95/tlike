@@ -2,12 +2,14 @@ import { FC, useState } from "react";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
+import { initUtils } from "@telegram-apps/sdk";
 
 import {
   earningImage,
   fortuneWheelImage,
   inviteImage,
   miningImage,
+  onboardingAnimation,
   waletImage,
 } from "@images";
 
@@ -41,6 +43,7 @@ export const Onboarding = () => {
   const dragX = useMotionValue(0);
   const { t } = useTranslation("onboarding");
   const wallet = useTonWallet();
+  const utils = initUtils();
 
   const next = () => {
     setImgIndex((prev) => Math.min(prev + 1, SLIDES.length - 1));
@@ -50,14 +53,22 @@ export const Onboarding = () => {
     return Math.abs(offset) * velocity;
   };
 
+  const byNft = () => {
+    utils.openLink(
+      "https://getgems.io/collection/EQDMvchkiDT6H2ufjqCecyLb6-S9YYE1-JzSC7D-AbJfee2g"
+    );
+  };
+
   const SLIDES = [
     {
-      image: earningImage,
+      image: onboardingAnimation,
       title: "earn-title",
       text: (
         <>
           {t("earn-text-1")}
-          <a href="https://getgems.io">getgems.io</a>
+          <span onClick={byNft} className={styles.link}>
+            getgems.io
+          </span>
           {t("earn-text-2")}
         </>
       ),

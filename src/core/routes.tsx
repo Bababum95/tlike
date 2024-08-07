@@ -1,5 +1,5 @@
 import type { ComponentType, JSX } from "react";
-import { OnboardingPage, MainPage, MinePage } from "@/pages";
+import { OnboardingPage, MainPage, MinePage, FriendsPage } from "@/pages";
 import { EarnIcon, FriendsIcon, MainIcon, MineIcon } from "@/assets/images";
 
 type Route = {
@@ -15,7 +15,7 @@ export const mainRoutes: Route[] = [
   { path: "/earn", Component: MainPage, icon: <EarnIcon />, title: "Earn" },
   {
     path: "/friends",
-    Component: MainPage,
+    Component: FriendsPage,
     icon: <FriendsIcon />,
     title: "Friends",
   },

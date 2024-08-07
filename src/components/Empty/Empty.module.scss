@@ -1,0 +1,32 @@
+.container {
+  @include flex-column;
+  align-items: center;
+  background-color: $section;
+  padding: 32px;
+  border-radius: 16px;
+  position: relative;
+  @include border-gradient;
+
+  .title {
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+    margin: 24px 0 4px;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 153%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: $hint;
+    margin: 0 0 24px;
+
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      color: $primary;
+    }
+  }
+}

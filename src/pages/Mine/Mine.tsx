@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { initUtils } from "@telegram-apps/sdk";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { Balance, Navigation, User } from "@/components";
-import { byNftImage, nftEmptyImage } from "@images";
-
-import styles from "./Mine.module.scss";
 import classNames from "classnames";
 
+import { Balance, Empty, Navigation, User } from "@/components";
+import { byNftImage } from "@images";
+
+import styles from "./Mine.module.scss";
+
 export const Mine = () => {
+  const utils = initUtils();
   const [tab, setTab] = useState("mining");
   const { t } = useTranslation("mine");
 
   const byNft = () => {
-    console.log("clicked");
+    utils.openLink(
+      "https://getgems.io/collection/EQDMvchkiDT6H2ufjqCecyLb6-S9YYE1-JzSC7D-AbJfee2g"
+    );
   };
 
   return (
@@ -40,7 +44,7 @@ export const Mine = () => {
           key={tab}
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -10, opacity: 0 }}
+          exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
           {tab === "mining" && (
@@ -52,17 +56,15 @@ export const Mine = () => {
                 onClick={byNft}
               />
               <h2 className={styles.title}>{t("my-nfts")}</h2>
-              <div className={styles.empty}>
-                <img src={nftEmptyImage} alt="" />
-                <h3 className={styles.title}>{t("no-nfts-title")}</h3>
-                <p className={styles.text}>
+              <Empty title={t("no-nfts-title")}>
+                <p>
                   {t("no-nfts-text")}
                   <span onClick={byNft}>{t("no-nfts-link")}</span>
                 </p>
-                <button className={styles.button} onClick={byNft}>
+                <button className={styles["button-empty"]} onClick={byNft}>
                   {t("no-nfts-button")}
                 </button>
-              </div>
+              </Empty>
             </>
           )}
         </motion.div>

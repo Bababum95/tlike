@@ -4,7 +4,12 @@ import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import classNames from "classnames";
 
 import { Navigation, User, Balance } from "@/components";
-import { ChevronRightIcon, minerImage, SettingIcon, WalletIcon } from "@images";
+import {
+  ChevronRightIcon,
+  minerAnimation,
+  SettingIcon,
+  WalletIcon,
+} from "@images";
 import {
   MAIN_SLIDER,
   AUTO_DELAY,
@@ -55,7 +60,19 @@ export const Main = () => {
           <SettingIcon />
         </Link>
       </header>
-      <img className={styles.miner} src={minerImage} alt="Miner" />
+      {/* <img className={styles.miner} src={minerImage} alt="Miner" /> */}
+      <video
+        className={styles.miner}
+        src={minerAnimation}
+        autoPlay
+        loop
+        muted
+        playsInline
+        data-wf-ignore="true"
+        data-object-fit="cover"
+      >
+        <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
+      </video>
       <Balance />
       <div className={styles.slider}>
         <AnimatePresence initial={false}>
@@ -96,24 +113,22 @@ export const Main = () => {
             ))}
           </motion.div>
         </AnimatePresence>
-        <div className={styles.buttons}>
-          {imgIndex > 0 && (
-            <button
-              className={classNames(styles.button, styles.left)}
-              onClick={() => setImgIndex((prev) => Math.max(prev - 1, 0))}
-            >
-              <ChevronRightIcon />
-            </button>
-          )}
-          {imgIndex < MAIN_SLIDER.length - 1 && (
-            <button
-              className={classNames(styles.button, styles.right)}
-              onClick={next}
-            >
-              <ChevronRightIcon />
-            </button>
-          )}
-        </div>
+        {imgIndex > 0 && (
+          <button
+            className={classNames(styles.button, styles.left)}
+            onClick={() => setImgIndex((prev) => Math.max(prev - 1, 0))}
+          >
+            <ChevronRightIcon />
+          </button>
+        )}
+        {imgIndex < MAIN_SLIDER.length - 1 && (
+          <button
+            className={classNames(styles.button, styles.right)}
+            onClick={next}
+          >
+            <ChevronRightIcon />
+          </button>
+        )}
       </div>
       <Navigation />
     </div>

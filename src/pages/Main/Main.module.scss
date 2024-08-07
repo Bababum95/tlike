@@ -33,6 +33,8 @@
 
 .miner {
   margin: 20px auto auto;
+  position: relative;
+  z-index: -1;
 }
 
 .slider {
@@ -52,15 +54,6 @@
   margin-inline: 16px;
 }
 
-.buttons {
-  @include flex-layout(space-between, center);
-  position: absolute;
-  translate: 0 -50%;
-  top: 50%;
-  left: 26px;
-  right: 26px;
-}
-
 .button {
   @include flex-center;
   background: rgba(255, 255, 255, 0.1);
@@ -69,12 +62,19 @@
   width: 44px;
   height: 44px;
   padding: 0;
+  position: absolute;
+  translate: 0 -50%;
+  top: 50%;
 
-  &.left svg {
-    rotate: 180deg;
+  &.left {
+    left: 26px;
+
+    svg {
+      rotate: 180deg;
+    }
   }
 
   &.right {
-    margin-left: auto;
+    right: 26px;
   }
 }

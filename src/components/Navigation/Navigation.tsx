@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { initHapticFeedback } from "@telegram-apps/sdk";
 import classNames from "classnames";
 
 import { mainRoutes } from "@/core/routes";
+import { Link } from "@/components";
 
 import styles from "./Navigation.module.scss";
 
