@@ -6,7 +6,7 @@ export const Balance = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <img src={thumbImage} alt="Like" />
+        <img height="28px" src={thumbImage} alt="Like" />
         <p className={styles.title}>Like balance</p>
         <p className={styles.value}>0 Like</p>
         <p className={styles.unit}>0 Like/h</p>

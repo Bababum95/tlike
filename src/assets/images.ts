@@ -15,7 +15,7 @@ export { default as minerAnimation } from "./animations/miner.mp4";
 export { default as onboardingAnimation } from "./animations/Onboarding.gif";
 
 // images
-export { default as defaultAvatar } from "./images/avatar.png";
+export { default as defaultAvatar } from "./images/avatar-empty.png";
 export { default as emptyImage } from "./images/empty.png";
 
 // onboarding
