@@ -3,24 +3,13 @@
 }
 
 .image {
-  background-color: aqua;
   border-radius: 50%;
   display: block;
   aspect-ratio: 1 / 1;
 }
 
-.name {
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  color: #fff;
-  font-weight: 600;
-  margin: 0 0 4px;
-}
-
 .id {
   font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.02em;
   background: linear-gradient(90deg, #007aff 0%, #aad3ff 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -28,10 +17,48 @@
   margin: 0;
 }
 
+.name {
+  letter-spacing: 0.01em;
+  font-weight: 600;
+}
+
 .row {
   gap: 12px;
 
   .image {
     width: 40px;
+  }
+
+  .name {
+    font-size: 14px;
+    margin: 0 0 4px;
+  }
+
+  .id {
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+}
+
+.column {
+  flex-direction: column;
+  gap: 14px;
+
+  .image {
+    width: 96px;
+    height: 96px;
+  }
+
+  .name {
+    font-size: 24px;
+    line-height: 175%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .id {
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-align: center;
   }
 }

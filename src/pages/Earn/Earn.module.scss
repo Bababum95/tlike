@@ -15,14 +15,14 @@
   @include h2;
 }
 
-h1 {
+h1.title {
   margin-bottom: 32px;
   margin: 28px 0 8px;
   text-align: center;
 }
 
-h2 {
-  margin: 20px 6px 16px;
+h2.title {
+  margin: 20px 8px 16px;
 }
 
 .text {

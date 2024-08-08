@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import classNames from "classnames";
 
-import { Navigation, User, Balance } from "@/components";
+import { Navigation, User, Balance, Link } from "@/components";
 import {
   ChevronRightIcon,
   minerAnimation,

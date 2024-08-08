@@ -1,0 +1,34 @@
+.page {
+  padding: 24px 0;
+}
+
+.buttons {
+  @include flex-layout(flex-start, stretch);
+  gap: 10px;
+  margin: 24px 0;
+  padding: 0 16px;
+}
+
+.button {
+  @include button;
+  flex: 1;
+  color: #fff;
+  background-color: $section;
+}
+
+.deposit {
+  @include primary-button;
+  flex: 1;
+}
+
+.button,
+.deposit {
+  padding: 10px;
+  font-size: 15px;
+  line-height: 147%;
+}
+
+.title {
+  @include h2;
+  margin: 20px 24px 16px;
+}
