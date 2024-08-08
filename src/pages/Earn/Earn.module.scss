@@ -1,0 +1,47 @@
+.page {
+  @include flex-column;
+  padding: 14px 16px 100px;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.preview {
+  max-width: 250px;
+  margin-inline: auto;
+}
+
+.title {
+  @include h2;
+}
+
+h1 {
+  margin-bottom: 32px;
+  margin: 28px 0 8px;
+  text-align: center;
+}
+
+h2 {
+  margin: 20px 6px 16px;
+}
+
+.text {
+  max-width: 185px;
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #a2acb0;
+  line-height: 1.2;
+}
+
+.spin {
+  @include primary-button;
+  margin: 24px 8px 0;
+
+  &:disabled {
+    background: rgba(67, 120, 255, 0.1);
+    color: $primary;
+  }
+}

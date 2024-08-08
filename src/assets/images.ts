@@ -14,7 +14,8 @@ export { CopyIcon } from "./ReactSVG/CopyIcon";
 export { default as minerAnimation } from "./animations/miner.mp4";
 export { default as onboardingAnimation } from "./animations/Onboarding.gif";
 
-export { default as defaultAvatar } from "./images/Avatar.png";
+// images
+export { default as defaultAvatar } from "./images/avatar.png";
 export { default as emptyImage } from "./images/empty.png";
 
 // onboarding
@@ -26,7 +27,7 @@ export { default as waletImage } from "./images/onboarding/walet.png";
 
 // main
 export { default as minerOffImage } from "./images/main/turned-off-miner.png";
-// slider
+// -- slider
 export { default as slide1Image } from "./images/main/slider/slide-1.png";
 
 // balance
@@ -35,3 +36,6 @@ export { default as thumbImage } from "./images/balance/thumb.png";
 
 // mine
 export { default as byNftImage } from "./images/mine/by-nft.png";
+
+// earn
+export { default as fortuneWheelPreviewImage } from "./images/earn/fortune-wheel.png";

@@ -2,6 +2,8 @@
   @include flex-column;
   padding: 24px 16px 100px;
   min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 h1.title {
@@ -27,39 +29,6 @@ h2.title {
   letter-spacing: 0.01em;
   text-align: center;
   color: $hint;
-}
-
-.list {
-  @include flex-column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  gap: 14px;
-}
-
-.item {
-  @include flex-layout(flex-start, center);
-  padding: 14px 16px;
-  gap: 16px;
-  border-radius: 16px;
-  position: relative;
-  background-color: $section;
-  @include border-gradient;
-
-  &-title {
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-    margin: 0 0 4px;
-  }
-
-  &-text {
-    margin: 0;
-    font-weight: 400;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-    color: $primary;
-  }
 }
 
 .invite {
