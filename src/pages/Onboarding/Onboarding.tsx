@@ -5,7 +5,6 @@ import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { initUtils } from "@telegram-apps/sdk";
 
 import {
-  earningImage,
   fortuneWheelImage,
   inviteImage,
   miningImage,
