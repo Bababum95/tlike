@@ -9,6 +9,8 @@ export const Wallet = () => {
   const { t } = useTranslation("wallet");
   const wallet = useTonWallet();
 
+  console.log(wallet);
+
   return (
     <div className={styles.page}>
       <User direction="column" />
