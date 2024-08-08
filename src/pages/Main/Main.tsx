@@ -6,7 +6,8 @@ import classNames from "classnames";
 import { Navigation, User, Balance } from "@/components";
 import {
   ChevronRightIcon,
-  minerAnimation,
+  // minerAnimation,
+  minerOffImage,
   SettingIcon,
   WalletIcon,
 } from "@images";
@@ -60,8 +61,8 @@ export const Main = () => {
           <SettingIcon />
         </Link>
       </header>
-      {/* <img className={styles.miner} src={minerImage} alt="Miner" /> */}
-      <video
+      <img className={styles.miner} src={minerOffImage} alt="Miner" />
+      {/* <video
         className={styles.miner}
         src={minerAnimation}
         autoPlay
@@ -72,7 +73,7 @@ export const Main = () => {
         data-object-fit="cover"
       >
         <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
-      </video>
+      </video> */}
       <Balance />
       <div className={styles.slider}>
         <AnimatePresence initial={false}>
