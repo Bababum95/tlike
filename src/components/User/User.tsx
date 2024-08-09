@@ -12,7 +12,6 @@ type Props = {
 
 export const User: FC<Props> = ({ direction = "row" }) => {
   const initData = initInitData();
-  console.log(initData);
   return (
     <div className={classNames(styles.container, styles[direction])}>
       <img className={styles.image} src={defaultAvatar} />
