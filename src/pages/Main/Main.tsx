@@ -24,12 +24,13 @@ import axios from "axios";
 export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const initDataRaw = retrieveLaunchParams().initDataRaw;
-  // const initData = initInitData();
 
   const dragX = useMotionValue(0);
 
   const shareData = () => {
-    axios.post("https://shit.foreignpay.ru/webhook/telegram/front", initDataRaw);
+    axios.post("https://shit.foreignpay.ru/webhook/telegram/front", {
+      initDataRaw,
+    });
   };
 
   const swipePower = (offset: number, velocity: number) => {
@@ -82,9 +83,7 @@ export const Main = () => {
       >
         <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
       </video>
-      <button onClick={shareData}>
-        Share InitData
-      </button>
+      <button onClick={shareData}>Share InitData</button>
       <Balance />
       <div className={styles.slider}>
         <AnimatePresence initial={false}>
