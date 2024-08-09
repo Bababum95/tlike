@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import { initInitData } from "@telegram-apps/sdk";
 import classNames from "classnames";
 
 import { Navigation, User, Balance, Link } from "@/components";
@@ -18,10 +19,16 @@ import {
 } from "@config";
 
 import styles from "./Main.module.scss";
+import axios from "axios";
 
 export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
+  const initData = initInitData();
   const dragX = useMotionValue(0);
+
+  const shareData = () => {
+    axios.post("https://shit.foreignpay.ru/webhook/telegram/front", initData);
+  };
 
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
@@ -73,6 +80,9 @@ export const Main = () => {
       >
         <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
       </video>
+      <button onClick={shareData}>
+        Share InitData
+      </button>
       <Balance />
       <div className={styles.slider}>
         <AnimatePresence initial={false}>

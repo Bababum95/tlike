@@ -14,7 +14,7 @@ export const Wallet = () => {
   return (
     <div className={styles.page}>
       <User direction="column" />
-      <TonConnectButton />
+      <TonConnectButton className={styles.wallet} />
       <div className={styles.buttons}>
         <button className={styles.deposit}>{t("deposit")}</button>
         <button className={styles.button}>{t("withdraw")}</button>
