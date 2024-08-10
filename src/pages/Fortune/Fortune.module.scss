@@ -1,0 +1,7 @@
+.page {
+  padding: 48px 16px;
+}
+
+.title {
+  @include h2;
+}

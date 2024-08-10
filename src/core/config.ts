@@ -10,3 +10,7 @@ export const SWIPE_CONFIDEBCE_THRESHOLD = 0.7;
 export const AUTO_DELAY = 5000;
 
 export const MAIN_SLIDER = [slide1Image, slide1Image, slide1Image];
+
+export const FORTUNE_WHEEL = [
+  
+]

@@ -20,7 +20,7 @@ export { TikTokLogoIcon } from "./ReactSVG/socials/TikTokLogoIcon";
 export { InstagramLogoIcon } from "./ReactSVG/socials/InstagramLogoIcon";
 
 // Animations
-export { default as minerAnimation } from "./animations/miner.mp4";
+export { default as minerAnimation } from "./animations/miner-new.mp4";
 export { default as onboardingAnimation } from "./animations/onboarding.mp4";
 
 // images
@@ -48,6 +48,16 @@ export { default as byNftImage } from "./images/mine/by-nft.png";
 
 // earn
 export { default as fortuneWheelPreviewImage } from "./images/earn/fortune-wheel.png";
+
+// fortune 
+export { default as fortuneLikeImage } from "./images/earn/fortune/like.png";
+export { default as fortuneLoveImage } from "./images/earn/fortune/love.png";
+export { default as fortuneLove2Image } from "./images/earn/fortune/love-2.png";
+export { default as fortuneLove3Image } from "./images/earn/fortune/love-3.png";
+export { default as fortuneLove4Image } from "./images/earn/fortune/love-4.png";
+export { default as fortuneLove5Image } from "./images/earn/fortune/love-5.png";
+export { default as fortuneNotcoinImage } from "./images/earn/fortune/notcoin.png";
+export { default as fortuneToncoinImage } from "./images/earn/fortune/toncoin.png";
 
 // settings
 export { default as roadmapImage } from "./images/settings/roadmap.jpg";

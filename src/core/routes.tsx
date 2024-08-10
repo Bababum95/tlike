@@ -10,6 +10,7 @@ import {
   SettingsPage,
   WithdrawPage,
   TransferPage,
+  FortunePage,
 } from "@/pages";
 import { EarnIcon, FriendsIcon, MainIcon, MineIcon } from "@/assets/images";
 
@@ -40,4 +41,5 @@ export const routes: Route[] = [
   { path: "/wallet/withdraw", Component: WithdrawPage },
   { path: "/wallet/transfer", Component: TransferPage },
   { path: "/settings", Component: SettingsPage },
+  { path: "/earn/fortune", Component: FortunePage },
 ];

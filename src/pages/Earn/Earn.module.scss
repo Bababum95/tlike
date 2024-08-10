@@ -40,7 +40,7 @@ h2.title {
   @include primary-button;
   margin: 24px 8px 0;
 
-  &:disabled {
+  &.disabled {
     @include primary-disabled-button;
   }
 }

@@ -4,6 +4,8 @@
   border: none;
   font-weight: 600;
   letter-spacing: 0.01em;
+  text-decoration-line: none;
+  text-align: center;
 }
 
 @mixin primary-button {
@@ -17,4 +19,5 @@
 @mixin primary-disabled-button {
   background: rgba(67, 120, 255, 0.1);
   color: $primary;
+  pointer-events: none;
 }
