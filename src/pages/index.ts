@@ -7,3 +7,5 @@ export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
 export { Wallet as WalletPage } from "./Wallet/Wallet";
 export { History as HistoryPage } from "./History/History";
 export { Settings as SettingsPage } from "./Settings/Settings";
+export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";
+export { Transfer as TransferPage } from "./Transfer/Transfer";

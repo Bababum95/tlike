@@ -54,7 +54,7 @@ export const Settings = () => {
             },
           }}
         >
-          Select Language
+          {t(i18n.language)}
           <motion.div
             variants={{
               open: { rotate: 270 },
@@ -108,7 +108,11 @@ export const Settings = () => {
         <Item extraClass={styles.item} title={t("about-project")}>
           <ChevronRightIcon />
         </Item>
-        <Item extraClass={styles.item} title={t("how-to-start")} link="/onboarding">
+        <Item
+          extraClass={styles.item}
+          title={t("how-to-start")}
+          link="/onboarding"
+        >
           <ChevronRightIcon />
         </Item>
         <li className={styles["stat-item"]}>

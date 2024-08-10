@@ -2,6 +2,7 @@
   "deposit": "Deposit",
   "withdraw": "Withdraw",
   "transfer": "Transfer",
+  "balance": "Balance",
   "deposit-hint": "To make a deposit, you have to contact support",
   "contact-support": "Contact Support",
   "transaction-history": "Transaction History",
@@ -10,5 +11,14 @@
   "withdraw-settings": "Withdraw Settings",
   "withdraw-like-hint": "To withdraw Like from your balance",
   "coming-soon": "Coming Soon",
-  "withdraw-love-hint": "Withdrawal of Love will be coming soon"
+  "withdraw-love-hint": "Withdrawal of Love will be coming soon",
+  "address-placeholder": "Write TON Wallet Adress",
+  "address": "Adress",
+  "total-placeholder": "Minimum 2000 LIKE",
+  "total": "Total",
+  "tax": "Tax",
+  "id-placeholder": "Write Receiver ID",
+  "total-love-placeholder": "Write Love amount to send",
+  "total-love-hint": "Transfer Tax: 5% Burn, 5% Team Project",
+  "send": "Send"
 }

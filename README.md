@@ -1,6 +1,10 @@
 # Tlike
 
-**Tlike** is a web application built using modern technologies. This project is set up with TypeScript, React, Vite, and various other tools to streamline development and build processes.
+**Tlike** — это веб-приложение, созданное с использованием современных технологий. Проект использует TypeScript, React, Vite и другие инструменты для упрощения разработки и сборки.
+
+## Описание
+
+Проект **Tlike** предназначен для создания и управления пользовательским контентом с акцентом на интеграцию с Telegram и TON. Приложение включает в себя набор функций для взаимодействия с Telegram API и поддерживает функциональность, связанную с токенами и криптовалютами.
 
 ## Технологии
 

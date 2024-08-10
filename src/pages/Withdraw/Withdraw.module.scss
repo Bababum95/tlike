@@ -1,0 +1,19 @@
+.page {
+  @include flex-column;
+  min-height: 100vh;
+  padding: 20px 22px;
+}
+
+.title {
+  @include h2;
+  margin: 0 2px 4px;
+}
+
+.submit {
+  @include primary-button;
+  margin-top: auto;
+
+  &:disabled {
+    @include primary-disabled-button;
+  }
+}
