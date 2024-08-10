@@ -6,9 +6,16 @@ export { MineIcon } from "./ReactSVG/MineIcon";
 export { WalletIcon } from "./ReactSVG/WalletIcon";
 export { SettingIcon } from "./ReactSVG/SettingIcon";
 export { ChevronRightIcon } from "./ReactSVG/ChevronRightIcon";
-export { TelegramLogoIcon } from "./ReactSVG/TelegramLogoIcon";
-export { TelegramPremiumIcon } from "./ReactSVG/TelegramPremiumIcon";
 export { CopyIcon } from "./ReactSVG/CopyIcon";
+export { HistoryIcon } from "./ReactSVG/HistoryIcon";
+// socials
+export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
+export { TelegramPremiumIcon } from "./ReactSVG/socials/TelegramPremiumIcon";
+export { XLogoIcon } from "./ReactSVG/socials/XLogoIcon";
+export { NetIcon } from "./ReactSVG/socials/NetIcon";
+export { YouTubeLogoIcon } from "./ReactSVG/socials/YouTubeLogoIcon";
+export { TikTokLogoIcon } from "./ReactSVG/socials/TikTokLogoIcon";
+export { InstagramLogoIcon } from "./ReactSVG/socials/InstagramLogoIcon";
 
 // Animations
 export { default as minerAnimation } from "./animations/miner.mp4";
@@ -39,3 +46,6 @@ export { default as byNftImage } from "./images/mine/by-nft.png";
 
 // earn
 export { default as fortuneWheelPreviewImage } from "./images/earn/fortune-wheel.png";
+
+// settings
+export { default as roadmapImage } from "./images/settings/roadmap.jpg";

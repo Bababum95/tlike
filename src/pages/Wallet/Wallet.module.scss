@@ -19,6 +19,41 @@
 .deposit {
   @include primary-button;
   flex: 1;
+
+  &-wrapper {
+    background-color: $section;
+    position: relative;
+    padding: 32px;
+    margin: 20px 16px;
+    border-radius: 16px;
+    @include border-gradient;
+  }
+
+  &-title {
+    @include h2;
+    margin: 0 0 4px;
+    text-align: center;
+  }
+
+  &-hint {
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 153%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #707579;
+    max-width: 220px;
+  }
+
+  &-contact {
+    @include primary-button;
+    display: block;
+    text-align: center;
+    text-decoration-line: none;
+    width: 100%;
+    margin-top: 24px;
+  }
 }
 
 .button,
@@ -35,4 +70,10 @@
 
 .wallet {
   margin: 14px auto 0;
+}
+
+.history {
+  position: absolute;
+  top: 20px;
+  right: 16px;
 }

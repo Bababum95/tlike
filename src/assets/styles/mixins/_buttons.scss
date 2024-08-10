@@ -13,3 +13,8 @@
   font-size: 17px;
   line-height: 150%;
 }
+
+@mixin primary-disabled-button {
+  background: rgba(67, 120, 255, 0.1);
+  color: $primary;
+}

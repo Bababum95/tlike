@@ -6,6 +6,8 @@ import {
   FriendsPage,
   EarnPage,
   WalletPage,
+  HistoryPage,
+  SettingsPage,
 } from "@/pages";
 import { EarnIcon, FriendsIcon, MainIcon, MineIcon } from "@/assets/images";
 
@@ -32,4 +34,6 @@ export const routes: Route[] = [
   ...mainRoutes,
   { path: "/onboarding", Component: OnboardingPage },
   { path: "/wallet", Component: WalletPage },
+  { path: "/history", Component: HistoryPage },
+  { path: "/settings", Component: SettingsPage },
 ];

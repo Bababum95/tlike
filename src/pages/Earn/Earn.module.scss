@@ -41,7 +41,6 @@ h2.title {
   margin: 24px 8px 0;
 
   &:disabled {
-    background: rgba(67, 120, 255, 0.1);
-    color: $primary;
+    @include primary-disabled-button;
   }
 }

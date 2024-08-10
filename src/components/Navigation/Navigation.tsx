@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { initHapticFeedback } from "@telegram-apps/sdk";
 import classNames from "classnames";
 
 import { mainRoutes } from "@/core/routes";
@@ -12,7 +11,6 @@ const isActivePath = (currentPath: string, routePath: string) => {
 };
 
 export const Navigation = () => {
-  const { impactOccurred } = initHapticFeedback();
   const { pathname } = useLocation();
 
   return (
@@ -24,7 +22,6 @@ export const Navigation = () => {
             [styles.active]: isActivePath(pathname, route.path),
           })}
           to={route.path}
-          onClick={() => impactOccurred("medium")}
         >
           <span className={styles.icon}>{route.icon}</span>
           {route.title}

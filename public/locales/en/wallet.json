@@ -1,5 +1,10 @@
 {
-    "deposit": "Deposit",
-    "withdraw": "Withdraw",
-    "transfer": "Transfer"
+  "deposit": "Deposit",
+  "withdraw": "Withdraw",
+  "transfer": "Transfer",
+  "deposit-hint": "To make a deposit, you have to contact support",
+  "contact-support": "Contact Support",
+  "transaction-history": "Transaction History",
+  "history-empty-title": "You don't have any transactions yet",
+  "history-empty-text": "All your transactions will be listed here"
 }

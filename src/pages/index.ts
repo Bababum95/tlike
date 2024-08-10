@@ -5,3 +5,5 @@ export { Earn as EarnPage } from "./Earn/Earn";
 
 export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
 export { Wallet as WalletPage } from "./Wallet/Wallet";
+export { History as HistoryPage } from "./History/History";
+export { Settings as SettingsPage } from "./Settings/Settings";
