@@ -12,25 +12,38 @@ import {
   waletImage,
 } from "@images";
 
-import {
-  SPRING_OPTIONS,
-  // IMAGE_INITIAL_STATE,
-  SWIPE_CONFIDEBCE_THRESHOLD,
-} from "@config";
+import { SPRING_OPTIONS, SWIPE_CONFIDEBCE_THRESHOLD } from "@config";
 import styles from "./Onboarding.module.scss";
 
 type SlideProps = {
-  image: string;
+  image?: string;
+  video?: string;
   title: string;
   text: JSX.Element | string;
 };
 
-const Slide: FC<SlideProps> = ({ image, title, text }) => {
+const Slide: FC<SlideProps> = ({ image, title, text, video }) => {
   const { t } = useTranslation("onboarding");
+
+  console.log(video);
 
   return (
     <motion.div transition={SPRING_OPTIONS} className={styles.slide}>
-      <img className={styles.image} src={image} />
+      {image && <img className={styles.image} src={image} />}
+      {video && (
+        <video
+          className={styles.image}
+          src={video}
+          autoPlay={true}
+          loop
+          muted
+          playsInline
+          data-wf-ignore="true"
+          data-object-fit="cover"
+        >
+          <source src={video} type="video/mp4" data-wf-ignore="true" />
+        </video>
+      )}
       <h1 className={styles.title}>{t(title)}</h1>
       <p className={styles.text}>{text}</p>
     </motion.div>
@@ -60,7 +73,7 @@ export const Onboarding = () => {
 
   const SLIDES = [
     {
-      image: onboardingAnimation,
+      video: onboardingAnimation,
       title: "earn-title",
       text: (
         <>
@@ -141,7 +154,8 @@ export const Onboarding = () => {
           {SLIDES.map((slide, index) => (
             <Slide
               key={index}
-              image={slide.image}
+              image={slide.image || undefined}
+              video={slide.video || undefined}
               title={t(slide.title)}
               text={slide.text}
             />

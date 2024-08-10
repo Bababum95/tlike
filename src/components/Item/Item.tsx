@@ -28,7 +28,7 @@ export const Item: FC<Props> = ({
         {icon}
         <div className={styles.content}>
           <p className={styles.title}>{title}</p>
-          <p className={styles.text}>{text}</p>
+          {text && <p className={styles.text}>{text}</p>}
         </div>
         {children}
       </Link>
