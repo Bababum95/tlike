@@ -9,3 +9,4 @@ export { Balance } from "./Balance/Balance";
 export { Empty } from "./Empty/Empty";
 export { List } from "./List/List";
 export { Item } from "./Item/Item";
+export { Toast } from "./Toast/Toast";

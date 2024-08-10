@@ -8,6 +8,8 @@ export { SettingIcon } from "./ReactSVG/SettingIcon";
 export { ChevronRightIcon } from "./ReactSVG/ChevronRightIcon";
 export { CopyIcon } from "./ReactSVG/CopyIcon";
 export { HistoryIcon } from "./ReactSVG/HistoryIcon";
+export { LikeIcon } from "./ReactSVG/LikeIcon";
+export { LoveIcon } from "./ReactSVG/LoveIcon";
 // socials
 export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
 export { TelegramPremiumIcon } from "./ReactSVG/socials/TelegramPremiumIcon";

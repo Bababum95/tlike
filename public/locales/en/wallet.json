@@ -6,5 +6,9 @@
   "contact-support": "Contact Support",
   "transaction-history": "Transaction History",
   "history-empty-title": "You don't have any transactions yet",
-  "history-empty-text": "All your transactions will be listed here"
+  "history-empty-text": "All your transactions will be listed here",
+  "withdraw-settings": "Withdraw Settings",
+  "withdraw-like-hint": "To withdraw Like from your balance",
+  "coming-soon": "Coming Soon",
+  "withdraw-love-hint": "Withdrawal of Love will be coming soon"
 }
