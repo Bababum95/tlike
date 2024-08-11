@@ -2,5 +2,11 @@
   "title": "Fortune Wheel",
   "text": "Complete all tasks to spin the fortune wheel",
   "spin": "Spin",
-  "task-list": "Task List"
+  "task-list": "Task List",
+  "fortune-text": "Get free prizes from the fortune wheel every 6 hours",
+  "nft-title": "NFT privilegie",
+  "nft-text": "Each NFT increases LOVE rewards by 2%, up to 20%",
+  "nft-button": "Buy NFT",
+  "you-won": "You won",
+  "confirm": "Confirm"
 }

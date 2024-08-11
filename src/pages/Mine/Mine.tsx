@@ -9,15 +9,15 @@ import { byNftImage } from "@images";
 
 import styles from "./Mine.module.scss";
 
+const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
+
 export const Mine = () => {
   const utils = initUtils();
   const [tab, setTab] = useState("mining");
   const { t } = useTranslation("mine");
 
   const byNft = () => {
-    utils.openLink(
-      "https://getgems.io/collection/EQDMvchkiDT6H2ufjqCecyLb6-S9YYE1-JzSC7D-AbJfee2g"
-    );
+    utils.openLink(getgemsUrl);
   };
 
   return (

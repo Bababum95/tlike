@@ -2,6 +2,142 @@
   padding: 48px 16px;
 }
 
+.wheel {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 111px);
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 58px;
+  gap: 14px;
+
+  .item {
+    @include flex-column;
+    align-items: center;
+    position: relative;
+    background-color: $section;
+    gap: 10px;
+    padding: 20px 10px;
+    border-radius: 16px;
+    @include border-gradient;
+
+    span {
+      font-weight: 600;
+      font-size: 11px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    img {
+      object-fit: contain;
+    }
+
+    &.active {
+      background-color: $primary;
+
+      &::before {
+        background: #4acaff;
+      }
+    }
+
+    &:not(.active) {
+      span {
+        font-weight: 600;
+        font-size: 11px;
+        background: linear-gradient(
+          49deg,
+          #007aff 0%,
+          #93c6ff 56%,
+          #007aff 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
 .title {
   @include h2;
+  margin-bottom: 32px;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.text {
+  max-width: 240px;
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #a2acb0;
+  line-height: 1.2;
+}
+
+.spin {
+  @include primary-button;
+  width: calc(100% - 16px);
+  margin: 24px 8px 0;
+
+  &.disabled {
+    @include primary-disabled-button;
+  }
+
+  &.loading {
+    @include loader-button;
+  }
+}
+
+.nft {
+  background-color: $section;
+  padding: 32px;
+  border-radius: 16px;
+  position: relative;
+  margin-top: 24px;
+  @include border-gradient;
+
+  .text {
+    max-width: 240px;
+    color: $hint;
+  }
+
+  .button {
+    margin-top: 24px;
+  }
+}
+
+.button {
+  @include primary-button;
+  width: 100%;
+}
+
+.toast {
+  &-icon {
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
+
+  &-title {
+    @include h2;
+    margin: 4px auto;
+    text-align: center;
+  }
+
+  &-value {
+    margin: 0 auto 14px;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: linear-gradient(49deg, #007aff 0%, #93c6ff 56%, #007aff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

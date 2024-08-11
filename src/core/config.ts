@@ -1,4 +1,15 @@
-import { slide1Image } from "@images";
+import {
+  fortuneLikeImage,
+  fortuneLove2Image,
+  fortuneLove3Image,
+  fortuneLove4Image,
+  fortuneLove5Image,
+  fortuneLoveImage,
+  fortuneNFTImage,
+  fortuneNotcoinImage,
+  fortuneToncoinImage,
+  slide1Image,
+} from "@images";
 
 export const SPRING_OPTIONS = {
   x: { type: "spring", stiffness: 300, damping: 30 },
@@ -12,5 +23,40 @@ export const AUTO_DELAY = 5000;
 export const MAIN_SLIDER = [slide1Image, slide1Image, slide1Image];
 
 export const FORTUNE_WHEEL = [
-  
-]
+  {
+    value: "1000 LOVE",
+    icon: fortuneLoveImage,
+  },
+  {
+    value: "50 TON",
+    icon: fortuneToncoinImage,
+  },
+  {
+    value: "2000 LOVE",
+    icon: fortuneLove3Image,
+  },
+  {
+    value: "1 NFT",
+    icon: fortuneNFTImage,
+  },
+  {
+    value: "1500 LOVE",
+    icon: fortuneLove2Image,
+  },
+  {
+    value: "2000 NOT",
+    icon: fortuneNotcoinImage,
+  },
+  {
+    value: "5000 LOVE",
+    icon: fortuneLove5Image,
+  },
+  {
+    value: "500 LIKE",
+    icon: fortuneLikeImage,
+  },
+  {
+    value: "3000 LOVE",
+    icon: fortuneLove4Image,
+  },
+];

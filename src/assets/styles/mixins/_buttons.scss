@@ -21,3 +21,28 @@
   color: $primary;
   pointer-events: none;
 }
+
+@mixin loader-button() {
+  position: relative;
+  color: transparent;
+  cursor: wait;
+  pointer-events: none;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border: solid 2px;
+    border-color: #fff #fff transparent transparent;
+    border-radius: 100%;
+    transition: 0.3s ease;
+    transform-origin: 0 0;
+    :global {
+      animation: spin 1s infinite;
+    }
+  }
+}

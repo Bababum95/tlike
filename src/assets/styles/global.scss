@@ -24,3 +24,12 @@ img,
 video {
   max-width: 100%;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0) translate(-50%, -50%);
+  }
+  to {
+    transform: rotate(360deg) translate(-50%, -50%);
+  }
+}

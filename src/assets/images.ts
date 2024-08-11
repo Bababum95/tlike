@@ -56,6 +56,7 @@ export { default as fortuneLove2Image } from "./images/earn/fortune/love-2.png";
 export { default as fortuneLove3Image } from "./images/earn/fortune/love-3.png";
 export { default as fortuneLove4Image } from "./images/earn/fortune/love-4.png";
 export { default as fortuneLove5Image } from "./images/earn/fortune/love-5.png";
+export { default as fortuneNFTImage } from "./images/earn/fortune/nft.png";
 export { default as fortuneNotcoinImage } from "./images/earn/fortune/notcoin.png";
 export { default as fortuneToncoinImage } from "./images/earn/fortune/toncoin.png";
 
