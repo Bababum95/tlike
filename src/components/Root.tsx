@@ -1,8 +1,10 @@
-import { SDKProvider, useLaunchParams } from "@telegram-apps/sdk-react";
+import { SDKProvider } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { type FC, useEffect, useMemo } from "react";
 
 import { App, ErrorBoundary } from "@/components";
+
+const debug = import.meta.env.VITE_APP_DEBUG === "true";
 
 const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
   <div>
@@ -20,7 +22,6 @@ const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
 );
 
 const Inner: FC = () => {
-  const debug = useLaunchParams().startParam === "debug";
   const manifestUrl = useMemo(() => {
     return new URL("tonconnect-manifest.json", window.location.href).toString();
   }, []);

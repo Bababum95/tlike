@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
@@ -14,6 +14,9 @@ import {
 
 import { SPRING_OPTIONS, SWIPE_CONFIDEBCE_THRESHOLD } from "@config";
 import styles from "./Onboarding.module.scss";
+import { useNavigate } from "react-router-dom";
+
+const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
 type SlideProps = {
   image?: string;
@@ -24,8 +27,6 @@ type SlideProps = {
 
 const Slide: FC<SlideProps> = ({ image, title, text, video }) => {
   const { t } = useTranslation("onboarding");
-
-  console.log(video);
 
   return (
     <motion.div transition={SPRING_OPTIONS} className={styles.slide}>
@@ -56,19 +57,18 @@ export const Onboarding = () => {
   const { t } = useTranslation("onboarding");
   const wallet = useTonWallet();
   const utils = initUtils();
-
-  const next = () => {
-    setImgIndex((prev) => Math.min(prev + 1, SLIDES.length - 1));
-  };
+  const navigate = useNavigate();
 
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
   };
 
+  const next = () => {
+    setImgIndex((prev) => Math.min(prev + 1, SLIDES.length - 1));
+  };
+
   const byNft = () => {
-    utils.openLink(
-      "https://getgems.io/collection/EQDMvchkiDT6H2ufjqCecyLb6-S9YYE1-JzSC7D-AbJfee2g"
-    );
+    utils.openLink(getgemsUrl);
   };
 
   const SLIDES = [
@@ -119,7 +119,11 @@ export const Onboarding = () => {
     },
   ];
 
-  if (wallet) SLIDES.slice(0, 3);
+  useEffect(() => {
+    if (wallet && imgIndex === SLIDES.length - 1) {
+      navigate("/");
+    }
+  }, [wallet, imgIndex]);
 
   return (
     <div className={styles.container}>
