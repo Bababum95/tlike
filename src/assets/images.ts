@@ -21,11 +21,12 @@ export { InstagramLogoIcon } from "./ReactSVG/socials/InstagramLogoIcon";
 
 // Animations
 export { default as minerAnimation } from "./animations/miner-new.mp4";
-export { default as onboardingAnimation } from "./animations/onboarding.mp4";
+export { default as onboardingAnimation } from "./animations/onboarding-new.mp4";
 
 // images
 export { default as defaultAvatar } from "./images/avatar-empty.png";
 export { default as emptyImage } from "./images/empty.png";
+export { default as loaderImage } from "./images/loader.png";
 
 // onboarding
 export { default as inviteImage } from "./images/onboarding/invite.png";

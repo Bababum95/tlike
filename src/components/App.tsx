@@ -1,3 +1,6 @@
+import { type FC, useEffect, useMemo, useState } from "react";
+import { AppRoot } from "@telegram-apps/telegram-ui";
+import { Navigate, Route, Router, Routes } from "react-router-dom";
 import { useIntegration } from "@telegram-apps/react-router-integration";
 import {
   bindMiniAppCSSVars,
@@ -10,21 +13,21 @@ import {
   useViewport,
   initInitData,
 } from "@telegram-apps/sdk-react";
-import { AppRoot } from "@telegram-apps/telegram-ui";
-import { type FC, useEffect, useMemo } from "react";
-import { Navigate, Route, Router, Routes } from "react-router-dom";
-import axios from "axios";
 
+import { useAppDispatch, useAppSelector } from "@hooks";
+import { Loader } from "@/components";
 import { routes } from "@/core/routes";
-
-const apiUrl = import.meta.env.VITE_API_URL;
+import { fetchUser } from "@/core/store/slices/user";
 
 export const App: FC = () => {
+  const [progress, setProgress] = useState(20);
   const lp = useLaunchParams();
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
   const viewport = useViewport();
   const initData = initInitData();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
 
   useEffect(() => {
     return bindMiniAppCSSVars(miniApp, themeParams);
@@ -51,33 +54,44 @@ export const App: FC = () => {
   }, [navigator]);
 
   useEffect(() => {
-    console.time("Request Duration");
-    axios
-      .post(`${apiUrl}/telegram/front`, initData)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        console.timeEnd("Request Duration");
-      });
-  }, []);
+    if (initData && user.status === "idle") {
+      setTimeout(() => {
+        setProgress(40);
+        setTimeout(() => {
+          setProgress(70);
+        }, 400);
+      }, 300);
+
+      dispatch(fetchUser(initData));
+    }
+  }, [initData]);
+
+  useEffect(() => {
+    if (user.status === "successed" && progress === 70) {
+      setProgress(99);
+      setTimeout(() => {
+        setProgress(100);
+      }, 400);
+    }
+  }, [user.status, progress]);
 
   return (
     <AppRoot
       appearance={miniApp.isDark ? "dark" : "light"}
       platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
     >
-      <Router location={location} navigator={reactNavigator}>
-        <Routes>
-          {routes.map((route) => (
-            <Route key={route.path} {...route} />
-          ))}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Router>
+      {progress !== 100 ? (
+        <Loader progress={progress} />
+      ) : (
+        <Router location={location} navigator={reactNavigator}>
+          <Routes>
+            {routes.map((route) => (
+              <Route key={route.path} {...route} />
+            ))}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Router>
+      )}
     </AppRoot>
   );
 };

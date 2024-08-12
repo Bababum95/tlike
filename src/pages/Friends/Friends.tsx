@@ -1,25 +1,32 @@
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { initUtils } from "@telegram-apps/sdk-react";
+import { initUtils, initInitData } from "@telegram-apps/sdk-react";
 
 import { Empty, Item, List, Navigation } from "@/components";
 import { TelegramPremiumIcon, TelegramLogoIcon, CopyIcon } from "@images";
 
 import styles from "./Friends.module.scss";
 
+const tgUrl = import.meta.env.VITE_WEB_APP_URL;
+
 export const Friends = () => {
   const { t } = useTranslation("friends");
   const utils = initUtils();
+  const initData = initInitData();
+  const shareURL = `${tgUrl}?startapp=${initData?.user?.id}`;
 
   const Invite = () => (
     <div className={styles.invite}>
       <button
         className={styles["invite-button"]}
-        onClick={() => utils.shareURL}
+        onClick={() => utils.shareURL(`${tgUrl}?startapp=${shareURL}`)}
       >
         {t("invite-friend")}
       </button>
-      <button className={styles.copy}>
+      <button
+        className={styles.copy}
+        onClick={() => navigator.clipboard.writeText(shareURL)}
+      >
         <CopyIcon />
       </button>
     </div>

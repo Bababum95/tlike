@@ -14,16 +14,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    ns: [
-      "common",
-      "onboarding",
-      "friends",
-      "mine",
-      "earn",
-      "wallet",
-      "settings",
-    ],
-    defaultNS: "common",
+    ns: ["onboarding", "friends", "mine", "earn", "wallet", "settings"],
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",
     },

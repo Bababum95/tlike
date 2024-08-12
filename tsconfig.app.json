@@ -25,7 +25,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@images": ["./src/assets/images.ts"],
-      "@config": ["./src/core/config.ts"]
+      "@types": ["./src/core/types.ts"],
+      "@config": ["./src/core/config.ts"],
+      "@hooks": ["./src/core/hooks.ts"]
     }
   },
   "include": ["src"]

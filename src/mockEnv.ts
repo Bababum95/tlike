@@ -29,7 +29,7 @@ if (import.meta.env.DEV) {
       [
         "user",
         JSON.stringify({
-          id: 99281932,
+          id: 1044888407,
           first_name: "Andrew",
           last_name: "Rogue",
           username: "rogue",
@@ -40,7 +40,7 @@ if (import.meta.env.DEV) {
       ],
       [
         "hash",
-        "89d6079ad6762351f38c6dbbc41bb53048019256a9443988af7a48bcad16ba31",
+        "43043b79c2c4208aada73eead620c3a42f555e4bc701aa19cd24daa00a222925",
       ],
       ["auth_date", "1716922846"],
       ["start_param", "debug"],

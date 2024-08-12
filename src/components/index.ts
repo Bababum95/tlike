@@ -11,3 +11,4 @@ export { List } from "./List/List";
 export { Item } from "./Item/Item";
 export { Toast } from "./Toast/Toast";
 export { Input } from "./Input/Input";
+export { Loader } from "./Loader/Loader";
