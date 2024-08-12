@@ -16,7 +16,7 @@ export const Fortune = () => {
   const [activeIndex, setActiveIndex] = useState<number>(100);
   const [targetIndex, setTargetIndex] = useState<number | null>(null);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
-  const [intervalTime, setIntervalTime] = useState<number>(400);
+  const [intervalTime, setIntervalTime] = useState<number>(200);
   const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
   const utils = initUtils();
 
@@ -48,9 +48,9 @@ export const Fortune = () => {
   useEffect(() => {
     if (!isSpinning) return;
     const interval = setInterval(() => {
-      if (targetIndex === null && intervalTime > 200) {
+      if (targetIndex === null && intervalTime > 50) {
         setIntervalTime(intervalTime - 25);
-      } else if (targetIndex !== null && intervalTime < 400) {
+      } else if (targetIndex !== null && intervalTime < 200) {
         setIntervalTime(intervalTime + 25);
       }
 
