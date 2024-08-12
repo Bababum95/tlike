@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { initUtils } from "@telegram-apps/sdk";
+import { initUtils, initHapticFeedback } from "@telegram-apps/sdk";
+import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import classNames from "classnames";
 
 import { FORTUNE_WHEEL } from "@config";
@@ -18,7 +19,9 @@ export const Fortune = () => {
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [intervalTime, setIntervalTime] = useState<number>(200);
   const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
+  const [showFierwork, setShowFierwork] = useState<boolean>(false);
   const utils = initUtils();
+  const haptic = initHapticFeedback();
 
   const closeToast = () => {
     setToastIsOpen(false);
@@ -28,6 +31,7 @@ export const Fortune = () => {
     if (isSpinning) return;
     setIsSpinning(true);
     setTargetIndex(null);
+    setShowFierwork(false);
     if (activeIndex > FORTUNE_WHEEL.length) setActiveIndex(0);
 
     try {
@@ -35,6 +39,8 @@ export const Fortune = () => {
 
       setTimeout(() => {
         setTargetIndex(newTargetIndex);
+        setShowFierwork(true);
+        haptic.impactOccurred("medium");
       }, 5000);
     } catch (error) {
       console.error(error);
@@ -119,6 +125,9 @@ export const Fortune = () => {
             {t("confirm")}
           </button>
         </Toast>
+      )}
+      {showFierwork && (
+        <Realistic onInit={({ conductor }) => conductor.shoot()} />
       )}
     </div>
   );
