@@ -8,18 +8,23 @@ import {
   useMiniApp,
   useThemeParams,
   useViewport,
+  retrieveLaunchParams,
 } from "@telegram-apps/sdk-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { type FC, useEffect, useMemo } from "react";
 import { Navigate, Route, Router, Routes } from "react-router-dom";
+import axios from "axios";
 
 import { routes } from "@/core/routes";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const App: FC = () => {
   const lp = useLaunchParams();
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
   const viewport = useViewport();
+  const initDataRaw = retrieveLaunchParams().initDataRaw;
 
   useEffect(() => {
     return bindMiniAppCSSVars(miniApp, themeParams);
@@ -44,6 +49,23 @@ export const App: FC = () => {
     navigator.attach();
     return () => navigator.detach();
   }, [navigator]);
+
+  useEffect(() => {
+    console.time("Request Duration");
+    axios
+      .post(`${apiUrl}/telegram/front`, {
+        initDataRaw,
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        console.timeEnd("Request Duration");
+      });
+  }, []);
 
   return (
     <AppRoot

@@ -1,7 +1,9 @@
+import { type FC, useEffect, useMemo } from "react";
+import { Provider } from "react-redux";
 import { SDKProvider } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import { type FC, useEffect, useMemo } from "react";
 
+import { store } from "@/core/store";
 import { App, ErrorBoundary } from "@/components";
 
 const debug = import.meta.env.VITE_APP_DEBUG === "true";
@@ -36,7 +38,9 @@ const Inner: FC = () => {
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
       <SDKProvider acceptCustomStyles debug={debug}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </SDKProvider>
     </TonConnectUIProvider>
   );
