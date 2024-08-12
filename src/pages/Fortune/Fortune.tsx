@@ -51,7 +51,7 @@ export const Fortune = () => {
       if (targetIndex === null && intervalTime > 50) {
         setIntervalTime(intervalTime - 25);
       } else if (targetIndex !== null && intervalTime < 200) {
-        setIntervalTime(intervalTime + 25);
+        setIntervalTime(intervalTime + 35);
       }
 
       setActiveIndex((prev) => {

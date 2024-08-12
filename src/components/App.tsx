@@ -77,7 +77,7 @@ export const App: FC = () => {
 
   return (
     <AppRoot
-      appearance={miniApp.isDark ? "dark" : "light"}
+      appearance={"dark"}
       platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
     >
       {progress !== 100 ? (
