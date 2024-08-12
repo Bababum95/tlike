@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
+import { initUtils } from "@telegram-apps/sdk-react";
 
 import { Empty, Item, List, Navigation } from "@/components";
 import { TelegramPremiumIcon, TelegramLogoIcon, CopyIcon } from "@images";
@@ -8,10 +9,16 @@ import styles from "./Friends.module.scss";
 
 export const Friends = () => {
   const { t } = useTranslation("friends");
+  const utils = initUtils();
 
   const Invite = () => (
     <div className={styles.invite}>
-      <button className={styles["invite-button"]}>{t("invite-friend")}</button>
+      <button
+        className={styles["invite-button"]}
+        onClick={() => utils.shareURL}
+      >
+        {t("invite-friend")}
+      </button>
       <button className={styles.copy}>
         <CopyIcon />
       </button>
