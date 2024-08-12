@@ -19,7 +19,7 @@ export const Friends = () => {
     <div className={styles.invite}>
       <button
         className={styles["invite-button"]}
-        onClick={() => utils.shareURL(`${tgUrl}?startapp=${shareURL}`)}
+        onClick={() => utils.shareURL(shareURL)}
       >
         {t("invite-friend")}
       </button>
