@@ -6,7 +6,6 @@
 
 body {
   background: $bg;
-  color: #fff;
   padding: 0;
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
@@ -14,6 +13,10 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.app {
+  color: #fff;
 }
 
 a {

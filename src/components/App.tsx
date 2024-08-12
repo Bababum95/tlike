@@ -79,6 +79,7 @@ export const App: FC = () => {
     <AppRoot
       appearance={"dark"}
       platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
+      className="app"
     >
       {progress !== 100 ? (
         <Loader progress={progress} />
