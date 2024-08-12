@@ -8,7 +8,7 @@ import {
   useMiniApp,
   useThemeParams,
   useViewport,
-  retrieveLaunchParams,
+  initInitData,
 } from "@telegram-apps/sdk-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { type FC, useEffect, useMemo } from "react";
@@ -24,7 +24,7 @@ export const App: FC = () => {
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
   const viewport = useViewport();
-  const initDataRaw = retrieveLaunchParams().initDataRaw;
+  const initData = initInitData();
 
   useEffect(() => {
     return bindMiniAppCSSVars(miniApp, themeParams);
@@ -53,9 +53,7 @@ export const App: FC = () => {
   useEffect(() => {
     console.time("Request Duration");
     axios
-      .post(`${apiUrl}/telegram/front`, {
-        initDataRaw,
-      })
+      .post(`${apiUrl}/telegram/front`, initData)
       .then((data) => {
         console.log(data);
       })
