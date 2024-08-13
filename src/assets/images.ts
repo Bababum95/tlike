@@ -10,6 +10,7 @@ export { CopyIcon } from "./ReactSVG/CopyIcon";
 export { HistoryIcon } from "./ReactSVG/HistoryIcon";
 export { LikeIcon } from "./ReactSVG/LikeIcon";
 export { LoveIcon } from "./ReactSVG/LoveIcon";
+export { ErrorIcon } from "./ReactSVG/ErrorIcon";
 // socials
 export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
 export { TelegramPremiumIcon } from "./ReactSVG/socials/TelegramPremiumIcon";
@@ -26,7 +27,7 @@ export { default as onboardingAnimation } from "./animations/onboarding-new.mp4"
 // images
 export { default as defaultAvatar } from "./images/avatar-empty.png";
 export { default as emptyImage } from "./images/empty.png";
-export { default as loaderImage } from "./images/image.png";
+export { default as loaderImage } from "./images/loader.png";
 
 // onboarding
 export { default as inviteImage } from "./images/onboarding/invite.png";
@@ -38,7 +39,10 @@ export { default as waletImage } from "./images/onboarding/walet.png";
 // main
 export { default as minerOffImage } from "./images/main/turned-off-miner.png";
 // -- slider
-export { default as slide1Image } from "./images/main/slider/slide-1.png";
+// export { default as slide1Image } from "./images/main/slider/slide-1.png";
+export { default as slide2Image } from "./images/main/slider/slide-2.png";
+export { default as slide3Image } from "./images/main/slider/slide-3.png";
+export { default as slide4Image } from "./images/main/slider/slide-4.png";
 
 // balance
 export { default as heartImage } from "./images/balance/heart.png";

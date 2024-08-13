@@ -39,7 +39,6 @@ export const Fortune = () => {
 
       setTimeout(() => {
         setTargetIndex(newTargetIndex);
-        setShowFierwork(true);
         haptic.impactOccurred("medium");
       }, 5000);
     } catch (error) {
@@ -66,6 +65,7 @@ export const Fortune = () => {
           setIsSpinning(false);
           clearInterval(interval);
           setToastIsOpen(true);
+          setShowFierwork(true);
         }
         return currentIndex;
       });

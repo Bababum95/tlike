@@ -142,22 +142,34 @@ export const Settings = () => {
       </List>
       <img className={styles.roadmap} src={roadmapImage} alt="Roadmap" />
       <nav className={styles.socials}>
-        <Link className={styles.social} to="#">
+        <Link className={styles.social} to="https://t.me/like_mining">
           <TelegramLogoIcon />
         </Link>
-        <Link className={styles.social} to="#">
+        <Link
+          className={styles.social}
+          to="https://x.com/Likemining66?t=zTFxAGvw0sUJCIJ5EcCOcw&s=09"
+        >
           <XLogoIcon />
         </Link>
-        <Link className={styles.social} to="#">
+        <Link className={styles.social} to="http://tonlike.com">
           <NetIcon />
         </Link>
-        <Link className={styles.social} to="#">
+        <Link
+          className={styles.social}
+          to="https://youtube.com/@likemining?si=KMiFQJKy3qKvWMu4"
+        >
           <YouTubeLogoIcon />
         </Link>
-        <Link className={styles.social} to="#">
+        <Link
+          className={styles.social}
+          to="https://www.tiktok.com/@likeminingjetton?_t=8omRImXjmAz&_r=1"
+        >
           <TikTokLogoIcon />
         </Link>
-        <Link className={styles.social} to="#">
+        <Link
+          className={styles.social}
+          to="https://www.instagram.com/qrmi_official?igsh=MXR6bW9pZmtpdmlzbA=="
+        >
           <InstagramLogoIcon />
         </Link>
       </nav>

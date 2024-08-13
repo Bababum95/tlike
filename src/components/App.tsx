@@ -15,12 +15,13 @@ import {
 } from "@telegram-apps/sdk-react";
 
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { Loader } from "@/components";
+import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
 import { fetchUser } from "@/core/store/slices/user";
+import { setNotice } from "@/core/store/slices/notice";
 
 export const App: FC = () => {
-  const [progress, setProgress] = useState(20);
+  const [progress, setProgress] = useState(100);
   const lp = useLaunchParams();
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
@@ -53,18 +54,18 @@ export const App: FC = () => {
     return () => navigator.detach();
   }, [navigator]);
 
-  useEffect(() => {
-    if (initData && user.status === "idle") {
-      setTimeout(() => {
-        setProgress(40);
-        setTimeout(() => {
-          setProgress(70);
-        }, 400);
-      }, 300);
+  // useEffect(() => {
+  //   if (initData && user.status === "idle") {
+  //     setTimeout(() => {
+  //       setProgress(40);
+  //       setTimeout(() => {
+  //         setProgress(70);
+  //       }, 400);
+  //     }, 300);
 
-      dispatch(fetchUser(initData));
-    }
-  }, [initData]);
+  //     dispatch(fetchUser(initData));
+  //   }
+  // }, [initData]);
 
   useEffect(() => {
     if (user.status === "successed" && progress === 70) {
@@ -72,6 +73,8 @@ export const App: FC = () => {
       setTimeout(() => {
         setProgress(100);
       }, 400);
+    } else if (user.status === "failed") {
+      dispatch(setNotice({ status: "error", message: user.error }));
     }
   }, [user.status, progress]);
 
@@ -81,6 +84,7 @@ export const App: FC = () => {
       platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
       className="app"
     >
+      <Notice />
       {progress !== 100 ? (
         <Loader progress={progress} />
       ) : (

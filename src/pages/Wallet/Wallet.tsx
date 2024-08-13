@@ -23,14 +23,19 @@ export const Wallet = () => {
         <button className={styles.button} onClick={() => setToastIsOpen(true)}>
           {t("withdraw")}
         </button>
-        <Link to="/wallet/transfer" className={styles.button}>{t("transfer")}</Link>
+        <Link to="/wallet/transfer" className={styles.button}>
+          {t("transfer")}
+        </Link>
       </div>
       <h2 className={styles.title}>{t("balance")}</h2>
       <Balance />
       <div className={styles["deposit-wrapper"]}>
         <h3 className={styles["deposit-title"]}>{t("deposit")}</h3>
         <p className={styles["deposit-hint"]}>{t("deposit-hint")}</p>
-        <Link to="#" className={styles["deposit-contact"]}>
+        <Link
+          to="https://t.me/Likeminingsupport"
+          className={styles["deposit-contact"]}
+        >
           {t("contact-support")}
         </Link>
       </div>

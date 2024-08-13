@@ -8,7 +8,10 @@ import {
   fortuneNFTImage,
   fortuneNotcoinImage,
   fortuneToncoinImage,
-  slide1Image,
+  // slide1Image,
+  slide2Image,
+  slide3Image,
+  slide4Image,
 } from "@images";
 
 export const SPRING_OPTIONS = {
@@ -20,7 +23,7 @@ export const IMAGE_INITIAL_STATE = { y: -60, scale: 0.9, opacity: 0.7 };
 export const SWIPE_CONFIDEBCE_THRESHOLD = 0.7;
 export const AUTO_DELAY = 5000;
 
-export const MAIN_SLIDER = [slide1Image, slide1Image, slide1Image];
+export const MAIN_SLIDER = [slide2Image, slide3Image, slide4Image];
 
 export const FORTUNE_WHEEL = [
   {

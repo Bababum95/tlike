@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import type { InitDataParsed } from "@telegram-apps/sdk-react";
 
 import { UserStateType } from "@types";
@@ -6,6 +10,7 @@ import { api } from "@/core/api";
 
 const initialState: UserStateType = {
   status: "idle",
+  error: null,
   balances: {
     tlike: 0,
     tlove: 0,
@@ -50,8 +55,11 @@ const userSlice = createSlice({
         if (action.payload.photo) state.photo = action.payload.photo;
         state.status = "successed";
       })
-      .addCase(fetchUser.rejected, (state, action) => {
+      .addCase(fetchUser.rejected, (state, action: PayloadAction<any>) => {
         state.status = "failed";
+        if (action.payload && action.payload.message) {
+          state.error = action.payload.message;
+        }
         // eslint-disable-next-line no-console
         console.log(action.payload);
       });

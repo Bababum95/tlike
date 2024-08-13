@@ -1,7 +1,7 @@
 type BalancesType = {
   tlike: number;
   tlove: number;
-}
+};
 
 export type UserType = {
   balances: BalancesType;
@@ -9,9 +9,9 @@ export type UserType = {
   photo?: string;
   token: string;
   type: "old" | "new";
-}
-
+};
 
 export type UserStateType = {
   status: "idle" | "loading" | "failed" | "successed";
+  error: null | string;
 } & UserType;

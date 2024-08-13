@@ -1,0 +1,32 @@
+.notice {
+  @include flex-center;
+  gap: 10px;
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  max-width: calc(100vw - 32px);
+  width: max-content;
+  background-color: #1f2d50;
+  padding: 10px;
+  border-radius: 12px;
+  animation: hide 5s ease-in-out forwards;
+
+  span {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 154%;
+    letter-spacing: 0.01em;
+  }
+}
+
+@keyframes hide {
+  0%,
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
