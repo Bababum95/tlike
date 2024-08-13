@@ -54,18 +54,18 @@ export const App: FC = () => {
     return () => navigator.detach();
   }, [navigator]);
 
-  // useEffect(() => {
-  //   if (initData && user.status === "idle") {
-  //     setTimeout(() => {
-  //       setProgress(40);
-  //       setTimeout(() => {
-  //         setProgress(70);
-  //       }, 400);
-  //     }, 300);
+  useEffect(() => {
+    if (initData && user.status === "idle") {
+      setTimeout(() => {
+        setProgress(40);
+        setTimeout(() => {
+          setProgress(70);
+        }, 400);
+      }, 300);
 
-  //     dispatch(fetchUser(initData));
-  //   }
-  // }, [initData]);
+      dispatch(fetchUser(initData));
+    }
+  }, [initData]);
 
   useEffect(() => {
     if (user.status === "successed" && progress === 70) {

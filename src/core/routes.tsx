@@ -42,4 +42,6 @@ export const routes: Route[] = [
   { path: "/wallet/transfer", Component: TransferPage },
   { path: "/settings", Component: SettingsPage },
   { path: "/earn/fortune", Component: FortunePage },
+  { path: "/mine/:tab?", Component: MinePage },
+
 ];

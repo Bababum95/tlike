@@ -7,7 +7,11 @@ import { Link } from "@/components";
 import styles from "./Navigation.module.scss";
 
 const isActivePath = (currentPath: string, routePath: string) => {
-  return currentPath === routePath;
+  if (routePath === "/" && currentPath !== "/") {
+    return false;
+  }
+
+  return currentPath.startsWith(routePath);
 };
 
 export const Navigation = () => {

@@ -39,7 +39,7 @@ export { default as waletImage } from "./images/onboarding/walet.png";
 // main
 export { default as minerOffImage } from "./images/main/turned-off-miner.png";
 // -- slider
-// export { default as slide1Image } from "./images/main/slider/slide-1.png";
+export { default as slide1Image } from "./images/main/slider/slide-1.png";
 export { default as slide2Image } from "./images/main/slider/slide-2.png";
 export { default as slide3Image } from "./images/main/slider/slide-3.png";
 export { default as slide4Image } from "./images/main/slider/slide-4.png";

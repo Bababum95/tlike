@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, type Variants } from "framer-motion";
 
@@ -28,6 +28,7 @@ const itemVariants: Variants = {
 export const Settings = () => {
   const { t, i18n } = useTranslation("settings");
   const [langIsOpen, setlangIsOpen] = useState(false);
+  const activeUsersRef = useRef<HTMLLIElement>(null);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -115,7 +116,7 @@ export const Settings = () => {
         >
           <ChevronRightIcon />
         </Item>
-        <li className={styles["stat-item"]}>
+        <li className={styles["stat-item"]} id="active-users">
           <p className={styles.label}>{t("active-users")}</p>
           <p className={styles.value}>1 427</p>
         </li>

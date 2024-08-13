@@ -104,12 +104,9 @@ export const Main = () => {
             className={styles.swiper}
           >
             {MAIN_SLIDER.map((slide, idx) => (
-              <motion.img
-                key={idx}
-                src={slide}
-                transition={SPRING_OPTIONS}
-                className={styles.slide}
-              />
+              <Link key={idx} to={slide.link} className={styles.slide}>
+                <motion.img src={slide.image} transition={SPRING_OPTIONS} />
+              </Link>
             ))}
           </motion.div>
         </AnimatePresence>

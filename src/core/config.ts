@@ -8,7 +8,7 @@ import {
   fortuneNFTImage,
   fortuneNotcoinImage,
   fortuneToncoinImage,
-  // slide1Image,
+  slide1Image,
   slide2Image,
   slide3Image,
   slide4Image,
@@ -23,7 +23,15 @@ export const IMAGE_INITIAL_STATE = { y: -60, scale: 0.9, opacity: 0.7 };
 export const SWIPE_CONFIDEBCE_THRESHOLD = 0.7;
 export const AUTO_DELAY = 5000;
 
-export const MAIN_SLIDER = [slide2Image, slide3Image, slide4Image];
+export const MAIN_SLIDER = [
+  { image: slide1Image, link: "/settings/#active-users" },
+  { image: slide2Image, link: "/earn" },
+  {
+    image: slide3Image,
+    link: "https://getgems.io/collection/EQDMvchkiDT6H2ufjqCecyLb6-S9YYE1-JzSC7D-AbJfee2g",
+  },
+  { image: slide4Image, link: "/mine/upgrades" },
+];
 
 export const FORTUNE_WHEEL = [
   {

@@ -8,12 +8,14 @@ import { Balance, Empty, Navigation, User } from "@/components";
 import { byNftImage } from "@images";
 
 import styles from "./Mine.module.scss";
+import { useParams } from "react-router-dom";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
 export const Mine = () => {
   const utils = initUtils();
-  const [tab, setTab] = useState("mining");
+  const params = useParams<{ tab?: "mining" | "upgrades" }>();
+  const [tab, setTab] = useState(params.tab || "mining");
   const { t } = useTranslation("mine");
 
   const byNft = () => {
