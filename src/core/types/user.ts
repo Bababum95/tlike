@@ -1,3 +1,5 @@
+import { stateStatus } from "./abstract";
+
 type BalancesType = {
   tlike: number;
   tlove: number;
@@ -13,6 +15,6 @@ export type UserType = {
 };
 
 export type UserStateType = {
-  status: "idle" | "loading" | "failed" | "successed";
+  status: stateStatus;
   error: null | string;
 } & UserType;

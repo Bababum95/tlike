@@ -1,0 +1,1 @@
+export type stateStatus = "idle" | "loading" | "failed" | "successed"

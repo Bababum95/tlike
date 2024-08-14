@@ -13,8 +13,10 @@ import {
   InstagramLogoIcon,
 } from "@images";
 import { Item, Link, List, Navigation } from "@/components";
+import { api } from "@/core/api";
 
 import styles from "./Settings.module.scss";
+import { useAppSelector } from "@/core/hooks";
 
 const itemVariants: Variants = {
   open: {
@@ -28,10 +30,23 @@ const itemVariants: Variants = {
 export const Settings = () => {
   const { t, i18n } = useTranslation("settings");
   const [langIsOpen, setlangIsOpen] = useState(false);
+  const token = useAppSelector((state) => state.user.token);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     setlangIsOpen(false);
+    api.put(
+      "profile/language",
+      {},
+      {
+        headers: {
+          "x-auth-token": token,
+        },
+        params: {
+          set: lng,
+        },
+      }
+    );
   };
 
   return (

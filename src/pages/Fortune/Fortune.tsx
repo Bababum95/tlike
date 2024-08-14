@@ -5,10 +5,13 @@ import { initUtils, initHapticFeedback } from "@telegram-apps/sdk";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import classNames from "classnames";
 
+import { setTime } from "@/core/store/slices/fortune";
+import { useAppDispatch, useAppSelector } from "@/core/hooks";
+import { api } from "@/core/api";
 import { FORTUNE_WHEEL } from "@config";
+import { Toast } from "@/components";
 
 import styles from "./Fortune.module.scss";
-import { Toast } from "@/components";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
@@ -20,8 +23,11 @@ export const Fortune = () => {
   const [intervalTime, setIntervalTime] = useState<number>(200);
   const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
   const [showFierwork, setShowFierwork] = useState<boolean>(false);
+  const token = useAppSelector((state) => state.user.token);
+  const fortuneStore = useAppSelector((state) => state.fortune);
   const utils = initUtils();
   const haptic = initHapticFeedback();
+  const dispatch = useAppDispatch();
 
   const closeToast = () => {
     setToastIsOpen(false);
@@ -35,12 +41,19 @@ export const Fortune = () => {
     if (activeIndex > FORTUNE_WHEEL.length) setActiveIndex(0);
 
     try {
-      const newTargetIndex = Math.floor(Math.random() * FORTUNE_WHEEL.length);
+      const response = await api.get("fortune/spin", {
+        headers: {
+          "x-auth-token": token,
+        },
+        params: {
+          type: "free",
+        },
+      });
 
-      setTimeout(() => {
-        setTargetIndex(newTargetIndex);
+      if (response.status === 200 && response.data.status === "new") {
+        setTargetIndex(response.data.gift_id - 1);
         haptic.impactOccurred("medium");
-      }, 5000);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -74,6 +87,13 @@ export const Fortune = () => {
     return () => clearInterval(interval);
   }, [isSpinning, targetIndex, intervalTime]);
 
+  useEffect(() => {
+    if (fortuneStore.spin_available) return;
+    setTimeout(() => {
+      dispatch(setTime());
+    }, 1000);
+  }, [fortuneStore.spin_available, fortuneStore.nextSpinTime]);
+
   return (
     <div className={styles.page}>
       <motion.ul className={styles.wheel}>
@@ -95,11 +115,12 @@ export const Fortune = () => {
         onClick={spin}
         className={classNames(
           styles.spin,
-          { [styles.disabled]: false },
+          { [styles.disabled]: !fortuneStore.spin_available },
           { [styles.loading]: isSpinning }
         )}
+        disabled={!fortuneStore.spin_available}
       >
-        {t("spin")}
+        {fortuneStore.spin_available ? t("spin") : fortuneStore.nextSpinTime}
       </button>
       <div className={styles.nft}>
         <h2 className={styles.title}>{t("nft-title")}</h2>

@@ -3,11 +3,12 @@ import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
+import { useAppSelector } from "@/core/hooks";
 import { Navigation, User, Balance, Link } from "@/components";
 import {
   ChevronRightIcon,
   minerAnimation,
-  // minerOffImage,
+  minerOffImage,
   SettingIcon,
   WalletIcon,
 } from "@images";
@@ -24,6 +25,7 @@ export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const dragX = useMotionValue(0);
   const { t } = useTranslation("common");
+  const user = useAppSelector((state) => state.user);
 
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
@@ -65,13 +67,17 @@ export const Main = () => {
       <video
         className={styles.miner}
         src={minerAnimation}
-        autoPlay={true}
+        autoPlay={user.mining_speed.tlike > 0 || user.mining_speed.tlike > 0}
         loop
         muted
         playsInline
         data-wf-ignore="true"
         data-object-fit="cover"
-        // poster={minerOffImage}
+        poster={
+          user.mining_speed.tlike > 0 || user.mining_speed.tlike > 0
+            ? ""
+            : minerOffImage
+        }
       >
         <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
       </video>

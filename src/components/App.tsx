@@ -2,6 +2,7 @@ import { type FC, useEffect, useMemo, useState } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { Navigate, Route, Router, Routes } from "react-router-dom";
 import { useIntegration } from "@telegram-apps/react-router-integration";
+import { useTranslation } from "react-i18next";
 import {
   bindMiniAppCSSVars,
   bindThemeParamsCSSVars,
@@ -19,7 +20,7 @@ import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
 import { fetchUser } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
-import { useTranslation } from "react-i18next";
+import { checkTime } from "@/core/store/slices/fortune";
 
 export const App: FC = () => {
   const [progress, setProgress] = useState(20);
@@ -60,9 +61,6 @@ export const App: FC = () => {
     if (initData && user.status === "idle") {
       setTimeout(() => {
         setProgress(40);
-        setTimeout(() => {
-          setProgress(70);
-        }, 400);
       }, 300);
 
       dispatch(fetchUser(initData));
@@ -70,16 +68,19 @@ export const App: FC = () => {
   }, [initData]);
 
   useEffect(() => {
-    if (user.status === "successed" && progress === 70) {
-      setProgress(99);
-      setTimeout(() => {
-        setProgress(100);
-      }, 400);
+    if (user.status === "successed") {
+      setProgress(70);
+      dispatch(checkTime()).finally(() => {
+        setProgress(99);
+        setTimeout(() => {
+          setProgress(100);
+        }, 400);
+      });
       i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));
     }
-  }, [user.status, progress]);
+  }, [user.status]);
 
   return (
     <AppRoot

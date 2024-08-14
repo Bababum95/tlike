@@ -20,7 +20,7 @@ const initialState: UserStateType = {
     tlove: 0,
   },
   token: "",
-  type: "new",
+  type: "old",
   language: "en",
 };
 
