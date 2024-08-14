@@ -55,16 +55,16 @@ const userSlice = createSlice({
         if (action.payload.photo) state.photo = action.payload.photo;
         state.status = "successed";
       })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .addCase(fetchUser.rejected, (state, action: PayloadAction<any>) => {
         state.status = "failed";
         if (action.payload && action.payload.message) {
           state.error = action.payload.message;
         }
-        // eslint-disable-next-line no-console
         console.log(action.payload);
       });
   },
 });
 
 export default userSlice.reducer;
-export const {} = userSlice.actions;
+// export const {} = userSlice.actions;
