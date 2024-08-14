@@ -22,14 +22,14 @@ type Route = {
 };
 
 export const mainRoutes: Route[] = [
-  { path: "/", Component: MainPage, icon: <MainIcon />, title: "Main" },
-  { path: "/mine", Component: MinePage, icon: <MineIcon />, title: "Mine" },
-  { path: "/earn", Component: EarnPage, icon: <EarnIcon />, title: "Earn" },
+  { path: "/", Component: MainPage, icon: <MainIcon />, title: "main" },
+  { path: "/mine", Component: MinePage, icon: <MineIcon />, title: "mine" },
+  { path: "/earn", Component: EarnPage, icon: <EarnIcon />, title: "earn" },
   {
     path: "/friends",
     Component: FriendsPage,
     icon: <FriendsIcon />,
-    title: "Friends",
+    title: "friends",
   },
 ];
 

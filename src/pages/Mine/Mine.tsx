@@ -32,10 +32,10 @@ export const Mine = () => {
             className={classNames(styles.background, styles[tab])}
           />
           <button className={styles.button} onClick={() => setTab("mining")}>
-            Mining
+            {t("mining")}
           </button>
           <button className={styles.button} onClick={() => setTab("upgrades")}>
-            Upgrades
+            {t("upgrades")}
           </button>
         </div>
       </header>

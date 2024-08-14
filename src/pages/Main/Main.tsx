@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { Navigation, User, Balance, Link } from "@/components";
 import {
   ChevronRightIcon,
   minerAnimation,
-  minerOffImage,
+  // minerOffImage,
   SettingIcon,
   WalletIcon,
 } from "@images";
@@ -22,6 +23,7 @@ import styles from "./Main.module.scss";
 export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const dragX = useMotionValue(0);
+  const { t } = useTranslation("common");
 
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
@@ -54,7 +56,7 @@ export const Main = () => {
         <User />
         <Link className={styles.wallet} to="/wallet">
           <WalletIcon />
-          <span>Wallet</span>
+          <span>{t("wallet")}</span>
         </Link>
         <Link className={styles.settings} to="/settings">
           <SettingIcon />
@@ -69,7 +71,7 @@ export const Main = () => {
         playsInline
         data-wf-ignore="true"
         data-object-fit="cover"
-        poster={minerOffImage}
+        // poster={minerOffImage}
       >
         <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
       </video>

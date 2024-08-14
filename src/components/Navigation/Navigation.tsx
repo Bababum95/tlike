@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { mainRoutes } from "@/core/routes";
@@ -16,6 +17,7 @@ const isActivePath = (currentPath: string, routePath: string) => {
 
 export const Navigation = () => {
   const { pathname } = useLocation();
+  const { t } = useTranslation("common");
 
   return (
     <nav className={styles.container}>
@@ -28,7 +30,7 @@ export const Navigation = () => {
           to={route.path}
         >
           <span className={styles.icon}>{route.icon}</span>
-          {route.title}
+          {route.title && t(route.title)}
         </Link>
       ))}
     </nav>

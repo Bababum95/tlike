@@ -21,6 +21,7 @@ const initialState: UserStateType = {
   },
   token: "",
   type: "new",
+  language: "en",
 };
 
 export const fetchUser = createAsyncThunk(
@@ -52,6 +53,7 @@ const userSlice = createSlice({
         state.mining_speed = action.payload.mining_speed;
         state.token = action.payload.token;
         state.type = action.payload.type;
+        state.language = action.payload.language;
         if (action.payload.photo) state.photo = action.payload.photo;
         state.status = "successed";
       })

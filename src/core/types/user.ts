@@ -9,6 +9,7 @@ export type UserType = {
   photo?: string;
   token: string;
   type: "old" | "new";
+  language: "en" | "ru";
 };
 
 export type UserStateType = {

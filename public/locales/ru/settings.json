@@ -1,13 +1,13 @@
 {
-  "settings": "Настройки",
+  "settings": "Настрйоки",
   "language": "Язык",
-  "ru": "Русский",
-  "en": "Английский",
+  "ru": "Russian",
+  "en": "English",
   "about-project": "О проекте",
-  "how-to-start": "Как начать?",
-  "active-users": "Активные пользователи",
-  "mined": "mined",
-  "earned": "earned",
-  "burned": "burned",
-  "next-halving": "Next halving"
+  "how-to-start": "С чего начать ?",
+  "active-users": "Активных пользователей",
+  "mined": "Добыто",
+  "earned": "Заработано",
+  "burned": "Сожжено",
+  "next-halving": "Следующий халвинг"
 }

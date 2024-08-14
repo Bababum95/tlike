@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
@@ -14,7 +15,6 @@ import {
 
 import { SPRING_OPTIONS, SWIPE_CONFIDEBCE_THRESHOLD } from "@config";
 import styles from "./Onboarding.module.scss";
-import { useNavigate } from "react-router-dom";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
@@ -62,6 +62,8 @@ export const Onboarding = () => {
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
   };
+
+  console.log(wallet);
 
   const next = () => {
     setImgIndex((prev) => Math.min(prev + 1, SLIDES.length - 1));

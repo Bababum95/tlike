@@ -19,9 +19,11 @@ import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
 import { fetchUser } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
+import { useTranslation } from "react-i18next";
 
 export const App: FC = () => {
-  const [progress, setProgress] = useState(100);
+  const [progress, setProgress] = useState(20);
+  const { i18n } = useTranslation();
   const lp = useLaunchParams();
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
@@ -73,6 +75,7 @@ export const App: FC = () => {
       setTimeout(() => {
         setProgress(100);
       }, 400);
+      i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));
     }
@@ -95,6 +98,7 @@ export const App: FC = () => {
             ))}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
+          {user.type === "new" && <Navigate to="/onboarding" replace />}
         </Router>
       )}
     </AppRoot>
