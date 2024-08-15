@@ -6,6 +6,7 @@ import {
 import type { InitDataParsed } from "@telegram-apps/sdk-react";
 
 import { UserStateType } from "@types";
+import { RootState } from "@/core/store";
 import { api } from "@/core/api";
 
 const initialState: UserStateType = {
@@ -29,6 +30,29 @@ export const fetchUser = createAsyncThunk(
   async (data: InitDataParsed, { rejectWithValue }) => {
     try {
       const response = await api.post("telegram/front", data);
+      if (response.status === 200) {
+        return response.data;
+      }
+      return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const fetchReferral = createAsyncThunk(
+  "user/fetchReferral",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+
+    try {
+      const response = await api.get("/referral/notifications", {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+      console.log(response.data);
       if (response.status === 200) {
         return response.data;
       }

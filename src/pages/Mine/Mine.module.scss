@@ -76,3 +76,54 @@
   @include primary-button;
   width: 100%;
 }
+
+.upgrade {
+  @include flex-layout(flex-start, center);
+  gap: 11px;
+  background-color: $section;
+  padding: 21px 18px;
+  border-radius: 16px;
+  flex: 1;
+  position: relative;
+  margin-top: 14px;
+  @include border-gradient;
+
+  .info {
+    flex: 1;
+  }
+
+  .title {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .price {
+    margin: 4px 0;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+  }
+
+  .text {
+    margin: 0;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    color: $primary;
+  }
+
+  .button {
+    @include primary-button;
+    width: 107px;
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  .amount {
+    margin: 8px 0 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+  }
+}

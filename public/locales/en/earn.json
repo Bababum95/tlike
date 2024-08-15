@@ -8,5 +8,7 @@
   "nft-text": "Each NFT increases LOVE rewards by 2%, up to 20%",
   "nft-button": "Buy NFT",
   "you-won": "You won",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "buy-spin": "Buy spin",
+  "buy-spin-hint": "You can buy a spin with LIKE or LOVE tokens"
 }

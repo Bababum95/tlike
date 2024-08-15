@@ -12,10 +12,10 @@ export const List: FC<Props> = ({ children }) => {
     <AnimatePresence mode="wait">
       <motion.ul
         className={styles.list}
-        initial={{ x: 20, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: [30, -15, 0], opacity: 1 }}
         exit={{ x: -30, opacity: 0 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.25 }}
         layout
         key="list"
       >

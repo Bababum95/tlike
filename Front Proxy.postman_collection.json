@@ -143,6 +143,149 @@
       ]
     },
     {
+      "name": "1. Привязать TON кошелек к аккаунту",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wallet\": \"xxx\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/wallet/link",
+          "host": ["{{host}}"],
+          "path": ["wallet", "link"]
+        }
+      },
+      "response": [
+        {
+          "name": "Кошелек обновлен",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"wallet\": \"UQDTmau9syjupuLgq8eMaVHXsU1gD8VkFPFs6LhugwxEpjs8\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/wallet/link",
+              "host": ["{{host}}"],
+              "path": ["wallet", "link"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 14 Aug 2024 20:24:19 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "265"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"109-GaMoYsqOP8mlReuMQk/PaVQHyb4\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 21,\n    \"user_id\": \"1044888407\",\n    \"wallet\": \"UQDTmau9syjupuLgq8eMaVHXsU1gD8VkFPFs6LhugwxEpjs8\",\n    \"is_premium\": false,\n    \"created_date\": \"2024-08-13T22:38:17.518Z\",\n    \"token\": \"be46d89f-f160-4d46-b4fd-8c316255655e\",\n    \"referral\": {\n        \"active\": false,\n        \"inviter_id\": \"debug\"\n    },\n    \"language\": \"en\"\n}"
+        },
+        {
+          "name": "В адресе ошибка",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"wallet\": \"UQDTmau9syjupuLgq8eMaVHXsU1gD8VkFPFs6LhugwxEpjs8\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/wallet/link",
+              "host": ["{{host}}"],
+              "path": ["wallet", "link"]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 14 Aug 2024 20:24:29 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"12-Y7TqX4PFUJ6O+RTv1aRJV2FCE/E\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"error\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "1. Положить в пользователя крипто-кошелек",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
       "name": "1. Смена языка профиля",
       "request": {
         "method": "PUT",
@@ -180,7 +323,7 @@
       },
       "response": [
         {
-          "name": "Пользователь уже получал подарок",
+          "name": "Пользователь уже получил подарок",
           "originalRequest": {
             "method": "GET",
             "header": [],
@@ -206,7 +349,7 @@
             },
             {
               "key": "Date",
-              "value": "Sun, 11 Aug 2024 10:08:17 GMT"
+              "value": "Wed, 14 Aug 2024 20:05:33 GMT"
             },
             {
               "key": "Content-Type",
@@ -214,7 +357,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "100"
+              "value": "192"
             },
             {
               "key": "Connection",
@@ -222,7 +365,7 @@
             },
             {
               "key": "ETag",
-              "value": "W/\"64-f1UMrnKeobhh3t2AYX/H8Cg5czk\""
+              "value": "W/\"c0-gCdQqenPeV3oIYJ5kOfCFgeygyM\""
             },
             {
               "key": "Vary",
@@ -230,10 +373,10 @@
             }
           ],
           "cookie": [],
-          "body": "{\n    \"message\": \"User has already spinned\",\n    \"status\": \"used\",\n    \"date\": \"2024-08-11T10:07:36.991Z\",\n    \"gift_id\": 2\n}"
+          "body": "{\n    \"message\": \"User has already spinned\",\n    \"status\": \"used\",\n    \"date\": \"2024-08-14T19:34:17.065Z\",\n    \"gift_id\": 1,\n    \"gift_info\": {\n        \"amount\": \"1000\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 000 токенов TLove\"\n    }\n}"
         },
         {
-          "name": "Пользователь выиграл",
+          "name": "Пользователь выиграл бесплатно",
           "originalRequest": {
             "method": "GET",
             "header": [],
@@ -259,7 +402,7 @@
             },
             {
               "key": "Date",
-              "value": "Sun, 11 Aug 2024 10:08:52 GMT"
+              "value": "Wed, 14 Aug 2024 20:06:28 GMT"
             },
             {
               "key": "Content-Type",
@@ -267,7 +410,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "84"
+              "value": "176"
             },
             {
               "key": "Connection",
@@ -275,7 +418,7 @@
             },
             {
               "key": "ETag",
-              "value": "W/\"54-H0b4CW+u+J5SIWF92Cck27Aeak0\""
+              "value": "W/\"b0-8DECUKcNiTKi0w571Qg4Q99i13Q\""
             },
             {
               "key": "Vary",
@@ -283,7 +426,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\n    \"message\": \"Successed\",\n    \"status\": \"new\",\n    \"date\": \"2024-08-11T10:08:52.153Z\",\n    \"gift_id\": 2\n}"
+          "body": "{\n    \"message\": \"Successed\",\n    \"status\": \"new\",\n    \"date\": \"2024-08-14T20:06:28.919Z\",\n    \"gift_id\": 2,\n    \"gift_info\": {\n        \"amount\": \"1500\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 500 токенов TLove\"\n    }\n}"
         }
       ]
     },
@@ -309,63 +452,6 @@
         }
       },
       "response": [
-        {
-          "name": "TLove пользователь купил",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{host}}/fortune/spin?type=paid&currency=TLove",
-              "host": ["{{host}}"],
-              "path": ["fortune", "spin"],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "paid"
-                },
-                {
-                  "key": "currency",
-                  "value": "TLove"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Server",
-              "value": "nginx/1.18.0 (Ubuntu)"
-            },
-            {
-              "key": "Date",
-              "value": "Sun, 11 Aug 2024 10:56:22 GMT"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json; charset=utf-8"
-            },
-            {
-              "key": "Content-Length",
-              "value": "96"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive"
-            },
-            {
-              "key": "ETag",
-              "value": "W/\"60-D75imbU3hBdChi2fO0Y+9vjLoFE\""
-            },
-            {
-              "key": "Vary",
-              "value": "Accept-Encoding"
-            }
-          ],
-          "cookie": [],
-          "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"date\": \"2024-08-11T13:56:22.349+03:00\",\n    \"gift_id\": 2\n}"
-        },
         {
           "name": "TLove не хватило денег",
           "originalRequest": {
@@ -424,63 +510,6 @@
           "body": "{\n    \"message\": \"TLove insufficient\",\n    \"status\": \"fail\",\n    \"date\": \"2024-08-11T13:57:27.426+03:00\"\n}"
         },
         {
-          "name": "TLike пользователь купил",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{host}}/fortune/spin?type=paid&currency=TLike",
-              "host": ["{{host}}"],
-              "path": ["fortune", "spin"],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "paid"
-                },
-                {
-                  "key": "currency",
-                  "value": "TLike"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Server",
-              "value": "nginx/1.18.0 (Ubuntu)"
-            },
-            {
-              "key": "Date",
-              "value": "Sun, 11 Aug 2024 10:59:13 GMT"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json; charset=utf-8"
-            },
-            {
-              "key": "Content-Length",
-              "value": "96"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive"
-            },
-            {
-              "key": "ETag",
-              "value": "W/\"60-OhD0E+6SzxdK5QD5Ei1qOGMEIkw\""
-            },
-            {
-              "key": "Vary",
-              "value": "Accept-Encoding"
-            }
-          ],
-          "cookie": [],
-          "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"date\": \"2024-08-11T13:59:13.790+03:00\",\n    \"gift_id\": 1\n}"
-        },
-        {
           "name": "TLike не хватило денег",
           "originalRequest": {
             "method": "GET",
@@ -536,6 +565,120 @@
           ],
           "cookie": [],
           "body": "{\n    \"message\": \"TLike insufficient\",\n    \"status\": \"fail\",\n    \"date\": \"2024-08-11T13:58:47.352+03:00\"\n}"
+        },
+        {
+          "name": "TLike пользователь купил",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/fortune/spin?type=paid&currency=TLike",
+              "host": ["{{host}}"],
+              "path": ["fortune", "spin"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "paid"
+                },
+                {
+                  "key": "currency",
+                  "value": "TLike"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 14 Aug 2024 20:07:20 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "149"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"95-wFnfa2T40E/LW4SJeqPNrh0lYPg\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"gift_id\": 2,\n    \"gift_info\": {\n        \"amount\": \"1500\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 500 токенов TLove\"\n    }\n}"
+        },
+        {
+          "name": "TLove пользователь купил",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/fortune/spin?type=paid&currency=TLove",
+              "host": ["{{host}}"],
+              "path": ["fortune", "spin"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "paid"
+                },
+                {
+                  "key": "currency",
+                  "value": "TLove"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 14 Aug 2024 20:07:48 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "149"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"95-+ao6kHPuAfekThuQgsaUkpHaBkI\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"gift_id\": 1,\n    \"gift_info\": {\n        \"amount\": \"1000\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 000 токенов TLove\"\n    }\n}"
         }
       ]
     },
@@ -545,10 +688,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://shit.foreignpay.ru/webhook-test/fortune/time",
-          "protocol": "https",
-          "host": ["shit", "foreignpay", "ru"],
-          "path": ["webhook-test", "fortune", "time"]
+          "raw": "{{host}}/fortune/time",
+          "host": ["{{host}}"],
+          "path": ["fortune", "time"]
         }
       },
       "response": [
@@ -1031,36 +1173,36 @@
           "_postman_previewlanguage": "json",
           "header": [
             {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 14 Aug 2024 20:16:47 GMT"
+            },
+            {
               "key": "Content-Type",
               "value": "application/json; charset=utf-8"
             },
             {
               "key": "Content-Length",
-              "value": "44"
-            },
-            {
-              "key": "ETag",
-              "value": "W/\"2c-0SVpqB5lD7dlq9zfbr4e29HswKk\""
-            },
-            {
-              "key": "Vary",
-              "value": "Accept-Encoding"
-            },
-            {
-              "key": "Date",
-              "value": "Sun, 11 Aug 2024 14:12:30 GMT"
+              "value": "98"
             },
             {
               "key": "Connection",
               "value": "keep-alive"
             },
             {
-              "key": "Keep-Alive",
-              "value": "timeout=5"
+              "key": "ETag",
+              "value": "W/\"62-9uUrSuVFpLD3PG9VI1Qp8lwrDfY\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
             }
           ],
           "cookie": [],
-          "body": "{\n    \"status\": \"non-used\",\n    \"inviter_id\": 571293212\n}"
+          "body": "{\n    \"status\": \"non-used\",\n    \"inviter_id\": \"debug\",\n    \"gift_id\": 1,\n    \"gift_currency\": \"TLove\",\n    \"gift_amount\": 10000\n}"
         }
       ]
     },
@@ -1421,7 +1563,7 @@
     "apikey": [
       {
         "key": "value",
-        "value": "c41073b9-8bf8-4aad-a461-acbf95896b11",
+        "value": "be46d89f-f160-4d46-b4fd-8c316255655e",
         "type": "string"
       },
       {

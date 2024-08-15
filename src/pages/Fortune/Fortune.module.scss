@@ -114,6 +114,10 @@
 .button {
   @include primary-button;
   width: 100%;
+
+  &.loading {
+    @include loader-button;
+  }
 }
 
 .toast {
@@ -140,4 +144,9 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+
+.buttons {
+  @include flex-layout;
+  gap: 10px;
 }

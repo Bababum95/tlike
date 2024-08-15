@@ -18,7 +18,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
-import { fetchUser } from "@/core/store/slices/user";
+import { fetchReferral, fetchUser } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
 
@@ -70,12 +70,14 @@ export const App: FC = () => {
   useEffect(() => {
     if (user.status === "successed") {
       setProgress(70);
-      dispatch(checkTime()).finally(() => {
-        setProgress(99);
-        setTimeout(() => {
-          setProgress(100);
-        }, 400);
-      });
+      Promise.all([dispatch(checkTime()), dispatch(fetchReferral())]).finally(
+        () => {
+          setProgress(99);
+          setTimeout(() => {
+            setProgress(100);
+          }, 400);
+        }
+      );
       i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));

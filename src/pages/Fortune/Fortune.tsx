@@ -14,6 +14,14 @@ import { Toast } from "@/components";
 import styles from "./Fortune.module.scss";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
+const initToastes = {
+  win: false,
+  by: {
+    open: false,
+    currency: "TLove",
+    loading: false,
+  },
+};
 
 export const Fortune = () => {
   const { t } = useTranslation("earn");
@@ -21,7 +29,7 @@ export const Fortune = () => {
   const [targetIndex, setTargetIndex] = useState<number | null>(null);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [intervalTime, setIntervalTime] = useState<number>(200);
-  const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
+  const [toastIsOpen, setToastIsOpen] = useState(initToastes);
   const [showFierwork, setShowFierwork] = useState<boolean>(false);
   const token = useAppSelector((state) => state.user.token);
   const fortuneStore = useAppSelector((state) => state.fortune);
@@ -30,7 +38,7 @@ export const Fortune = () => {
   const dispatch = useAppDispatch();
 
   const closeToast = () => {
-    setToastIsOpen(false);
+    setToastIsOpen(initToastes);
   };
 
   const spin = async () => {
@@ -59,6 +67,35 @@ export const Fortune = () => {
     }
   };
 
+  const openBySpinToast = (currency: "TLike" | "TLove") => {
+    setToastIsOpen((prev) => ({
+      ...prev,
+      by: { ...prev.by, open: true, currency },
+    }));
+  };
+
+  const bySpin = async () => {
+    setToastIsOpen((prev) => ({ ...prev, by: { ...prev.by, loading: true } }));
+    try {
+      const response = await api.get("fortune/spin", {
+        headers: {
+          "x-auth-token": token,
+        },
+        params: {
+          type: "paid",
+          currency: toastIsOpen.by.currency,
+        },
+      });
+
+      console.log(response);
+    } finally {
+      setToastIsOpen((prev) => ({
+        ...prev,
+        by: { ...prev.by, loading: false },
+      }));
+    }
+  };
+
   const byNft = () => {
     utils.openLink(getgemsUrl);
   };
@@ -77,7 +114,7 @@ export const Fortune = () => {
         if (currentIndex === targetIndex) {
           setIsSpinning(false);
           clearInterval(interval);
-          setToastIsOpen(true);
+          setToastIsOpen((prev) => ({ ...prev, win: true }));
           setShowFierwork(true);
         }
         return currentIndex;
@@ -122,6 +159,26 @@ export const Fortune = () => {
       >
         {fortuneStore.spin_available ? t("spin") : fortuneStore.nextSpinTime}
       </button>
+      {!fortuneStore.spin_available && (
+        <div className={styles.nft}>
+          <h2 className={styles.title}>{t("buy-spin")}</h2>
+          <p className={styles.text}>{t("buy-spin-hint")}</p>
+          <div className={styles.buttons}>
+            <button
+              className={styles.button}
+              onClick={() => openBySpinToast("TLike")}
+            >
+              100 LIKE
+            </button>
+            <button
+              className={styles.button}
+              onClick={() => openBySpinToast("TLove")}
+            >
+              5 000 LOVE
+            </button>
+          </div>
+        </div>
+      )}
       <div className={styles.nft}>
         <h2 className={styles.title}>{t("nft-title")}</h2>
         <p className={styles.text}>{t("nft-text")}</p>
@@ -130,7 +187,7 @@ export const Fortune = () => {
         </button>
       </div>
       {FORTUNE_WHEEL[activeIndex] && (
-        <Toast isOpen={toastIsOpen} onClose={closeToast}>
+        <Toast isOpen={toastIsOpen.win} onClose={closeToast}>
           <img
             src={FORTUNE_WHEEL[activeIndex].icon}
             alt={FORTUNE_WHEEL[activeIndex].value}
@@ -150,6 +207,20 @@ export const Fortune = () => {
       {showFierwork && (
         <Realistic onInit={({ conductor }) => conductor.shoot()} />
       )}
+      <Toast isOpen={toastIsOpen.by.open} onClose={closeToast}>
+        <p className={styles["toast-title"]}>{t("buy-spin")}</p>
+        <p className={styles["toast-value"]}>
+          {toastIsOpen.by.currency === "TLike" ? "100 LIKE" : "5 000 LOVE"}
+        </p>
+        <button
+          onClick={bySpin}
+          className={classNames(styles.button, {
+            [styles.loading]: toastIsOpen.by.loading,
+          })}
+        >
+          {t("confirm")}
+        </button>
+      </Toast>
     </div>
   );
 };

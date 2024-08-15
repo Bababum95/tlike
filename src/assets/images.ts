@@ -50,11 +50,16 @@ export { default as thumbImage } from "./images/balance/thumb.png";
 
 // mine
 export { default as byNftImage } from "./images/mine/by-nft.png";
+// -- upgrades
+export { default as cableImprovementsImage } from "./images/mine/upgrades/cable-improvements.svg";
+export { default as engineerImage } from "./images/mine/upgrades/engineer.svg";
+export { default as fanImage } from "./images/mine/upgrades/fan.svg";
+export { default as waterCoolingImage } from "./images/mine/upgrades/water-cooling.svg";
 
 // earn
 export { default as fortuneWheelPreviewImage } from "./images/earn/fortune-wheel.png";
 
-// fortune 
+// fortune
 export { default as fortuneLikeImage } from "./images/earn/fortune/like.png";
 export { default as fortuneLoveImage } from "./images/earn/fortune/love.png";
 export { default as fortuneLove2Image } from "./images/earn/fortune/love-2.png";

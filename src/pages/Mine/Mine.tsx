@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 
 import { Balance, Empty, Navigation, User } from "@/components";
-import { byNftImage } from "@images";
+import {
+  byNftImage,
+  cableImprovementsImage,
+  engineerImage,
+  fanImage,
+  waterCoolingImage,
+} from "@images";
 
 import styles from "./Mine.module.scss";
 import { useParams } from "react-router-dom";
@@ -49,7 +55,7 @@ export const Mine = () => {
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {tab === "mining" && (
+          {tab === "mining" ? (
             <>
               <img
                 src={byNftImage}
@@ -67,6 +73,85 @@ export const Mine = () => {
                   {t("no-nfts-button")}
                 </button>
               </Empty>
+            </>
+          ) : (
+            <>
+              <div className={styles.upgrade}>
+                <motion.img
+                  src={fanImage}
+                  alt="Fan"
+                  className={styles.image}
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: [0.5, 1.2, 1] }}
+                  transition={{ duration: 0.4 }}
+                />
+                <div className={styles.info}>
+                  <h2 className={styles.title}>{t("fan")}</h2>
+                  <p className={styles.price}>1 500 TLike</p>
+                  <p className={styles.text}>+195 TLove/h</p>
+                </div>
+                <div className={styles.action}>
+                  <button className={styles.button}>{t("buy")}</button>
+                  <p className={styles.amount}>Amount: 0</p>
+                </div>
+              </div>
+              <div className={styles.upgrade}>
+                <motion.img
+                  src={cableImprovementsImage}
+                  alt="Cable improvements"
+                  className={styles.image}
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: [0.5, 1.2, 1] }}
+                  transition={{ duration: 0.4 }}
+                />
+                <div className={styles.info}>
+                  <h2 className={styles.title}>{t("cable-improvements")}</h2>
+                  <p className={styles.price}>1 500 TLike</p>
+                  <p className={styles.text}>+195 TLove/h</p>
+                </div>
+                <div className={styles.action}>
+                  <button className={styles.button}>{t("buy")}</button>
+                  <p className={styles.amount}>Amount: 0</p>
+                </div>
+              </div>
+              <div className={styles.upgrade}>
+                <motion.img
+                  src={waterCoolingImage}
+                  alt="Water cooling"
+                  className={styles.image}
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: [0.5, 1.2, 1] }}
+                  transition={{ duration: 0.4 }}
+                />
+                <div className={styles.info}>
+                  <h2 className={styles.title}>{t("water-cooling")}</h2>
+                  <p className={styles.price}>1 500 TLike</p>
+                  <p className={styles.text}>+195 TLove/h</p>
+                </div>
+                <div className={styles.action}>
+                  <button className={styles.button}>{t("buy")}</button>
+                  <p className={styles.amount}>Amount: 0</p>
+                </div>
+              </div>
+              <div className={styles.upgrade}>
+                <motion.img
+                  src={engineerImage}
+                  alt="Engineer"
+                  className={styles.image}
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: [0.5, 1.2, 1] }}
+                  transition={{ duration: 0.4 }}
+                />
+                <div className={styles.info}>
+                  <h2 className={styles.title}>{t("engineer")}</h2>
+                  <p className={styles.price}>1 500 TLike</p>
+                  <p className={styles.text}>+195 TLove/h</p>
+                </div>
+                <div className={styles.action}>
+                  <button className={styles.button}>{t("buy")}</button>
+                  <p className={styles.amount}>Amount: 0</p>
+                </div>
+              </div>
             </>
           )}
         </motion.div>
