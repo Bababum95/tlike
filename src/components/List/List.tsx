@@ -13,9 +13,9 @@ export const List: FC<Props> = ({ children }) => {
       <motion.ul
         className={styles.list}
         initial={{ x: 50, opacity: 0 }}
-        animate={{ x: [30, -15, 0], opacity: 1 }}
+        animate={{ x: [50, -15, 0], opacity: 1 }}
         exit={{ x: -30, opacity: 0 }}
-        transition={{ duration: 0.25 }}
+        transition={{ duration: 0.3 }}
         layout
         key="list"
       >
