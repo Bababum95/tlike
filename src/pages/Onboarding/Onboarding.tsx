@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { initUtils } from "@telegram-apps/sdk";
 
+import { api } from "@/core/api";
+import { useAppSelector } from "@hooks";
 import {
   fortuneWheelImage,
   inviteImage,
@@ -58,6 +60,7 @@ export const Onboarding = () => {
   const wallet = useTonWallet();
   const utils = initUtils();
   const navigate = useNavigate();
+  const token = useAppSelector((state) => state.user.token);
 
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
@@ -67,6 +70,20 @@ export const Onboarding = () => {
 
   const next = () => {
     setImgIndex((prev) => Math.min(prev + 1, SLIDES.length - 1));
+  };
+
+  const connectWallet = async () => {
+    api.put(
+      "wallet/link",
+      {
+        wallet: wallet?.account.address,
+      },
+      {
+        headers: {
+          "x-auth-token": token,
+        },
+      }
+    );
   };
 
   const byNft = () => {
@@ -123,6 +140,7 @@ export const Onboarding = () => {
 
   useEffect(() => {
     if (wallet && imgIndex === SLIDES.length - 1) {
+      connectWallet();
       navigate("/");
     }
   }, [wallet, imgIndex]);

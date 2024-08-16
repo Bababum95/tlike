@@ -72,6 +72,13 @@
 
 .wallet {
   margin: 14px auto 0;
+
+  button,
+  ul {
+    border: 1px solid $primary;
+    background-color: $section;
+    color: #fff;
+  }
 }
 
 .history {

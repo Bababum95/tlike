@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { initUtils } from "@telegram-apps/sdk";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,7 +15,6 @@ import {
 } from "@images";
 
 import styles from "./Mine.module.scss";
-import { useParams } from "react-router-dom";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
@@ -84,6 +84,8 @@ export const Mine = () => {
                   initial={{ scale: 0.5 }}
                   animate={{ scale: [0.5, 1.2, 1] }}
                   transition={{ duration: 0.4 }}
+                  width={83}
+                  height={78}
                 />
                 <div className={styles.info}>
                   <h2 className={styles.title}>{t("fan")}</h2>
@@ -103,6 +105,8 @@ export const Mine = () => {
                   initial={{ scale: 0.5 }}
                   animate={{ scale: [0.5, 1.2, 1] }}
                   transition={{ duration: 0.4 }}
+                  width={83}
+                  height={78}
                 />
                 <div className={styles.info}>
                   <h2 className={styles.title}>{t("cable-improvements")}</h2>
@@ -122,6 +126,8 @@ export const Mine = () => {
                   initial={{ scale: 0.5 }}
                   animate={{ scale: [0.5, 1.2, 1] }}
                   transition={{ duration: 0.4 }}
+                  width={83}
+                  height={78}
                 />
                 <div className={styles.info}>
                   <h2 className={styles.title}>{t("water-cooling")}</h2>
@@ -141,6 +147,8 @@ export const Mine = () => {
                   initial={{ scale: 0.5 }}
                   animate={{ scale: [0.5, 1.2, 1] }}
                   transition={{ duration: 0.4 }}
+                  width={83}
+                  height={78}
                 />
                 <div className={styles.info}>
                   <h2 className={styles.title}>{t("engineer")}</h2>
