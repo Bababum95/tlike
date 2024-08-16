@@ -12,6 +12,7 @@ export type UserType = {
   token: string;
   type: "old" | "new";
   language: "en" | "ru";
+  wallet?: string;
 };
 
 export type UserStateType = {

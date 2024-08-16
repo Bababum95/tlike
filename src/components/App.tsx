@@ -2,6 +2,7 @@ import { type FC, useEffect, useMemo, useState } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { Navigate, Route, Router, Routes } from "react-router-dom";
 import { useIntegration } from "@telegram-apps/react-router-integration";
+import { useTonWallet } from "@tonconnect/ui-react";
 import { useTranslation } from "react-i18next";
 import {
   bindMiniAppCSSVars,
@@ -18,7 +19,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
-import { fetchReferral, fetchUser } from "@/core/store/slices/user";
+import { fetchReferral, fetchUser, setWallet } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
 
@@ -32,6 +33,7 @@ export const App: FC = () => {
   const initData = initInitData();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
+  const wallet = useTonWallet();
 
   useEffect(() => {
     return bindMiniAppCSSVars(miniApp, themeParams);
@@ -64,6 +66,10 @@ export const App: FC = () => {
       }, 300);
 
       dispatch(fetchUser(initData));
+      if (wallet) {
+        dispatch(setWallet(wallet.account.address));
+        console.log(wallet);
+      }
     }
   }, [initData]);
 

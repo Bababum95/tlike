@@ -66,7 +66,11 @@ export const fetchReferral = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setWallet: (state, action: PayloadAction<string>) => {
+      state.wallet = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
@@ -93,4 +97,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-// export const {} = userSlice.actions;
+export const { setWallet } = userSlice.actions;
