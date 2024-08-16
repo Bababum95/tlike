@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useTonWallet } from "@tonconnect/ui-react";
 import { motion, type Variants } from "framer-motion";
 
 import {
@@ -13,10 +14,11 @@ import {
   InstagramLogoIcon,
 } from "@images";
 import { Item, Link, List, Navigation } from "@/components";
+import { useAppDispatch, useAppSelector } from "@hooks";
 import { api } from "@/core/api";
+import { connectWallet } from "@/core/store/slices/user";
 
 import styles from "./Settings.module.scss";
-import { useAppSelector } from "@/core/hooks";
 
 const itemVariants: Variants = {
   open: {
@@ -30,7 +32,10 @@ const itemVariants: Variants = {
 export const Settings = () => {
   const { t, i18n } = useTranslation("settings");
   const [langIsOpen, setlangIsOpen] = useState(false);
-  const token = useAppSelector((state) => state.user.token);
+  const user = useAppSelector((state) => state.user);
+  const wallet = useTonWallet();
+  const dispatch = useAppDispatch();
+
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -40,7 +45,7 @@ export const Settings = () => {
       {},
       {
         headers: {
-          "x-auth-token": token,
+          "x-auth-token": user.token,
         },
         params: {
           set: lng,
@@ -48,6 +53,12 @@ export const Settings = () => {
       }
     );
   };
+
+  useEffect(() => {
+    if (wallet && wallet.account.address !== user.wallet) {
+      dispatch(connectWallet({ wallet: wallet.account.address }));
+    }
+  }, [wallet]);
 
   return (
     <div className={styles.page}>

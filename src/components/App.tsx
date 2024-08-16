@@ -72,7 +72,11 @@ export const App: FC = () => {
   useEffect(() => {
     if (user.status === "successed") {
       setProgress(70);
-      Promise.all([dispatch(checkTime()), dispatch(fetchReferral())]).finally(
+      Promise.all([
+        dispatch(checkTime()),
+        dispatch(fetchReferral()),
+        // dispatch(getNFT()),
+      ]).finally(
         () => {
           setProgress(99);
           setTimeout(() => {
@@ -81,12 +85,11 @@ export const App: FC = () => {
         }
       );
       i18n.changeLanguage(user.language);
+      if (wallet) {
+        dispatch(setWallet(wallet.account.address));
+      }
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));
-    }
-    if (wallet) {
-      dispatch(setWallet(wallet.account.address));
-      console.log(wallet);
     }
   }, [user.status]);
 
