@@ -66,10 +66,6 @@ export const App: FC = () => {
       }, 300);
 
       dispatch(fetchUser(initData));
-      if (wallet) {
-        dispatch(setWallet(wallet.account.address));
-        console.log(wallet);
-      }
     }
   }, [initData]);
 
@@ -87,6 +83,10 @@ export const App: FC = () => {
       i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));
+    }
+    if (wallet) {
+      dispatch(setWallet(wallet.account.address));
+      console.log(wallet);
     }
   }, [user.status]);
 
