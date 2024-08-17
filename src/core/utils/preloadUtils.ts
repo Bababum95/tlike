@@ -9,6 +9,7 @@ export const preloadUtils = {
     videos.forEach((video) => {
       const vid = document.createElement("video");
       vid.src = video;
+      vid.preload = 'auto';
       vid.load();
     });
   },

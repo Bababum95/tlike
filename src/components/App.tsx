@@ -38,6 +38,8 @@ export const App: FC = () => {
   const wallet = useTonWallet();
 
   useEffect(() => {
+    miniApp.setBgColor("#1d2733");
+    miniApp.setHeaderColor("#1d2733");
     return bindMiniAppCSSVars(miniApp, themeParams);
   }, [miniApp, themeParams]);
 
