@@ -1,4 +1,8 @@
 import {
+  byNftImage,
+  cableImprovementsImage,
+  engineerImage,
+  fanImage,
   fortuneLikeImage,
   fortuneLove2Image,
   fortuneLove3Image,
@@ -8,10 +12,13 @@ import {
   fortuneNFTImage,
   fortuneNotcoinImage,
   fortuneToncoinImage,
+  fortuneWheelPreviewImage,
+  minerOffImage,
   slide1Image,
   slide2Image,
   slide3Image,
   slide4Image,
+  waterCoolingImage,
 } from "@images";
 
 export const SPRING_OPTIONS = {
@@ -72,7 +79,25 @@ export const FORTUNE_WHEEL = [
   },
 ];
 
-
 export const PRELOAD_IMAGES_LIST = [
-  
-]
+  fortuneLikeImage,
+  fortuneLove2Image,
+  fortuneLove3Image,
+  fortuneLove4Image,
+  fortuneLove5Image,
+  fortuneLoveImage,
+  fortuneNFTImage,
+  fortuneNotcoinImage,
+  fortuneToncoinImage,
+  slide1Image,
+  slide2Image,
+  slide3Image,
+  slide4Image,
+  minerOffImage,
+  byNftImage,
+  cableImprovementsImage,
+  engineerImage,
+  fanImage,
+  waterCoolingImage,
+  fortuneWheelPreviewImage,
+];

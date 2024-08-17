@@ -17,11 +17,13 @@ import {
 } from "@telegram-apps/sdk-react";
 
 import { useAppDispatch, useAppSelector } from "@hooks";
+import { PRELOAD_IMAGES_LIST } from "@config";
 import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
 import { fetchReferral, fetchUser, setWallet } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
+import { preloadUtils } from "@/core/utils/preloadUtils";
 
 export const App: FC = () => {
   const [progress, setProgress] = useState(20);
@@ -66,6 +68,7 @@ export const App: FC = () => {
       }, 300);
 
       dispatch(fetchUser(initData));
+      preloadUtils.images(PRELOAD_IMAGES_LIST);
     }
   }, [initData]);
 
@@ -76,14 +79,12 @@ export const App: FC = () => {
         dispatch(checkTime()),
         dispatch(fetchReferral()),
         // dispatch(getNFT()),
-      ]).finally(
-        () => {
-          setProgress(99);
-          setTimeout(() => {
-            setProgress(100);
-          }, 400);
-        }
-      );
+      ]).finally(() => {
+        setProgress(99);
+        setTimeout(() => {
+          setProgress(100);
+        }, 400);
+      });
       i18n.changeLanguage(user.language);
       if (wallet) {
         dispatch(setWallet(wallet.account.address));
