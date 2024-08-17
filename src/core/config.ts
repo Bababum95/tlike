@@ -13,7 +13,9 @@ import {
   fortuneNotcoinImage,
   fortuneToncoinImage,
   fortuneWheelPreviewImage,
+  minerAnimation,
   minerOffImage,
+  onboardingAnimation,
   slide1Image,
   slide2Image,
   slide3Image,
@@ -101,3 +103,5 @@ export const PRELOAD_IMAGES_LIST = [
   waterCoolingImage,
   fortuneWheelPreviewImage,
 ];
+
+export const PRELOAD_VIDEOS_LIST = [minerAnimation, onboardingAnimation];

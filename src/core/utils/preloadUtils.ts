@@ -5,4 +5,11 @@ export const preloadUtils = {
       img.src = image;
     });
   },
+  videos: (videos: string[]) => {
+    videos.forEach((video) => {
+      const vid = document.createElement("video");
+      vid.src = video;
+      vid.load();
+    });
+  },
 };

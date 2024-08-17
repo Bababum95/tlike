@@ -17,7 +17,7 @@ import {
 } from "@telegram-apps/sdk-react";
 
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { PRELOAD_IMAGES_LIST } from "@config";
+import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice } from "@/components";
 import { routes } from "@/core/routes";
 import { fetchReferral, fetchUser, setWallet } from "@/core/store/slices/user";
@@ -69,6 +69,7 @@ export const App: FC = () => {
 
       dispatch(fetchUser(initData));
       preloadUtils.images(PRELOAD_IMAGES_LIST);
+      preloadUtils.videos(PRELOAD_VIDEOS_LIST);
     }
   }, [initData]);
 
