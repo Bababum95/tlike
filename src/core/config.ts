@@ -71,3 +71,8 @@ export const FORTUNE_WHEEL = [
     icon: fortuneLove4Image,
   },
 ];
+
+
+export const PRELOAD_IMAGES_LIST = [
+  
+]

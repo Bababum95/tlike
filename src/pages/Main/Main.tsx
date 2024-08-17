@@ -73,6 +73,7 @@ export const Main = () => {
         playsInline
         data-wf-ignore="true"
         data-object-fit="cover"
+        preload="auto"
         poster={
           user.mining_speed.tlike > 0 || user.mining_speed.tlike > 0
             ? ""

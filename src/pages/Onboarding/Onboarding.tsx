@@ -43,6 +43,7 @@ const Slide: FC<SlideProps> = ({ image, title, text, video }) => {
           playsInline
           data-wf-ignore="true"
           data-object-fit="cover"
+          preload="auto"
         >
           <source src={video} type="video/mp4" data-wf-ignore="true" />
         </video>
