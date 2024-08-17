@@ -14,12 +14,13 @@ import {
   useThemeParams,
   useViewport,
   initInitData,
+  initBackButton,
 } from "@telegram-apps/sdk-react";
 
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice } from "@/components";
-import { routes } from "@/core/routes";
+import { mainRoutes, routes } from "@/core/routes";
 import { fetchReferral, fetchUser, setWallet } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
@@ -36,6 +37,7 @@ export const App: FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const wallet = useTonWallet();
+  const [backButton] = initBackButton();
 
   useEffect(() => {
     miniApp.setBgColor("#1d2733");
@@ -63,6 +65,18 @@ export const App: FC = () => {
     navigator.attach();
     return () => navigator.detach();
   }, [navigator]);
+
+  useEffect(() => {
+    let isMain = false;
+    mainRoutes.forEach((route) => {
+      if (route.path === location.pathname) {
+        isMain = true;
+      }
+    });
+
+    if (isMain) backButton.hide();
+    else backButton.show();
+  }, [location]);
 
   useEffect(() => {
     if (initData && user.status === "idle") {
