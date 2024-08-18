@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 import { api } from "@/core/api";
 import { RootState } from "@/core/store";
@@ -62,6 +62,11 @@ const fortuneSlice = createSlice({
     setTime(state) {
       setNextTime(state);
     },
+    setLastSpinTime(state, action: PayloadAction<string>) {
+      state.last_spin_time = action.payload;
+      state.spin_available = false;
+      setNextTime(state);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -87,4 +92,4 @@ const fortuneSlice = createSlice({
 });
 
 export default fortuneSlice.reducer;
-export const { setTime } = fortuneSlice.actions;
+export const { setTime, setLastSpinTime } = fortuneSlice.actions;

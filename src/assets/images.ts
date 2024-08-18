@@ -11,6 +11,7 @@ export { HistoryIcon } from "./ReactSVG/HistoryIcon";
 export { LikeIcon } from "./ReactSVG/LikeIcon";
 export { LoveIcon } from "./ReactSVG/LoveIcon";
 export { ErrorIcon } from "./ReactSVG/ErrorIcon";
+export { SuccessIcon } from "./ReactSVG/SuccessIcon";
 // socials
 export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
 export { TelegramPremiumIcon } from "./ReactSVG/socials/TelegramPremiumIcon";

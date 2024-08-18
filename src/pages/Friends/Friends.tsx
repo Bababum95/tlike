@@ -4,6 +4,8 @@ import { initUtils, initInitData } from "@telegram-apps/sdk-react";
 
 import { Empty, Item, List, Navigation } from "@/components";
 import { TelegramPremiumIcon, TelegramLogoIcon, CopyIcon } from "@images";
+import { useAppDispatch } from "@/core/hooks";
+import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./Friends.module.scss";
 
@@ -14,6 +16,12 @@ export const Friends = () => {
   const utils = initUtils();
   const initData = initInitData();
   const shareURL = `${tgUrl}?startapp=${initData?.user?.id}`;
+  const dispatch = useAppDispatch();
+
+  const copy = () => {
+    navigator.clipboard.writeText(shareURL);
+    dispatch(setNotice({ status: "success", message: "Copied!" }));
+  };
 
   const Invite = () => (
     <div className={styles.invite}>
@@ -23,10 +31,7 @@ export const Friends = () => {
       >
         {t("invite-friend")}
       </button>
-      <button
-        className={styles.copy}
-        onClick={() => navigator.clipboard.writeText(shareURL)}
-      >
+      <button className={styles.copy} onClick={copy}>
         <CopyIcon />
       </button>
     </div>

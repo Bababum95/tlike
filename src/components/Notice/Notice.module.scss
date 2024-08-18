@@ -11,7 +11,7 @@
   background-color: #1f2d50;
   padding: 10px;
   border-radius: 12px;
-  // animation: hide 5s ease-in-out forwards;
+  animation: hide 0.2s ease-in-out forwards 4.3s;
 
   span {
     font-weight: 400;
@@ -22,8 +22,7 @@
 }
 
 @keyframes hide {
-  0%,
-  95% {
+  0% {
     opacity: 1;
   }
   100% {

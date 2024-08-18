@@ -39,6 +39,10 @@ h2.title {
   &-button {
     @include primary-button;
     flex: 1;
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
 
@@ -47,4 +51,9 @@ h2.title {
   @include primary-button;
   width: 50px;
   height: 50px;
+  transition: all 0.1s ease-in-out;
+
+  &:active {
+    transform: scale(0.9);
+  }
 }

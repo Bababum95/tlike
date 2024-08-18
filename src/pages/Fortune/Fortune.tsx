@@ -5,7 +5,7 @@ import { initUtils, initHapticFeedback } from "@telegram-apps/sdk";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import classNames from "classnames";
 
-import { setTime } from "@/core/store/slices/fortune";
+import { setLastSpinTime, setTime } from "@/core/store/slices/fortune";
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { api } from "@/core/api";
 import { FORTUNE_WHEEL } from "@config";
@@ -62,6 +62,7 @@ export const Fortune = () => {
         setTargetIndex(response.data.gift_id - 1);
         haptic.impactOccurred("medium");
       }
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -76,18 +77,26 @@ export const Fortune = () => {
 
   const bySpin = async () => {
     setToastIsOpen((prev) => ({ ...prev, by: { ...prev.by, loading: true } }));
-    try {
-      const response = await api.get("fortune/spin", {
-        headers: {
-          "x-auth-token": token,
-        },
-        params: {
-          type: "paid",
-          currency: toastIsOpen.by.currency,
-        },
-      });
+    const delay = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
 
-      console.log(response);
+    try {
+      const [response] = await Promise.all([
+        api.get("fortune/spin", {
+          headers: {
+            "x-auth-token": token,
+          },
+          params: {
+            type: "paid",
+            currency: toastIsOpen.by.currency,
+          },
+        }),
+        delay(5000),
+      ]);
+
+      if (response.status === 200 && response.data.date) {
+        dispatch(setLastSpinTime(response.data.date));
+      }
     } finally {
       setToastIsOpen((prev) => ({
         ...prev,

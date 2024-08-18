@@ -21,7 +21,12 @@ import { useAppDispatch, useAppSelector } from "@hooks";
 import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice } from "@/components";
 import { mainRoutes, routes } from "@/core/routes";
-import { fetchReferral, fetchUser, setWallet } from "@/core/store/slices/user";
+import {
+  fetchReferral,
+  fetchUser,
+  // getNFT,
+  setWallet,
+} from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
 import { preloadUtils } from "@/core/utils/preloadUtils";
