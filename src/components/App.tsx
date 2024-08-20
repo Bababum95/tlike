@@ -24,7 +24,7 @@ import { mainRoutes, routes } from "@/core/routes";
 import {
   fetchReferral,
   fetchUser,
-  // getNFT,
+  getNFT,
   setWallet,
 } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
@@ -101,7 +101,7 @@ export const App: FC = () => {
       Promise.all([
         dispatch(checkTime()),
         dispatch(fetchReferral()),
-        // dispatch(getNFT()),
+        dispatch(getNFT()),
       ]).finally(() => {
         setProgress(99);
         setTimeout(() => {

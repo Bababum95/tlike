@@ -278,14 +278,6 @@
       ]
     },
     {
-      "name": "1. Положить в пользователя крипто-кошелек",
-      "request": {
-        "method": "GET",
-        "header": []
-      },
-      "response": []
-    },
-    {
       "name": "1. Смена языка профиля",
       "request": {
         "method": "PUT",
@@ -453,6 +445,63 @@
       },
       "response": [
         {
+          "name": "TLove пользователь купил",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/fortune/spin?type=paid&currency=TLove",
+              "host": ["{{host}}"],
+              "path": ["fortune", "spin"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "paid"
+                },
+                {
+                  "key": "currency",
+                  "value": "TLove"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 14 Aug 2024 20:07:48 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "149"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"95-+ao6kHPuAfekThuQgsaUkpHaBkI\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"gift_id\": 1,\n    \"gift_info\": {\n        \"amount\": \"1000\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 000 токенов TLove\"\n    }\n}"
+        },
+        {
           "name": "TLove не хватило денег",
           "originalRequest": {
             "method": "GET",
@@ -508,63 +557,6 @@
           ],
           "cookie": [],
           "body": "{\n    \"message\": \"TLove insufficient\",\n    \"status\": \"fail\",\n    \"date\": \"2024-08-11T13:57:27.426+03:00\"\n}"
-        },
-        {
-          "name": "TLike не хватило денег",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{host}}/fortune/spin?type=paid&currency=TLike",
-              "host": ["{{host}}"],
-              "path": ["fortune", "spin"],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "paid"
-                },
-                {
-                  "key": "currency",
-                  "value": "TLike"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Server",
-              "value": "nginx/1.18.0 (Ubuntu)"
-            },
-            {
-              "key": "Date",
-              "value": "Sun, 11 Aug 2024 10:58:47 GMT"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json; charset=utf-8"
-            },
-            {
-              "key": "Content-Length",
-              "value": "87"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive"
-            },
-            {
-              "key": "ETag",
-              "value": "W/\"57-sYhLAxLw84ctmvuK/DueZg0QgNM\""
-            },
-            {
-              "key": "Vary",
-              "value": "Accept-Encoding"
-            }
-          ],
-          "cookie": [],
-          "body": "{\n    \"message\": \"TLike insufficient\",\n    \"status\": \"fail\",\n    \"date\": \"2024-08-11T13:58:47.352+03:00\"\n}"
         },
         {
           "name": "TLike пользователь купил",
@@ -624,12 +616,12 @@
           "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"gift_id\": 2,\n    \"gift_info\": {\n        \"amount\": \"1500\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 500 токенов TLove\"\n    }\n}"
         },
         {
-          "name": "TLove пользователь купил",
+          "name": "TLike не хватило денег",
           "originalRequest": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{host}}/fortune/spin?type=paid&currency=TLove",
+              "raw": "{{host}}/fortune/spin?type=paid&currency=TLike",
               "host": ["{{host}}"],
               "path": ["fortune", "spin"],
               "query": [
@@ -639,7 +631,7 @@
                 },
                 {
                   "key": "currency",
-                  "value": "TLove"
+                  "value": "TLike"
                 }
               ]
             }
@@ -654,7 +646,7 @@
             },
             {
               "key": "Date",
-              "value": "Wed, 14 Aug 2024 20:07:48 GMT"
+              "value": "Sun, 11 Aug 2024 10:58:47 GMT"
             },
             {
               "key": "Content-Type",
@@ -662,7 +654,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "149"
+              "value": "87"
             },
             {
               "key": "Connection",
@@ -670,7 +662,7 @@
             },
             {
               "key": "ETag",
-              "value": "W/\"95-+ao6kHPuAfekThuQgsaUkpHaBkI\""
+              "value": "W/\"57-sYhLAxLw84ctmvuK/DueZg0QgNM\""
             },
             {
               "key": "Vary",
@@ -678,7 +670,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\n    \"message\": \"Gift was bought\",\n    \"status\": \"paid\",\n    \"gift_id\": 1,\n    \"gift_info\": {\n        \"amount\": \"1000\",\n        \"currency\": \"TLove\",\n        \"description\": \"1 000 токенов TLove\"\n    }\n}"
+          "body": "{\n    \"message\": \"TLike insufficient\",\n    \"status\": \"fail\",\n    \"date\": \"2024-08-11T13:58:47.352+03:00\"\n}"
         }
       ]
     },
@@ -923,7 +915,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"currency\": \"TLove\",\r\n    \"amount\": \"1000\",\r\n    \"receiver\": \"571293212\"\r\n}   ",
+          "raw": "{\r\n    \"currency\": \"TLove\",\r\n    \"amount\": \"1000\",\r\n    \"receiver\": \"343633586\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -1048,6 +1040,161 @@
           ],
           "cookie": [],
           "body": "{\n    \"message\": \"Money has been sent\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "4. Получение статистики по рефералам",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/referral/stat",
+          "host": ["{{host}}"],
+          "path": ["referral", "stat"]
+        }
+      },
+      "response": [
+        {
+          "name": "Пригласил реферала только 1-го уровня",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/referral/stat",
+              "host": ["{{host}}"],
+              "path": ["referral", "stat"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "41"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"29-eqCaLrCd+9VvDx4JCYR6n5SzzcQ\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 14:54:26 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"sum\": 40000,\n    \"second_referral_count\": \"0\"\n}"
+        },
+        {
+          "name": "Пригласил реферала 2-го уровня",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/referral/stat",
+              "host": ["{{host}}"],
+              "path": ["referral", "stat"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "40"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"28-pOqEeuVE1L0anjU2niEm+eW8BcE\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 14:54:57 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"sum\": 5000,\n    \"second_referral_count\": \"1\"\n}"
+        },
+        {
+          "name": "Не пригласил никого",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/referral/stat",
+              "host": ["{{host}}"],
+              "path": ["referral", "stat"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "41"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"29-x7eNpIsXjb9iXxhQAQpTkYYZafk\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 14:55:30 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"sum\": null,\n    \"second_referral_count\": null\n}"
         }
       ]
     },
@@ -1268,7 +1415,7 @@
       ]
     },
     {
-      "name": "5. Получить список NFT в профиле",
+      "name": "5. Проверить NFT в сети TON",
       "request": {
         "method": "GET",
         "header": [],
@@ -1347,11 +1494,11 @@
             },
             {
               "key": "Content-Length",
-              "value": "30"
+              "value": "28"
             },
             {
               "key": "ETag",
-              "value": "W/\"1e-e0PPBvAN5kdxRHQ8CaASWzrNA6E\""
+              "value": "W/\"1c-+LBreAeDKO5IYAZWrVeSuTYeaLs\""
             },
             {
               "key": "Vary",
@@ -1359,7 +1506,7 @@
             },
             {
               "key": "Date",
-              "value": "Sun, 11 Aug 2024 16:32:26 GMT"
+              "value": "Sun, 18 Aug 2024 17:10:35 GMT"
             },
             {
               "key": "Connection",
@@ -1371,7 +1518,7 @@
             }
           ],
           "cookie": [],
-          "body": "[\n    {\n        \"status\": \"empty\",\n        \"count\": 0\n    }\n]"
+          "body": "{\n    \"status\": \"empty\",\n    \"count\": 0\n}"
         },
         {
           "name": "NFT есть на кошельке",
@@ -1556,6 +1703,647 @@
           "body": "{\n    \"status\": \"failed\"\n}"
         }
       ]
+    },
+    {
+      "name": "6. Получить список миссий и их статусы",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/missions",
+          "host": ["{{host}}"],
+          "path": ["missions"]
+        }
+      },
+      "response": [
+        {
+          "name": "Токена не существует",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/missions",
+              "host": ["{{host}}"],
+              "path": ["missions"]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 10:28:35 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "33"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"21-gu77oDc5Sc/6t7vEFiBYWbQIFxI\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Token doesn't exist\"\n}"
+        },
+        {
+          "name": "Все миссии не активированные",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/missions",
+              "host": ["{{host}}"],
+              "path": ["missions"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 10:29:45 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "870"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"366-CCxg6wRxvN7w4Vd+2jBrzeGItfQ\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 2,\n        \"description\": \"Subscribe to our TikTok\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 5,\n        \"description\": \"Join to our Telegram channel\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 6,\n        \"description\": \"Join to our Telegram chat\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 4,\n        \"description\": \"Subscribe to our Instagram\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 1,\n        \"description\": \"Join to our X channel\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 3,\n        \"description\": \"Subscribe to our YouTube channel\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    }\n]"
+        },
+        {
+          "name": "Миссия с ID 1 активирована",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/missions",
+              "host": ["{{host}}"],
+              "path": ["missions"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 10:30:21 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "891"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"37b-9MfceZy4w+5yRtuNotusXQmkQWU\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"description\": \"Join to our X channel\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": true,\n        \"activation_date\": \"2024-08-17T19:00:00.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"description\": \"Subscribe to our TikTok\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 5,\n        \"description\": \"Join to our Telegram channel\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 6,\n        \"description\": \"Join to our Telegram chat\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 4,\n        \"description\": \"Subscribe to our Instagram\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    },\n    {\n        \"id\": 3,\n        \"description\": \"Subscribe to our YouTube channel\",\n        \"award_amount\": 15000,\n        \"award_currency\": \"TLove\",\n        \"mission_actived\": false,\n        \"activation_date\": null\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "6. Активировать миссию у клиента",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"mission_id\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/missions",
+          "host": ["{{host}}"],
+          "path": ["missions"]
+        }
+      },
+      "response": [
+        {
+          "name": "Миссия была ранее активированна",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"mission_id\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/missions",
+              "host": ["{{host}}"],
+              "path": ["missions"]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "88"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"58-dEAeQd71b23j+zjt/Nvik2gFTG4\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 11:12:29 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"error\",\n    \"mission_activated\": true,\n    \"activation_date\": \"2024-08-17T19:00:00.000Z\"\n}"
+        },
+        {
+          "name": "Миссия успешна активирована",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"mission_id\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/missions",
+              "host": ["{{host}}"],
+              "path": ["missions"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "124"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"7c-KKtZ/zQuXf/7SccKyQuNCO/q5E4\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 11:15:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"ok\",\n    \"mission_activated\": true,\n    \"award\": {\n        \"amount\": 15000,\n        \"currency\": \"TLove\",\n        \"description\": \"Subscribe to our TikTok\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "7. Получить список объектов в inventory",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/inventory",
+          "host": ["{{host}}"],
+          "path": ["inventory"]
+        }
+      },
+      "response": [
+        {
+          "name": "Полученный список",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/inventory",
+              "host": ["{{host}}"],
+              "path": ["inventory"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "631"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"277-+Wcq4NRJY2aBT0Sp7yShw9YeSxM\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 15:12:09 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"costs\": \"1500\",\n        \"item_name\": \"Вентилятор\",\n        \"description\": null,\n        \"increase_value\": \"4690\",\n        \"costs_currency\": \"TLike\",\n        \"increase_currency\": null\n    },\n    {\n        \"id\": 2,\n        \"costs\": \"2900\",\n        \"item_name\": \"Кабель улучшений\",\n        \"description\": null,\n        \"increase_value\": \"9600\",\n        \"costs_currency\": \"TLike\",\n        \"increase_currency\": null\n    },\n    {\n        \"id\": 3,\n        \"costs\": \"4950\",\n        \"item_name\": \"Водяное охлаждение\",\n        \"description\": null,\n        \"increase_value\": \"16100\",\n        \"costs_currency\": \"TLike\",\n        \"increase_currency\": null\n    },\n    {\n        \"id\": 4,\n        \"costs\": \"6950\",\n        \"item_name\": \"Инженер\",\n        \"description\": null,\n        \"increase_value\": \"24200\",\n        \"costs_currency\": \"TLike\",\n        \"increase_currency\": null\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "7. Купить новую шмотку в inventory",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"inventory_id\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/inventory",
+          "host": ["{{host}}"],
+          "path": ["inventory"]
+        }
+      },
+      "response": [
+        {
+          "name": "Успешная покупка",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"inventory_id\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/inventory",
+              "host": ["{{host}}"],
+              "path": ["inventory"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "250"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"fa-k8ribP8JSBOTa1XjhNJ3+tx5E/M\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 15:30:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"success\",\n    \"message\": \"Покупка произошла успешно\",\n    \"inventory_info\": {\n        \"id\": 1,\n        \"costs\": \"1500\",\n        \"item_name\": \"Вентилятор\",\n        \"description\": null,\n        \"increase_value\": \"4690\",\n        \"costs_currency\": \"TLike\",\n        \"increase_currency\": null\n    }\n}"
+        },
+        {
+          "name": "Не хватает баланса",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"inventory_id\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/inventory",
+              "host": ["{{host}}"],
+              "path": ["inventory"]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "65"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"41-iPf666GTuU+TjcR+Iy2x+sZi/Aw\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 15:30:32 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"error\",\n    \"message\": \"Не хватило баланса\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "7. Получить список покупок у пользователя",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/user/inventory",
+          "host": ["{{host}}"],
+          "path": ["user", "inventory"]
+        }
+      },
+      "response": [
+        {
+          "name": "У пользователя есть эквип, майнинг отключен",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/user/inventory",
+              "host": ["{{host}}"],
+              "path": ["user", "inventory"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "563"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"233-ZDXZmAGHNSpsj2WSaPE0dxjIl8E\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 15:34:16 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 6,\n        \"user_id\": \"1044888407\",\n        \"datetime\": \"2024-08-18T15:27:29.127Z\",\n        \"item_id\": 1,\n        \"list\": {\n            \"id\": 1,\n            \"costs\": \"1500\",\n            \"item_name\": \"Вентилятор\",\n            \"description\": null,\n            \"costs_currency\": \"TLike\",\n            \"increase_value\": \"4690\",\n            \"increase_currency\": null\n        },\n        \"mining_status\": false,\n        \"mining_upd\": null\n    },\n    {\n        \"id\": 7,\n        \"user_id\": \"1044888407\",\n        \"datetime\": \"2024-08-18T15:30:06.176Z\",\n        \"item_id\": 1,\n        \"list\": {\n            \"id\": 1,\n            \"costs\": \"1500\",\n            \"item_name\": \"Вентилятор\",\n            \"description\": null,\n            \"costs_currency\": \"TLike\",\n            \"increase_value\": \"4690\",\n            \"increase_currency\": null\n        },\n        \"mining_status\": false,\n        \"mining_upd\": null\n    }\n]"
+        },
+        {
+          "name": "У пользователя есть эквип, майнинг включен",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/user/inventory",
+              "host": ["{{host}}"],
+              "path": ["user", "inventory"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "562"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"232-NRnA+yrri7aVuIK7EEZLgN+dk8Q\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 15:34:54 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 7,\n        \"user_id\": \"1044888407\",\n        \"datetime\": \"2024-08-18T15:30:06.176Z\",\n        \"item_id\": 1,\n        \"list\": {\n            \"id\": 1,\n            \"costs\": \"1500\",\n            \"item_name\": \"Вентилятор\",\n            \"description\": null,\n            \"costs_currency\": \"TLike\",\n            \"increase_value\": \"4690\",\n            \"increase_currency\": null\n        },\n        \"mining_status\": false,\n        \"mining_upd\": null\n    },\n    {\n        \"id\": 6,\n        \"user_id\": \"1044888407\",\n        \"datetime\": \"2024-08-18T15:27:29.127Z\",\n        \"item_id\": 1,\n        \"list\": {\n            \"id\": 1,\n            \"costs\": \"1500\",\n            \"item_name\": \"Вентилятор\",\n            \"description\": null,\n            \"costs_currency\": \"TLike\",\n            \"increase_value\": \"4690\",\n            \"increase_currency\": null\n        },\n        \"mining_status\": true,\n        \"mining_upd\": null\n    }\n]"
+        },
+        {
+          "name": "У пользователя нет эквипа",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/user/inventory",
+              "host": ["{{host}}"],
+              "path": ["user", "inventory"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "4"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"4-TplQofIwX1bTWMrSPyggP7Oqy+8\""
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 18 Aug 2024 15:35:30 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {}\n]"
+        }
+      ]
     }
   ],
   "auth": {
@@ -1563,7 +2351,7 @@
     "apikey": [
       {
         "key": "value",
-        "value": "be46d89f-f160-4d46-b4fd-8c316255655e",
+        "value": "3c7349db-859b-400d-afe3-a0e6d49efbda",
         "type": "string"
       },
       {

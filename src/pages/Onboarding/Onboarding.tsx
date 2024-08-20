@@ -6,6 +6,8 @@ import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { initUtils } from "@telegram-apps/sdk";
 
 import { useAppDispatch } from "@hooks";
+import { connectWallet, setOld } from "@/core/store/slices/user";
+import { SPRING_OPTIONS, SWIPE_CONFIDEBCE_THRESHOLD } from "@config";
 import {
   fortuneWheelImage,
   inviteImage,
@@ -14,9 +16,7 @@ import {
   waletImage,
 } from "@images";
 
-import { SPRING_OPTIONS, SWIPE_CONFIDEBCE_THRESHOLD } from "@config";
 import styles from "./Onboarding.module.scss";
-import { connectWallet } from "@/core/store/slices/user";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
@@ -66,8 +66,6 @@ export const Onboarding = () => {
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
   };
-
-  console.log(wallet);
 
   const next = () => {
     setImgIndex((prev) => Math.min(prev + 1, SLIDES.length - 1));
@@ -128,6 +126,7 @@ export const Onboarding = () => {
   useEffect(() => {
     if (wallet && imgIndex === SLIDES.length - 1) {
       dispatch(connectWallet({ wallet: wallet.account.address }));
+      dispatch(setOld());
       navigate("/");
     }
   }, [wallet, imgIndex]);

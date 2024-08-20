@@ -111,14 +111,15 @@ export const getNFT = createAsyncThunk(
   }
 );
 
-
-
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     setWallet: (state, action: PayloadAction<string>) => {
       state.wallet = action.payload;
+    },
+    setOld: (state) => {
+      state.type = "old";
     },
   },
   extraReducers: (builder) => {
@@ -153,4 +154,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setWallet } = userSlice.actions;
+export const { setWallet, setOld } = userSlice.actions;
