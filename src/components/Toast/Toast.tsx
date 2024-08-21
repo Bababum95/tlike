@@ -19,7 +19,7 @@ export const Toast: FC<Props> = ({ isOpen, onClose, children }) => {
         onClick={onClose}
         tabIndex={0}
         role='none'
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2 }}
         className={styles.overlay}
       />
       <motion.div
