@@ -12,6 +12,7 @@ type Props = {
   text?: string;
   extraClass?: string;
   link?: string;
+  onClick?: () => void;
 };
 
 export const Item: FC<Props> = ({
@@ -21,6 +22,7 @@ export const Item: FC<Props> = ({
   title,
   extraClass,
   link,
+  onClick,
 }) => {
   if (link) {
     return (
@@ -36,7 +38,7 @@ export const Item: FC<Props> = ({
   }
 
   return (
-    <li className={classNames(styles.item, extraClass)}>
+    <li className={classNames(styles.item, extraClass)} onClick={onClick}>
       {icon}
       <div className={styles.content}>
         <p className={styles.title}>{title}</p>

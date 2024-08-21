@@ -5,13 +5,15 @@ import {
 } from "@reduxjs/toolkit";
 import type { InitDataParsed } from "@telegram-apps/sdk-react";
 
-import { UserStateType } from "@types";
+import type { UserStateType } from "@types";
 import { RootState } from "@/core/store";
 import { api } from "@/core/api";
 
 const initialState: UserStateType = {
   status: "idle",
   error: null,
+  inventory: [],
+  missions: [],
   balances: {
     tlike: 0,
     tlove: 0,
@@ -88,6 +90,29 @@ export const fetchReferral = createAsyncThunk(
   }
 );
 
+export const getMissions = createAsyncThunk(
+  "user/getMissions",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+
+    try {
+      const response = await api.get("/missions", {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+      console.log(response.data);
+      if (response.status === 200) {
+        return response.data;
+      }
+      return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 export const getNFT = createAsyncThunk(
   "user/getNFT",
   async (_, { rejectWithValue, getState }) => {
@@ -105,6 +130,36 @@ export const getNFT = createAsyncThunk(
         return response.data;
       }
       return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const getInventory = createAsyncThunk(
+  "user/getInventory",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+
+    try {
+      const responses = await Promise.all([
+        api.get("/inventory", {
+          headers: {
+            "x-auth-token": token,
+          },
+        }),
+        api.get("/user/inventory", {
+          headers: {
+            "x-auth-token": token,
+          },
+        }),
+      ]);
+      console.log(responses);
+      // if (response.status === 200) {
+      //   return response.data;
+      // }
+      // return rejectWithValue(response.data);
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -149,6 +204,9 @@ const userSlice = createSlice({
       })
       .addCase(connectWallet.rejected, (_, action) => {
         console.log(action.payload);
+      })
+      .addCase(getMissions.fulfilled, (state, action) => {
+        state.missions = action.payload;
       });
   },
 });

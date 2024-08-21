@@ -94,7 +94,7 @@ export const Mine = () => {
                 </div>
                 <div className={styles.action}>
                   <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>Amount: 0</p>
+                  <p className={styles.amount}>{t("amount")}: 0</p>
                 </div>
               </div>
               <div className={styles.upgrade}>
@@ -115,7 +115,7 @@ export const Mine = () => {
                 </div>
                 <div className={styles.action}>
                   <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>Amount: 0</p>
+                  <p className={styles.amount}>{t("amount")}: 0</p>
                 </div>
               </div>
               <div className={styles.upgrade}>
@@ -136,7 +136,7 @@ export const Mine = () => {
                 </div>
                 <div className={styles.action}>
                   <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>Amount: 0</p>
+                  <p className={styles.amount}>{t("amount")}: 0</p>
                 </div>
               </div>
               <div className={styles.upgrade}>
@@ -157,7 +157,7 @@ export const Mine = () => {
                 </div>
                 <div className={styles.action}>
                   <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>Amount: 0</p>
+                  <p className={styles.amount}>{t("amount")}: 0</p>
                 </div>
               </div>
             </>

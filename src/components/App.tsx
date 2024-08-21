@@ -24,12 +24,16 @@ import { mainRoutes, routes } from "@/core/routes";
 import {
   fetchReferral,
   fetchUser,
+  getInventory,
+  getMissions,
   getNFT,
   setWallet,
 } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
 import { preloadUtils } from "@/core/utils/preloadUtils";
+
+const debug = import.meta.env.VITE_APP_DEBUG === "true";
 
 export const App: FC = () => {
   const [progress, setProgress] = useState(20);
@@ -79,6 +83,8 @@ export const App: FC = () => {
       }
     });
 
+    if (location.pathname === "/onboarding") isMain = true;
+
     if (isMain) backButton.hide();
     else backButton.show();
   }, [location]);
@@ -102,6 +108,8 @@ export const App: FC = () => {
         dispatch(checkTime()),
         dispatch(fetchReferral()),
         dispatch(getNFT()),
+        dispatch(getInventory()),
+        dispatch(getMissions()),
       ]).finally(() => {
         setProgress(99);
         setTimeout(() => {
@@ -119,12 +127,12 @@ export const App: FC = () => {
 
   return (
     <AppRoot
-      appearance={"dark"}
+      appearance="dark"
       platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
       className="app"
     >
       <Notice />
-      {progress !== 100 ? (
+      {progress !== 100 && !debug ? (
         <Loader progress={progress} />
       ) : (
         <Router location={location} navigator={reactNavigator}>
