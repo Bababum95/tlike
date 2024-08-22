@@ -25,6 +25,7 @@ const initialState: UserStateType = {
   token: "",
   type: "old",
   language: "en",
+  nfts: [],
 };
 
 export const fetchUser = createAsyncThunk(
@@ -145,7 +146,6 @@ export const getNFT = createAsyncThunk(
           "x-auth-token": token,
         },
       });
-      console.log(response.data);
       if (response.status === 200) {
         return response.data;
       }
@@ -234,6 +234,9 @@ const userSlice = createSlice({
       })
       .addCase(getMissions.fulfilled, (state, action) => {
         state.missions = action.payload;
+      })
+      .addCase(getNFT.fulfilled, (state, action) => {
+        state.nfts = action.payload;
       })
       .addCase(missionActivate.fulfilled, (state, action) => {
         if (action.payload.mission_activated) {

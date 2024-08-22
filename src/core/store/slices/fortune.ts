@@ -74,7 +74,6 @@ const fortuneSlice = createSlice({
         state.status = "loading";
       })
       .addCase(checkTime.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.status = "successed";
         state.spin_available = action.payload.spin_available;
 

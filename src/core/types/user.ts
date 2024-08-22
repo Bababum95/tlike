@@ -34,6 +34,17 @@ export type UserType = {
     item_name: string;
   }[];
   missions: MissionType[];
+  nfts: {
+    id: number;
+    nft_id: string;
+    active: boolean;
+    start_date: string;
+    upd_date: string;
+    user_id: string;
+    in_account: boolean;
+    image_url: string;
+    nft_name: string;
+  }[];
 };
 
 export type UserStateType = {

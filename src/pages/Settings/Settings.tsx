@@ -33,9 +33,9 @@ export const Settings = () => {
   const { t, i18n } = useTranslation("settings");
   const [langIsOpen, setlangIsOpen] = useState(false);
   const user = useAppSelector((state) => state.user);
+  const stat = useAppSelector((state) => state.project.stat);
   const wallet = useTonWallet();
   const dispatch = useAppDispatch();
-
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -147,27 +147,43 @@ export const Settings = () => {
         </Item>
         <li className={styles["stat-item"]} id="active-users">
           <p className={styles.label}>{t("active-users")}</p>
-          <p className={styles.value}>1 427</p>
+          <p className={styles.value}>{stat.active_users}</p>
         </li>
         <li className={styles["stat-item"]}>
           <p className={styles.label}>Like {t("mined")}</p>
-          <p className={styles.value}>1 427</p>
+          <p className={styles.value}>
+            {new Intl.NumberFormat("ru-RU", {
+              maximumFractionDigits: 0,
+            }).format(stat.like_mined)}
+          </p>
         </li>
         <li className={styles["stat-item"]}>
           <p className={styles.label}>Love {t("earned")}</p>
-          <p className={styles.value}>1 427</p>
+          <p className={styles.value}>
+            {new Intl.NumberFormat("ru-RU", {
+              maximumFractionDigits: 0,
+            }).format(stat.love_earned)}
+          </p>{" "}
         </li>
         <li className={styles["stat-item"]}>
           <p className={styles.label}>Like {t("burned")}</p>
-          <p className={styles.value}>1 427</p>
+          <p className={styles.value}>
+            {new Intl.NumberFormat("ru-RU", {
+              maximumFractionDigits: 0,
+            }).format(stat.like_burned)}
+          </p>{" "}
         </li>
         <li className={styles["stat-item"]}>
           <p className={styles.label}>Love {t("burned")}</p>
-          <p className={styles.value}>1 427</p>
+          <p className={styles.value}>
+            {new Intl.NumberFormat("ru-RU", {
+              maximumFractionDigits: 0,
+            }).format(stat.love_burned)}
+          </p>{" "}
         </li>
         <li className={styles["stat-item"]}>
           <p className={styles.label}>{t("next-halving")}</p>
-          <p className={styles.value}>1 427</p>
+          <p className={styles.value}>{stat.next_halving}</p>
         </li>
       </List>
       <img className={styles.roadmap} src={roadmapImage} alt="Roadmap" />

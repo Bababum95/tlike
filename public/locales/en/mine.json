@@ -11,5 +11,7 @@
   "cable-improvements": "Cable upgrade",
   "water-cooling": "Water cooling",
   "engineer": "Engineer",
-  "amount": "Amount"
+  "amount": "Amount",
+  "start": "Start",
+  "stop": "Stop"
 }

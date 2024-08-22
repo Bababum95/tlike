@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 
 import { Balance, Empty, Navigation, User } from "@/components";
+import { useAppSelector } from "@hooks";
 import {
   byNftImage,
   cableImprovementsImage,
@@ -23,6 +24,7 @@ export const Mine = () => {
   const params = useParams<{ tab?: "mining" | "upgrades" }>();
   const [tab, setTab] = useState(params.tab || "mining");
   const { t } = useTranslation("mine");
+  const nftList = useAppSelector((state) => state.user.nfts);
 
   const byNft = () => {
     utils.openLink(getgemsUrl);
@@ -64,15 +66,39 @@ export const Mine = () => {
                 onClick={byNft}
               />
               <h2 className={styles.title}>{t("my-nfts")}</h2>
-              <Empty title={t("no-nfts-title")}>
-                <p>
-                  {t("no-nfts-text")}
-                  <span onClick={byNft}>{t("no-nfts-link")}</span>
-                </p>
-                <button className={styles["button-empty"]} onClick={byNft}>
-                  {t("no-nfts-button")}
-                </button>
-              </Empty>
+              {nftList.length ? (
+                <ul className={styles.list}>
+                  {nftList.map((nft) => (
+                    <li key={nft.id} className={styles.item}>
+                      <p className={styles.name}>{nft.nft_name}</p>
+                      <motion.img
+                        className={styles.nft}
+                        src={nft.image_url}
+                        alt={nft.nft_name}
+                        animate={{ scale: [0.5, 1.2, 1] }}
+                      />
+                      <p className={styles.speed}>+ 240 Like/h</p>
+                      <button
+                        className={classNames(styles.start, {
+                          [styles.stop]: nft.active,
+                        })}
+                      >
+                        {t(!nft.active ? "start" : "stop")}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <Empty title={t("no-nfts-title")}>
+                  <p>
+                    {t("no-nfts-text")}
+                    <span onClick={byNft}>{t("no-nfts-link")}</span>
+                  </p>
+                  <button className={styles["button-empty"]} onClick={byNft}>
+                    {t("no-nfts-button")}
+                  </button>
+                </Empty>
+              )}
             </>
           ) : (
             <>
