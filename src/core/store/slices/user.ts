@@ -79,7 +79,6 @@ export const fetchReferral = createAsyncThunk(
           "x-auth-token": token,
         },
       });
-      console.log(response.data);
       if (response.status === 200) {
         return response.data;
       }
@@ -102,7 +101,28 @@ export const getMissions = createAsyncThunk(
           "x-auth-token": token,
         },
       });
-      console.log(response.data);
+      if (response.status === 200) {
+        return response.data;
+      }
+      return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const missionActivate = createAsyncThunk(
+  "user/missionActivate",
+  async ({ id }: { id: number }, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+
+    try {
+      const response = await api.post(
+        "/missions",
+        { mission_id: id },
+        { headers: { "x-auth-token": token } }
+      );
       if (response.status === 200) {
         return response.data;
       }
@@ -176,6 +196,13 @@ const userSlice = createSlice({
     setOld: (state) => {
       state.type = "old";
     },
+    addBalance: (
+      state,
+      action: PayloadAction<{ amount: number; currency: "TLove" | "TLike" }>
+    ) => {
+      const key = action.payload.currency.toLowerCase() as "tlove" | "tlike";
+      state.balances[key] += action.payload.amount;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -207,9 +234,20 @@ const userSlice = createSlice({
       })
       .addCase(getMissions.fulfilled, (state, action) => {
         state.missions = action.payload;
+      })
+      .addCase(missionActivate.fulfilled, (state, action) => {
+        if (action.payload.mission_activated) {
+          state.missions.forEach((mission, index) => {
+            if (mission.id === action.meta.arg.id) {
+              state.missions[index].mission_actived = true;
+            }
+          });
+          state.balances.tlove =
+            state.balances.tlike + action.payload.award.amount;
+        }
       });
   },
 });
 
 export default userSlice.reducer;
-export const { setWallet, setOld } = userSlice.actions;
+export const { setWallet, setOld, addBalance } = userSlice.actions;

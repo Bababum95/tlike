@@ -12,9 +12,25 @@ import { FORTUNE_WHEEL } from "@config";
 import { Toast } from "@/components";
 
 import styles from "./Fortune.module.scss";
+import { addBalance } from "@/core/store/slices/user";
+
+type ParamsType = {
+  type: "free" | "paid";
+  currency?: "TLove" | "TLike";
+};
+
+type InitToastesType = {
+  win: boolean;
+  by: {
+    open: boolean;
+    currency: "TLove" | "TLike";
+    loading: boolean;
+  };
+};
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
-const initToastes = {
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const initToastes: InitToastesType = {
   win: false,
   by: {
     open: false,
@@ -31,7 +47,7 @@ export const Fortune = () => {
   const [intervalTime, setIntervalTime] = useState<number>(200);
   const [toastIsOpen, setToastIsOpen] = useState(initToastes);
   const [showFierwork, setShowFierwork] = useState<boolean>(false);
-  const token = useAppSelector((state) => state.user.token);
+  const user = useAppSelector((state) => state.user);
   const fortuneStore = useAppSelector((state) => state.fortune);
   const utils = initUtils();
   const haptic = initHapticFeedback();
@@ -41,30 +57,60 @@ export const Fortune = () => {
     setToastIsOpen(initToastes);
   };
 
-  const spin = async () => {
+  const spin = async (type: "free" | "paid") => {
     if (isSpinning) return;
+    window.scrollTo(0, 0);
     setIsSpinning(true);
     setTargetIndex(null);
     setShowFierwork(false);
+    closeToast();
     if (activeIndex > FORTUNE_WHEEL.length) setActiveIndex(0);
 
-    try {
-      const response = await api.get("fortune/spin", {
-        headers: {
-          "x-auth-token": token,
-        },
-        params: {
-          type: "free",
-        },
-      });
+    const params: ParamsType = { type };
 
-      if (response.status === 200 && response.data.status === "new") {
-        setTargetIndex(response.data.gift_id - 1);
+    if (type === "paid") {
+      params.currency = toastIsOpen.by.currency;
+      dispatch(
+        addBalance({
+          amount: toastIsOpen.by.currency === "TLove" ? -5000 : -100,
+          currency: toastIsOpen.by.currency,
+        })
+      );
+    }
+
+    try {
+      const [response] = await Promise.all([
+        api.get("fortune/spin", {
+          headers: { "x-auth-token": user.token },
+          params,
+        }),
+        delay(5000),
+      ]);
+
+      if (
+        (response.status === 200 && response.data.status === "new") ||
+        response.data.status === "paid"
+      ) {
+        setTargetIndex(response.data.gift_id);
         haptic.impactOccurred("medium");
+        if (type === "free") {
+          dispatch(setLastSpinTime(response.data.date));
+        }
+        if (
+          response.data.gift_info.currency === "TLove" ||
+          response.data.gift_info.currency === "TLike"
+        ) {
+          dispatch(
+            addBalance({
+              amount: response.data.gift_info.amount,
+              currency: response.data.gift_info.currency,
+            })
+          );
+        }
       }
-      console.log(response);
     } catch (error) {
       console.error(error);
+      haptic.impactOccurred("medium");
     }
   };
 
@@ -73,36 +119,6 @@ export const Fortune = () => {
       ...prev,
       by: { ...prev.by, open: true, currency },
     }));
-  };
-
-  const bySpin = async () => {
-    setToastIsOpen((prev) => ({ ...prev, by: { ...prev.by, loading: true } }));
-    const delay = (ms: number) =>
-      new Promise((resolve) => setTimeout(resolve, ms));
-
-    try {
-      const [response] = await Promise.all([
-        api.get("fortune/spin", {
-          headers: {
-            "x-auth-token": token,
-          },
-          params: {
-            type: "paid",
-            currency: toastIsOpen.by.currency,
-          },
-        }),
-        delay(5000),
-      ]);
-
-      if (response.status === 200 && response.data.date) {
-        dispatch(setLastSpinTime(response.data.date));
-      }
-    } finally {
-      setToastIsOpen((prev) => ({
-        ...prev,
-        by: { ...prev.by, loading: false },
-      }));
-    }
   };
 
   const byNft = () => {
@@ -120,7 +136,10 @@ export const Fortune = () => {
 
       setActiveIndex((prev) => {
         const currentIndex = (prev + 1) % FORTUNE_WHEEL.length;
-        if (currentIndex === targetIndex) {
+        if (
+          FORTUNE_WHEEL[currentIndex].id === targetIndex &&
+          intervalTime > 100
+        ) {
           setIsSpinning(false);
           clearInterval(interval);
           setToastIsOpen((prev) => ({ ...prev, win: true }));
@@ -145,7 +164,7 @@ export const Fortune = () => {
       <motion.ul className={styles.wheel}>
         {FORTUNE_WHEEL.map((item, index) => (
           <motion.li
-            key={item.value}
+            key={item.id}
             className={classNames(styles.item, {
               [styles.active]: index === activeIndex,
             })}
@@ -158,11 +177,11 @@ export const Fortune = () => {
       <h1 className={styles.title}>{t("title")}</h1>
       <p className={styles.text}>{t("fortune-text")}</p>
       <button
-        onClick={spin}
+        onClick={() => spin("free")}
         className={classNames(
           styles.spin,
           { [styles.disabled]: !fortuneStore.spin_available },
-          { [styles.loading]: isSpinning }
+          { [styles.loading]: isSpinning && fortuneStore.spin_available }
         )}
         disabled={!fortuneStore.spin_available}
       >
@@ -174,13 +193,17 @@ export const Fortune = () => {
           <p className={styles.text}>{t("buy-spin-hint")}</p>
           <div className={styles.buttons}>
             <button
-              className={styles.button}
+              className={classNames(styles.button, {
+                [styles.disabled]: user.balances.tlike < 100,
+              })}
               onClick={() => openBySpinToast("TLike")}
             >
               100 LIKE
             </button>
             <button
-              className={styles.button}
+              className={classNames(styles.button, {
+                [styles.disabled]: user.balances.tlove < 5000,
+              })}
               onClick={() => openBySpinToast("TLove")}
             >
               5 000 LOVE
@@ -222,7 +245,7 @@ export const Fortune = () => {
           {toastIsOpen.by.currency === "TLike" ? "100 LIKE" : "5 000 LOVE"}
         </p>
         <button
-          onClick={bySpin}
+          onClick={() => spin("paid")}
           className={classNames(styles.button, {
             [styles.loading]: toastIsOpen.by.loading,
           })}

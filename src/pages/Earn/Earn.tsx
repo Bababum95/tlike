@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import classNames from "classnames";
 
 import { Item, Link, List, Navigation, Toast } from "@/components";
-import { useAppSelector } from "@hooks";
+import { useAppDispatch, useAppSelector } from "@hooks";
 import { MissionType } from "@types";
 import {
   ChevronRightIcon,
@@ -13,18 +13,39 @@ import {
 } from "@images";
 
 import styles from "./Earn.module.scss";
+import { missionActivate } from "@/core/store/slices/user";
 
 export const Earn = () => {
   const { t } = useTranslation("earn");
+  const dispatch = useAppDispatch();
   const missions = useAppSelector((state) => state.user.missions);
   const [toast, setToast] = useState<null | MissionType>(null);
+  const [loading, setLoading] = useState(false);
 
   const openToast = (mission: MissionType) => {
     setToast(mission);
   };
 
+  const subscribe = async () => {
+    if (!toast) return;
+
+    setLoading(true);
+    try {
+      await dispatch(missionActivate({ id: toast.id }));
+    } finally {
+      setLoading(false);
+      setToast(
+        (prev) =>
+          ({
+            ...prev,
+            mission_actived: true,
+          } as MissionType)
+      );
+    }
+  };
+
   const spinAvailable = () => {
-    if (!missions || missions.length < 1) return true;
+    if (!missions || missions.length < 1) return false;
     return missions.some((mission) => !mission.mission_actived);
   };
 
@@ -39,7 +60,9 @@ export const Earn = () => {
       <p className={styles.text}>{t("text")}</p>
       <Link
         to="/earn/fortune"
-        className={classNames(styles.spin, { [styles.disabled]: spinAvailable })}
+        className={classNames(styles.spin, {
+          [styles.disabled]: !spinAvailable,
+        })}
       >
         {t("spin")}
       </Link>
@@ -101,10 +124,22 @@ export const Earn = () => {
               <p className={styles["toast-text"]}>
                 {toast.award_amount} {toast.award_currency}
               </p>
-              <Link to={toast.redirect_url} className={styles["toast-button"]}>
+              <button
+                className={classNames(styles["toast-button"], {
+                  [styles.loading]: loading,
+                })}
+                onClick={subscribe}
+              >
                 Subscribe
-              </Link>
-              <button className={styles["toast-button"]}>Check</button>
+              </button>
+              <button
+                className={classNames(styles["toast-button"], {
+                  [styles.disabled]: !toast.mission_actived,
+                })}
+                onClick={() => setToast(null)}
+              >
+                Check
+              </button>
             </div>
           )}
         </>

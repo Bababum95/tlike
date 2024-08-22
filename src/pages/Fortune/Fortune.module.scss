@@ -80,9 +80,9 @@
 }
 
 .spin {
-  @include primary-button;
   width: calc(100% - 16px);
   margin: 24px 8px 0;
+  @include primary-button;
 
   &.disabled {
     @include primary-disabled-button;
@@ -112,11 +112,15 @@
 }
 
 .button {
-  @include primary-button;
   width: 100%;
+  @include primary-button;
 
   &.loading {
     @include loader-button;
+  }
+
+  &.disabled {
+    @include primary-disabled-button;
   }
 }
 

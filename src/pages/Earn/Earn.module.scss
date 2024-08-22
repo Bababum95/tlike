@@ -37,8 +37,8 @@ h2.title {
 }
 
 .spin {
-  @include primary-button;
   margin: 24px 8px 0;
+  @include primary-button;
 
   &.disabled {
     @include primary-disabled-button;
@@ -57,9 +57,9 @@ h2.title {
     }
   }
 
-  // &.active {
-  //   order: 2;
-  // }
+  &.active {
+    order: 2;
+  }
 }
 
 .toast {
@@ -93,8 +93,16 @@ h2.title {
   }
 
   &-button {
-    @include primary-button;
     width: 100%;
     margin-top: 8px;
+    @include primary-button;
+
+    &.loading {
+      @include loader-button;
+    }
+
+    &.disabled {
+      @include primary-disabled-button;
+    }
   }
 }

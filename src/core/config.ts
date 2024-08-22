@@ -46,38 +46,47 @@ export const FORTUNE_WHEEL = [
   {
     value: "1000 LOVE",
     icon: fortuneLoveImage,
+    id: 1,
   },
   {
     value: "50 TON",
     icon: fortuneToncoinImage,
+    id: 9,
   },
   {
     value: "2000 LOVE",
     icon: fortuneLove3Image,
+    id: 3,
   },
   {
     value: "1 NFT",
     icon: fortuneNFTImage,
+    id: 8,
   },
   {
     value: "1500 LOVE",
     icon: fortuneLove2Image,
+    id: 2,
   },
   {
     value: "2000 NOT",
     icon: fortuneNotcoinImage,
+    id: 7,
   },
   {
     value: "5000 LOVE",
     icon: fortuneLove5Image,
+    id: 5,
   },
   {
     value: "500 LIKE",
     icon: fortuneLikeImage,
+    id: 6,
   },
   {
     value: "3000 LOVE",
     icon: fortuneLove4Image,
+    id: 4,
   },
 ];
 

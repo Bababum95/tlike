@@ -6,14 +6,19 @@
   letter-spacing: 0.01em;
   text-decoration-line: none;
   text-align: center;
+  transition: all 0.2s ease-in-out;
+
+  &:active {
+    scale: 0.95;
+  }
 }
 
 @mixin primary-button {
-  @include button;
   background: $primary;
   color: #fff;
   font-size: 17px;
   line-height: 150%;
+  @include button;
 }
 
 @mixin primary-disabled-button {

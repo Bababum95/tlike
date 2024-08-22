@@ -73,8 +73,8 @@
 }
 
 .button-empty {
-  @include primary-button;
   width: 100%;
+  @include primary-button;
 }
 
 .upgrade {
@@ -113,10 +113,10 @@
   }
 
   .button {
-    @include primary-button;
     width: 107px;
     font-size: 15px;
     padding: 8px;
+    @include primary-button;
   }
 
   .amount {
