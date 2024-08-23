@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { initUtils } from "@telegram-apps/sdk";
@@ -6,7 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 
 import { Balance, Empty, Navigation, User } from "@/components";
-import { useAppSelector } from "@hooks";
+import { useAppDispatch, useAppSelector } from "@hooks";
+import { NFTType } from "@types";
+import { changeStatusNFT } from "@/core/store/slices/user";
+import { api } from "@/core/api";
 import {
   byNftImage,
   cableImprovementsImage,
@@ -16,15 +19,16 @@ import {
 } from "@images";
 
 import styles from "./Mine.module.scss";
+import { setNotice } from "@/core/store/slices/notice";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
-export const Mine = () => {
+export const Mine: FC = () => {
   const utils = initUtils();
   const params = useParams<{ tab?: "mining" | "upgrades" }>();
+  const nftList = useAppSelector((state) => state.user.nfts);
   const [tab, setTab] = useState(params.tab || "mining");
   const { t } = useTranslation("mine");
-  const nftList = useAppSelector((state) => state.user.nfts);
 
   const byNft = () => {
     utils.openLink(getgemsUrl);
@@ -69,23 +73,7 @@ export const Mine = () => {
               {nftList.length ? (
                 <ul className={styles.list}>
                   {nftList.map((nft) => (
-                    <li key={nft.id} className={styles.item}>
-                      <p className={styles.name}>{nft.nft_name}</p>
-                      <motion.img
-                        className={styles.nft}
-                        src={nft.image_url}
-                        alt={nft.nft_name}
-                        animate={{ scale: [0.5, 1.2, 1] }}
-                      />
-                      <p className={styles.speed}>+ 240 Like/h</p>
-                      <button
-                        className={classNames(styles.start, {
-                          [styles.stop]: nft.active,
-                        })}
-                      >
-                        {t(!nft.active ? "start" : "stop")}
-                      </button>
-                    </li>
+                    <NFT key={nft.id} nft={nft} />
                   ))}
                 </ul>
               ) : (
@@ -192,5 +180,72 @@ export const Mine = () => {
       </AnimatePresence>
       <Navigation />
     </div>
+  );
+};
+
+type NFTProps = {
+  nft: NFTType;
+};
+
+const NFT: FC<NFTProps> = ({ nft }) => {
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation("mine");
+  const dispatch = useAppDispatch();
+  const token = useAppSelector((state) => state.user.token);
+
+  const toggleNft = async () => {
+    dispatch(
+      setNotice({ status: "loading", message: "Request Processing..." })
+    );
+    setLoading(true);
+    try {
+      const response = await api.put(
+        "/nft/change_status",
+        {
+          nft_id: nft.nft_id,
+          active: !nft.active,
+        },
+        {
+          headers: { "x-auth-token": token },
+        }
+      );
+
+      if (response.status === 200) {
+        dispatch(
+          changeStatusNFT({
+            nft_id: response.data.nft.nft_id,
+            active: response.data.nft.active,
+          })
+        );
+        dispatch(setNotice({ status: "success", message: "Success!" }));
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(setNotice({ status: "error", message: "Error!" }));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <li key={nft.id} className={styles.item}>
+      <p className={styles.name}>{nft.nft_name}</p>
+      <motion.img
+        className={styles.nft}
+        src={nft.image_url}
+        alt={nft.nft_name}
+        animate={{ scale: [0.5, 1.2, 1] }}
+      />
+      <p className={styles.speed}>+ 240 Like/h</p>
+      <button
+        className={classNames(styles.start, {
+          [styles.stop]: nft.active,
+          [styles.loading]: loading,
+        })}
+        onClick={toggleNft}
+      >
+        {t(!nft.active ? "start" : "stop")}
+      </button>
+    </li>
   );
 };

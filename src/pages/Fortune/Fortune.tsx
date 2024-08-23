@@ -102,7 +102,7 @@ export const Fortune = () => {
         ) {
           dispatch(
             addBalance({
-              amount: response.data.gift_info.amount,
+              amount: Number(response.data.gift_info.amount),
               currency: response.data.gift_info.currency,
             })
           );
@@ -181,7 +181,7 @@ export const Fortune = () => {
         className={classNames(
           styles.spin,
           { [styles.disabled]: !fortuneStore.spin_available },
-          { [styles.loading]: isSpinning && fortuneStore.spin_available }
+          { [styles.loading]: isSpinning }
         )}
         disabled={!fortuneStore.spin_available}
       >

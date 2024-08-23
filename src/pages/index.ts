@@ -10,3 +10,4 @@ export { Settings as SettingsPage } from "./Settings/Settings";
 export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";
 export { Transfer as TransferPage } from "./Transfer/Transfer";
 export { Fortune as FortunePage } from "./Fortune/Fortune";
+export { Referal as ReferalPage } from "./Referal/Referal";

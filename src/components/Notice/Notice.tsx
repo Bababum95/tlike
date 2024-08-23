@@ -11,7 +11,8 @@ export const Notice: FC = () => {
   const noticeStore = useAppSelector((state) => state.notice);
 
   useEffect(() => {
-    if (noticeStore.status === "idle") return;
+    if (noticeStore.status === "idle" || noticeStore.status === "loading")
+      return;
     const timer = setTimeout(() => {
       dispatch(setNotice({ status: "idle", message: "" }));
     }, 5000);
@@ -25,6 +26,7 @@ export const Notice: FC = () => {
     <div className={styles.notice}>
       {noticeStore.status === "error" && <ErrorIcon />}
       {noticeStore.status === "success" && <SuccessIcon />}
+      {noticeStore.status === "loading" && <span className={styles.spiner} />}
       <span>{noticeStore.message}</span>
     </div>
   );

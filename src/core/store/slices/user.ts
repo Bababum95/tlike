@@ -76,9 +76,26 @@ export const fetchReferral = createAsyncThunk(
 
     try {
       const response = await api.get("/referral/notifications", {
-        headers: {
-          "x-auth-token": token,
-        },
+        headers: { "x-auth-token": token },
+      });
+      if (response.status === 200) {
+        return response.data;
+      }
+      return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const referralActivate = createAsyncThunk(
+  "user/referralActivate",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+    try {
+      const response = await api.get("/referral/activate", {
+        headers: { "x-auth-token": token },
       });
       if (response.status === 200) {
         return response.data;
@@ -142,9 +159,7 @@ export const getNFT = createAsyncThunk(
 
     try {
       const response = await api.get("/nft/check", {
-        headers: {
-          "x-auth-token": token,
-        },
+        headers: { "x-auth-token": token },
       });
       if (response.status === 200) {
         return response.data;
@@ -161,19 +176,12 @@ export const getInventory = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     const state = getState() as RootState;
     const { token } = state.user;
+    const headers = { "x-auth-token": token };
 
     try {
       const responses = await Promise.all([
-        api.get("/inventory", {
-          headers: {
-            "x-auth-token": token,
-          },
-        }),
-        api.get("/user/inventory", {
-          headers: {
-            "x-auth-token": token,
-          },
-        }),
+        api.get("/inventory", { headers }),
+        api.get("/user/inventory", { headers }),
       ]);
       console.log(responses);
       // if (response.status === 200) {
@@ -202,6 +210,13 @@ const userSlice = createSlice({
     ) => {
       const key = action.payload.currency.toLowerCase() as "tlove" | "tlike";
       state.balances[key] += action.payload.amount;
+    },
+    changeStatusNFT: (state, action) => {
+      state.nfts.forEach((nft, index) => {
+        if (nft.nft_id === action.payload.nft_id) {
+          state.nfts[index].active = action.payload.active;
+        }
+      });
     },
   },
   extraReducers: (builder) => {
@@ -248,9 +263,19 @@ const userSlice = createSlice({
           state.balances.tlove =
             state.balances.tlike + action.payload.award.amount;
         }
+      })
+      .addCase(fetchReferral.fulfilled, (state, action) => {
+        console.log(action.payload);
+        if (action.payload.status === "non-used") {
+          state.referal = action.payload;
+        }
+      })
+      .addCase(referralActivate.fulfilled, (state) => {
+        state.balances.tlove += state.referal?.gift_amount || 0;
       });
   },
 });
 
 export default userSlice.reducer;
-export const { setWallet, setOld, addBalance } = userSlice.actions;
+export const { setWallet, setOld, addBalance, changeStatusNFT } =
+  userSlice.actions;

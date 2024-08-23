@@ -30,7 +30,8 @@ if (import.meta.env.DEV) {
         "user",
         JSON.stringify({
           // id: 1044888407, // Andrew's ID
-          id: 1104815458, // Rustam's ID
+          id: 5726499852, // Andrew's II ID
+          // id: 1104815458, // Rustam's ID
           first_name: "Andrew",
           last_name: "Rogue",
           username: "rogue",
@@ -44,7 +45,7 @@ if (import.meta.env.DEV) {
         "43043b79c2c4208aada73eead620c3a42f555e4bc701aa19cd24daa00a222925",
       ],
       ["auth_date", "1716922846"],
-      ["start_param", "debug"],
+      ["start_param", "1044888407"],
       ["chat_type", "sender"],
       ["chat_instance", "8428209589180549439"],
     ]).toString();

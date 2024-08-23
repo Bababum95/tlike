@@ -123,6 +123,7 @@
 
 .start {
   @include primary-button;
+
   & {
     width: 100%;
     font-weight: 500;
@@ -134,6 +135,10 @@
   &.stop {
     background: rgba(67, 120, 255, 0.1);
     color: #f00;
+  }
+
+  &.loading {
+    @include loader-button;
   }
 }
 

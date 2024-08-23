@@ -1,0 +1,48 @@
+.name {
+  @include h2;
+  text-align: center;
+  margin: 24px 16px 20px;
+}
+
+.title {
+  @include h2;
+  margin: 20px 16px 8px;
+}
+
+.inviter_id {
+  font-weight: 400;
+  font-size: 16px;
+  color: $hint;
+  margin: 0 16px;
+}
+
+.gift {
+  @include flex-column;
+  align-items: center;
+  border-radius: 16px;
+  padding: 32px 16px;
+  margin: 14px 16px;
+  background: $primary;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.amount {
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  margin: 12px 0 5px;
+  text-transform: uppercase;
+}
+
+.description {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+}
