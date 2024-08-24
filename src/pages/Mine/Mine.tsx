@@ -5,33 +5,53 @@ import { initUtils } from "@telegram-apps/sdk";
 import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 
-import { Balance, Empty, Navigation, User } from "@/components";
+import { UPGRADES } from "@config";
+import { Balance, Empty, Navigation, Toast, User } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { NFTType } from "@types";
-import { changeStatusNFT } from "@/core/store/slices/user";
+import { NFTType, UpgradeType } from "@types";
+import { byNftImage } from "@images";
 import { api } from "@/core/api";
 import {
-  byNftImage,
-  cableImprovementsImage,
-  engineerImage,
-  fanImage,
-  waterCoolingImage,
-} from "@images";
+  changeStatusNFT,
+  byUpgrade as fetchByUpgrade,
+} from "@/core/store/slices/user";
+import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./Mine.module.scss";
-import { setNotice } from "@/core/store/slices/notice";
 
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
 export const Mine: FC = () => {
   const utils = initUtils();
   const params = useParams<{ tab?: "mining" | "upgrades" }>();
-  const nftList = useAppSelector((state) => state.user.nfts);
-  const [tab, setTab] = useState(params.tab || "mining");
+  const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation("mine");
+  const [tab, setTab] = useState(params.tab || "mining");
+  const [toast, setToast] = useState<UpgradeType | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const byNft = () => {
     utils.openLink(getgemsUrl);
+  };
+
+  const byUpgrade = async () => {
+    if (!toast) return;
+
+    setLoading(true);
+    dispatch(
+      setNotice({ status: "loading", message: "Request Processing..." })
+    );
+
+    try {
+      await dispatch(fetchByUpgrade({ id: toast.id })).unwrap();
+      dispatch(setNotice({ status: "success", message: "Success!" }));
+    } catch (err) {
+      dispatch(setNotice({ status: "error", message: err }));
+    } finally {
+      setLoading(false);
+      setToast(null);
+    }
   };
 
   return (
@@ -70,9 +90,9 @@ export const Mine: FC = () => {
                 onClick={byNft}
               />
               <h2 className={styles.title}>{t("my-nfts")}</h2>
-              {nftList.length ? (
+              {user.nfts.length ? (
                 <ul className={styles.list}>
-                  {nftList.map((nft) => (
+                  {user.nfts.map((nft) => (
                     <NFT key={nft.id} nft={nft} />
                   ))}
                 </ul>
@@ -90,104 +110,106 @@ export const Mine: FC = () => {
             </>
           ) : (
             <>
-              <div className={styles.upgrade}>
-                <motion.img
-                  src={fanImage}
-                  alt="Fan"
-                  className={styles.image}
-                  initial={{ scale: 0.5 }}
-                  animate={{ scale: [0.5, 1.2, 1] }}
-                  transition={{ duration: 0.4 }}
-                  width={83}
-                  height={78}
-                />
-                <div className={styles.info}>
-                  <h2 className={styles.title}>{t("fan")}</h2>
-                  <p className={styles.price}>1 500 TLike</p>
-                  <p className={styles.text}>+195 TLove/h</p>
+              {user.upgrades.map((upgrade) => (
+                <div className={styles.upgrade} key={upgrade.id}>
+                  <motion.img
+                    src={UPGRADES[upgrade.id].image}
+                    alt="Fan"
+                    className={styles.image}
+                    initial={{ scale: 0.5 }}
+                    animate={{ scale: [0.5, 1.2, 1] }}
+                    transition={{ duration: 0.4 }}
+                    width={83}
+                    height={78}
+                  />
+                  <div className={styles.info}>
+                    <h2 className={styles.title}>
+                      {t(UPGRADES[upgrade.id].name)}
+                    </h2>
+                    <p className={styles.price}>
+                      {new Intl.NumberFormat("ru-RU", {
+                        maximumFractionDigits: 0,
+                      }).format(upgrade.costs)}{" "}
+                      TLike
+                    </p>
+                    <p className={styles.text}>
+                      +
+                      {new Intl.NumberFormat("ru-RU", {
+                        maximumFractionDigits: 0,
+                      }).format(upgrade.value)}{" "}
+                      TLove/h
+                    </p>
+                  </div>
+                  <div className={styles.action}>
+                    <button
+                      className={classNames(styles.button, {
+                        [styles.disabled]: user.balances.tlike < upgrade.costs,
+                      })}
+                      onClick={() => setToast(upgrade)}
+                    >
+                      {t("buy")}
+                    </button>
+                    <p className={styles.amount}>
+                      {t("amount")}: {upgrade.count}
+                    </p>
+                  </div>
                 </div>
-                <div className={styles.action}>
-                  <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>{t("amount")}: 0</p>
-                </div>
-              </div>
-              <div className={styles.upgrade}>
-                <motion.img
-                  src={cableImprovementsImage}
-                  alt="Cable improvements"
-                  className={styles.image}
-                  initial={{ scale: 0.5 }}
-                  animate={{ scale: [0.5, 1.2, 1] }}
-                  transition={{ duration: 0.4 }}
-                  width={83}
-                  height={78}
-                />
-                <div className={styles.info}>
-                  <h2 className={styles.title}>{t("cable-improvements")}</h2>
-                  <p className={styles.price}>1 500 TLike</p>
-                  <p className={styles.text}>+195 TLove/h</p>
-                </div>
-                <div className={styles.action}>
-                  <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>{t("amount")}: 0</p>
-                </div>
-              </div>
-              <div className={styles.upgrade}>
-                <motion.img
-                  src={waterCoolingImage}
-                  alt="Water cooling"
-                  className={styles.image}
-                  initial={{ scale: 0.5 }}
-                  animate={{ scale: [0.5, 1.2, 1] }}
-                  transition={{ duration: 0.4 }}
-                  width={83}
-                  height={78}
-                />
-                <div className={styles.info}>
-                  <h2 className={styles.title}>{t("water-cooling")}</h2>
-                  <p className={styles.price}>1 500 TLike</p>
-                  <p className={styles.text}>+195 TLove/h</p>
-                </div>
-                <div className={styles.action}>
-                  <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>{t("amount")}: 0</p>
-                </div>
-              </div>
-              <div className={styles.upgrade}>
-                <motion.img
-                  src={engineerImage}
-                  alt="Engineer"
-                  className={styles.image}
-                  initial={{ scale: 0.5 }}
-                  animate={{ scale: [0.5, 1.2, 1] }}
-                  transition={{ duration: 0.4 }}
-                  width={83}
-                  height={78}
-                />
-                <div className={styles.info}>
-                  <h2 className={styles.title}>{t("engineer")}</h2>
-                  <p className={styles.price}>1 500 TLike</p>
-                  <p className={styles.text}>+195 TLove/h</p>
-                </div>
-                <div className={styles.action}>
-                  <button className={styles.button}>{t("buy")}</button>
-                  <p className={styles.amount}>{t("amount")}: 0</p>
-                </div>
-              </div>
+              ))}
             </>
           )}
         </motion.div>
       </AnimatePresence>
       <Navigation />
+      <Toast isOpen={!!toast} onClose={() => setToast(null)}>
+        <div className={styles.toast}>
+          {!!toast && (
+            <>
+              <motion.img
+                src={UPGRADES[toast.id].image}
+                alt="Fan"
+                className={styles.image}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: [0.8, 1.1, 1] }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+                width={83}
+                height={78}
+              />
+              <h2 className={styles.title}>{t(UPGRADES[toast.id].name)}</h2>
+              <p className={styles.description}>
+                {t(`${UPGRADES[toast.id].name}-description`)}
+              </p>
+              <p className={styles.text}>{t("profit-per-hour")}</p>
+              <p className={styles.speed}>
+                +
+                {new Intl.NumberFormat("ru-RU", {
+                  maximumFractionDigits: 0,
+                }).format(toast.value)}{" "}
+                TLove/h
+              </p>
+              <p className={styles.price}>
+                {new Intl.NumberFormat("ru-RU", {
+                  maximumFractionDigits: 0,
+                }).format(toast.costs)}{" "}
+                TLike
+              </p>
+              <button
+                className={classNames(styles.button, {
+                  [styles.loading]: loading,
+                  [styles.disabled]: user.balances.tlike < toast.costs,
+                })}
+                onClick={byUpgrade}
+              >
+                {t("buy")}
+              </button>
+            </>
+          )}
+        </div>
+      </Toast>
     </div>
   );
 };
 
-type NFTProps = {
-  nft: NFTType;
-};
-
-const NFT: FC<NFTProps> = ({ nft }) => {
+const NFT: FC<{ nft: NFTType }> = ({ nft }) => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation("mine");
   const dispatch = useAppDispatch();

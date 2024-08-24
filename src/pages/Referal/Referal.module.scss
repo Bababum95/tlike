@@ -29,6 +29,10 @@
   &:active {
     scale: 0.95;
   }
+
+  &.clicked {
+    pointer-events: none;
+  }
 }
 
 .amount {

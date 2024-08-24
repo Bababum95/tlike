@@ -56,6 +56,14 @@
   }
 }
 
+.button {
+  @include primary-button;
+
+  &.disabled {
+    @include primary-disabled-button;
+  }
+}
+
 .main {
   padding: 0 16px;
 }
@@ -181,7 +189,6 @@
     width: 107px;
     font-size: 15px;
     padding: 8px;
-    @include primary-button;
   }
 
   .amount {
@@ -190,5 +197,61 @@
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.01em;
+  }
+}
+
+.toast {
+  @include flex-column;
+  align-items: center;
+
+  .title {
+    margin: 16px 0 10px;
+  }
+
+  .description {
+    margin: 0;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #a2acb0;
+    max-width: 270px;
+  }
+
+  .text {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .speed {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: $primary;
+    margin: 0;
+  }
+
+  .price {
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0em;
+    background: linear-gradient(49deg, #007aff 0%, #93c6ff 56%, #007aff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 16px 0 8px;
+  }
+
+  .button {
+    width: 100%;
+
+    &.loading {
+      @include loader-button;
+    }
   }
 }

@@ -27,6 +27,7 @@ import {
   getInventory,
   getMissions,
   getNFT,
+  referralStat,
   setWallet,
 } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
@@ -112,6 +113,7 @@ export const App: FC = () => {
         dispatch(getInventory()),
         dispatch(getMissions()),
         dispatch(getProjectStat()),
+        dispatch(referralStat()),
       ]).finally(() => {
         setProgress(99);
         setTimeout(() => {

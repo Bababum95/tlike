@@ -26,6 +26,7 @@ const initialState: UserStateType = {
   type: "old",
   language: "en",
   nfts: [],
+  upgrades: [],
 };
 
 export const fetchUser = createAsyncThunk(
@@ -95,6 +96,25 @@ export const referralActivate = createAsyncThunk(
     const { token } = state.user;
     try {
       const response = await api.get("/referral/activate", {
+        headers: { "x-auth-token": token },
+      });
+      if (response.status === 200) {
+        return response.data;
+      }
+      return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const referralStat = createAsyncThunk(
+  "user/referralStat",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+    try {
+      const response = await api.get("/referral/stat", {
         headers: { "x-auth-token": token },
       });
       if (response.status === 200) {
@@ -183,13 +203,42 @@ export const getInventory = createAsyncThunk(
         api.get("/inventory", { headers }),
         api.get("/user/inventory", { headers }),
       ]);
-      console.log(responses);
-      // if (response.status === 200) {
-      //   return response.data;
-      // }
-      // return rejectWithValue(response.data);
+      return {
+        upgrades: responses[0].data,
+        userUpgraded: responses[1].data.inventory,
+      };
     } catch (err) {
       return rejectWithValue(err);
+    }
+  }
+);
+
+export const byUpgrade = createAsyncThunk(
+  "user/byUpgrade",
+  async ({ id }: { id: number }, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+    try {
+      const response = await api.post(
+        "/inventory",
+        { inventory_id: id },
+        { headers: { "x-auth-token": token } }
+      );
+      return response.data;
+    } catch (err) {
+      if (err instanceof Error) {
+        const errorWithResponse = err as {
+          response?: { data?: { message?: string } };
+        };
+
+        if (errorWithResponse.response?.data?.message) {
+          return rejectWithValue(errorWithResponse.response.data.message);
+        }
+
+        return rejectWithValue(err.message);
+      }
+
+      return rejectWithValue("Error!");
     }
   }
 );
@@ -265,13 +314,47 @@ const userSlice = createSlice({
         }
       })
       .addCase(fetchReferral.fulfilled, (state, action) => {
-        console.log(action.payload);
         if (action.payload.status === "non-used") {
           state.referal = action.payload;
         }
       })
       .addCase(referralActivate.fulfilled, (state) => {
         state.balances.tlove += state.referal?.gift_amount || 0;
+      })
+      .addCase(getInventory.fulfilled, (state, action) => {
+        action.payload.upgrades.forEach(
+          (upgrade: {
+            id: 1 | 2 | 3 | 4;
+            costs: string;
+            increase_value: string;
+          }) => {
+            state.upgrades.push({
+              id: upgrade.id,
+              costs: Number(upgrade.costs),
+              value: Number(upgrade.increase_value),
+              count: 0,
+            });
+          }
+        );
+        action.payload.userUpgraded.forEach(
+          (upgrade: { item_id?: number; count?: string }) => {
+            if (upgrade.item_id && upgrade.count) {
+              state.upgrades.forEach((u, i) => {
+                if (u.id === upgrade.item_id) {
+                  state.upgrades[i].count += Number(upgrade.count);
+                }
+              });
+            }
+          }
+        );
+      })
+      .addCase(byUpgrade.fulfilled, (state, action) => {
+        state.balances.tlove -= Number(action.payload.inventory_info?.costs);
+        state.upgrades.forEach((u, i) => {
+          if (u.id === action.payload.inventory_info?.item_id) {
+            state.upgrades[i].count += 1;
+          }
+        });
       });
   },
 });

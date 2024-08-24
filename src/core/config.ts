@@ -90,6 +90,25 @@ export const FORTUNE_WHEEL = [
   },
 ];
 
+export const UPGRADES = {
+  1: {
+    name: "fan",
+    image: fanImage,
+  },
+  2: {
+    name: "cable-improvements",
+    image: cableImprovementsImage,
+  },
+  3: {
+    name: "water-cooling",
+    image: waterCoolingImage,
+  },
+  4: {
+    name: "engineer",
+    image: engineerImage,
+  },
+};
+
 export const PRELOAD_IMAGES_LIST = [
   fortuneLikeImage,
   fortuneLove2Image,

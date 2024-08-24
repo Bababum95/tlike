@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { Item, Link, List, Navigation, Toast } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { MissionType } from "@types";
+import { missionActivate } from "@/core/store/slices/user";
 import {
   ChevronRightIcon,
   fortuneWheelPreviewImage,
@@ -13,7 +14,6 @@ import {
 } from "@images";
 
 import styles from "./Earn.module.scss";
-import { missionActivate } from "@/core/store/slices/user";
 
 export const Earn = () => {
   const { t } = useTranslation("earn");
@@ -45,8 +45,7 @@ export const Earn = () => {
   };
 
   const spinAvailable = () => {
-    if (!missions || missions.length < 1) return false;
-    return missions.some((mission) => !mission.mission_actived);
+    return !missions.some((mission) => !mission.mission_actived);
   };
 
   return (
@@ -61,7 +60,7 @@ export const Earn = () => {
       <Link
         to="/earn/fortune"
         className={classNames(styles.spin, {
-          [styles.disabled]: !spinAvailable,
+          [styles.disabled]: !spinAvailable(),
         })}
       >
         {t("spin")}

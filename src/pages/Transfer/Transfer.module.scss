@@ -10,8 +10,8 @@
 }
 
 .submit {
-  @include primary-button;
   margin-top: auto;
+  @include primary-button;
 
   &:disabled {
     @include primary-disabled-button;

@@ -17,6 +17,13 @@ export type NFTType = {
   nft_name: string;
 };
 
+export type UpgradeType = {
+  id: 1 | 2 | 3 | 4;
+  costs: number;
+  value: number;
+  count: number;
+};
+
 export type MissionType = {
   id: number;
   description: string;
@@ -54,6 +61,7 @@ export type UserType = {
     inviter_id: string;
     status: "non-used" | "used" | "empty";
   };
+  upgrades: UpgradeType[];
 };
 
 export type UserStateType = {

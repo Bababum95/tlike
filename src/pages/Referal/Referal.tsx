@@ -4,10 +4,10 @@ import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { Balance } from "@/components";
+import { referralActivate } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./Referal.module.scss";
-import { referralActivate } from "@/core/store/slices/user";
 
 export const Referal = () => {
   const referal = useAppSelector((state) => state.user.referal);
@@ -28,14 +28,13 @@ export const Referal = () => {
 
     try {
       await dispatch(referralActivate());
-
       dispatch(setNotice({ status: "success", message: "Success!" }));
     } catch (err) {
       console.log(err);
       dispatch(setNotice({ status: "error", message: "Error!" }));
+    } finally {
+      navigate("/onboarding", { replace: true });
     }
-
-    navigate("/onboarding", { replace: true });
   };
 
   return (
@@ -48,7 +47,10 @@ export const Referal = () => {
       <p className={styles.inviter_id}>{referal?.inviter_id}</p>
       <div
         className={styles.gift}
-        onClick={takeGift}
+        onClick={(evt) => {
+          (evt.target as HTMLElement).classList.toggle(styles.clicked);
+          takeGift();
+        }}
         role="button"
         tabIndex={0}
       >

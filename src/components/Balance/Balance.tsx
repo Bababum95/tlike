@@ -22,14 +22,34 @@ export const Balance = () => {
       <div className={styles.item}>
         <img height="28px" src={thumbImage} alt="Like" />
         <p className={styles.title}>{t("like-balance")}</p>
-        <p className={styles.value}>{user.balances.tlike.toFixed(0)} Like</p>
-        <p className={styles.unit}>{user.mining_speed.tlike.toFixed(0)} Like/h</p>
+        <p className={styles.value}>
+          {new Intl.NumberFormat("ru-RU", {
+            maximumFractionDigits: 0,
+          }).format(user.balances.tlike)}{" "}
+          Like
+        </p>
+        <p className={styles.unit}>
+          {new Intl.NumberFormat("ru-RU", {
+            maximumFractionDigits: 0,
+          }).format(user.mining_speed.tlike)}{" "}
+          Like/h
+        </p>
       </div>
       <div className={styles.item}>
         <img src={heartImage} alt="Love" />
         <p className={styles.title}>{t("love-balance")}</p>
-        <p className={styles.value}>{user.balances.tlove.toFixed(0)} Love</p>
-        <p className={styles.unit}>{user.mining_speed.tlove.toFixed(0)} Love/h</p>
+        <p className={styles.value}>
+          {new Intl.NumberFormat("ru-RU", {
+            maximumFractionDigits: 0,
+          }).format(user.balances.tlove)}{" "}
+          Love
+        </p>
+        <p className={styles.unit}>
+          {new Intl.NumberFormat("ru-RU", {
+            maximumFractionDigits: 0,
+          }).format(user.mining_speed.tlove)}{" "}
+          Love/h
+        </p>
       </div>
     </motion.div>
   );
