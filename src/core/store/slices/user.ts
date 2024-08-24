@@ -380,9 +380,13 @@ const userSlice = createSlice({
         );
       })
       .addCase(byUpgrade.fulfilled, (state, action) => {
-        state.balances.tlove -= Number(action.payload.inventory_info?.costs);
+        state.balances.tlike -= Number(action.payload.inventory_info?.costs);
+        if (action.payload.inventory_info?.increase_value) {
+          state.mining_speed.tlove +=
+            Number(action.payload.inventory_info.increase_value) / 3600;
+        }
         state.upgrades.forEach((u, i) => {
-          if (u.id === action.payload.inventory_info?.item_id) {
+          if (u.id === action.payload.inventory_info?.id) {
             state.upgrades[i].count += 1;
           }
         });
