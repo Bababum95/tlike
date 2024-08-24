@@ -22,6 +22,7 @@ import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice } from "@/components";
 import { mainRoutes, routes } from "@/core/routes";
 import {
+  addBalance,
   fetchReferral,
   fetchUser,
   getInventory,
@@ -128,6 +129,25 @@ export const App: FC = () => {
       dispatch(setNotice({ status: "error", message: user.error }));
     }
   }, [user.status]);
+
+  useEffect(() => {
+    if (!user.mining_speed.tlike && !user.mining_speed.tlove) return;
+    const loop = setInterval(() => {
+      if (user.mining_speed.tlike) {
+        dispatch(
+          addBalance({ amount: user.mining_speed.tlike, currency: "TLike" })
+        );
+      }
+
+      if (user.mining_speed.tlove) {
+        dispatch(
+          addBalance({ amount: user.mining_speed.tlove, currency: "TLove" })
+        );
+      }
+    }, 1000);
+
+    return () => clearInterval(loop);
+  }, [user.mining_speed]);
 
   return (
     <AppRoot

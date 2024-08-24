@@ -20,5 +20,12 @@
   "id-placeholder": "Write Receiver ID",
   "total-love-placeholder": "Write Love amount to send",
   "total-love-hint": "Transfer Tax: 5% Burn, 5% Team Project",
-  "send": "Send"
+  "error-not-enough": "Not enough balance",
+  "error-min": "Minimum amount 2000 Love",
+  "send": "Send",
+  "to": "To",
+  "to-burn": "to Burn",
+  "to-team": "to Project Team",
+  "send-total": "Send Total",
+  "send-hint": "By clicking 'Send' you confirm the transaction"
 }

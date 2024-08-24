@@ -31,7 +31,7 @@ export const Balance = () => {
         <p className={styles.unit}>
           {new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(user.mining_speed.tlike)}{" "}
+          }).format(user.mining_speed.tlike * 3600)}{" "}
           Like/h
         </p>
       </div>
@@ -47,7 +47,7 @@ export const Balance = () => {
         <p className={styles.unit}>
           {new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(user.mining_speed.tlove)}{" "}
+          }).format(user.mining_speed.tlove * 3600)}{" "}
           Love/h
         </p>
       </div>

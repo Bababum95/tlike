@@ -10,7 +10,7 @@
     width: 100%;
     border: 1.8px solid rgba(255, 255, 255, 0.05);
     border-radius: 14px;
-    padding: 16px;
+    padding: 12px 16px;
     background-color: transparent;
     margin-top: 14px;
     font-weight: 400;
@@ -19,18 +19,40 @@
     letter-spacing: 0.01em;
     color: #fff;
     outline: none;
+    appearance: none;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
     &::placeholder {
       color: $hint;
     }
   }
+
   .hint {
     margin: 14px 0 0;
-    font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.01em;
     color: $hint;
+  }
+
+  &.error input {
+    color: #ff3b30;
+    border-color: #ff3b30;
+  }
+
+  .error {
+    margin: 14px 0 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: #ff3b30;
   }
 }

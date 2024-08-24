@@ -11,9 +11,38 @@
 
 .submit {
   margin-top: auto;
+  width: 100%;
   @include primary-button;
 
   &:disabled {
     @include primary-disabled-button;
   }
+}
+
+.row {
+  @include flex-layout(space-between, center);
+
+  p {
+    font-weight: inherit;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: inherit;
+    margin: 0;
+  }
+
+  &:not(.total) {
+    color: $hint;
+    margin-bottom: 6px;
+  }
+}
+
+.hint {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 185%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: $hint;
+  margin: 14px 0;
 }
