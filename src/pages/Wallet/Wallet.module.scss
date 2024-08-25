@@ -10,17 +10,17 @@
 }
 
 .button {
-  @include button;
   flex: 1;
   color: #fff;
   background-color: $section;
   text-decoration-line: none;
   text-align: center;
+  @include button;
 }
 
 .deposit {
-  @include primary-button;
   flex: 1;
+  @include primary-button;
 
   &-wrapper {
     background-color: $section;
@@ -49,12 +49,12 @@
   }
 
   &-contact {
-    @include primary-button;
     display: block;
     text-align: center;
     text-decoration-line: none;
     width: 100%;
     margin-top: 24px;
+    @include primary-button;
   }
 }
 

@@ -5,9 +5,6 @@
   "balance": "Balance",
   "deposit-hint": "To make a deposit, you have to contact support",
   "contact-support": "Contact Support",
-  "transaction-history": "Transaction History",
-  "history-empty-title": "You don't have any transactions yet",
-  "history-empty-text": "All your transactions will be listed here",
   "withdraw-settings": "Withdraw Settings",
   "withdraw-like-hint": "To withdraw Like from your balance",
   "coming-soon": "Coming Soon",
@@ -27,5 +24,13 @@
   "to-burn": "to Burn",
   "to-team": "to Project Team",
   "send-total": "Send Total",
-  "send-hint": "By clicking 'Send' you confirm the transaction"
+  "send-hint": "By clicking 'Send' you confirm the transaction",
+
+  "transaction-history": "Transaction History",
+  "history-empty-title": "You don't have any transactions yet",
+  "history-empty-text": "All your transactions will be listed here",
+  "Fortune": "Fortune wheel",
+  "Tasks": "Completed task",
+  "Referral": "Invited friends",
+  "success": "Success"
 }
