@@ -55,8 +55,8 @@ export type UserType = {
   missions: MissionType[];
   nfts: NFTType[];
   referal?: {
-    gift_amount: number;
-    gift_currency: "TLove" | "TLike";
+    amount: number;
+    currency: "TLove" | "TLike";
     gift_id: number;
     inviter_id: string;
     status: "non-used" | "used" | "empty";

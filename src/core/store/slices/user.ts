@@ -103,7 +103,19 @@ export const referralActivate = createAsyncThunk(
       }
       return rejectWithValue(response.data);
     } catch (err) {
-      return rejectWithValue(err);
+      if (err instanceof Error) {
+        const errorWithResponse = err as {
+          response?: { data?: { message?: string } };
+        };
+
+        if (errorWithResponse.response?.data?.message) {
+          return rejectWithValue(errorWithResponse.response.data.message);
+        }
+
+        return rejectWithValue(err.message);
+      }
+
+      return rejectWithValue("Error!");
     }
   }
 );
@@ -350,7 +362,8 @@ const userSlice = createSlice({
         }
       })
       .addCase(referralActivate.fulfilled, (state) => {
-        state.balances.tlove += state.referal?.gift_amount || 0;
+        state.balances.tlove += state.referal?.amount || 0;
+        state.referal = undefined;
       })
       .addCase(getInventory.fulfilled, (state, action) => {
         action.payload.upgrades.forEach(

@@ -27,11 +27,10 @@ export const Referal = () => {
     );
 
     try {
-      await dispatch(referralActivate());
+      await dispatch(referralActivate()).unwrap();
       dispatch(setNotice({ status: "success", message: "Success!" }));
     } catch (err) {
-      console.log(err);
-      dispatch(setNotice({ status: "error", message: "Error!" }));
+      dispatch(setNotice({ status: "error", message: err }));
     } finally {
       navigate("/onboarding", { replace: true });
     }
@@ -71,7 +70,7 @@ export const Referal = () => {
         <p className={styles.amount}>
           {`${new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(referal?.gift_amount || 0)} ${referal?.gift_currency}`}
+          }).format(referal?.amount || 0)} ${referal?.currency}`}
         </p>
         <p className={styles.description}>Take the gift</p>
       </div>

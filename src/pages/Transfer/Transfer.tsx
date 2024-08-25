@@ -66,7 +66,7 @@ export const Transfer = () => {
     setLoading((prev) => ({ ...prev, validId: true }));
 
     try {
-      const response = await api.get("user/exists", {
+      const response = await api.get("user/exist", {
         params: { user_id: values.id },
         headers: { "x-auth-token": user.token },
       });
@@ -107,6 +107,7 @@ export const Transfer = () => {
           receiver: values.id,
         })
       ).unwrap();
+      setValues({ id: "", total: "" });
       dispatch(setNotice({ status: "success", message: "Success!" }));
     } catch (err) {
       dispatch(setNotice({ status: "error", message: err }));

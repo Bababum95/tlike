@@ -49,6 +49,7 @@ export const Main = () => {
       if (x === 0) next();
     }, AUTO_DELAY);
 
+    console.log(user.mining_speed);
     return () => clearInterval(intervalRef);
   }, [imgIndex]);
 
@@ -67,7 +68,7 @@ export const Main = () => {
       <video
         className={styles.miner}
         src={minerAnimation}
-        autoPlay={user.mining_speed.tlike > 0 || user.mining_speed.tlike > 0}
+        autoPlay={user.mining_speed.tlove > 0 || user.mining_speed.tlike > 0}
         loop
         muted
         playsInline
@@ -75,7 +76,7 @@ export const Main = () => {
         data-object-fit="cover"
         preload="auto"
         poster={
-          user.mining_speed.tlike > 0 || user.mining_speed.tlike > 0
+          user.mining_speed.tlove > 0 || user.mining_speed.tlike > 0
             ? ""
             : minerOffImage
         }

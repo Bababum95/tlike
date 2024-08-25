@@ -167,7 +167,9 @@ export const App: FC = () => {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           {user.referal && <Navigate to="/referal" replace />}
-          {user.type === "new" && <Navigate to="/onboarding" replace />}
+          {!user.referal && user.type === "new" && (
+            <Navigate to="/onboarding" replace />
+          )}
         </Router>
       )}
     </AppRoot>
