@@ -93,11 +93,13 @@ export const History = () => {
               </motion.li>
             ))}
           </motion.ul>
-          <Pagination
-            page={page}
-            total={historyStore.total_pages}
-            onPageChange={onPageChange}
-          />
+          {historyStore.total_pages > 1 && (
+            <Pagination
+              page={page}
+              total={historyStore.total_pages}
+              onPageChange={onPageChange}
+            />
+          )}
         </>
       ) : historyStore.status === "loading" ||
         historyStore.status === "idle" ? null : (

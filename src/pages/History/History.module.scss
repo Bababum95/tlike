@@ -104,7 +104,10 @@
 .pagination {
   @include flex-center;
   gap: 20px;
-  margin: 20px 0;
+  padding: 20px 0;
+  background-color: $bg;
+  position: relative;
+  z-index: 2;
 
   .buttons {
     @include flex-center;
