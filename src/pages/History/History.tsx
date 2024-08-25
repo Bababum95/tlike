@@ -34,6 +34,7 @@ export const History = () => {
 
   useEffect(() => {
     dispatch(getHistory({ page }));
+    scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 
   const onPageChange = (value: number) => {
@@ -59,11 +60,11 @@ export const History = () => {
               <motion.li
                 className={styles.item}
                 key={item.id}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 80 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{
                   delay: index * 0.05,
-                  duration: 0.4,
+                  duration: 0.3,
                 }}
               >
                 <div>
