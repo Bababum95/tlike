@@ -185,7 +185,7 @@ export const Fortune = () => {
         )}
         disabled={!fortuneStore.spin_available}
       >
-        {fortuneStore.spin_available ? t("spin") : fortuneStore.nextSpinTime}
+        {fortuneStore.spin_available ? t("spin-free") : fortuneStore.nextSpinTime}
       </button>
       {!fortuneStore.spin_available && (
         <div className={styles.nft}>
