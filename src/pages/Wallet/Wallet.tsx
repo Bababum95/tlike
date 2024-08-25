@@ -28,7 +28,7 @@ export const Wallet = () => {
         <HistoryIcon />
       </Link>
       <User direction="column" />
-      <TonConnectButton className={styles.wallet} />
+      {!!wallet && <TonConnectButton className={styles.wallet} />}
       <div className={styles.buttons}>
         <button className={styles.deposit}>{t("deposit")}</button>
         <button className={styles.button} onClick={() => setToastIsOpen(true)}>

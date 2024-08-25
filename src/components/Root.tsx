@@ -1,7 +1,7 @@
 import { type FC, useEffect, useMemo } from "react";
 import { Provider } from "react-redux";
 import { SDKProvider } from "@telegram-apps/sdk-react";
-import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
 
 import { store } from "@/core/store";
 import { App, ErrorBoundary } from "@/components";
@@ -40,6 +40,9 @@ const Inner: FC = () => {
     <TonConnectUIProvider
       manifestUrl={manifestUrl}
       actionsConfiguration={{ twaReturnUrl }}
+      uiPreferences={{
+        theme: THEME.DARK,
+      }}
     >
       <SDKProvider acceptCustomStyles debug={debug}>
         <Provider store={store}>
