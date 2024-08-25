@@ -5,5 +5,7 @@
   "main": "Main",
   "friends": "Friends",
   "earn": "Earn",
-  "mine": "Mine"
+  "mine": "Mine",
+  "connect-wallet": "Connect wallet",
+  "connect-wallet-hint": "To start mining, you have to buy an NFT from our collection and connect your wallet"
 }

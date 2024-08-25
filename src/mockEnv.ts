@@ -9,6 +9,8 @@ import {
 // so you will not see it in your final bundle.
 if (import.meta.env.DEV) {
   let shouldMock: boolean;
+  const id = import.meta.env.VITE_TG_ID;
+  const hash = import.meta.env.VITE_TG_HASH;
 
   // Try to extract launch parameters to check if the current environment is Telegram-based.
   try {
@@ -29,9 +31,7 @@ if (import.meta.env.DEV) {
       [
         "user",
         JSON.stringify({
-          id: 1044888407, // Andrew's ID
-          // id: 5726499852, // Andrew's II ID
-          // id: 1104815458, // Rustam's ID
+          id,
           first_name: "Andrew",
           last_name: "Rogue",
           username: "rogue",
@@ -40,10 +40,7 @@ if (import.meta.env.DEV) {
           allows_write_to_pm: true,
         }),
       ],
-      [
-        "hash",
-        "43043b79c2c4208aada73eead620c3a42f555e4bc701aa19cd24daa00a222925",
-      ],
+      ["hash", hash],
       ["auth_date", "1716922846"],
       ["start_param", "1044888407"],
       ["chat_type", "sender"],

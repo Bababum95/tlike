@@ -6,7 +6,7 @@ import styles from './Toast.module.scss';
 
 type Props = {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   children: React.ReactNode;
 };
 
