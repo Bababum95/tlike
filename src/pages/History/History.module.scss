@@ -21,6 +21,7 @@
   padding: 0;
   margin: 0;
   border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  flex-grow: 1;
 
   &.loading {
     opacity: 0.5 !important;
@@ -97,5 +98,71 @@
 
   .end p {
     text-align: end;
+  }
+}
+
+.pagination {
+  @include flex-center;
+  gap: 20px;
+  margin: 20px 0;
+
+  .buttons {
+    @include flex-center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 175%;
+    letter-spacing: 0.01em;
+    color: $hint;
+
+    .button {
+      @include flex-center;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 175%;
+      letter-spacing: 0.01em;
+      text-align: center;
+      color: inherit;
+      background-color: transparent;
+      border-radius: 6px;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      border: none;
+      transition: all 0.1s ease;
+
+      &:active {
+        scale: 0.9;
+      }
+
+      &.active {
+        background-color: $primary;
+        color: #fff;
+      }
+    }
+  }
+
+  .back,
+  .forward {
+    @include flex-center;
+    background-color: transparent;
+    border: none;
+    transition: all 0.1s ease;
+    width: 32px;
+    height: 32px;
+
+    &:active {
+      scale: 0.9;
+    }
+
+    path {
+      fill: $primary;
+    }
+  }
+
+  .back {
+    svg {
+      transform: rotate(180deg);
+    }
   }
 }

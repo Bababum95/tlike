@@ -6,12 +6,13 @@ import { HistoryStateType } from "@/core/types";
 
 export const getHistory = createAsyncThunk(
   "history/getHistory",
-  async (_, { getState, rejectWithValue }) => {
+  async ({ page }: { page: number }, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const { token } = state.user;
     try {
       const response = await api.get("/transactions/info", {
         headers: { "x-auth-token": token },
+        params: { page },
       });
       return response.data;
     } catch (err) {
@@ -34,7 +35,8 @@ export const getHistory = createAsyncThunk(
 
 const initialState: HistoryStateType = {
   status: "idle",
-  data: [],
+  records: [],
+  total_pages: 0,
 };
 
 const historySlice = createSlice({
@@ -47,7 +49,8 @@ const historySlice = createSlice({
         state.status = "loading";
       })
       .addCase(getHistory.fulfilled, (state, action) => {
-        state.data = action.payload.reverse();
+        state.records = action.payload.records;
+        state.total_pages = action.payload.total_pages;
         state.status = "successed";
       });
   },

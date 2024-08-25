@@ -42,5 +42,6 @@ type HistoryItem = TransferType | TasksType | FortuneType;
 
 export type HistoryStateType = {
   status: stateStatus;
-  data: HistoryItem[];
+  records: HistoryItem[];
+  total_pages: number;
 };
