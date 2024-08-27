@@ -174,7 +174,7 @@ export const Transfer = () => {
           <p>{(Number(values.total) * 0.05).toFixed(0)} LOVE</p>
         </div>
         <div className={styles.row}>
-          <p>{t("to-team")}</p>
+          <p>5% {t("to-team")}</p>
           <p>{(Number(values.total) * 0.05).toFixed(0)} LOVE</p>
         </div>
         <div className={classNames(styles.row, styles.total)}>

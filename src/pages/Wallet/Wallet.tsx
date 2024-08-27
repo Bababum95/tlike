@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 
@@ -12,6 +12,7 @@ import styles from "./Wallet.module.scss";
 export const Wallet = () => {
   const { t } = useTranslation("wallet");
   const wallet = useTonWallet();
+  const depositRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const [toastIsOpen, setToastIsOpen] = useState(false);
@@ -30,7 +31,14 @@ export const Wallet = () => {
       <User direction="column" />
       {!!wallet && <TonConnectButton className={styles.wallet} />}
       <div className={styles.buttons}>
-        <button className={styles.deposit}>{t("deposit")}</button>
+        <button
+          className={styles.deposit}
+          onClick={() => {
+            depositRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          {t("deposit")}
+        </button>
         <button className={styles.button} onClick={() => setToastIsOpen(true)}>
           {t("withdraw")}
         </button>
@@ -40,7 +48,7 @@ export const Wallet = () => {
       </div>
       <h2 className={styles.title}>{t("balance")}</h2>
       <Balance />
-      <div className={styles["deposit-wrapper"]}>
+      <div ref={depositRef} className={styles["deposit-wrapper"]}>
         <h3 className={styles["deposit-title"]}>{t("deposit")}</h3>
         <p className={styles["deposit-hint"]}>{t("deposit-hint")}</p>
         <Link

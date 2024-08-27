@@ -1,6 +1,7 @@
 // ReactSVG
 export { EarnIcon } from "./ReactSVG/EarnIcon";
 export { FriendsIcon } from "./ReactSVG/FriendsIcon";
+export { FriendIcon } from "./ReactSVG/FriendIcon";
 export { MainIcon } from "./ReactSVG/MainIcon";
 export { MineIcon } from "./ReactSVG/MineIcon";
 export { WalletIcon } from "./ReactSVG/WalletIcon";

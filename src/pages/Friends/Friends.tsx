@@ -3,8 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { initUtils, initInitData } from "@telegram-apps/sdk-react";
 
 import { Empty, Item, List, Navigation } from "@/components";
-import { TelegramPremiumIcon, TelegramLogoIcon, CopyIcon } from "@images";
-import { useAppDispatch } from "@/core/hooks";
+import {
+  TelegramPremiumIcon,
+  TelegramLogoIcon,
+  CopyIcon,
+  FriendIcon,
+} from "@images";
+import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./Friends.module.scss";
@@ -17,6 +22,7 @@ export const Friends = () => {
   const initData = initInitData();
   const shareURL = `${tgUrl}?startapp=${initData?.user?.id}`;
   const dispatch = useAppDispatch();
+  const referrals = useAppSelector((state) => state.user.referrals);
 
   const copy = () => {
     navigator.clipboard.writeText(shareURL);
@@ -63,10 +69,34 @@ export const Friends = () => {
           layout
           key="main"
         >
-          <Empty title={t("empty-title")}>
-            <p>{t("empty-text")}</p>
-            <Invite />
-          </Empty>
+          {referrals.length > 0 ? (
+            <List>
+              {referrals.map((referral) => (
+                <Item
+                  key={referral.stats_user_id}
+                  icon={
+                    <img
+                      className={styles.photo}
+                      src={referral.max_stats_photo_url}
+                    />
+                  }
+                  title={referral.stats_user_id}
+                  text={`+ ${new Intl.NumberFormat("ru-RU", {
+                    maximumFractionDigits: 0,
+                  }).format(referral.sum_amount)} LOVE`}
+                >
+                  <span className={styles.counter}>
+                    {referral.sum_level_2} <FriendIcon />
+                  </span>
+                </Item>
+              ))}
+            </List>
+          ) : (
+            <Empty title={t("empty-title")}>
+              <p>{t("empty-text")}</p>
+              <Invite />
+            </Empty>
+          )}
         </motion.div>
       </AnimatePresence>
       <Navigation />

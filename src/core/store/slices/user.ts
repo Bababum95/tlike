@@ -27,6 +27,7 @@ const initialState: UserStateType = {
   language: "en",
   nfts: [],
   upgrades: [],
+  referrals: [],
 };
 
 export const fetchUser = createAsyncThunk(
@@ -403,6 +404,11 @@ const userSlice = createSlice({
             state.upgrades[i].count += 1;
           }
         });
+      })
+      .addCase(referralStat.fulfilled, (state, action) => {
+        if (Array.isArray(action.payload)) {
+          state.referrals = action.payload;
+        }
       });
   },
 });

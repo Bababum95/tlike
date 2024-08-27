@@ -19,6 +19,12 @@ type ParamsType = {
   currency?: "TLove" | "TLike";
 };
 
+type GiftInfoType = {
+  amount: string;
+  currency: string;
+  description: string;
+};
+
 type InitToastesType = {
   win: boolean;
   by: {
@@ -47,6 +53,7 @@ export const Fortune = () => {
   const [intervalTime, setIntervalTime] = useState<number>(200);
   const [toastIsOpen, setToastIsOpen] = useState(initToastes);
   const [showFierwork, setShowFierwork] = useState<boolean>(false);
+  const [giftInfo, setGiftInfo] = useState<GiftInfoType | null>(null);
   const user = useAppSelector((state) => state.user);
   const fortuneStore = useAppSelector((state) => state.fortune);
   const utils = initUtils();
@@ -92,6 +99,7 @@ export const Fortune = () => {
         response.data.status === "paid"
       ) {
         setTargetIndex(response.data.gift_id);
+        setGiftInfo(response.data.gift_info);
         haptic.impactOccurred("medium");
         if (type === "free") {
           dispatch(setLastSpinTime(response.data.date));
@@ -185,7 +193,9 @@ export const Fortune = () => {
         )}
         disabled={!fortuneStore.spin_available}
       >
-        {fortuneStore.spin_available ? t("spin-free") : fortuneStore.nextSpinTime}
+        {fortuneStore.spin_available
+          ? t("spin-free")
+          : fortuneStore.nextSpinTime}
       </button>
       {!fortuneStore.spin_available && (
         <div className={styles.nft}>
@@ -229,7 +239,9 @@ export const Fortune = () => {
           />
           <p className={styles["toast-title"]}>{t("you-won")}</p>
           <p className={styles["toast-value"]}>
-            {FORTUNE_WHEEL[activeIndex].value}
+            {giftInfo
+              ? `${giftInfo.amount} ${giftInfo.currency}`
+              : FORTUNE_WHEEL[activeIndex].value}
           </p>
           <button onClick={closeToast} className={styles.button}>
             {t("confirm")}

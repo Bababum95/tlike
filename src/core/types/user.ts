@@ -5,6 +5,13 @@ type BalancesType = {
   tlove: number;
 };
 
+export type ReferralType = {
+  max_stats_photo_url: string;
+  stats_user_id: string;
+  sum_amount: number;
+  sum_level_2: number;
+};
+
 export type NFTType = {
   id: number;
   nft_id: string;
@@ -62,6 +69,7 @@ export type UserType = {
     status: "non-used" | "used" | "empty";
   };
   upgrades: UpgradeType[];
+  referrals: ReferralType[]
 };
 
 export type UserStateType = {

@@ -26,7 +26,7 @@ export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const { t } = useTranslation("common");
   const dragX = useMotionValue(0);
-  const wallet = useTonWallet();
+  const wallet = import.meta.env.DEV ? true : useTonWallet();
   const user = useAppSelector((state) => state.user);
 
   const swipePower = (offset: number, velocity: number) => {
