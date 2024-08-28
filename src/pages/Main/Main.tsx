@@ -49,7 +49,6 @@ export const Main = () => {
       if (x === 0) next();
     }, AUTO_DELAY);
 
-    console.log(user.mining_speed);
     return () => clearInterval(intervalRef);
   }, [imgIndex]);
 

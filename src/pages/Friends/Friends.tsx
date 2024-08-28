@@ -61,43 +61,43 @@ export const Friends = () => {
       </List>
       <h2 className={styles.title}>{t("invited-friends")}</h2>
       <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          layout
-          key="main"
-        >
-          {referrals.length > 0 ? (
-            <List>
-              {referrals.map((referral) => (
-                <Item
-                  key={referral.stats_user_id}
-                  icon={
-                    <img
-                      className={styles.photo}
-                      src={referral.max_stats_photo_url}
-                    />
-                  }
-                  title={referral.stats_user_id}
-                  text={`+ ${new Intl.NumberFormat("ru-RU", {
-                    maximumFractionDigits: 0,
-                  }).format(referral.sum_amount)} LOVE`}
-                >
-                  <span className={styles.counter}>
-                    {referral.sum_level_2} <FriendIcon />
-                  </span>
-                </Item>
-              ))}
-            </List>
-          ) : (
+        {referrals.length > 0 ? (
+          <List>
+            {referrals.map((referral) => (
+              <Item
+                key={referral.stats_user_id}
+                icon={
+                  <img
+                    className={styles.photo}
+                    src={referral.max_stats_photo_url}
+                  />
+                }
+                title={referral.stats_user_id}
+                text={`+ ${new Intl.NumberFormat("ru-RU", {
+                  maximumFractionDigits: 0,
+                }).format(referral.sum_amount)} LOVE`}
+              >
+                <span className={styles.counter}>
+                  {referral.sum_level_2} <FriendIcon />
+                </span>
+              </Item>
+            ))}
+          </List>
+        ) : (
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            layout
+            key="main"
+          >
             <Empty title={t("empty-title")}>
               <p>{t("empty-text")}</p>
               <Invite />
             </Empty>
-          )}
-        </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
       <Navigation />
     </div>

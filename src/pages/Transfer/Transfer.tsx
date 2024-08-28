@@ -6,9 +6,9 @@ import { Input, Toast } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { api } from "@/core/api";
 import { transferLove } from "@/core/store/slices/user";
+import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./Transfer.module.scss";
-import { setNotice } from "@/core/store/slices/notice";
 
 type Errors = {
   id: string | null;
@@ -19,7 +19,6 @@ export const Transfer = () => {
   const { t } = useTranslation("wallet");
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  const love = 3000;
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [isValid, setIsValid] = useState({
     id: false,
@@ -49,7 +48,7 @@ export const Transfer = () => {
 
   useEffect(() => {
     const total = Number(values.total);
-    if (total > love) {
+    if (total > user.balances.tlove) {
       setErrors({ ...errors, total: t("error-not-enough") });
       setIsValid((prev) => ({ ...prev, button: false }));
     } else if (
@@ -152,7 +151,19 @@ export const Transfer = () => {
         onChange={onChange}
         error={errors.total}
         type="number"
-      />
+      >
+        <button
+          className={styles.max}
+          onClick={() =>
+            setValues({
+              ...values,
+              total: Math.floor(user.balances.tlove).toFixed(0),
+            })
+          }
+        >
+          Max
+        </button>
+      </Input>
       <button
         className={styles.submit}
         disabled={!isValid.button}

@@ -5,6 +5,10 @@
   letter-spacing: 0.01em;
   margin: 20px 0;
 
+  .container {
+    position: relative;
+  }
+
   input {
     display: block;
     width: 100%;

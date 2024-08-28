@@ -25,6 +25,8 @@
   "to-team": "to Project Team",
   "send-total": "Send Total",
   "send-hint": "By clicking 'Send' you confirm the transaction",
+  "withdraw-total": "Withdraw Total",
+  "withdraw-hint": "By clicking 'Withdraw' you confirm the transaction",
 
   "transaction-history": "Transaction History",
   "history-empty-title": "You don't have any transactions yet",

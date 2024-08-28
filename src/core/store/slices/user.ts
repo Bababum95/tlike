@@ -286,6 +286,36 @@ export const transferLove = createAsyncThunk(
     }
   }
 );
+export const transferLike = createAsyncThunk(
+  "user/transferLike",
+  async (
+    data: { currency: string; amount: string; receiver: string },
+    { getState, rejectWithValue }
+  ) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+    try {
+      const response = await api.post("/transfer/onchain", data, {
+        headers: { "x-auth-token": token },
+      });
+      return response.data;
+    } catch (err) {
+      if (err instanceof Error) {
+        const errorWithResponse = err as {
+          response?: { data?: { message?: string } };
+        };
+
+        if (errorWithResponse.response?.data?.message) {
+          return rejectWithValue(errorWithResponse.response.data.message);
+        }
+
+        return rejectWithValue(err.message);
+      }
+
+      return rejectWithValue("Error!");
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -409,6 +439,12 @@ const userSlice = createSlice({
         if (Array.isArray(action.payload)) {
           state.referrals = action.payload;
         }
+      })
+      .addCase(transferLove.fulfilled, (state, action) => {
+        state.balances.tlove -= Number(action.meta.arg.amount);
+      })
+      .addCase(transferLike.fulfilled, (state, action) => {
+        state.balances.tlike -= Number(action.meta.arg.amount);
       });
   },
 });
