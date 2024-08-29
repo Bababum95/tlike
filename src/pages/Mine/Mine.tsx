@@ -259,7 +259,7 @@ const NFT: FC<{ nft: NFTType }> = ({ nft }) => {
         animate={{ scale: [0.5, 1.2, 1] }}
       />
       <p className={styles.speed}>
-        + {nft.mining_speed_hour.toFixed(1)} Like/h
+        + {Number(nft.mining_speed_hour).toFixed(0)} Like/h
       </p>
       <button
         className={classNames(styles.start, {

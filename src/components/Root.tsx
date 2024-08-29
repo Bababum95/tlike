@@ -10,7 +10,7 @@ const debug = import.meta.env.VITE_APP_DEBUG === "true";
 const twaReturnUrl = import.meta.env.VITE_WEB_APP_URL;
 
 const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
-  <div>
+  <div style={{ color: "#FFF" }}>
     <p>An unhandled error occurred:</p>
     <blockquote>
       <code>
