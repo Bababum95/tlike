@@ -341,11 +341,25 @@ const userSlice = createSlice({
         }
       });
     },
+    endMissionLoading: (state, action) => {
+      state.missions.forEach((mission, index) => {
+        if (mission.id === action.payload.id) {
+          state.missions[index].loading = false;
+        }
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
         state.status = "loading";
+      })
+      .addCase(missionActivate.pending, (state, action) => {
+        state.missions.forEach((mission, index) => {
+          if (mission.id === action.meta.arg.id) {
+            state.missions[index].loading = true;
+          }
+        });
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.balances = action.payload.balances;
@@ -384,7 +398,7 @@ const userSlice = createSlice({
             }
           });
           state.balances.tlove =
-            state.balances.tlike + action.payload.award.amount;
+            state.balances.tlove + action.payload.award.amount;
         }
       })
       .addCase(fetchReferral.fulfilled, (state, action) => {
@@ -450,5 +464,10 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setWallet, setOld, addBalance, changeStatusNFT } =
-  userSlice.actions;
+export const {
+  setWallet,
+  setOld,
+  addBalance,
+  changeStatusNFT,
+  endMissionLoading,
+} = userSlice.actions;

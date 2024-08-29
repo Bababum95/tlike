@@ -41,6 +41,7 @@ export type MissionType = {
   mission_actived: boolean;
   activation_date: string;
   redirect_url: string;
+  loading?: boolean;
 };
 
 export type UserType = {

@@ -1,13 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import { initUtils } from "@telegram-apps/sdk";
 import classNames from "classnames";
 
 import { Item, Link, List, Navigation, Toast } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { MissionType } from "@types";
-import { missionActivate } from "@/core/store/slices/user";
+import { missionActivate, endMissionLoading } from "@/core/store/slices/user";
 import {
   ChevronRightIcon,
   fortuneWheelPreviewImage,
@@ -16,42 +15,15 @@ import {
 
 import styles from "./Earn.module.scss";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const Earn = () => {
   const { t } = useTranslation("earn");
-  const dispatch = useAppDispatch();
-  const utils = initUtils();
   const missions = useAppSelector((state) => state.user.missions);
-  const [toast, setToast] = useState<null | MissionType>(null);
-  const [loading, setLoading] = useState(false);
-
-  const openToast = (mission: MissionType) => {
-    setToast(mission);
-  };
-
-  const subscribe = async () => {
-    if (!toast) return;
-
-    setLoading(true);
-    try {
-      dispatch(missionActivate({ id: toast.id }));
-      utils.openLink(toast.redirect_url, { tryInstantView: true });
-      await delay(10000);
-    } finally {
-      setLoading(false);
-      setToast(
-        (prev) =>
-          ({
-            ...prev,
-            mission_actived: true,
-          } as MissionType)
-      );
-    }
-  };
+  const [toast, setToast] = useState<null | number>(null);
 
   const spinAvailable = () => {
-    return !missions.some((mission) => !mission.mission_actived);
+    return !missions.some(
+      (mission) => !mission.mission_actived || mission.loading
+    );
   };
 
   return (
@@ -75,11 +47,11 @@ export const Earn = () => {
         <>
           <h2 className={styles.title}>{t("task-list")}</h2>
           <List>
-            {missions.map((mission) => (
+            {missions.map((mission, index) => (
               <Item
                 key={mission.id}
                 extraClass={classNames(styles.mission, {
-                  [styles.active]: mission.mission_actived,
+                  [styles.active]: mission.mission_actived && !mission.loading,
                 })}
                 title={mission.description}
                 text={`+ ${mission.award_amount} ${mission.award_currency}`}
@@ -95,10 +67,12 @@ export const Earn = () => {
                   />
                 }
                 onClick={
-                  mission.mission_actived ? undefined : () => openToast(mission)
+                  mission.mission_actived && !mission.loading
+                    ? undefined
+                    : () => setToast(index)
                 }
               >
-                {mission.mission_actived ? (
+                {mission.mission_actived && !mission.loading ? (
                   <SuccessIcon />
                 ) : (
                   <ChevronRightIcon />
@@ -109,47 +83,70 @@ export const Earn = () => {
         </>
       )}
       <Toast isOpen={!!toast} onClose={() => setToast(null)}>
-        <>
-          {toast && (
-            <div className={styles.toast}>
-              <motion.div
-                className={styles["toast-icon"]}
-                initial={{ scale: 0.8 }}
-                animate={{ scale: [0.8, 1.1, 1] }}
-              >
-                <img
-                  src={toast.icon_name}
-                  alt={toast.description}
-                  className={styles.icon}
-                  width={24}
-                  height={24}
-                />
-              </motion.div>
-              <p className={styles["toast-title"]}>{toast.description}</p>
-              <p className={styles["toast-text"]}>
-                {toast.award_amount} {toast.award_currency}
-              </p>
-              <button
-                className={classNames(styles["toast-button"], {
-                  [styles.loading]: loading,
-                })}
-                onClick={subscribe}
-              >
-                Subscribe
-              </button>
-              <button
-                className={classNames(styles["toast-button"], {
-                  [styles.disabled]: !toast.mission_actived,
-                })}
-                onClick={() => setToast(null)}
-              >
-                Check
-              </button>
-            </div>
-          )}
-        </>
+        {toast && (
+          <EarnToast missionIndex={toast} onClose={() => setToast(null)} />
+        )}
       </Toast>
       <Navigation />
+    </div>
+  );
+};
+
+type EarnToastProps = {
+  onClose: () => void;
+  missionIndex: number;
+};
+
+const EarnToast: FC<EarnToastProps> = ({ onClose, missionIndex }) => {
+  const dispatch = useAppDispatch();
+  const missions = useAppSelector((state) => state.user.missions);
+  const utils = initUtils();
+  const toast = missions[missionIndex];
+
+  const subscribe = async () => {
+    dispatch(missionActivate({ id: toast.id }));
+    utils.openLink(toast.redirect_url, { tryInstantView: true });
+
+    setTimeout(() => {
+      dispatch(endMissionLoading({ id: toast.id }));
+    }, 60000);
+  };
+
+  return (
+    <div className={styles.toast}>
+      <motion.div
+        className={styles["toast-icon"]}
+        initial={{ scale: 0.8 }}
+        animate={{ scale: [0.8, 1.1, 1] }}
+      >
+        <img
+          src={toast.icon_name}
+          alt={toast.description}
+          className={styles.icon}
+          width={24}
+          height={24}
+        />
+      </motion.div>
+      <p className={styles["toast-title"]}>{toast.description}</p>
+      <p className={styles["toast-text"]}>
+        {toast.award_amount} {toast.award_currency}
+      </p>
+      <button
+        className={classNames(styles["toast-button"], {
+          [styles.loading]: toast.loading,
+        })}
+        onClick={subscribe}
+      >
+        Subscribe
+      </button>
+      <button
+        className={classNames(styles["toast-button"], {
+          [styles.disabled]: !toast.mission_actived || toast.loading,
+        })}
+        onClick={onClose}
+      >
+        Check
+      </button>
     </div>
   );
 };
