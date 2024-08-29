@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { initUtils } from "@telegram-apps/sdk";
 import classNames from "classnames";
 
 import { Item, Link, List, Navigation, Toast } from "@/components";
@@ -15,9 +16,12 @@ import {
 
 import styles from "./Earn.module.scss";
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const Earn = () => {
   const { t } = useTranslation("earn");
   const dispatch = useAppDispatch();
+  const utils = initUtils();
   const missions = useAppSelector((state) => state.user.missions);
   const [toast, setToast] = useState<null | MissionType>(null);
   const [loading, setLoading] = useState(false);
@@ -31,7 +35,9 @@ export const Earn = () => {
 
     setLoading(true);
     try {
-      await dispatch(missionActivate({ id: toast.id }));
+      dispatch(missionActivate({ id: toast.id }));
+      utils.openTelegramLink(toast.redirect_url);
+      await delay(10000);
     } finally {
       setLoading(false);
       setToast(

@@ -10,9 +10,9 @@ import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { api } from "@/core/api";
 import { FORTUNE_WHEEL } from "@config";
 import { Toast } from "@/components";
+import { addBalance } from "@/core/store/slices/user";
 
 import styles from "./Fortune.module.scss";
-import { addBalance } from "@/core/store/slices/user";
 
 type ParamsType = {
   type: "free" | "paid";
