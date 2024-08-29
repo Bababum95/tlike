@@ -33,9 +33,38 @@ export const getHistory = createAsyncThunk(
   }
 );
 
+export const getNotifications = createAsyncThunk(
+  "history/getNotifications",
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+    try {
+      const response = await api.get("/transfers/notifications", {
+        headers: { "x-auth-token": token },
+      });
+      return response.data;
+    } catch (err) {
+      if (err instanceof Error) {
+        const errorWithResponse = err as {
+          response?: { data?: { message?: string } };
+        };
+
+        if (errorWithResponse.response?.data?.message) {
+          return rejectWithValue(errorWithResponse.response.data.message);
+        }
+
+        return rejectWithValue(err.message);
+      }
+
+      return rejectWithValue("Error!");
+    }
+  }
+);
+
 const initialState: HistoryStateType = {
   status: "idle",
   records: [],
+  notifications: [],
   total_pages: 0,
 };
 
@@ -52,6 +81,11 @@ const historySlice = createSlice({
         state.records = action.payload.records;
         state.total_pages = action.payload.total_pages;
         state.status = "successed";
+      })
+      .addCase(getNotifications.fulfilled, (state, action) => {
+        if (action.payload.transfers) {
+          state.notifications = action.payload.transfers;
+        }
       });
   },
 });

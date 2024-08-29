@@ -35,6 +35,7 @@ import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
 import { preloadUtils } from "@/core/utils/preloadUtils";
 import { getProjectStat } from "@/core/store/slices/project";
+import { getNotifications } from "@/core/store/slices/history";
 
 const debug = import.meta.env.VITE_APP_DEBUG === "true";
 
@@ -115,6 +116,7 @@ export const App: FC = () => {
         dispatch(getMissions()),
         dispatch(getProjectStat()),
         dispatch(referralStat()),
+        dispatch(getNotifications()),
       ]).finally(() => {
         setProgress(99);
         setTimeout(() => {

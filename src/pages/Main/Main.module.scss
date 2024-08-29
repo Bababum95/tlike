@@ -84,7 +84,10 @@
 .toast {
   @include flex-column;
   align-items: center;
-  padding-bottom: 65px;
+
+  &-wallet {
+    padding-bottom: 65px;
+  }
 
   .title {
     @include h2;
@@ -99,6 +102,23 @@
     text-align: center;
     color: $hint;
     max-width: 200px;
+  }
+
+  .amount {
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0em;
+    background: linear-gradient(49deg, #007aff 0%, #93c6ff 56%, #007aff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 16px 0 8px;
+  }
+
+  .claim {
+    width: 100%;
+    height: 50px;
+    @include primary-button;
   }
 }
 

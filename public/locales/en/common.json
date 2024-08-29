@@ -7,5 +7,7 @@
   "earn": "Earn",
   "mine": "Mine",
   "connect-wallet": "Connect wallet",
-  "connect-wallet-hint": "To start mining, you have to buy an NFT from our collection and connect your wallet"
+  "connect-wallet-hint": "To start mining, you have to buy an NFT from our collection and connect your wallet",
+  "claim": "Claim",
+  "gift-from": "Take a gift from"
 }

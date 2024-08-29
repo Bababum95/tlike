@@ -16,6 +16,27 @@ type TransferType = {
   user_id: string;
 };
 
+type NotificationType = {
+  id: number;
+  timedate: string;
+  receiver: {
+    user_id: string;
+    received_amount: number;
+  };
+  sender: {
+    user_id: string;
+    sent_amount: number;
+  };
+  currency: string;
+  amount: number;
+  status: string;
+  commission: {
+    burnt_commission: number;
+    project_commission: number;
+  };
+  notified: boolean;
+};
+
 type TasksType = {
   amount: number;
   currency: string;
@@ -43,5 +64,6 @@ type HistoryItem = TransferType | TasksType | FortuneType;
 export type HistoryStateType = {
   status: stateStatus;
   records: HistoryItem[];
+  notifications: NotificationType[];
   total_pages: number;
 };

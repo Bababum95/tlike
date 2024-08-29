@@ -24,10 +24,12 @@ import styles from "./Main.module.scss";
 
 export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
+  const [notificationIndex, setNotificationIndex] = useState(0);
   const { t } = useTranslation("common");
   const dragX = useMotionValue(0);
   const wallet = import.meta.env.DEV ? true : useTonWallet();
   const user = useAppSelector((state) => state.user);
+  const notifications = useAppSelector((state) => state.history.notifications);
 
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
@@ -138,7 +140,7 @@ export const Main = () => {
       </div>
       <Navigation />
       <Toast isOpen={!wallet}>
-        <div className={styles.toast}>
+        <div className={classNames(styles.toast, styles["toast-wallet"])}>
           <svg
             width={84}
             height={78}
@@ -191,7 +193,81 @@ export const Main = () => {
           <p className={styles.hint}>{t("connect-wallet-hint")}</p>
         </div>
       </Toast>
-      {!wallet && <TonConnectButton className={styles.walet} />}
+      {wallet ? (
+        notifications[notificationIndex] && (
+          <Toast
+            isOpen={!!notifications[notificationIndex]}
+            onClose={() => setNotificationIndex(notificationIndex + 1)}
+          >
+            <div className={styles.toast}>
+              <svg
+                width={84}
+                height={78}
+                viewBox="0 0 84 78"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.05994 20.0951L42 1.13771L76.9401 20.0951V57.9049L42 76.8623L7.05994 57.9049V20.0951Z"
+                  stroke="url(#paint0_linear_216_13969)"
+                  strokeWidth={2}
+                />
+                <path
+                  d="M12.2561 23.0982L42 7.13492L71.7439 23.0982V54.9018L42 70.8651L12.2561 54.9018V23.0982Z"
+                  fill="#1D60EC"
+                  fillOpacity="0.35"
+                  stroke="#007AFF"
+                  strokeWidth={2}
+                />
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M42.5 47.8754C41.9616 48.8747 41.9609 48.8742 41.9609 48.8742L41.9573 48.8724L41.9489 48.8682L41.92 48.8537C41.8955 48.8412 41.8605 48.8234 41.8158 48.8001C41.7263 48.7538 41.5977 48.686 41.4356 48.5979C41.1116 48.4217 40.6527 48.1634 40.1038 47.8302C39.0084 47.1654 37.5425 46.1953 36.0708 44.9775C33.1947 42.5971 30 39.0257 30 34.7501C30 30.7537 33.259 28 36.6406 28C39.0584 28 41.1764 29.2023 42.5 31.03C43.8236 29.2023 45.9416 28 48.3594 28C51.7409 28 55 30.7537 55 34.7501C55 39.0257 51.8053 42.5971 48.9292 44.9775C47.4575 46.1953 45.9916 47.1654 44.8962 47.8302C44.3473 48.1634 43.8884 48.4217 43.5644 48.5979C43.4023 48.686 43.2737 48.7538 43.1842 48.8001C43.1395 48.8234 43.1045 48.8412 43.08 48.8537L43.0511 48.8682L43.0427 48.8724L43.0391 48.8742C43.0391 48.8742 43.0384 48.8747 42.5 47.8754ZM42.5 47.8754L43.0391 48.8742C42.7014 49.0419 42.2986 49.0419 41.9609 48.8742L42.5 47.8754Z"
+                  fill="white"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_216_13969"
+                    x1="53.5"
+                    y1="-8.5855e-07"
+                    x2="38.5"
+                    y2={78}
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="#007AFF" stopOpacity={0} />
+                    <stop
+                      offset="0.45"
+                      stopColor="#007AFF"
+                      stopOpacity="0.15"
+                    />
+                    <stop offset={1} stopColor="#007AFF" stopOpacity="0.6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <h2 className={styles.title}>{t("gift-from")}</h2>
+              <p className={styles.hint}>
+                {notifications[notificationIndex].sender.user_id}
+              </p>
+              <p className={styles.amount}>
+                {new Intl.NumberFormat("ru-RU", {
+                  maximumFractionDigits: 0,
+                }).format(
+                  notifications[notificationIndex].receiver.received_amount
+                )}{" "}
+                {notifications[notificationIndex].currency}
+              </p>
+              <button
+                className={styles.claim}
+                onClick={() => setNotificationIndex(notificationIndex + 1)}
+              >
+                {t("claim")}
+              </button>
+            </div>
+          </Toast>
+        )
+      ) : (
+        <TonConnectButton className={styles.walet} />
+      )}
     </div>
   );
 };

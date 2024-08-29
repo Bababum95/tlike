@@ -13,7 +13,7 @@
   position: absolute;
   right: 16px;
   bottom: 12px;
-  background-color: $bg;
+  background-color: transparent;
   padding: 0;
   border: none;
   line-height: 150%;
@@ -30,6 +30,10 @@
 
   &:disabled {
     @include primary-disabled-button;
+  }
+
+  &.loading {
+    @include loader-button;
   }
 }
 
