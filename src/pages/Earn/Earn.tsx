@@ -36,7 +36,7 @@ export const Earn = () => {
     setLoading(true);
     try {
       dispatch(missionActivate({ id: toast.id }));
-      utils.openTelegramLink(toast.redirect_url);
+      utils.openLink(toast.redirect_url, { tryInstantView: true });
       await delay(10000);
     } finally {
       setLoading(false);
