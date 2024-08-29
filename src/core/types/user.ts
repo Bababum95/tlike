@@ -22,6 +22,7 @@ export type NFTType = {
   in_account: boolean;
   image_url: string;
   nft_name: string;
+  mining_speed_hour: number;
 };
 
 export type UpgradeType = {
@@ -69,7 +70,7 @@ export type UserType = {
     status: "non-used" | "used" | "empty";
   };
   upgrades: UpgradeType[];
-  referrals: ReferralType[]
+  referrals: ReferralType[];
 };
 
 export type UserStateType = {

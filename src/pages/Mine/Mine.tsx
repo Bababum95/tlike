@@ -258,7 +258,9 @@ const NFT: FC<{ nft: NFTType }> = ({ nft }) => {
         alt={nft.nft_name}
         animate={{ scale: [0.5, 1.2, 1] }}
       />
-      <p className={styles.speed}>+ 240 Like/h</p>
+      <p className={styles.speed}>
+        + {nft.mining_speed_hour.toFixed(1)} Like/h
+      </p>
       <button
         className={classNames(styles.start, {
           [styles.stop]: nft.active,
