@@ -248,11 +248,15 @@ export const Fortune = () => {
           {/* {giftInfo &&
             giftInfo.currency !== "TLove" &&
             giftInfo.currency !== "TLike" && ( */}
-              <div className={styles["toast-address"]}>
-                <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
-                <Input label={t("address")} value={address} readOnly />
-              </div>
-            {/* )} */}
+          <div className={styles["toast-address"]}>
+            <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
+            <Input
+              label={t("address")}
+              value={`${address.slice(0, 15)}.......${address.slice(-15)}`}
+              readOnly
+            />
+          </div>
+          {/* )} */}
           <button onClick={closeToast} className={styles.button}>
             {giftInfo &&
             giftInfo.currency !== "TLove" &&
