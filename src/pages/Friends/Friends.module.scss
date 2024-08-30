@@ -1,6 +1,6 @@
 .page {
   @include flex-column;
-  padding: 24px 16px 100px;
+  padding: 24px 16px 160px;
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
@@ -35,6 +35,14 @@ h2.title {
   @include flex-layout(flex-start, stretch);
   width: 100%;
   gap: 8px;
+
+  &-wrapper {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+  }
 
   &-button {
     flex: 1;

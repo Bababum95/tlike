@@ -62,27 +62,32 @@ export const Friends = () => {
       <h2 className={styles.title}>{t("invited-friends")}</h2>
       <AnimatePresence mode="wait">
         {referrals.length > 0 ? (
-          <List>
-            {referrals.map((referral) => (
-              <Item
-                key={referral.stats_user_id}
-                icon={
-                  <img
-                    className={styles.photo}
-                    src={referral.max_stats_photo_url}
-                  />
-                }
-                title={referral.stats_user_id}
-                text={`+ ${new Intl.NumberFormat("ru-RU", {
-                  maximumFractionDigits: 0,
-                }).format(referral.sum_amount)} LOVE`}
-              >
-                <span className={styles.counter}>
-                  {referral.sum_level_2} <FriendIcon />
-                </span>
-              </Item>
-            ))}
-          </List>
+          <>
+            <List>
+              {referrals.map((referral) => (
+                <Item
+                  key={referral.stats_user_id}
+                  icon={
+                    <img
+                      className={styles.photo}
+                      src={referral.max_stats_photo_url}
+                    />
+                  }
+                  title={referral.stats_user_id}
+                  text={`+ ${new Intl.NumberFormat("ru-RU", {
+                    maximumFractionDigits: 0,
+                  }).format(referral.sum_amount)} LOVE`}
+                >
+                  <span className={styles.counter}>
+                    {referral.sum_level_2} <FriendIcon />
+                  </span>
+                </Item>
+              ))}
+            </List>
+            <div className={styles['invite-wrapper']}>
+            <Invite />
+            </div>
+          </>
         ) : (
           <motion.div
             initial={{ y: 10, opacity: 0 }}
