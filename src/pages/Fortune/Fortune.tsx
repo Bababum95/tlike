@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { initUtils, initHapticFeedback } from "@telegram-apps/sdk";
+import { useTonAddress } from "@tonconnect/ui-react";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import classNames from "classnames";
 
@@ -13,7 +14,6 @@ import { Input, Toast } from "@/components";
 import { addBalance } from "@/core/store/slices/user";
 
 import styles from "./Fortune.module.scss";
-import { useTonAddress } from "@tonconnect/ui-react";
 
 type ParamsType = {
   type: "free" | "paid";
@@ -38,7 +38,7 @@ type InitToastesType = {
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const initToastes: InitToastesType = {
-  win: true,
+  win: false,
   by: {
     open: false,
     currency: "TLove",
@@ -48,7 +48,7 @@ const initToastes: InitToastesType = {
 
 export const Fortune = () => {
   const { t } = useTranslation("earn");
-  const [activeIndex, setActiveIndex] = useState<number>(1);
+  const [activeIndex, setActiveIndex] = useState<number>(100);
   const [targetIndex, setTargetIndex] = useState<number | null>(null);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [intervalTime, setIntervalTime] = useState<number>(200);
@@ -245,18 +245,18 @@ export const Fortune = () => {
               ? `${giftInfo.amount} ${giftInfo.currency}`
               : FORTUNE_WHEEL[activeIndex].value}
           </p>
-          {/* {giftInfo &&
+          {giftInfo &&
             giftInfo.currency !== "TLove" &&
-            giftInfo.currency !== "TLike" && ( */}
-          <div className={styles["toast-address"]}>
-            <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
-            <Input
-              label={t("address")}
-              value={`${address.slice(0, 15)}.......${address.slice(-15)}`}
-              readOnly
-            />
-          </div>
-          {/* )} */}
+            giftInfo.currency !== "TLike" && (
+              <div className={styles["toast-address"]}>
+                <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
+                <Input
+                  label={t("address")}
+                  value={`${address.slice(0, 15)}.......${address.slice(-15)}`}
+                  readOnly
+                />
+              </div>
+            )}
           <button onClick={closeToast} className={styles.button}>
             {giftInfo &&
             giftInfo.currency !== "TLove" &&
