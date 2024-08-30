@@ -82,8 +82,8 @@ export const Earn = () => {
           </List>
         </>
       )}
-      <Toast isOpen={!!toast} onClose={() => setToast(null)}>
-        {toast && (
+      <Toast isOpen={toast !== null} onClose={() => setToast(null)}>
+        {toast !== null && (
           <EarnToast missionIndex={toast} onClose={() => setToast(null)} />
         )}
       </Toast>
