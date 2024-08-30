@@ -60,7 +60,7 @@ export const Fortune = () => {
   const utils = initUtils();
   const haptic = initHapticFeedback();
   const dispatch = useAppDispatch();
-  const address = useTonAddress(false);
+  const address = useTonAddress(true);
 
   const closeToast = () => {
     setToastIsOpen(initToastes);
