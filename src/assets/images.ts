@@ -33,7 +33,7 @@ export { default as loaderImage } from "./images/loader.png";
 
 // onboarding
 export { default as inviteImage } from "./images/onboarding/invite.png";
-export { default as miningImage } from "./images/onboarding/mining.png";
+export { default as miningImage } from "./images/onboarding/mining-new.png";
 export { default as earningImage } from "./images/onboarding/earning.png";
 export { default as fortuneWheelImage } from "./images/onboarding/fortune-wheel.png";
 export { default as waletImage } from "./images/onboarding/walet.png";
