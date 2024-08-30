@@ -11,5 +11,8 @@
   "you-won": "Вы выиграли",
   "confirm": "Подтвердить",
   "buy-spin": "Купить прокрутку",
-  "buy-spin-hint": "Вы можете купить прокрутку за токены LIKE или LOVE."
+  "buy-spin-hint": "Вы можете купить прокрутку за токены LIKE или LOVE.",
+  "take-reward": "Take reward",
+  "win-hint": "We will send your prize shortly to the address listed below.",
+  "address": "Address"
 }

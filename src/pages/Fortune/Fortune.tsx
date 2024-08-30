@@ -9,10 +9,11 @@ import { setLastSpinTime, setTime } from "@/core/store/slices/fortune";
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { api } from "@/core/api";
 import { FORTUNE_WHEEL } from "@config";
-import { Toast } from "@/components";
+import { Input, Toast } from "@/components";
 import { addBalance } from "@/core/store/slices/user";
 
 import styles from "./Fortune.module.scss";
+import { useTonAddress } from "@tonconnect/ui-react";
 
 type ParamsType = {
   type: "free" | "paid";
@@ -37,7 +38,7 @@ type InitToastesType = {
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const initToastes: InitToastesType = {
-  win: false,
+  win: true,
   by: {
     open: false,
     currency: "TLove",
@@ -47,7 +48,7 @@ const initToastes: InitToastesType = {
 
 export const Fortune = () => {
   const { t } = useTranslation("earn");
-  const [activeIndex, setActiveIndex] = useState<number>(100);
+  const [activeIndex, setActiveIndex] = useState<number>(1);
   const [targetIndex, setTargetIndex] = useState<number | null>(null);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [intervalTime, setIntervalTime] = useState<number>(200);
@@ -59,6 +60,7 @@ export const Fortune = () => {
   const utils = initUtils();
   const haptic = initHapticFeedback();
   const dispatch = useAppDispatch();
+  const address = useTonAddress();
 
   const closeToast = () => {
     setToastIsOpen(initToastes);
@@ -243,8 +245,20 @@ export const Fortune = () => {
               ? `${giftInfo.amount} ${giftInfo.currency}`
               : FORTUNE_WHEEL[activeIndex].value}
           </p>
+          {/* {giftInfo &&
+            giftInfo.currency !== "TLove" &&
+            giftInfo.currency !== "TLike" && ( */}
+              <div className={styles["toast-address"]}>
+                <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
+                <Input label={t("address")} value={address} readOnly />
+              </div>
+            {/* )} */}
           <button onClick={closeToast} className={styles.button}>
-            {t("confirm")}
+            {giftInfo &&
+            giftInfo.currency !== "TLove" &&
+            giftInfo.currency !== "TLike"
+              ? t("take-reward")
+              : t("confirm")}
           </button>
         </Toast>
       )}

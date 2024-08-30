@@ -11,5 +11,8 @@
   "you-won": "You won",
   "confirm": "Confirm",
   "buy-spin": "Buy spin",
-  "buy-spin-hint": "You can buy a spin with LIKE or LOVE tokens"
+  "buy-spin-hint": "You can buy a spin with LIKE or LOVE tokens",
+  "take-reward": "Take reward",
+  "win-hint": "We will send your prize shortly to the address listed below.",
+  "address": "Address"
 }

@@ -84,8 +84,8 @@ export const Friends = () => {
                 </Item>
               ))}
             </List>
-            <div className={styles['invite-wrapper']}>
-            <Invite />
+            <div className={styles["invite-wrapper"]}>
+              <Invite />
             </div>
           </>
         ) : (

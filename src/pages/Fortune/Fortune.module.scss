@@ -148,6 +148,21 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  &-address {
+    margin: 18px auto 28px;
+    padding: 0 22px;
+  }
+
+  &-hiint {
+    margin: 0 auto 36px;
+    max-width: 180px;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: $hint;
+  }
 }
 
 .buttons {
