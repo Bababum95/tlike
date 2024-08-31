@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import classNames from "classnames";
 
-import { useAppSelector } from "@/core/hooks";
+import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { Navigation, User, Balance, Link, Toast } from "@/components";
 import {
   ChevronRightIcon,
@@ -21,13 +21,14 @@ import {
 } from "@config";
 
 import styles from "./Main.module.scss";
+import { markNotificationsAsRead } from "@/core/store/slices/history";
 
 export const Main = () => {
   const [imgIndex, setImgIndex] = useState(0);
-  const [notificationIndex, setNotificationIndex] = useState(0);
   const { t } = useTranslation("common");
   const dragX = useMotionValue(0);
   const wallet = import.meta.env.DEV ? true : useTonWallet();
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const notifications = useAppSelector((state) => state.history.notifications);
 
@@ -194,10 +195,10 @@ export const Main = () => {
         </div>
       </Toast>
       {wallet ? (
-        notifications[notificationIndex] && (
+        !!notifications.length && (
           <Toast
-            isOpen={!!notifications[notificationIndex]}
-            onClose={() => setNotificationIndex(notificationIndex + 1)}
+            isOpen={!!notifications[0]}
+            onClose={() => dispatch(markNotificationsAsRead())}
           >
             <div className={styles.toast}>
               <svg
@@ -245,20 +246,16 @@ export const Main = () => {
                 </defs>
               </svg>
               <h2 className={styles.title}>{t("gift-from")}</h2>
-              <p className={styles.hint}>
-                {notifications[notificationIndex].sender.user_id}
-              </p>
+              <p className={styles.hint}>{notifications[0].sender.user_id}</p>
               <p className={styles.amount}>
                 {new Intl.NumberFormat("ru-RU", {
                   maximumFractionDigits: 0,
-                }).format(
-                  notifications[notificationIndex].receiver.received_amount
-                )}{" "}
-                {notifications[notificationIndex].currency}
+                }).format(notifications[0].receiver.received_amount)}{" "}
+                {notifications[0].currency}
               </p>
               <button
                 className={styles.claim}
-                onClick={() => setNotificationIndex(notificationIndex + 1)}
+                onClick={() => dispatch(markNotificationsAsRead())}
               >
                 {t("claim")}
               </button>

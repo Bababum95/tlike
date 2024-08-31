@@ -71,7 +71,11 @@ const initialState: HistoryStateType = {
 const historySlice = createSlice({
   name: "history",
   initialState,
-  reducers: {},
+  reducers: {
+    markNotificationsAsRead: (state) => {
+      state.notifications = state.notifications.slice(1, -1);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getHistory.pending, (state) => {
@@ -91,4 +95,4 @@ const historySlice = createSlice({
 });
 
 export default historySlice.reducer;
-// export const {  } = historySlice.actions;
+export const { markNotificationsAsRead } = historySlice.actions;
