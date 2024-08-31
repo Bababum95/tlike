@@ -46,9 +46,15 @@
     color: $hint;
   }
 
-  &.error input {
-    color: #ff3b30;
-    border-color: #ff3b30;
+  &.error {
+    button {
+      color: #ff3b30;
+    }
+
+    input {
+      color: #ff3b30;
+      border-color: #ff3b30;
+    }
   }
 
   .error {

@@ -68,8 +68,8 @@ export const Withdraw = () => {
         throw new Error();
       }
     } catch (err) {
-      setErrors({ ...errors, address: "ID does not exist" });
-      dispatch(setNotice({ status: "error", message: "ID does not exist" }));
+      setErrors({ ...errors, address: "Wrong adress" });
+      dispatch(setNotice({ status: "error", message: "Wrong adress" }));
       setIsValid({ address: false, button: false });
       if (loading.transfer) setLoading({ transfer: false, validId: false });
     }
@@ -143,6 +143,7 @@ export const Withdraw = () => {
         value={values.total}
         name="total"
         onChange={onChange}
+        error={errors.total}
       >
         <button
           className={styles.max}
