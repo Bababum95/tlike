@@ -10,9 +10,10 @@ import styles from "./User.module.scss";
 
 type Props = {
   direction?: "row" | "column";
+  showIcon?: boolean;
 };
 
-export const User: FC<Props> = ({ direction = "row" }) => {
+export const User: FC<Props> = ({ direction = "row", showIcon }) => {
   const photo = useAppSelector((state) => state.user.photo);
   const initData = initInitData();
   const dispatch = useAppDispatch();
@@ -29,7 +30,10 @@ export const User: FC<Props> = ({ direction = "row" }) => {
       <img className={styles.image} src={photo || defaultAvatar} alt="User" />
       <div className={styles.info}>
         <p className={styles.name}>@{initData?.user?.username || "unknown"}</p>
-        <p className={styles.id} onClick={copy}>
+        <p
+          className={classNames(styles.id, { [styles["with-icon"]]: showIcon })}
+          onClick={copy}
+        >
           ID: {initData?.user?.id}
         </p>
       </div>

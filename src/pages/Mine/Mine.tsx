@@ -89,7 +89,14 @@ export const Mine: FC = () => {
                 className={styles["by-nft"]}
                 onClick={byNft}
               />
-              <h2 className={styles.title}>{t("my-nfts")}</h2>
+              <div className={styles["title-container"]}>
+                <h2 className={styles.title}>{t("my-nfts")}</h2>
+                {user.nfts.length && (
+                  <p className={styles.counter}>
+                    {t("amount-short")}: {user.nfts.length}
+                  </p>
+                )}
+              </div>
               {user.nfts.length ? (
                 <ul className={styles.list}>
                   {user.nfts.map((nft) => (

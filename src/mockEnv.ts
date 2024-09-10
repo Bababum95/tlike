@@ -42,7 +42,6 @@ if (import.meta.env.DEV) {
       ],
       ["hash", hash],
       ["auth_date", "1716922846"],
-      ["start_param", "1044888407"],
       ["chat_type", "sender"],
       ["chat_instance", "8428209589180549439"],
     ]).toString();

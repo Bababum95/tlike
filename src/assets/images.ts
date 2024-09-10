@@ -15,7 +15,6 @@ export { ErrorIcon } from "./ReactSVG/ErrorIcon";
 export { SuccessIcon } from "./ReactSVG/SuccessIcon";
 // socials
 export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
-export { TelegramPremiumIcon } from "./ReactSVG/socials/TelegramPremiumIcon";
 export { XLogoIcon } from "./ReactSVG/socials/XLogoIcon";
 export { NetIcon } from "./ReactSVG/socials/NetIcon";
 export { YouTubeLogoIcon } from "./ReactSVG/socials/YouTubeLogoIcon";
@@ -74,3 +73,6 @@ export { default as fortuneToncoinImage } from "./images/earn/fortune/toncoin.pn
 
 // settings
 export { default as roadmapImage } from "./images/settings/roadmap.jpg";
+
+// friends
+export { default as tgStarImage } from "./images/friends/tg-star.png";

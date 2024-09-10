@@ -3,12 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { initUtils, initInitData } from "@telegram-apps/sdk-react";
 
 import { Empty, Item, List, Navigation } from "@/components";
-import {
-  TelegramPremiumIcon,
-  TelegramLogoIcon,
-  CopyIcon,
-  FriendIcon,
-} from "@images";
+import { tgStarImage, TelegramLogoIcon, CopyIcon, FriendIcon } from "@images";
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { setNotice } from "@/core/store/slices/notice";
 
@@ -50,12 +45,12 @@ export const Friends = () => {
       <List>
         <Item
           icon={<TelegramLogoIcon />}
-          text={`+ 5 000 LOVE ${t("for-you-and-your-friend")}`}
+          text={`+ 20 000 LOVE ${t("for-you-and-your-friend")}`}
           title={t("invite-friend")}
         />
         <Item
-          icon={<TelegramPremiumIcon />}
-          text={`+ 25 000 LOVE ${t("for-you-and-your-friend")}`}
+          icon={<img src={tgStarImage} alt="Telegram Premium" width={24} />}
+          text={`+ 100 000 LOVE ${t("for-you-and-your-friend")}`}
           title={`${t("invite-friend")} ${t("with-telegram-premium")}`}
         />
       </List>

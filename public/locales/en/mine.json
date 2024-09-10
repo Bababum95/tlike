@@ -18,5 +18,6 @@
   "amount": "Amount",
   "start": "Start",
   "stop": "Stop",
-  "profit-per-hour": "Profit per hour"
+  "profit-per-hour": "Profit per hour",
+  "amount-short": "Amount"
 }

@@ -1,6 +1,6 @@
 {
   "my-nfts": "Мои NFT",
-  "no-nfts-title": "В твоем кошельке нет ни одного НФТ",
+  "no-nfts-title": "В твоем кошельке нет ни одного NFT",
   "no-nfts-text": "Чтобы начать майнинг, тебе необходимо иметь как минимум 1 NFT из ",
   "no-nfts-link": " нашей коллекции",
   "no-nfts-button": "Купить NFT",
@@ -18,5 +18,6 @@
   "amount": "Кол-во",
   "start": "Start",
   "stop": "Stop",
-  "profit-per-hour": "Profit per hour"
+  "profit-per-hour": "Profit per hour",
+  "amount-short": "Кол-во"
 }

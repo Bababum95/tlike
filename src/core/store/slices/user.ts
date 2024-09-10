@@ -337,7 +337,13 @@ const userSlice = createSlice({
     changeStatusNFT: (state, action) => {
       state.nfts.forEach((nft, index) => {
         if (nft.nft_id === action.payload.nft_id) {
+          const speed = Number(nft.mining_speed_hour) / 3600;
+          const result = action.payload.active
+            ? state.mining_speed.tlike + speed
+            : state.mining_speed.tlike - speed;
+
           state.nfts[index].active = action.payload.active;
+          state.mining_speed.tlike = result > 0.0001 ? result : 0;
         }
       });
     },

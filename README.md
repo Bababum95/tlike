@@ -116,29 +116,29 @@ npm run preview
 │   ├── logo.png                 # Логотип для TonConnect
 |   └── tonconnect-manifest.json # Конфигурация TonConnect
 ├── /src
-│   ├── /assets             # Ассеты
-│   │   ├── /animations     # Анимации
-│   │   ├── /images         # Изображения
-│   │   └── /styles         # Глобальные стили (Sass) и mixins
-│   ├── /components         # Компоненты React
-│   ├── /pages              # Страницы приложения
-│   ├── /core               # 
-│   │   ├── /hooks          # Кастомные хуки
-│   │   ├── /store          # Redux store
-│   │   ├── /utils          # Утилиты
-│   │   ├── /types          # Типы
-│   │   ├── api.ts          # API
-│   │   ├── config.ts       # Конфигурация
-│   │   └── routes.ts       # Маршруты
-│   └── main.tsx            # Входная точка приложения
-├── /dist                   # Собранные файлы (вывод сборки)
-├── /node_modules           # Установленные зависимости
-├── .env                    # Переменные окружения
-├── .gitignore              # Игнорируемые Git файлы
-├── Dockerfile              # Docker конфигурация
-├── package.json            # Конфигурация проекта и зависимости
-├── README.md               # Документация проекта
-├── index.html              # Основной HTML файл
-├── .eslintrc.cjs           # Конфигурация ESLint
-└── tsconfig.json           # Конфигурация TypeScript
+│   ├── /assets
+│   │   ├── /animations          # Анимации
+│   │   ├── /images              # Изображения
+│   │   └── /styles              # Глобальные стили и миксины (SCSS)
+│   ├── /components              # Компоненты React
+│   ├── /pages                   # Страницы приложения
+│   ├── /core
+│   │   ├── /hooks               # Кастомные хуки
+│   │   ├── /store               # Redux store
+│   │   ├── /utils               # Утилиты
+│   │   ├── /types               # Типы
+│   │   ├── api.ts               # API
+│   │   ├── config.ts            # Конфигурация
+│   │   └── routes.ts            # Маршруты
+│   └── main.tsx                 # Входная точка приложения
+├── /dist                        # Собранные файлы (вывод сборки)
+├── /node_modules                # Установленные зависимости
+├── .env                         # Переменные окружения
+├── .gitignore                   # Игнорируемые Git файлы
+├── Dockerfile                   # Docker конфигурация
+├── package.json                 # Конфигурация проекта и зависимости
+├── README.md                    # Документация проекта
+├── index.html                   # Основной HTML файл
+├── .eslintrc.cjs                # Конфигурация ESLint
+└── tsconfig.json                # Конфигурация TypeScript
 ```

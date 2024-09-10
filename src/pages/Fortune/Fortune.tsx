@@ -96,10 +96,7 @@ export const Fortune = () => {
         delay(5000),
       ]);
 
-      if (
-        (response.status === 200 && response.data.status === "new") ||
-        response.data.status === "paid"
-      ) {
+      if (response.status === 200 && response.data.gift_info) {
         setTargetIndex(response.data.gift_id);
         setGiftInfo(response.data.gift_info);
         haptic.impactOccurred("medium");
