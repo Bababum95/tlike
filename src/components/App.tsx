@@ -2,7 +2,7 @@ import { type FC, useEffect, useMemo, useState } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { Navigate, Route, Router, Routes } from "react-router-dom";
 import { useIntegration } from "@telegram-apps/react-router-integration";
-import { useTonWallet } from "@tonconnect/ui-react";
+import { useTonWallet, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTranslation } from "react-i18next";
 import {
   bindMiniAppCSSVars,
@@ -23,18 +23,18 @@ import { Loader, Notice } from "@/components";
 import { mainRoutes, routes } from "@/core/routes";
 import {
   addBalance,
+  connectWallet,
   fetchReferral,
   fetchUser,
   getInventory,
   getMissions,
   getNFT,
   referralStat,
-  setWallet,
 } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
 import { preloadUtils } from "@/core/utils/preloadUtils";
-import { getProjectStat } from "@/core/store/slices/project";
+import { getCommission, getProjectStat } from "@/core/store/slices/project";
 import { getNotifications } from "@/core/store/slices/history";
 
 const debug = import.meta.env.VITE_APP_DEBUG === "true";
@@ -50,6 +50,7 @@ export const App: FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const wallet = useTonWallet();
+  const [tonConnectUI] = useTonConnectUI();
   const [backButton] = initBackButton();
 
   useEffect(() => {
@@ -82,9 +83,7 @@ export const App: FC = () => {
   useEffect(() => {
     let isMain = false;
     mainRoutes.forEach((route) => {
-      if (route.path === location.pathname) {
-        isMain = true;
-      }
+      if (route.path === location.pathname) isMain = true;
     });
 
     if (location.pathname === "/onboarding") isMain = true;
@@ -108,6 +107,10 @@ export const App: FC = () => {
   useEffect(() => {
     if (user.status === "successed") {
       setProgress(70);
+      if (!user.wallet && wallet) {
+        tonConnectUI.disconnect();
+      }
+
       Promise.all([
         dispatch(checkTime()),
         dispatch(fetchReferral()),
@@ -123,33 +126,49 @@ export const App: FC = () => {
           setProgress(100);
         }, 400);
       });
+
+      dispatch(getCommission());
       i18n.changeLanguage(user.language);
-      if (wallet) {
-        dispatch(setWallet(wallet.account.address));
-      }
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));
     }
   }, [user.status]);
 
   useEffect(() => {
-    if (!user.mining_speed.tlike && !user.mining_speed.tlove) return;
+    if (
+      !user.mining_speed.like &&
+      !user.mining_speed.love_nft &&
+      !user.mining_speed.love_upgrades
+    )
+      return;
     const loop = setInterval(() => {
-      if (user.mining_speed.tlike) {
+      if (user.mining_speed.like) {
         dispatch(
-          addBalance({ amount: user.mining_speed.tlike, currency: "TLike" })
+          addBalance({ amount: user.mining_speed.like, currency: "Like" })
         );
       }
 
-      if (user.mining_speed.tlove) {
+      if (user.mining_speed.love_nft || user.mining_speed.love_upgrades) {
         dispatch(
-          addBalance({ amount: user.mining_speed.tlove, currency: "TLove" })
+          addBalance({
+            amount:
+              user.mining_speed.love_nft + user.mining_speed.love_upgrades,
+            currency: "Love",
+          })
         );
       }
     }, 1000);
 
     return () => clearInterval(loop);
   }, [user.mining_speed]);
+
+  useEffect(() => {
+    if (!wallet || progress !== 100) return;
+
+    if (user.wallet !== wallet?.account.address) {
+      dispatch(connectWallet({ wallet: wallet.account.address }));
+    }
+  }, [wallet]);
 
   return (
     <AppRoot

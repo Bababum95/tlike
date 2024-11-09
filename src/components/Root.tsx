@@ -1,4 +1,4 @@
-import { type FC, useEffect, useMemo } from "react";
+import { type FC, useMemo, useEffect } from "react";
 import { Provider } from "react-redux";
 import { SDKProvider } from "@telegram-apps/sdk-react";
 import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
@@ -28,6 +28,8 @@ const Inner: FC = () => {
   const manifestUrl = useMemo(() => {
     return new URL("tonconnect-manifest.json", window.location.href).toString();
   }, []);
+
+  console.info("version: 1.0.1");
 
   // Enable debug mode to see all the methods sent and events received.
   useEffect(() => {

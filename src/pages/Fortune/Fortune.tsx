@@ -17,7 +17,7 @@ import styles from "./Fortune.module.scss";
 
 type ParamsType = {
   type: "free" | "paid";
-  currency?: "TLove" | "TLike";
+  currency?: "Love" | "Like";
 };
 
 type GiftInfoType = {
@@ -30,7 +30,7 @@ type InitToastesType = {
   win: boolean;
   by: {
     open: boolean;
-    currency: "TLove" | "TLike";
+    currency: "Love" | "Like";
     loading: boolean;
   };
 };
@@ -41,7 +41,7 @@ const initToastes: InitToastesType = {
   win: false,
   by: {
     open: false,
-    currency: "TLove",
+    currency: "Love",
     loading: false,
   },
 };
@@ -81,7 +81,7 @@ export const Fortune = () => {
       params.currency = toastIsOpen.by.currency;
       dispatch(
         addBalance({
-          amount: toastIsOpen.by.currency === "TLove" ? -5000 : -100,
+          amount: toastIsOpen.by.currency === "Love" ? -5000 : -10,
           currency: toastIsOpen.by.currency,
         })
       );
@@ -104,8 +104,8 @@ export const Fortune = () => {
           dispatch(setLastSpinTime(response.data.date));
         }
         if (
-          response.data.gift_info.currency === "TLove" ||
-          response.data.gift_info.currency === "TLike"
+          response.data.gift_info.currency === "Love" ||
+          response.data.gift_info.currency === "Like"
         ) {
           dispatch(
             addBalance({
@@ -121,7 +121,7 @@ export const Fortune = () => {
     }
   };
 
-  const openBySpinToast = (currency: "TLike" | "TLove") => {
+  const openBySpinToast = (currency: "Like" | "Love") => {
     setToastIsOpen((prev) => ({
       ...prev,
       by: { ...prev.by, open: true, currency },
@@ -203,17 +203,17 @@ export const Fortune = () => {
           <div className={styles.buttons}>
             <button
               className={classNames(styles.button, {
-                [styles.disabled]: user.balances.tlike < 100,
+                [styles.disabled]: user.balances.like < 10,
               })}
-              onClick={() => openBySpinToast("TLike")}
+              onClick={() => openBySpinToast("Like")}
             >
-              100 LIKE
+              10 LIKE
             </button>
             <button
               className={classNames(styles.button, {
-                [styles.disabled]: user.balances.tlove < 5000,
+                [styles.disabled]: user.balances.love < 5000,
               })}
-              onClick={() => openBySpinToast("TLove")}
+              onClick={() => openBySpinToast("Love")}
             >
               5 000 LOVE
             </button>
@@ -243,8 +243,8 @@ export const Fortune = () => {
               : FORTUNE_WHEEL[activeIndex].value}
           </p>
           {giftInfo &&
-            giftInfo.currency !== "TLove" &&
-            giftInfo.currency !== "TLike" && (
+            giftInfo.currency !== "Love" &&
+            giftInfo.currency !== "Like" && (
               <div className={styles["toast-address"]}>
                 <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
                 <Input
@@ -256,8 +256,8 @@ export const Fortune = () => {
             )}
           <button onClick={closeToast} className={styles.button}>
             {giftInfo &&
-            giftInfo.currency !== "TLove" &&
-            giftInfo.currency !== "TLike"
+            giftInfo.currency !== "Love" &&
+            giftInfo.currency !== "Like"
               ? t("take-reward")
               : t("confirm")}
           </button>
@@ -269,7 +269,7 @@ export const Fortune = () => {
       <Toast isOpen={toastIsOpen.by.open} onClose={closeToast}>
         <p className={styles["toast-title"]}>{t("buy-spin")}</p>
         <p className={styles["toast-value"]}>
-          {toastIsOpen.by.currency === "TLike" ? "100 LIKE" : "5 000 LOVE"}
+          {toastIsOpen.by.currency === "Like" ? "10 LIKE" : "5 000 LOVE"}
         </p>
         <button
           onClick={() => spin("paid")}

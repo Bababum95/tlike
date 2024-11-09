@@ -15,12 +15,12 @@ const initialState: UserStateType = {
   inventory: [],
   missions: [],
   balances: {
-    tlike: 0,
-    tlove: 0,
+    like: 0,
+    love: 0,
   },
   mining_speed: {
-    tlike: 0,
-    tlove: 0,
+    like: 0,
+    love: 0,
   },
   token: "",
   type: "old",
@@ -28,6 +28,7 @@ const initialState: UserStateType = {
   nfts: [],
   upgrades: [],
   referrals: [],
+  wallet: null,
 };
 
 export const fetchUser = createAsyncThunk(
@@ -286,16 +287,17 @@ export const transferLove = createAsyncThunk(
     }
   }
 );
+
 export const transferLike = createAsyncThunk(
   "user/transferLike",
   async (
-    data: { currency: string; amount: string; receiver: string },
+    data: { currency: string; amount: number; receiver: string },
     { getState, rejectWithValue }
   ) => {
     const state = getState() as RootState;
     const { token } = state.user;
     try {
-      const response = await api.post("/transfer/onchain", data, {
+      const response = await api.post("/transfer/onchain/check", data, {
         headers: { "x-auth-token": token },
       });
       return response.data;
@@ -329,9 +331,9 @@ const userSlice = createSlice({
     },
     addBalance: (
       state,
-      action: PayloadAction<{ amount: number; currency: "TLove" | "TLike" }>
+      action: PayloadAction<{ amount: number; currency: "Love" | "Like" }>
     ) => {
-      const key = action.payload.currency.toLowerCase() as "tlove" | "tlike";
+      const key = action.payload.currency.toLowerCase() as "love" | "like";
       state.balances[key] += action.payload.amount;
     },
     changeStatusNFT: (state, action) => {
@@ -339,11 +341,11 @@ const userSlice = createSlice({
         if (nft.nft_id === action.payload.nft_id) {
           const speed = Number(nft.mining_speed_hour) / 3600;
           const result = action.payload.active
-            ? state.mining_speed.tlike + speed
-            : state.mining_speed.tlike - speed;
+            ? state.mining_speed.like + speed
+            : state.mining_speed.like - speed;
 
           state.nfts[index].active = action.payload.active;
-          state.mining_speed.tlike = result > 0.0001 ? result : 0;
+          state.mining_speed.like = result > 0.0001 ? result : 0;
         }
       });
     },
@@ -373,6 +375,10 @@ const userSlice = createSlice({
         state.token = action.payload.token;
         state.type = action.payload.type;
         state.language = action.payload.language;
+        state.wallet =
+          action.payload.wallet && action.payload.wallet !== ""
+            ? action.payload.wallet
+            : null;
         if (action.payload.photo) state.photo = action.payload.photo;
         state.status = "successed";
       })
@@ -403,8 +409,8 @@ const userSlice = createSlice({
               state.missions[index].mission_actived = true;
             }
           });
-          state.balances.tlove =
-            state.balances.tlove + action.payload.award.amount;
+          state.balances.love =
+            state.balances.love + action.payload.award.amount;
         }
       })
       .addCase(fetchReferral.fulfilled, (state, action) => {
@@ -413,7 +419,7 @@ const userSlice = createSlice({
         }
       })
       .addCase(referralActivate.fulfilled, (state) => {
-        state.balances.tlove += state.referal?.amount || 0;
+        state.balances.love += state.referal?.amount || 0;
         state.referal = undefined;
       })
       .addCase(getInventory.fulfilled, (state, action) => {
@@ -444,9 +450,9 @@ const userSlice = createSlice({
         );
       })
       .addCase(byUpgrade.fulfilled, (state, action) => {
-        state.balances.tlike -= Number(action.payload.inventory_info?.costs);
+        state.balances.like -= Number(action.payload.inventory_info?.costs);
         if (action.payload.inventory_info?.increase_value) {
-          state.mining_speed.tlove +=
+          state.mining_speed.love +=
             Number(action.payload.inventory_info.increase_value) / 3600;
         }
         state.upgrades.forEach((u, i) => {
@@ -461,10 +467,10 @@ const userSlice = createSlice({
         }
       })
       .addCase(transferLove.fulfilled, (state, action) => {
-        state.balances.tlove -= Number(action.meta.arg.amount);
+        state.balances.love -= Number(action.meta.arg.amount);
       })
       .addCase(transferLike.fulfilled, (state, action) => {
-        state.balances.tlike -= Number(action.meta.arg.amount);
+        state.balances.like -= Number(action.meta.arg.amount);
       });
   },
 });

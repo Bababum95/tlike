@@ -34,14 +34,14 @@
    Эта команда создаст Docker-образ с вашим приложением.
 
 ```
-docker build -t tlike .
+docker build -t like .
 ```
 
 2. Запуск Docker-контейнера
    Эта команда запустит контейнер и ваше приложение будет доступно по адресу http://localhost.
 
 ```
-docker run -p 80:80 tlike
+docker run -p 80:80 like
 ```
 
 3. Настройка Nginx
@@ -110,7 +110,7 @@ npm run preview
 ## Структура проекта
 
 ```
-/tlike
+/like
 ├── /public
 │   ├── /locales                 # Локализация (Текст, переводы)
 │   ├── logo.png                 # Логотип для TonConnect

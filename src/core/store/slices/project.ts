@@ -5,12 +5,34 @@ import { RootState } from "@/core/store";
 import type { ProjectStateType } from "@types";
 
 export const getProjectStat = createAsyncThunk(
-  "fortune/getProjectStat",
+  "project/getProjectStat",
   async (_, { rejectWithValue, getState }) => {
     const state = getState() as RootState;
     const { token } = state.user;
     try {
       const response = await api.get("project/stat", {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+
+      if (response.status === 200) {
+        return response.data;
+      }
+      return rejectWithValue(response.data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const getCommission = createAsyncThunk(
+  "project/getCommission",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const { token } = state.user;
+    try {
+      const response = await api.get("withdraw/commission", {
         headers: {
           "x-auth-token": token,
         },
@@ -36,6 +58,7 @@ const initialState: ProjectStateType = {
     like_burned: 0,
     next_halving: "",
   },
+  commission: 600,
 };
 
 const projectSlice = createSlice({
@@ -53,6 +76,10 @@ const projectSlice = createSlice({
       })
       .addCase(getProjectStat.rejected, (state) => {
         state.status = "failed";
+      })
+      .addCase(getCommission.fulfilled, (state, action) => {
+        state.status = "successed";
+        state.commission = Number(action.payload.commission);
       });
   },
 });

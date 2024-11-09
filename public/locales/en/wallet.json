@@ -2,7 +2,7 @@
   "deposit": "Deposit",
   "withdraw": "Withdraw",
   "transfer": "Transfer",
-  "balance": "Balance",
+  "balance": "Total balance",
   "deposit-hint": "To make a deposit, you have to contact support",
   "contact-support": "Contact Support",
   "withdraw-settings": "Withdraw Settings",

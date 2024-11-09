@@ -25,29 +25,32 @@ export const Balance = () => {
         <p className={styles.value}>
           {new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(user.balances.tlike)}{" "}
+          }).format(user.balances.like)}{" "}
           Like
         </p>
         <p className={styles.unit}>
           {new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(user.mining_speed.tlike * 3600)}{" "}
+          }).format(user.mining_speed.like * 3600)}{" "}
           Like/h
         </p>
       </div>
       <div className={styles.item}>
-        <img src={heartImage} alt="Love" />
+        <img height="28px" src={heartImage} alt="Love" />
         <p className={styles.title}>{t("love-balance")}</p>
         <p className={styles.value}>
           {new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(user.balances.tlove)}{" "}
+          }).format(user.balances.love)}{" "}
           Love
         </p>
         <p className={styles.unit}>
           {new Intl.NumberFormat("ru-RU", {
             maximumFractionDigits: 0,
-          }).format(user.mining_speed.tlove * 3600)}{" "}
+          }).format(
+            (user.mining_speed.love_nft + user.mining_speed.love_upgrades) *
+              3600
+          )}{" "}
           Love/h
         </p>
       </div>

@@ -1,12 +1,13 @@
-import { FC, useState } from "react";
+import { FC, useState} from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { initUtils } from "@telegram-apps/sdk";
 import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
+import Realistic from "react-canvas-confetti/dist/presets/realistic"; // Импортируем конфетти
 
 import { UPGRADES } from "@config";
-import { Balance, Empty, Navigation, Toast, User } from "@/components";
+import { Balance, Empty, Navigation, Toast, User, Link } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { NFTType, UpgradeType } from "@types";
 import { byNftImage } from "@images";
@@ -30,6 +31,7 @@ export const Mine: FC = () => {
   const [tab, setTab] = useState(params.tab || "mining");
   const [toast, setToast] = useState<UpgradeType | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showConfetti, setShowConfetti] = useState<boolean>(false); // Состояние для конфетти
 
   const byNft = () => {
     utils.openLink(getgemsUrl);
@@ -46,6 +48,12 @@ export const Mine: FC = () => {
     try {
       await dispatch(fetchByUpgrade({ id: toast.id })).unwrap();
       dispatch(setNotice({ status: "success", message: "Success!" }));
+      setShowConfetti(true); // Запускаем конфетти после успешной покупки
+
+      // Таймер для автоматического скрытия конфетти через 2 секунды
+      setTimeout(() => {
+        setShowConfetti(false); // Сброс конфетти
+      }, 2000);
     } catch (err) {
       dispatch(setNotice({ status: "error", message: err }));
     } finally {
@@ -71,7 +79,9 @@ export const Mine: FC = () => {
           </button>
         </div>
       </header>
-      <Balance />
+      <Link to="/wallet">
+        <Balance />
+      </Link>
       <AnimatePresence mode="wait">
         <motion.div
           className={styles.main}
@@ -137,21 +147,19 @@ export const Mine: FC = () => {
                       {new Intl.NumberFormat("ru-RU", {
                         maximumFractionDigits: 0,
                       }).format(upgrade.costs)}{" "}
-                      TLike
+                      Like
                     </p>
                     <p className={styles.text}>
                       +
                       {new Intl.NumberFormat("ru-RU", {
                         maximumFractionDigits: 0,
                       }).format(upgrade.value)}{" "}
-                      TLove/h
+                      Love/h
                     </p>
                   </div>
                   <div className={styles.action}>
                     <button
-                      className={classNames(styles.button, {
-                        [styles.disabled]: user.balances.tlike < upgrade.costs,
-                      })}
+                      className={classNames(styles.button)}
                       onClick={() => setToast(upgrade)}
                     >
                       {t("buy")}
@@ -191,18 +199,18 @@ export const Mine: FC = () => {
                 {new Intl.NumberFormat("ru-RU", {
                   maximumFractionDigits: 0,
                 }).format(toast.value)}{" "}
-                TLove/h
+                Love/h
               </p>
               <p className={styles.price}>
                 {new Intl.NumberFormat("ru-RU", {
                   maximumFractionDigits: 0,
                 }).format(toast.costs)}{" "}
-                TLike
+                Like
               </p>
               <button
                 className={classNames(styles.button, {
                   [styles.loading]: loading,
-                  [styles.disabled]: user.balances.tlike < toast.costs,
+                  [styles.disabled]: user.balances.like < toast.costs,
                 })}
                 onClick={byUpgrade}
               >
@@ -212,6 +220,9 @@ export const Mine: FC = () => {
           )}
         </div>
       </Toast>
+      {showConfetti && (
+        <Realistic onInit={({ conductor }) => conductor.shoot()} />
+      )}
     </div>
   );
 };

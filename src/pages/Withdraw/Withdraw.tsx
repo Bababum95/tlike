@@ -18,6 +18,7 @@ type Errors = {
 export const Withdraw = () => {
   const { t } = useTranslation("wallet");
   const user = useAppSelector((state) => state.user);
+  const commission = useAppSelector((state) => state.project.commission);
   const dispatch = useAppDispatch();
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -33,13 +34,13 @@ export const Withdraw = () => {
     total: null,
   });
   const [loading, setLoading] = useState({
-    validId: false,
+    address: false,
     transfer: false,
   });
 
   useEffect(() => {
     const total = Number(values.total);
-    if (total > user.balances.tlike) {
+    if (total > user.balances.like) {
       setErrors({ ...errors, total: t("error-not-enough") });
       setIsValid((prev) => ({ ...prev, button: false }));
     } else if (
@@ -63,7 +64,7 @@ export const Withdraw = () => {
       if (response.status === 200) {
         setErrors({ ...errors, address: null });
         if (loading.transfer) onSubmit();
-        setLoading((prev) => ({ ...prev, validId: false }));
+        setLoading((prev) => ({ ...prev, address: false }));
       } else {
         throw new Error();
       }
@@ -71,7 +72,7 @@ export const Withdraw = () => {
       setErrors({ ...errors, address: "Wrong adress" });
       dispatch(setNotice({ status: "error", message: "Wrong adress" }));
       setIsValid({ address: false, button: false });
-      if (loading.transfer) setLoading({ transfer: false, validId: false });
+      if (loading.transfer) setLoading({ transfer: false, address: false });
     }
   };
 
@@ -85,13 +86,13 @@ export const Withdraw = () => {
       return;
     }
 
-    if (loading.validId) return;
+    if (loading.address) return;
 
     try {
       await dispatch(
         transferLike({
-          currency: "TLike",
-          amount: values.total,
+          currency: "Like",
+          amount: Number(values.total),
           receiver: values.address,
         })
       ).unwrap();
@@ -150,14 +151,14 @@ export const Withdraw = () => {
           onClick={() =>
             setValues({
               ...values,
-              total: Math.floor(user.balances.tlike).toFixed(0),
+              total: Math.floor(user.balances.like).toFixed(0),
             })
           }
         >
           Max
         </button>
       </Input>
-      <Input label={t("tax")} placeholder="600" readOnly>
+      <Input label={t("tax")} placeholder={commission.toFixed(0)} readOnly>
         <span className={styles.currency}>LIKE</span>
       </Input>
       <button className={styles.submit} onClick={openToast}>
@@ -174,11 +175,11 @@ export const Withdraw = () => {
         </div>
         <div className={styles.row}>
           <p>{t("tax")}</p>
-          <p>600 LIKE</p>
+          <p>{commission} LIKE</p>
         </div>
         <div className={classNames(styles.row, styles.total)}>
           <p>{t("withdraw-total")}</p>
-          <p>{Number(values.total) - 600} LIKE</p>
+          <p>{Number(values.total) - commission} LIKE</p>
         </div>
         <p className={styles.hint}>{t("withdraw-hint")}</p>
         <button

@@ -10,4 +10,5 @@ export type ProjectStateType = {
     like_burned: number;
     next_halving: string;
   };
+  commission: number;
 };

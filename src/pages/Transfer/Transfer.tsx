@@ -48,7 +48,7 @@ export const Transfer = () => {
 
   useEffect(() => {
     const total = Number(values.total);
-    if (total > user.balances.tlove) {
+    if (total > user.balances.love) {
       setErrors({ ...errors, total: t("error-not-enough") });
       setIsValid((prev) => ({ ...prev, button: false }));
     } else if (
@@ -101,7 +101,7 @@ export const Transfer = () => {
     try {
       await dispatch(
         transferLove({
-          currency: "TLove",
+          currency: "Love",
           amount: values.total,
           receiver: values.id,
         })
@@ -118,14 +118,7 @@ export const Transfer = () => {
 
   const openToast = () => {
     if (!values.id || !values.total) return;
-
-    const total = Number(values.total);
-    if (total < 2000) {
-      setErrors({ ...errors, total: t("error-min") });
-      setIsValid((prev) => ({ ...prev, button: false }));
-      return;
-    }
-
+        
     setToastIsOpen(true);
   };
 
@@ -157,7 +150,7 @@ export const Transfer = () => {
           onClick={() =>
             setValues({
               ...values,
-              total: Math.floor(user.balances.tlove).toFixed(0),
+              total: Math.floor(user.balances.love).toFixed(0),
             })
           }
         >

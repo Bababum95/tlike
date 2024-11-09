@@ -1,27 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
+import { TonConnectButton } from "@tonconnect/ui-react";
 
 import { Balance, Link, Toast, User } from "@/components";
 import { HistoryIcon, LikeIcon, LoveIcon } from "@images";
-import { connectWallet } from "@/core/store/slices/user";
-import { useAppDispatch, useAppSelector } from "@hooks";
 
 import styles from "./Wallet.module.scss";
 
 export const Wallet = () => {
   const { t } = useTranslation("wallet");
-  const wallet = useTonWallet();
   const depositRef = useRef<HTMLDivElement>(null);
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
   const [toastIsOpen, setToastIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (wallet && user.wallet !== wallet?.account.address) {
-      dispatch(connectWallet({ wallet: wallet.account.address }));
-    }
-  }, [wallet]);
 
   return (
     <div className={styles.page}>
@@ -29,7 +18,7 @@ export const Wallet = () => {
         <HistoryIcon />
       </Link>
       <User direction="column" />
-      {!!wallet && <TonConnectButton className={styles.wallet} />}
+      <TonConnectButton className={styles.wallet} />
       <div className={styles.buttons}>
         <button
           className={styles.deposit}

@@ -1,8 +1,8 @@
 import { stateStatus } from "./abstract";
 
 type BalancesType = {
-  tlike: number;
-  tlove: number;
+  like: number;
+  love: number;
 };
 
 export type ReferralType = {
@@ -46,15 +46,19 @@ export type MissionType = {
 
 export type UserType = {
   balances: BalancesType;
-  mining_speed: BalancesType;
+  mining_speed: {
+    like: number;
+    love_nft: number;
+    love_upgrades: number;
+  };
   photo?: string;
   token: string;
   type: "old" | "new";
   language: "en" | "ru";
-  wallet?: string;
+  wallet: string | null;
   inventory: {
     costs: string;
-    costs_currency: "TLike";
+    costs_currency: "Like";
     description: null;
     id: number;
     increase_currency: null;
@@ -65,7 +69,7 @@ export type UserType = {
   nfts: NFTType[];
   referal?: {
     amount: number;
-    currency: "TLove" | "TLike";
+    currency: "Love" | "Like";
     gift_id: number;
     inviter_id: string;
     status: "non-used" | "used" | "empty";

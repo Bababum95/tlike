@@ -50,7 +50,7 @@ export const Friends = () => {
         />
         <Item
           icon={<img src={tgStarImage} alt="Telegram Premium" width={24} />}
-          text={`+ 100 000 LOVE ${t("for-you-and-your-friend")}`}
+          text={`+ 40 000 LOVE ${t("for-you-and-your-friend")}`}
           title={`${t("invite-friend")} ${t("with-telegram-premium")}`}
         />
       </List>

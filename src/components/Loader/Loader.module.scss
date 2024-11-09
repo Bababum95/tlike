@@ -2,27 +2,31 @@
   @include flex-center;
   position: relative;
   height: 100vh;
+  width: 100vw;
   padding: 24px;
 }
 
 .image {
+  position: absolute;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .progress {
-    position: absolute;
-    width: calc(100% - 48px);
-    left: 24px;
-    top: 0;
-    height: 4px;
-    background: rgba(67, 120, 255, 0.1);
-    border-radius: 4px;
+  position: absolute;
+  width: calc(100% - 48px);
+  left: 24px;
+  top: 0;
+  height: 4px;
+  background: rgba(67, 120, 255, 0.1);
+  border-radius: 4px;
 }
 
 .status {
-    height: 100%;
-    border-radius: 4px;
-    background-color: $primary;
+  height: 100%;
+  border-radius: 4px;
+  background-color: $primary;
 }
