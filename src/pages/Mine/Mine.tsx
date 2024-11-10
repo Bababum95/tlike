@@ -1,10 +1,10 @@
 import { FC, useState} from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { initUtils } from "@telegram-apps/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import { motion, AnimatePresence } from "framer-motion";
 import classNames from "classnames";
-import Realistic from "react-canvas-confetti/dist/presets/realistic"; // Импортируем конфетти
+import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
 import { UPGRADES } from "@config";
 import { Balance, Empty, Navigation, Toast, User, Link } from "@/components";
@@ -23,7 +23,6 @@ import styles from "./Mine.module.scss";
 const getgemsUrl = import.meta.env.VITE_GETGEMS_URL;
 
 export const Mine: FC = () => {
-  const utils = initUtils();
   const params = useParams<{ tab?: "mining" | "upgrades" }>();
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -34,7 +33,7 @@ export const Mine: FC = () => {
   const [showConfetti, setShowConfetti] = useState<boolean>(false); // Состояние для конфетти
 
   const byNft = () => {
-    utils.openLink(getgemsUrl);
+    openLink(getgemsUrl);
   };
 
   const byUpgrade = async () => {
@@ -48,11 +47,10 @@ export const Mine: FC = () => {
     try {
       await dispatch(fetchByUpgrade({ id: toast.id })).unwrap();
       dispatch(setNotice({ status: "success", message: "Success!" }));
-      setShowConfetti(true); // Запускаем конфетти после успешной покупки
+      setShowConfetti(true);
 
-      // Таймер для автоматического скрытия конфетти через 2 секунды
       setTimeout(() => {
-        setShowConfetti(false); // Сброс конфетти
+        setShowConfetti(false);
       }, 2000);
     } catch (err) {
       dispatch(setNotice({ status: "error", message: err }));

@@ -1,4 +1,5 @@
 import type { ComponentType, JSX } from "react";
+
 import {
   OnboardingPage,
   MainPage,
@@ -45,5 +46,4 @@ export const routes: Route[] = [
   { path: "/settings", Component: SettingsPage },
   { path: "/earn/fortune", Component: FortunePage },
   { path: "/mine/:tab?", Component: MinePage },
-
 ];

@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 @mixin border-gradient {
   &::before {
     content: "";

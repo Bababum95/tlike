@@ -13,6 +13,9 @@ export { LikeIcon } from "./ReactSVG/LikeIcon";
 export { LoveIcon } from "./ReactSVG/LoveIcon";
 export { ErrorIcon } from "./ReactSVG/ErrorIcon";
 export { SuccessIcon } from "./ReactSVG/SuccessIcon";
+export { QRCodeIcon } from "./ReactSVG/QRCodeIcon";
+export { GiftIcon } from "./ReactSVG/GiftIcon";
+export { ConnectWalletIcon } from "./ReactSVG/ConnectWalletIcon";
 // socials
 export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
 export { XLogoIcon } from "./ReactSVG/socials/XLogoIcon";

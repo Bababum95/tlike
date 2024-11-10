@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { initInitData } from "@telegram-apps/sdk";
+import { initData } from "@telegram-apps/sdk-react";
 import classNames from "classnames";
 
 import { defaultAvatar } from "@images";
@@ -15,13 +15,11 @@ type Props = {
 
 export const User: FC<Props> = ({ direction = "row", showIcon }) => {
   const photo = useAppSelector((state) => state.user.photo);
-  const initData = initInitData();
+  const user = initData.user();
   const dispatch = useAppDispatch();
 
   const copy = () => {
-    if (!initData || !initData.user) return;
-
-    navigator.clipboard.writeText(String(initData.user.id));
+    navigator.clipboard.writeText(String(user?.id));
     dispatch(setNotice({ status: "success", message: "Copied!" }));
   };
 
@@ -29,12 +27,12 @@ export const User: FC<Props> = ({ direction = "row", showIcon }) => {
     <div className={classNames(styles.container, styles[direction])}>
       <img className={styles.image} src={photo || defaultAvatar} alt="User" />
       <div className={styles.info}>
-        <p className={styles.name}>@{initData?.user?.username || "unknown"}</p>
+        <p className={styles.name}>@{user?.username || "unknown"}</p>
         <p
           className={classNames(styles.id, { [styles["with-icon"]]: showIcon })}
           onClick={copy}
         >
-          ID: {initData?.user?.id}
+          ID: {user?.id}
         </p>
       </div>
     </div>

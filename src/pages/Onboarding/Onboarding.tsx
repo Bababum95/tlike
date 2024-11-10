@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
-import { initUtils } from "@telegram-apps/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 
 import { useAppDispatch } from "@hooks";
 import { connectWallet, setOld } from "@/core/store/slices/user";
@@ -59,7 +59,6 @@ export const Onboarding = () => {
   const dragX = useMotionValue(0);
   const { t } = useTranslation("onboarding");
   const wallet = useTonWallet();
-  const utils = initUtils();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -72,7 +71,7 @@ export const Onboarding = () => {
   };
 
   const byNft = () => {
-    utils.openLink(getgemsUrl);
+    openLink(getgemsUrl);
   };
 
   const SLIDES = [

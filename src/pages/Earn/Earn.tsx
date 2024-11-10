@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { FC, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { initUtils } from "@telegram-apps/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import classNames from "classnames";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
@@ -107,7 +107,7 @@ export const Earn = () => {
 type EarnToastProps = {
   onClose: () => void;
   missionIndex: number;
-  onMissionComplete: () => void; // Добавляем новый пропс для запуска конфетти
+  onMissionComplete: () => void;
 };
 
 const EarnToast: FC<EarnToastProps> = ({
@@ -117,22 +117,19 @@ const EarnToast: FC<EarnToastProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const missions = useAppSelector((state) => state.user.missions);
-  const utils = initUtils();
   const toast = missions[missionIndex];
 
   const subscribe = async () => {
     if (!toast.mission_actived) {
-      // Если миссия еще не активна, активируем
       dispatch(missionActivate({ id: toast.id }));
-      utils.openLink(toast.redirect_url, { tryInstantView: true });
+      openLink(toast.redirect_url, { tryInstantView: true });
 
       setTimeout(() => {
         dispatch(endMissionLoading({ id: toast.id }));
-        onMissionComplete(); // Запускаем конфетти через 10 секунд
+        onMissionComplete();
       }, 10000);
     } else {
-      // Если миссия уже активирована, просто открываем ссылку
-      utils.openLink(toast.redirect_url, { tryInstantView: true });
+      openLink(toast.redirect_url, { tryInstantView: true });
     }
   };
 
@@ -159,16 +156,16 @@ const EarnToast: FC<EarnToastProps> = ({
         className={classNames(styles["toast-button"], {
           [styles.loading]: toast.loading,
         })}
-        onClick={subscribe} // Кнопка всегда активна для перехода по ссылке
+        onClick={subscribe}
       >
         Subscribe
       </button>
       <button
         className={classNames(styles["toast-button"], {
-          [styles.disabled]: toast.mission_actived || toast.loading, // Делаем кнопку неактивной после выполнения задания
+          [styles.disabled]: toast.mission_actived || toast.loading,
         })}
-        onClick={onClose} // Кнопка "Check" работает как закрытие
-        disabled={toast.mission_actived} // Отключаем кнопку, если миссия выполнена
+        onClick={onClose}
+        disabled={toast.mission_actived}
       >
         Check
       </button>

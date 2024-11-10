@@ -1,0 +1,46 @@
+.slider {
+  width: 100vw;
+  overflow: hidden;
+  margin-top: 15px;
+  position: relative;
+}
+.swiper {
+  @include flex-layout;
+}
+
+.slide {
+  width: calc(100% - 32px);
+  flex-shrink: 0;
+  margin-inline: 16px;
+}
+
+.button {
+  @include flex-center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  position: absolute;
+  translate: 0 -50%;
+  top: 50%;
+
+  &.left {
+    left: 26px;
+
+    svg {
+      rotate: 180deg;
+    }
+  }
+
+  &.right {
+    right: 26px;
+  }
+
+  transition: all 0.2s linear;
+
+  &:active {
+    scale: 0.9;
+  }
+}

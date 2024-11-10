@@ -1,4 +1,4 @@
-import { initInitData } from "@telegram-apps/sdk";
+import { initData } from "@telegram-apps/sdk-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ import styles from "./Referal.module.scss";
 
 export const Referal = () => {
   const referal = useAppSelector((state) => state.user.referal);
-  const initData = initInitData();
+  const user = initData.user();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -39,7 +39,7 @@ export const Referal = () => {
   return (
     <div className={styles.page}>
       <h1 className={styles.name}>
-        {`${initData?.user?.firstName} ${initData?.user?.lastName}`}
+        {`${user?.firstName} ${user?.lastName}`}
       </h1>
       <Balance />
       <h2 className={styles.title}>Take a gift from</h2>

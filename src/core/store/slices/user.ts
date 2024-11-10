@@ -3,7 +3,6 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import type { InitDataParsed } from "@telegram-apps/sdk-react";
 
 import type { UserStateType } from "@types";
 import { RootState } from "@/core/store";
@@ -20,7 +19,8 @@ const initialState: UserStateType = {
   },
   mining_speed: {
     like: 0,
-    love: 0,
+    love_nft: 0,
+    love_upgrades: 0,
   },
   token: "",
   type: "old",
@@ -33,7 +33,7 @@ const initialState: UserStateType = {
 
 export const fetchUser = createAsyncThunk(
   "user/fetchUser",
-  async (data: InitDataParsed, { rejectWithValue }) => {
+  async (data: any, { rejectWithValue }) => {
     try {
       const response = await api.post("telegram/front", data);
       if (response.status === 200) {
@@ -452,7 +452,7 @@ const userSlice = createSlice({
       .addCase(byUpgrade.fulfilled, (state, action) => {
         state.balances.like -= Number(action.payload.inventory_info?.costs);
         if (action.payload.inventory_info?.increase_value) {
-          state.mining_speed.love +=
+          state.mining_speed.love_upgrades +=
             Number(action.payload.inventory_info.increase_value) / 3600;
         }
         state.upgrades.forEach((u, i) => {

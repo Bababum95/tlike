@@ -1,26 +1,18 @@
-import { type FC, useEffect, useMemo, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
-import { Navigate, Route, Router, Routes } from "react-router-dom";
-import { useIntegration } from "@telegram-apps/react-router-integration";
+import { Outlet, Navigate } from "react-router-dom";
 import { useTonWallet, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTranslation } from "react-i18next";
 import {
-  bindMiniAppCSSVars,
-  bindThemeParamsCSSVars,
-  bindViewportCSSVars,
-  initNavigator,
   useLaunchParams,
-  useMiniApp,
-  useThemeParams,
-  useViewport,
-  initInitData,
-  initBackButton,
+  initData,
+  backButton,
 } from "@telegram-apps/sdk-react";
 
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice } from "@/components";
-import { mainRoutes, routes } from "@/core/routes";
+import { mainRoutes } from "@/core/routes";
 import {
   addBalance,
   connectWallet,
@@ -37,48 +29,16 @@ import { preloadUtils } from "@/core/utils/preloadUtils";
 import { getCommission, getProjectStat } from "@/core/store/slices/project";
 import { getNotifications } from "@/core/store/slices/history";
 
-const debug = import.meta.env.VITE_APP_DEBUG === "true";
+const isProd = import.meta.env.PROD;
 
 export const App: FC = () => {
   const [progress, setProgress] = useState(20);
   const { i18n } = useTranslation();
   const lp = useLaunchParams();
-  const miniApp = useMiniApp();
-  const themeParams = useThemeParams();
-  const viewport = useViewport();
-  const initData = initInitData();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const wallet = useTonWallet();
   const [tonConnectUI] = useTonConnectUI();
-  const [backButton] = initBackButton();
-
-  useEffect(() => {
-    miniApp.setBgColor("#1d2733");
-    miniApp.setHeaderColor("#1d2733");
-    return bindMiniAppCSSVars(miniApp, themeParams);
-  }, [miniApp, themeParams]);
-
-  useEffect(() => {
-    return bindThemeParamsCSSVars(themeParams);
-  }, [themeParams]);
-
-  useEffect(() => {
-    viewport?.expand();
-    return viewport && bindViewportCSSVars(viewport);
-  }, [viewport]);
-
-  // Create a new application navigator and attach it to the browser history, so it could modify
-  // it and listen to its changes.
-  const navigator = useMemo(() => initNavigator("app-navigation-state"), []);
-  const [location, reactNavigator] = useIntegration(navigator);
-
-  // Don't forget to attach the navigator to allow it to control the BackButton state as well
-  // as browser history.
-  useEffect(() => {
-    navigator.attach();
-    return () => navigator.detach();
-  }, [navigator]);
 
   useEffect(() => {
     let isMain = false;
@@ -98,9 +58,21 @@ export const App: FC = () => {
         setProgress(40);
       }, 300);
 
-      dispatch(fetchUser(initData));
-      preloadUtils.images(PRELOAD_IMAGES_LIST);
-      preloadUtils.videos(PRELOAD_VIDEOS_LIST);
+      dispatch(
+        fetchUser({
+          initData: {
+            user: initData.user(),
+            queryId: initData.queryId(),
+            hash: initData.hash(),
+            authDate: initData.authDate(),
+            startParam: initData.startParam(),
+          },
+        })
+      );
+      if (isProd) {
+        preloadUtils.images(PRELOAD_IMAGES_LIST);
+        preloadUtils.videos(PRELOAD_VIDEOS_LIST);
+      }
     }
   }, [initData]);
 
@@ -177,21 +149,17 @@ export const App: FC = () => {
       className="app"
     >
       <Notice />
-      {progress !== 100 && !debug ? (
+      {progress !== 100 && isProd ? (
         <Loader progress={progress} />
       ) : (
-        <Router location={location} navigator={reactNavigator}>
-          <Routes>
-            {routes.map((route) => (
-              <Route key={route.path} {...route} />
-            ))}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-          {user.referal && <Navigate to="/referal" replace />}
-          {!user.referal && user.type === "new" && (
-            <Navigate to="/onboarding" replace />
+        <>
+          <Outlet />
+          {user.referal ? (
+            <Navigate to="/referal" replace />
+          ) : (
+            user.type === "new" && <Navigate to="/onboarding" replace />
           )}
-        </Router>
+        </>
       )}
     </AppRoot>
   );

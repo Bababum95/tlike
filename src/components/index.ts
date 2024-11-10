@@ -1,4 +1,5 @@
 export { App } from "./App";
+export { EnvUnsupported } from "./EnvUnsupported";
 export { ErrorBoundary } from "./ErrorBoundary";
 export { Root } from "./Root";
 

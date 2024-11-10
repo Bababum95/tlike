@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { initUtils, initHapticFeedback } from "@telegram-apps/sdk";
+import { openLink, hapticFeedback } from "@telegram-apps/sdk-react";
 import { useTonAddress } from "@tonconnect/ui-react";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import classNames from "classnames";
@@ -57,8 +57,6 @@ export const Fortune = () => {
   const [giftInfo, setGiftInfo] = useState<GiftInfoType | null>(null);
   const user = useAppSelector((state) => state.user);
   const fortuneStore = useAppSelector((state) => state.fortune);
-  const utils = initUtils();
-  const haptic = initHapticFeedback();
   const dispatch = useAppDispatch();
   const address = useTonAddress(true);
 
@@ -99,7 +97,7 @@ export const Fortune = () => {
       if (response.status === 200 && response.data.gift_info) {
         setTargetIndex(response.data.gift_id);
         setGiftInfo(response.data.gift_info);
-        haptic.impactOccurred("medium");
+        hapticFeedback.impactOccurred("medium");
         if (type === "free") {
           dispatch(setLastSpinTime(response.data.date));
         }
@@ -117,7 +115,7 @@ export const Fortune = () => {
       }
     } catch (error) {
       console.error(error);
-      haptic.impactOccurred("medium");
+      hapticFeedback.impactOccurred("medium");
     }
   };
 
@@ -129,7 +127,7 @@ export const Fortune = () => {
   };
 
   const byNft = () => {
-    utils.openLink(getgemsUrl);
+    openLink(getgemsUrl);
   };
 
   useEffect(() => {

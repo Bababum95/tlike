@@ -1,18 +1,15 @@
-import { useUtils, initHapticFeedback } from "@telegram-apps/sdk-react";
+import { openLink, hapticFeedback } from "@telegram-apps/sdk-react";
 import { type FC, type MouseEventHandler, useCallback } from "react";
 import { Link as RouterLink, type LinkProps } from "react-router-dom";
 
 export const Link: FC<LinkProps> = ({ onClick: propsOnClick, to, ...rest }) => {
-  const utils = useUtils();
-  const haptic = initHapticFeedback();
-
   const onClick = useCallback<MouseEventHandler<HTMLAnchorElement>>(
     (e) => {
       propsOnClick?.(e);
-      haptic.impactOccurred("medium");
+      hapticFeedback.impactOccurred("medium");
 
-      // Compute if target path is external. In this case we would like to open link using
-      // TMA method.
+      // Compute if target path is external. In this case we would like to open
+      // link using TMA method.
       let path: string;
       if (typeof to === "string") {
         path = to;
@@ -29,10 +26,10 @@ export const Link: FC<LinkProps> = ({ onClick: propsOnClick, to, ...rest }) => {
 
       if (isExternal) {
         e.preventDefault();
-        utils.openLink(targetUrl.toString());
+        openLink(targetUrl.toString());
       }
     },
-    [to, propsOnClick, utils]
+    [to, propsOnClick]
   );
 
   return <RouterLink {...rest} to={to} onClick={onClick} />;
