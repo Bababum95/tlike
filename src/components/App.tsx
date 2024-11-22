@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState, useCallback } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { Outlet, Navigate } from "react-router-dom";
 import { useTonWallet, useTonConnectUI } from "@tonconnect/ui-react";
@@ -29,10 +29,16 @@ import { preloadUtils } from "@/core/utils/preloadUtils";
 import { getCommission, getProjectStat } from "@/core/store/slices/project";
 import { getNotifications } from "@/core/store/slices/history";
 
-const isProd = import.meta.env.PROD;
+const isProd: boolean = import.meta.env.PROD;
 
-export const App: FC = () => {
-  const [progress, setProgress] = useState(20);
+/**
+ * Main application component handling initialization and state management.
+ *
+ * @component
+ * @returns {JSX.Element} The App component managing routing and loading state.
+ */
+export const App: FC = (): JSX.Element => {
+  const [progress, setProgress] = useState<number>(20);
   const { i18n } = useTranslation();
   const lp = useLaunchParams();
   const dispatch = useAppDispatch();
@@ -40,23 +46,24 @@ export const App: FC = () => {
   const wallet = useTonWallet();
   const [tonConnectUI] = useTonConnectUI();
 
-  useEffect(() => {
-    let isMain = false;
-    mainRoutes.forEach((route) => {
-      if (route.path === location.pathname) isMain = true;
-    });
+  /**
+   * Checks if the current route is a main route and controls the visibility of the back button.
+   */
+  const updateBackButton = useCallback((): void => {
+    const isMainRoute =
+      mainRoutes.some((route) => route.path === location.pathname) ||
+      location.pathname === "/onboarding";
+    isMainRoute ? backButton.hide() : backButton.show();
+  }, [location.pathname]);
 
-    if (location.pathname === "/onboarding") isMain = true;
+  useEffect(updateBackButton, [location.pathname, updateBackButton]);
 
-    if (isMain) backButton.hide();
-    else backButton.show();
-  }, [location]);
-
+  /**
+   * Initializes user data on app startup.
+   */
   useEffect(() => {
     if (initData && user.status === "idle") {
-      setTimeout(() => {
-        setProgress(40);
-      }, 300);
+      setProgress(40);
 
       dispatch(
         fetchUser({
@@ -69,16 +76,21 @@ export const App: FC = () => {
           },
         })
       );
+
       if (isProd) {
         preloadUtils.images(PRELOAD_IMAGES_LIST);
         preloadUtils.videos(PRELOAD_VIDEOS_LIST);
       }
     }
-  }, [initData]);
+  }, [initData, dispatch, user.status]);
 
+  /**
+   * Handles user status changes and data loading.
+   */
   useEffect(() => {
     if (user.status === "successed") {
       setProgress(70);
+
       if (!user.wallet && wallet) {
         tonConnectUI.disconnect();
       }
@@ -92,20 +104,18 @@ export const App: FC = () => {
         dispatch(getProjectStat()),
         dispatch(referralStat()),
         dispatch(getNotifications()),
-      ]).finally(() => {
-        setProgress(99);
-        setTimeout(() => {
-          setProgress(100);
-        }, 400);
-      });
+      ]).finally(() => setProgress(100));
 
       dispatch(getCommission());
       i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
       dispatch(setNotice({ status: "error", message: user.error }));
     }
-  }, [user.status]);
+  }, [user.status, dispatch, tonConnectUI, wallet, i18n]);
 
+  /**
+   * Starts a loop to add balance to the user based on mining speed.
+   */
   useEffect(() => {
     if (
       !user.mining_speed.like &&
@@ -113,7 +123,8 @@ export const App: FC = () => {
       !user.mining_speed.love_upgrades
     )
       return;
-    const loop = setInterval(() => {
+
+    const miningLoop = setInterval(() => {
       if (user.mining_speed.like) {
         dispatch(
           addBalance({ amount: user.mining_speed.like, currency: "Like" })
@@ -131,16 +142,19 @@ export const App: FC = () => {
       }
     }, 1000);
 
-    return () => clearInterval(loop);
-  }, [user.mining_speed]);
+    return () => clearInterval(miningLoop);
+  }, [user.mining_speed, dispatch]);
 
+  /**
+   * Connects the user's wallet once the app is fully loaded.
+   */
   useEffect(() => {
     if (!wallet || progress !== 100) return;
 
     if (user.wallet !== wallet?.account.address) {
       dispatch(connectWallet({ wallet: wallet.account.address }));
     }
-  }, [wallet]);
+  }, [wallet, progress, user.wallet, dispatch]);
 
   return (
     <AppRoot

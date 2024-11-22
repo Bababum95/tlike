@@ -1,6 +1,6 @@
 @use '../variables' as *;
 
-@mixin border-gradient {
+@mixin border-gradient($br: 16px) {
   &::before {
     content: "";
     position: absolute;
@@ -16,7 +16,7 @@
       #0061c966,
       $primary
     );
-    border-radius: 16px;
+    border-radius: $br;
     z-index: -1;
     transition: all 0.1s ease;
   }

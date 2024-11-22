@@ -3,6 +3,8 @@ import { stateStatus } from "./abstract";
 type BalancesType = {
   like: number;
   love: number;
+  ton: number;
+  usdt: number;
 };
 
 export type ReferralType = {

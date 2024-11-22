@@ -16,6 +16,8 @@ const initialState: UserStateType = {
   balances: {
     like: 0,
     love: 0,
+    ton: 0,
+    usdt: 0,
   },
   mining_speed: {
     like: 0,

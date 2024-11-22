@@ -1,6 +1,11 @@
-const hash = import.meta.env.VITE_APP_BUILD_TIME;
+const hash: string = import.meta.env.VITE_APP_BUILD_TIME;
 
-const clearOldCaches = async (prefix: string) => {
+/**
+ * Clears old caches that do not match the current cache version.
+ *
+ * @param {string} prefix - The prefix for the cache keys to be cleared.
+ */
+const clearOldCaches = async (prefix: string): Promise<void> => {
   const cacheKeys = await caches.keys();
   const currentCacheVersion = `${prefix}-${hash}`;
 
@@ -12,48 +17,59 @@ const clearOldCaches = async (prefix: string) => {
 };
 
 export const preloadUtils = {
-  images: async (images: string[]) => {
+  /**
+   * Preloads images and stores them in the cache if not already cached.
+   *
+   * @param {string[]} images - An array of image URLs to be preloaded.
+   * @returns {Promise<void>} - A promise that resolves when all images are preloaded.
+   */
+  images: async (images: string[]): Promise<void> => {
     const cacheVersion = `image-cache-${hash}`;
     const cache = await caches.open(cacheVersion);
 
+    // Clear old caches
     await clearOldCaches("image-cache");
 
-    images.forEach(async (image) => {
-      const cachedResponse = await cache.match(image);
-
-      if (!cachedResponse) {
-        const img = new Image();
-        img.src = image;
-
-        img.onload = async () => {
+    for (const image of images) {
+      try {
+        const cachedResponse = await cache.match(image);
+        if (!cachedResponse) {
           const response = await fetch(image);
-          cache.put(image, response.clone());
-        };
+          if (response.ok) {
+            await cache.put(image, response.clone());
+          }
+        }
+      } catch (error) {
+        console.error(`Failed to preload image ${image}:`, error);
       }
-    });
+    }
   },
 
-  videos: async (videos: string[]) => {
+  /**
+   * Preloads videos and stores them in the cache if not already cached.
+   *
+   * @param {string[]} videos - An array of video URLs to be preloaded.
+   * @returns {Promise<void>} - A promise that resolves when all videos are preloaded.
+   */
+  videos: async (videos: string[]): Promise<void> => {
     const cacheVersion = `video-cache-${hash}`;
     const cache = await caches.open(cacheVersion);
 
+    // Clear old caches
     await clearOldCaches("video-cache");
 
-    videos.forEach(async (video) => {
-      const cachedResponse = await cache.match(video);
-
-      if (!cachedResponse) {
-        const vid = document.createElement("video");
-        vid.src = video;
-        vid.preload = "auto";
-
-        vid.onloadeddata = async () => {
+    for (const video of videos) {
+      try {
+        const cachedResponse = await cache.match(video);
+        if (!cachedResponse) {
           const response = await fetch(video);
-          cache.put(video, response.clone());
-        };
-
-        vid.load();
+          if (response.ok) {
+            await cache.put(video, response.clone());
+          }
+        }
+      } catch (error) {
+        console.error(`Failed to preload video ${video}:`, error);
       }
-    });
+    }
   },
 };

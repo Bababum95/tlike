@@ -2,67 +2,32 @@
   padding: 24px 0;
 }
 
+.header {
+  @include flex-center;
+}
+
 .buttons {
   @include flex-layout(flex-start, stretch);
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px 6px;
   margin: 24px 0;
   padding: 0 16px;
 }
 
 .button {
-  flex: 1;
+  width: calc(50% - 3px);
   color: #fff;
   background-color: $section;
   text-decoration-line: none;
   text-align: center;
-  @include button;
-}
-
-.deposit {
-  flex: 1;
-  @include primary-button;
-
-  &-wrapper {
-    background-color: $section;
-    position: relative;
-    padding: 32px;
-    margin: 20px 16px;
-    border-radius: 16px;
-    @include border-gradient;
-  }
-
-  &-title {
-    @include h2;
-    margin: 0 0 4px;
-    text-align: center;
-  }
-
-  &-hint {
-    margin: 0 auto;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 153%;
-    letter-spacing: 0.01em;
-    text-align: center;
-    color: #707579;
-    max-width: 220px;
-  }
-
-  &-contact {
-    display: block;
-    text-align: center;
-    text-decoration-line: none;
-    width: 100%;
-    margin-top: 24px;
-    @include primary-button;
-  }
-}
-
-.button,
-.deposit {
-  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  font-weight: 600;
   font-size: 15px;
   line-height: 147%;
+  letter-spacing: 0.01em;
+  @include border-gradient(8px);
+  padding: 8px;
 }
 
 .title {
@@ -86,32 +51,3 @@
   right: 16px;
 }
 
-.toast-title {
-  @include h2;
-  margin: 0 8px;
-}
-
-.withdraw-item {
-  @include flex-layout(flex-start, center);
-  gap: 16px;
-  margin-top: 14px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background-color: #1f2d50;
-  text-decoration-line: none;
-
-  h3 {
-    margin: 0 0 4px;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-  }
-
-  p {
-    margin: 0;
-    font-weight: 400;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-    color: $hint;
-  }
-}

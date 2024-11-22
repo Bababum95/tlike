@@ -2,68 +2,57 @@ import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton } from "@tonconnect/ui-react";
 
-import { Balance, Link, Toast, User } from "@/components";
-import { HistoryIcon, LikeIcon, LoveIcon } from "@images";
+import { Link, Toast, User } from "@/components";
+import { HistoryIcon } from "@images";
+import { useAppSelector } from "@hooks";
 
 import styles from "./Wallet.module.scss";
 
 export const Wallet = () => {
+  // const [toastIsOpen, setToastIsOpen] = useState(false);a
   const { t } = useTranslation("wallet");
+  const user = useAppSelector((state) => state.user);
   const depositRef = useRef<HTMLDivElement>(null);
-  const [toastIsOpen, setToastIsOpen] = useState(false);
 
   return (
     <div className={styles.page}>
-      <Link to="/wallet/history" className={styles.history}>
-        <HistoryIcon />
-      </Link>
-      <User direction="column" />
+      <header className={styles.header}>
+        <User size="m" showIcon />
+        <Link to="/wallet/history" className={styles.history}>
+          <HistoryIcon />
+        </Link>
+      </header>
       <TonConnectButton className={styles.wallet} />
       <div className={styles.buttons}>
         <button
-          className={styles.deposit}
+          className={styles.button}
           onClick={() => {
             depositRef.current?.scrollIntoView({ behavior: "smooth" });
           }}
         >
           {t("deposit")}
         </button>
-        <button className={styles.button} onClick={() => setToastIsOpen(true)}>
-          {t("withdraw")}
-        </button>
+        <button className={styles.button}>{t("withdraw")}</button>
+        <Link to="/wallet/transfer" className={styles.button}>
+          {t("transfer")}
+        </Link>
         <Link to="/wallet/transfer" className={styles.button}>
           {t("transfer")}
         </Link>
       </div>
       <h2 className={styles.title}>{t("balance")}</h2>
-      <Balance />
-      <div ref={depositRef} className={styles["deposit-wrapper"]}>
-        <h3 className={styles["deposit-title"]}>{t("deposit")}</h3>
-        <p className={styles["deposit-hint"]}>{t("deposit-hint")}</p>
-        <Link
-          to="https://t.me/Likeminingsupport"
-          className={styles["deposit-contact"]}
-        >
-          {t("contact-support")}
-        </Link>
-      </div>
-      <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
-        <h2 className={styles["toast-title"]}>{t("withdraw-settings")}</h2>
-        <Link to="/wallet/withdraw" className={styles["withdraw-item"]}>
-          <LikeIcon />
-          <div>
-            <h3>$LIKE {t("withdraw")}</h3>
-            <p>{t("withdraw-like-hint")}</p>
-          </div>
-        </Link>
-        <div className={styles["withdraw-item"]}>
-          <LoveIcon />
-          <div>
-            <h3>{t("coming-soon")}</h3>
-            <p>{t("withdraw-love-hint")}</p>
-          </div>
+
+      {Object.entries(user.balances).map(([key, value]) => (
+        <div className={styles.item} key={key}>
+          <img src={`/images/currency/${key}.png`} alt={key} />
+          <p className={styles.key}>{key}</p>
+          <p className={styles.value}>{value}</p>
         </div>
-      </Toast>
+      ))}
+
+      {/* <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
+        <></>
+      </Toast> */}
     </div>
   );
 };

@@ -35,7 +35,6 @@ export const Header: FC = () => {
       <Link className={styles.button} to="/settings">
         <SettingIcon />
       </Link>
-
       {user && (
         <Toast isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <div className={styles.toast}>
