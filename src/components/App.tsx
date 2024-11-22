@@ -1,6 +1,6 @@
 import { type FC, useEffect, useState, useCallback } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
-import { Outlet, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes, HashRouter, Outlet } from "react-router-dom";
 import { useTonWallet, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTranslation } from "react-i18next";
 import {
@@ -12,6 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice } from "@/components";
+import { routes } from "@/core/routes";
 import { mainRoutes } from "@/core/routes";
 import {
   addBalance,
@@ -163,6 +164,14 @@ export const App: FC = (): JSX.Element => {
       className="app"
     >
       <Notice />
+      <HashRouter>
+        <Routes>
+          {routes.map((route) => (
+            <Route key={route.path} {...route} />
+          ))}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </HashRouter>
       {progress !== 100 && isProd ? (
         <Loader progress={progress} />
       ) : (

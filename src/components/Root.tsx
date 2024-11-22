@@ -1,27 +1,13 @@
 import { type FC, useMemo } from "react";
 import { Provider } from "react-redux";
 import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
-import { RouterProvider, createHashRouter } from "react-router-dom";
 
 import { store } from "@/core/store";
-import { routes } from "@/core/routes";
 import { App, ErrorBoundary } from "@/components";
 
 const twaReturnUrl = import.meta.env.VITE_WEB_APP_URL;
 const time = import.meta.env.VITE_APP_BUILD_TIME;
 
-const router = createHashRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      ...routes.map(({ path, Component }) => ({
-        path: path,
-        element: <Component />,
-      })),
-    ],
-  },
-]);
 
 const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
   <div style={{ color: "#FFF" }}>
@@ -54,7 +40,7 @@ export const Root: FC = () => {
         }}
       >
         <Provider store={store}>
-          <RouterProvider router={router} />
+          <App />
         </Provider>
       </TonConnectUIProvider>
     </ErrorBoundary>
