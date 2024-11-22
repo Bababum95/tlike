@@ -1,15 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton } from "@tonconnect/ui-react";
 
-import { Link, Toast, User } from "@/components";
+import { Link, User } from "@/components";
 import { HistoryIcon } from "@images";
 import { useAppSelector } from "@hooks";
 
 import styles from "./Wallet.module.scss";
 
 export const Wallet = () => {
-  // const [toastIsOpen, setToastIsOpen] = useState(false);a
   const { t } = useTranslation("wallet");
   const user = useAppSelector((state) => state.user);
   const depositRef = useRef<HTMLDivElement>(null);
@@ -49,10 +48,6 @@ export const Wallet = () => {
           <p className={styles.value}>{value}</p>
         </div>
       ))}
-
-      {/* <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
-        <></>
-      </Toast> */}
     </div>
   );
 };
