@@ -23,6 +23,29 @@ import {
   waterCoolingImage,
 } from "@images";
 
+export const BALANCES = [
+  {
+    name: "USDT",
+    key: "usdt",
+    icon: "/images/currency/usdt.webp",
+  },
+  {
+    name: "TON",
+    key: "ton",
+    icon: "/images/currency/ton.webp",
+  },
+  {
+    name: "Like",
+    key: "like",
+    icon: "/images/currency/like.webp",
+  },
+  {
+    name: "Love",
+    key: "love",
+    icon: "/images/currency/love.webp",
+  },
+] as const;
+
 export const SPRING_OPTIONS = {
   x: { type: "spring", stiffness: 300, damping: 30 },
   opacity: { duration: 0.2 },

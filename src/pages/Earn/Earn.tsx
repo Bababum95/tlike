@@ -1,18 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { FC, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { openLink } from "@telegram-apps/sdk-react";
 import classNames from "classnames";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
-import { Item, Link, List, Navigation, Toast } from "@/components";
+import { Item, List, Navigation, Toast, Page } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { missionActivate, endMissionLoading } from "@/core/store/slices/user";
-import {
-  ChevronRightIcon,
-  fortuneWheelPreviewImage,
-  SuccessIcon,
-} from "@images";
+import { ChevronRightIcon, SuccessIcon } from "@images";
 
 import styles from "./Earn.module.scss";
 
@@ -29,78 +25,64 @@ export const Earn = () => {
     }
   }, [showFirework]);
 
-  const spinAvailable = () => {
-    return !missions.some(
-      (mission) => !mission.mission_actived || mission.loading
-    );
-  };
-
   return (
-    <div className={styles.page}>
-      <img
-        className={styles.preview}
-        src={fortuneWheelPreviewImage}
-        alt="Fortune wheel"
-      />
-      <h1 className={styles.title}>{t("title")}</h1>
-      <p className={styles.text}>{t("text")}</p>
-      <Link
-        to="/earn/fortune"
-        className={classNames(styles.spin, {
-          [styles.disabled]: !spinAvailable(),
-        })}
-      >
-        {t("spin")}
-      </Link>
-      {missions && missions.length > 0 && (
-        <>
-          <h2 className={styles.title}>{t("task-list")}</h2>
-          <List>
-            {missions.map((mission, index) => (
-              <Item
-                key={mission.id}
-                extraClass={classNames(styles.mission, {
-                  [styles.active]: mission.mission_actived && !mission.loading,
-                })}
-                title={mission.description}
-                text={`+ ${mission.award_amount} ${mission.award_currency}`}
-                icon={
-                  <motion.img
-                    initial={{ scale: 0.8 }}
-                    animate={{ scale: [0.8, 1.1, 1] }}
-                    transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                    src={mission.icon_name}
-                    alt={mission.description}
-                    width={24}
-                    height={24}
-                  />
-                }
-                onClick={() => setToast(index)}
-              >
-                {mission.mission_actived && !mission.loading ? (
-                  <SuccessIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </Item>
-            ))}
-          </List>
-        </>
-      )}
-      <Toast isOpen={toast !== null} onClose={() => setToast(null)}>
-        {toast !== null && (
-          <EarnToast
-            missionIndex={toast}
-            onClose={() => setToast(null)}
-            onMissionComplete={() => setShowFirework(true)}
-          />
+    <Page>
+      <div className={styles.page}>
+        {missions && missions.length > 0 && (
+          <>
+            <h2 className={styles.title}>{t("task-list")}</h2>
+            <List>
+              {missions.map((mission, index) => (
+                <Item
+                  key={mission.id}
+                  extraClass={classNames(styles.mission, {
+                    [styles.active]:
+                      mission.mission_actived && !mission.loading,
+                  })}
+                  title={mission.description}
+                  text={`+ ${mission.award_amount} ${mission.award_currency}`}
+                  icon={
+                    <motion.img
+                      initial={{ scale: 0.8 }}
+                      animate={{ scale: [0.8, 1.1, 1] }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 24,
+                      }}
+                      src={mission.icon_name}
+                      alt={mission.description}
+                      width={24}
+                      height={24}
+                    />
+                  }
+                  onClick={() => setToast(index)}
+                >
+                  {mission.mission_actived && !mission.loading ? (
+                    <SuccessIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
+                </Item>
+              ))}
+            </List>
+          </>
         )}
-      </Toast>
-      {showFirework && (
-        <Realistic onInit={({ conductor }) => conductor.shoot()} />
-      )}
-      <Navigation />
-    </div>
+        <Toast isOpen={toast !== null} onClose={() => setToast(null)}>
+          {toast !== null && (
+            <EarnToast
+              missionIndex={toast}
+              onClose={() => setToast(null)}
+              onMissionComplete={() => setShowFirework(true)}
+            />
+          )}
+        </Toast>
+        {showFirework && (
+          <Realistic onInit={({ conductor }) => conductor.shoot()} />
+        )}
+        <Navigation />
+      </div>
+    </Page>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { openLink, hapticFeedback } from "@telegram-apps/sdk-react";
 import { useTonAddress } from "@tonconnect/ui-react";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";

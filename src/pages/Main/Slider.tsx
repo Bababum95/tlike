@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "motion/react";
 import classNames from "classnames";
 
 import { Link } from "@/components";

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { openLink } from "@telegram-apps/sdk-react";

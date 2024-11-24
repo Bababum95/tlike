@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTonWallet } from "@tonconnect/ui-react";
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants } from "motion/react";
 
 import {
   ChevronRightIcon,

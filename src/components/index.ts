@@ -1,6 +1,7 @@
 export { App } from "./App";
 export { EnvUnsupported } from "./EnvUnsupported";
 export { ErrorBoundary } from "./ErrorBoundary";
+export { Page } from "./Page";
 export { Root } from "./Root";
 
 export { Navigation } from "./Navigation/Navigation";

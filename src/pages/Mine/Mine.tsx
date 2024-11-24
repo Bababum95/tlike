@@ -2,7 +2,7 @@ import { FC, useState} from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { openLink } from "@telegram-apps/sdk-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import classNames from "classnames";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
