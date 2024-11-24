@@ -23,26 +23,26 @@ import {
   waterCoolingImage,
 } from "@images";
 
-export const BALANCES = [
+export const TOKENS = [
   {
     name: "USDT",
     key: "usdt",
-    icon: "/images/currency/usdt.webp",
+    icon: "/images/tokens/usdt.webp",
   },
   {
     name: "TON",
     key: "ton",
-    icon: "/images/currency/ton.webp",
+    icon: "/images/tokens/ton.webp",
   },
   {
     name: "Like",
     key: "like",
-    icon: "/images/currency/like.webp",
+    icon: "/images/tokens/like.webp",
   },
   {
     name: "Love",
     key: "love",
-    icon: "/images/currency/love.webp",
+    icon: "/images/tokens/love.webp",
   },
 ] as const;
 
