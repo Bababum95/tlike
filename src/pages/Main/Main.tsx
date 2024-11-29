@@ -3,7 +3,7 @@ import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import classNames from "classnames";
 
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
-import { Navigation, Balance, Link, Toast } from "@/components";
+import { Navigation, Balance, Toast } from "@/components";
 import { markNotificationsAsRead } from "@/core/store/slices/history";
 import {
   minerAnimation,
@@ -42,9 +42,9 @@ export const Main = () => {
       >
         <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
       </video>
-      <Link to="/wallet">
+      <div className={styles.balance}>
         <Balance />
-      </Link>
+      </div>
       <Slider />
       <Navigation />
       <Toast isOpen={!wallet && isProd}>

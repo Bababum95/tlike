@@ -36,6 +36,7 @@ export const BalanceItem: FC<Props> = ({
         [styles["with-mining"]]: withMining,
       })}
     >
+      <div className={styles.background} />
       <img className={styles.icon} src={token.icon} alt={token.name} />
       <div className={styles.balance}>
         <p className={styles.name}>

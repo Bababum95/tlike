@@ -1,12 +1,21 @@
 .item {
   @include flex-layout;
   position: relative;
-  background-color: $section;
-  border-radius: 16px;
   list-style: none;
   width: 100%;
   padding: 14px;
   @include border-gradient;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $section;
+  border-radius: 16px;
+  z-index: -1;
 }
 
 .icon {

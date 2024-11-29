@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { openLink } from "@telegram-apps/sdk-react";
 import classNames from "classnames";
 
-import { BalanceItem, Empty, Link } from "@/components";
+import { Balance, Empty } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { NFTType } from "@types";
 import { byNftImage } from "@images";
@@ -32,23 +32,7 @@ export const Index = () => {
         exit={{ y: -20, opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <Link to="/wallet" className={styles.balance}>
-          <BalanceItem
-            name="like"
-            direction="column"
-            mining={user.mining_speed.like * 3600}
-            maximumFractionDigits={0}
-          />
-          <BalanceItem
-            name="love"
-            direction="column"
-            mining={
-              (user.mining_speed.love_nft + user.mining_speed.love_upgrades) *
-              3600
-            }
-            maximumFractionDigits={0}
-          />
-        </Link>
+        <Balance />
         <img
           src={byNftImage}
           alt="By NFT"

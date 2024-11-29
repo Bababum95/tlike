@@ -1,38 +1,5 @@
-.container {
-  @include flex-layout(flex-start, stretch);
-  gap: 10px;
-  padding: 0 16px;
-}
-
-.item {
-  background-color: $section;
-  padding: 14px;
-  border-radius: 16px;
-  flex: 1;
-  position: relative;
-  @include border-gradient;
-}
-
-.title {
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 0.01em;
-  color: #a2acb0;
-  margin: 14px 0 4px;
-}
-
-.value {
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  margin: 0;
-}
-
-.unit {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 112%;
-  letter-spacing: 0.01em;
-  color: $primary;
-  margin: 4px 0 0;
+.wrapper {
+  @include flex-layout;
+  width: 100%;
+  gap: 14px;
 }

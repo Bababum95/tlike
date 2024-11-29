@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "@hooks";
 import { byUpgrade as fetchByUpgrade } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 
+import { Upgrade } from "./Upgrade";
 import styles from "./Upgrades.module.scss";
 
 export const Upgrades = () => {
@@ -78,57 +79,14 @@ export const Upgrades = () => {
         </Link>
         <ul className={styles.list}>
           {user.upgrades.map((upgrade) => (
-            <li className={styles.upgrade} key={upgrade.id}>
-              <video
-                className={styles.image}
-                src={`/animations/upgrades/${upgrade.id}.webm`}
-                autoPlay={upgrade.count > 0}
-                loop
-                muted
-                playsInline
-                data-wf-ignore="true"
-                data-object-fit="cover"
-                preload="auto"
-                width={155}
-                height={155}
-                poster={
-                  upgrade.count > 0 ? "" : `/images/upgrades/${upgrade.id}.webp`
-                }
-              >
-                <source
-                  src={`/animations/upgrades/${upgrade.id}.webm`}
-                  type="video/webm"
-                  data-wf-ignore="true"
-                />
-              </video>
-              <div className={styles.info}>
-                <h2 className={styles.title}>
-                  {t(`upgrade-list.${upgrade.id}.name`)}
-                </h2>
-                <p className={styles.price}>
-                  {new Intl.NumberFormat("ru-RU", {
-                    maximumFractionDigits: 0,
-                  }).format(upgrade.costs)}{" "}
-                  Like
-                </p>
-                <p className={styles.text}>
-                  +
-                  {new Intl.NumberFormat("ru-RU", {
-                    maximumFractionDigits: 0,
-                  }).format(upgrade.value)}{" "}
-                  Love/h
-                </p>
-                <button
-                  className={classNames(styles.button)}
-                  onClick={() => setToast(upgrade)}
-                >
-                  {t("buy")}
-                </button>
-                <p className={styles.amount}>
-                  {t("amount")}: {upgrade.count}
-                </p>
-              </div>
-            </li>
+            <Upgrade
+              key={upgrade.id}
+              id={upgrade.id}
+              value={upgrade.value}
+              count={upgrade.count}
+              costs={upgrade.costs}
+              handleBuy={() => setToast(upgrade)}
+            />
           ))}
         </ul>
         <Toast isOpen={!!toast} onClose={() => setToast(null)}>

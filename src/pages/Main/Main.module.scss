@@ -11,6 +11,11 @@
   z-index: -1;
 }
 
+.balance {
+  padding: 0 16px;
+  width: 100%;
+}
+
 .toast {
   @include flex-column;
   align-items: center;

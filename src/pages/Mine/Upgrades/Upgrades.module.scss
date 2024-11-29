@@ -32,62 +32,6 @@
   margin: 20px 0;
 }
 
-.upgrade {
-  @include flex-layout;
-  gap: 8px;
-  background-color: #171d32;
-  padding: 30px 14px;
-  border-radius: 16px;
-  flex: 1;
-  position: relative;
-  @include border-gradient;
-
-  &:not(:first-child) {
-    margin-top: 14px;
-  }
-
-  .info {
-    flex: 1;
-  }
-
-  .title {
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-    margin: 0;
-  }
-
-  .price {
-    margin: 4px 0;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-  }
-
-  .text {
-    margin: 0;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-    color: $primary;
-  }
-
-  .button {
-    width: 115px;
-    font-size: 14px;
-    padding: 8px;
-    margin: 14px 0;
-  }
-
-  .amount {
-    margin: 0;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-  }
-}
-
 .toast {
   @include flex-column;
   align-items: center;
