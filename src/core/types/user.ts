@@ -1,6 +1,6 @@
 import { stateStatus } from "./abstract";
 
-type BalancesType = {
+export type BalancesType = {
   like: number;
   love: number;
   ton: number;

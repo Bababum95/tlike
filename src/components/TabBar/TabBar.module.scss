@@ -1,0 +1,35 @@
+.nav {
+  @include flex-layout(flex-start, stretch);
+  border-radius: 44px;
+  padding: 2px;
+  width: 100%;
+  height: 40px;
+  background: $section;
+  position: relative;
+}
+
+.link {
+  @include flex-center;
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #fff;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+}
+
+.background {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  background: rgba(0, 122, 255, 0.35);
+  border: 1px solid $primary;
+  border-radius: 40px;
+}

@@ -1,5 +1,5 @@
 export { Main as MainPage } from "./Main/Main";
-export { Mine as MinePage } from "./Mine/Mine";
+export { Mine as MinePage, MineIndex as MineIndexPage, MineUpgrades as MineUpgradesPage } from "./Mine";
 export { Friends as FriendsPage } from "./Friends/Friends";
 export { Earn as EarnPage } from "./Earn/Earn";
 

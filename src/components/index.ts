@@ -1,4 +1,5 @@
 export { App } from "./App";
+export { AppRoutes } from "./AppRoutes";
 export { EnvUnsupported } from "./EnvUnsupported";
 export { ErrorBoundary } from "./ErrorBoundary";
 export { Page } from "./Page";
@@ -8,6 +9,7 @@ export { Navigation } from "./Navigation/Navigation";
 export { User } from "./User/User";
 export { Link } from "./Link/Link";
 export { Balance } from "./Balance/Balance";
+export { BalanceItem } from "./BalanceItem/BalanceItem";
 export { Empty } from "./Empty/Empty";
 export { List } from "./List/List";
 export { Item } from "./Item/Item";
@@ -15,3 +17,4 @@ export { Toast } from "./Toast/Toast";
 export { Input } from "./Input/Input";
 export { Loader } from "./Loader/Loader";
 export { Notice } from "./Notice/Notice";
+export { TabBar } from "./TabBar/TabBar";

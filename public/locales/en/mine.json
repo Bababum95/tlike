@@ -6,18 +6,28 @@
   "no-nfts-button": "Buy NFTs",
   "mining": "Mining",
   "upgrades": "Upgrades",
-  "fan": "Fan",
-  "fan-description": "Upgrade your mining rig with the Fan for cooler operations and higher LOVE profits.",
-  "cable-improvements": "Cable upgrade",
-  "cable-improvements-description": "Boost your mining efficiency with the Cable improvements, providing a stable power supply.",
-  "water-cooling": "Water cooling",
-  "water-cooling-description": "Improve your mining efficiency with Water Cooling, providing superior cooling and increased LOVE profits.",
-  "engineer": "Engineer",
-  "engineer-description": "Boost your mining setup with the Engineer, optimizing performance and maximizing LOVE profits.",
   "buy": "Buy",
   "amount": "Amount",
   "start": "Start",
   "stop": "Stop",
   "profit-per-hour": "Profit per hour",
-  "amount-short": "Amount"
+  "amount-short": "Amount",
+  "upgrade-list": {
+    "1": {
+      "name": "Fan",
+      "description": "Upgrade your miner with a fan for better cooling and LOVE higher profits"
+    },
+    "2": {
+      "name": "Stabilizer",
+      "description": "Improve your LOVE mining efficiency with an improved stabilizer for stable power."
+    },
+    "3": {
+      "name": "Water Cooling",
+      "description": "Improve your mining efficiency with a water cooler for superior cooling and LOVE higher profits."
+    },
+    "4": {
+      "name": "Artificial Intelligence",
+      "description": "Improve your miner with artificial intelligence, optimizing performance and maximizing LOVE profits."
+    }
+  }
 }

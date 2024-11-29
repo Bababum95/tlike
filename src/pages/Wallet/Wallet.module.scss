@@ -56,37 +56,3 @@
   list-style: none;
   margin: 8px 0 0;
 }
-
-.item {
-  @include flex-layout(flex-start, center);
-  gap: 14px;
-  position: relative;
-  background-color: $section;
-  border-radius: 16px;
-  padding: 10px 14px;
-  @include border-gradient;
-
-  &:not(:last-child) {
-    margin-bottom: 8px;
-  }
-}
-
-.icon {
-  height: 28px;
-  width: auto;
-}
-
-.name {
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  color: $hint;
-  margin: 0;
-}
-
-.value {
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  margin: 0 0 0 auto;
-}

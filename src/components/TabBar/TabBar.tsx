@@ -1,20 +1,40 @@
-// import { FC } from "react";
-// import { motion } from "motion/react";
-// import classNames from "classnames";
+import { FC } from "react";
+import { useLocation } from "react-router-dom";
+import { motion } from "motion/react";
 
-// export const TabBar: FC = () => {
-//   return (
-//     <nav>
-//       <motion.div
-//         layoutId="background"
-//         className={classNames(styles.background, styles[tab])}
-//       />
-//       <button className={styles.button} onClick={() => setTab("mining")}>
-//         {t("mining")}
-//       </button>
-//       <button className={styles.button} onClick={() => setTab("upgrades")}>
-//         {t("upgrades")}
-//       </button>
-//     </nav>
-//   );
-// };
+import { Link } from "@/components";
+
+import styles from "./TabBar.module.scss";
+
+type Props = {
+  links: {
+    label: string;
+    path: string;
+  }[];
+};
+
+export const TabBar: FC<Props> = ({ links }) => {
+  const location = useLocation();
+  const width = 100 / links.length;
+  const isActivePath = links.findIndex(
+    ({ path }) => path === location.pathname
+  );
+
+  return (
+    <nav className={styles.nav}>
+      <motion.div
+        layoutId="background"
+        className={styles.background}
+        style={{
+          width: `calc(${width}% - 4px)`,
+          left: `max(${width}% * ${isActivePath}, 2px)`,
+        }}
+      />
+      {links.map(({ label, path }) => (
+        <Link key={path} className={styles.link} to={path}>
+          {label}
+        </Link>
+      ))}
+    </nav>
+  );
+};

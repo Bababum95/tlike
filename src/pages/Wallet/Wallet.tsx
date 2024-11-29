@@ -2,16 +2,14 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton } from "@tonconnect/ui-react";
 
-import { Link, User, Page } from "@/components";
+import { Link, User, Page, BalanceItem } from "@/components";
 import { HistoryIcon } from "@images";
-import { useAppSelector } from "@hooks";
 import { TOKENS } from "@/core/config";
 
 import styles from "./Wallet.module.scss";
 
 export const Wallet = () => {
   const { t } = useTranslation("wallet");
-  const user = useAppSelector((state) => state.user);
   const depositRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -44,12 +42,8 @@ export const Wallet = () => {
         <h2 className={styles.title}>{t("balance")}</h2>
 
         <ul className={styles.list}>
-          {TOKENS.map(({ key, icon, name }) => (
-            <li className={styles.item} key={key}>
-              <img className={styles.icon} src={icon} alt={name} />
-              <p className={styles.name}>{name}</p>
-              <p className={styles.value}>{user.balances[key]}</p>
-            </li>
+          {TOKENS.map(({ key }) => (
+            <BalanceItem name={key} key={key} />
           ))}
         </ul>
       </div>

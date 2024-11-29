@@ -2,6 +2,7 @@ export type { FortuneStateType } from "./types/fortune";
 export type { ProjectStateType } from "./types/project";
 export type { HistoryStateType } from "./types/history";
 export type {
+  BalancesType,
   UserType,
   UserStateType,
   MissionType,

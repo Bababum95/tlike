@@ -4,6 +4,8 @@ import {
   OnboardingPage,
   MainPage,
   MinePage,
+  MineIndexPage,
+  MineUpgradesPage,
   FriendsPage,
   EarnPage,
   WalletPage,
@@ -16,16 +18,30 @@ import {
 } from "@/pages";
 import { EarnIcon, FriendsIcon, MainIcon, MineIcon } from "@/assets/images";
 
-type Route = {
+export type Route = {
   path: string;
   Component: ComponentType;
   title?: string;
   icon?: JSX.Element;
+  children?: {
+    path?: string;
+    Component: ComponentType;
+    index?: boolean;
+  }[];
 };
 
 export const mainRoutes: Route[] = [
   { path: "/", Component: MainPage, icon: <MainIcon />, title: "main" },
-  { path: "/mine", Component: MinePage, icon: <MineIcon />, title: "mine" },
+  {
+    path: "/mine",
+    Component: MinePage,
+    icon: <MineIcon />,
+    title: "mine",
+    children: [
+      { index: true, Component: MineIndexPage },
+      { path: "upgrades", Component: MineUpgradesPage },
+    ],
+  },
   { path: "/earn", Component: EarnPage, icon: <EarnIcon />, title: "earn" },
   {
     path: "/friends",
@@ -45,5 +61,4 @@ export const routes: Route[] = [
   { path: "/wallet/transfer", Component: TransferPage },
   { path: "/settings", Component: SettingsPage },
   { path: "/earn/fortune", Component: FortunePage },
-  { path: "/mine/:tab?", Component: MinePage },
 ];

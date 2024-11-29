@@ -1,6 +1,6 @@
 import { type FC, useEffect, useState, useCallback } from "react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
-import { Navigate, Route, Routes, HashRouter } from "react-router-dom";
+import { Navigate, HashRouter } from "react-router-dom";
 import { useTonWallet, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTranslation } from "react-i18next";
 import {
@@ -11,8 +11,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
-import { Loader, Notice } from "@/components";
-import { routes } from "@/core/routes";
+import { Loader, Notice, AppRoutes } from "@/components";
 import { mainRoutes } from "@/core/routes";
 import {
   addBalance,
@@ -169,12 +168,7 @@ export const App: FC = (): JSX.Element => {
       ) : (
         <>
           <HashRouter>
-            <Routes>
-              {routes.map((route) => (
-                <Route key={route.path} {...route} />
-              ))}
-              {/* <Route path="*" element={<Navigate to="/" />} /> */}
-            </Routes>
+            <AppRoutes />
             {user.referal && <Navigate to="/referal" replace />}
             {!user.referal && user.type === "new" && (
               <Navigate to="/onboarding" replace />
