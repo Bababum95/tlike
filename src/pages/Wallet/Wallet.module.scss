@@ -1,5 +1,5 @@
 .page {
-  padding: 24px 0;
+  padding: 20px 24px;
 }
 
 .header {
@@ -11,7 +11,6 @@
   flex-wrap: wrap;
   gap: 8px 6px;
   margin: 24px 0;
-  padding: 0 16px;
 }
 
 .button {
@@ -32,7 +31,7 @@
 
 .title {
   @include h2;
-  margin: 20px 24px 16px;
+  margin: 20px 0 16px;
 }
 
 .wallet {
@@ -48,11 +47,11 @@
 .history {
   position: absolute;
   top: 20px;
-  right: 16px;
+  right: 20px;
 }
 
 .list {
-  padding: 0 16px;
+  padding: 0;
   list-style: none;
   margin: 8px 0 0;
 

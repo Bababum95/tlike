@@ -9,6 +9,7 @@ import {
   FriendsPage,
   EarnPage,
   WalletPage,
+  WalletCard,
   HistoryPage,
   SettingsPage,
   WithdrawPage,
@@ -27,6 +28,7 @@ export type Route = {
     path?: string;
     Component: ComponentType;
     index?: boolean;
+    props?: object;
   }[];
 };
 
@@ -55,7 +57,15 @@ export const routes: Route[] = [
   ...mainRoutes,
   { path: "/onboarding", Component: OnboardingPage },
   { path: "/referal", Component: ReferalPage },
-  { path: "/wallet", Component: WalletPage },
+  {
+    path: "/wallet",
+    Component: WalletPage,
+    children: [
+      { index: true, Component: WalletCard, props: { type: "silver" } },
+      { path: "gold", Component: WalletCard, props: { type: "gold" } },
+      { path: "platinum", Component: WalletCard, props: { type: "platinum" } },
+    ],
+  },
   { path: "/wallet/history", Component: HistoryPage },
   { path: "/wallet/withdraw", Component: WithdrawPage },
   { path: "/wallet/transfer", Component: TransferPage },
