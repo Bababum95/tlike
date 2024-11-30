@@ -44,6 +44,11 @@ export const Card: FC<Props> = ({ type = "silver" }) => {
             <p className={styles.value}>123456789</p>
           </div>
         </div>
+        <div>
+          <h3 className={styles.title}>
+            {type === "silver" ? "Параметры карты" : "Преимущества карты"}
+          </h3>
+        </div>
       </div>
     </motion.div>
   );
