@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useId } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 
@@ -28,6 +28,7 @@ type Props = LinkProps | ButtonProps;
 
 export const TabBar: FC<Props> = (props) => {
   const { type, links } = props;
+  const id = useId();
   const location = useLocation();
   const width = 100 / props.links.length;
   const isActive =
@@ -38,7 +39,7 @@ export const TabBar: FC<Props> = (props) => {
   return (
     <nav className={styles.nav}>
       <motion.div
-        layoutId="background"
+        layoutId={id}
         className={styles.background}
         style={{
           width: `calc(${width}% - 4px)`,

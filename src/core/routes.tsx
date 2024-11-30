@@ -8,6 +8,7 @@ import {
   MineUpgradesPage,
   FriendsPage,
   EarnPage,
+  EarnTasksPage,
   WalletPage,
   HistoryPage,
   SettingsPage,
@@ -42,7 +43,16 @@ export const mainRoutes: Route[] = [
       { path: "upgrades", Component: MineUpgradesPage },
     ],
   },
-  { path: "/earn", Component: EarnPage, icon: <EarnIcon />, title: "earn" },
+  {
+    path: "/earn",
+    Component: EarnPage,
+    icon: <EarnIcon />,
+    title: "earn",
+    children: [
+      { index: true, Component: EarnTasksPage },
+      { path: "fortune", Component: FortunePage },
+    ],
+  },
   {
     path: "/friends",
     Component: FriendsPage,
@@ -60,5 +70,4 @@ export const routes: Route[] = [
   { path: "/wallet/withdraw", Component: WithdrawPage },
   { path: "/wallet/transfer", Component: TransferPage },
   { path: "/settings", Component: SettingsPage },
-  { path: "/earn/fortune", Component: FortunePage },
 ];

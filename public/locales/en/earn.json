@@ -1,5 +1,4 @@
 {
-  "title": "Fortune Wheel",
   "text": "Complete all tasks to spin the fortune wheel",
   "spin": "Spin",
   "spin-free": "Free spin",
@@ -14,5 +13,13 @@
   "buy-spin-hint": "You can buy a spin with LIKE or LOVE tokens",
   "take-reward": "Take reward",
   "win-hint": "We will send your prize shortly to the address listed below.",
-  "address": "Address"
+  "address": "Address",
+  "tasks": "Задания",
+  "calendar": "Календарь",
+  "fortune": "Fortune Wheel",
+  "story": {
+    "title": "Выставляй пост и получай бонусы",
+    "text": "Новые возможности с NFT майнингом",
+    "button": "Опубликовать"
+  }
 }

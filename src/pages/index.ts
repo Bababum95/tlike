@@ -5,7 +5,7 @@ export {
   MineUpgrades as MineUpgradesPage,
 } from "./Mine";
 export { Friends as FriendsPage } from "./Friends/Friends";
-export { Earn as EarnPage } from "./Earn/Earn";
+export { Earn as EarnPage, EarnTasks as EarnTasksPage } from "./Earn";
 
 export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
 export { Wallet as WalletPage } from "./Wallet/Wallet";
