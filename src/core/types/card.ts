@@ -13,7 +13,7 @@ export type CardStateType = {
       like_fee: number;
       love_fee: number;
       ton_fee: number;
-      stacking_requirement: string | null;
+      stacking_requirement: number | null;
       nft_requirement: number | null;
     };
   };

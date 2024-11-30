@@ -113,6 +113,8 @@ npm run preview
 /like
 ├── /public
 │   ├── /locales                 # Локализация (Текст, переводы)
+│   ├── /animations              # Анимации
+│   ├── /images                  # Изображения
 │   ├── logo.png                 # Логотип для TonConnect
 |   └── tonconnect-manifest.json # Конфигурация TonConnect
 ├── /src

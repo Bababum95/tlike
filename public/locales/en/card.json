@@ -23,5 +23,18 @@
       "description_zero": "Нет комиссии за Like !",
       "description_other": "{{amount}} % независимо от суммы"
     }
+  },
+  "requirements": {
+    "nft": {
+      "title": "Владение минимум нашими {{amount}} NFT",
+      "description": "NFT должны находиться непосредственно в кошельке"
+    },
+    "stacking": {
+      "title": "Активная механика стейкинга",
+      "description": "Стейкинг USDT на сумму от {{amount}}$ и выше"
+    },
+    "platinum": {
+      "title": "Наличие NFT \"Platinum card\" в кошельке"
+    }
   }
 }

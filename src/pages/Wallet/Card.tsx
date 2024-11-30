@@ -6,23 +6,51 @@ import classNames from "classnames";
 
 import type { CardType } from "@types";
 import { TabBar } from "@/components";
-import { SuccessIcon } from "@images";
+import { SuccessIcon, ErrorIcon } from "@images";
 import { useAppSelector } from "@hooks";
 import { CARD_ADVANTAGES } from "@config";
 
 import styles from "./Card.module.scss";
 
-type Props = {
-  type?: CardType;
+type ItemProps = {
+  delay: number;
+  title: string;
+  description?: string;
+  success?: boolean;
 };
 
-export const Card: FC<Props> = () => {
+const Item: FC<ItemProps> = ({ delay, title, description, success }) => {
+  return (
+    <motion.li
+      className={styles.item}
+      animate={{
+        x: [100, 0],
+        opacity: [0, 1],
+      }}
+      transition={{
+        delay,
+        duration: 0.2,
+      }}
+    >
+      {success ? <SuccessIcon /> : <ErrorIcon />}
+      <div>
+        <p className={styles["item-title"]}>{title}</p>
+        {description && (
+          <p className={styles["item-description"]}>{description}</p>
+        )}
+      </div>
+    </motion.li>
+  );
+};
+
+export const Card = () => {
   const { t } = useTranslation("card");
   const user = initData.user();
   const card = useAppSelector((state) => state.card);
 
   const [type, setType] = useState<CardType>(card.current);
   const advantages = card.advantages[type];
+  const requirements = card.requirements[type];
 
   return (
     <motion.div
@@ -84,53 +112,60 @@ export const Card: FC<Props> = () => {
             </h3>
             <ul className={styles.list}>
               {CARD_ADVANTAGES.map((item, index) => (
-                <motion.li
+                <Item
                   key={item + type}
-                  className={styles.item}
-                  animate={{
-                    x: [100, 0],
-                    opacity: [0, 1],
-                  }}
-                  transition={{
-                    duration: 0.2,
-                    delay: 0.1 * index,
-                  }}
-                >
-                  <SuccessIcon />
-                  <div>
-                    <p className={styles["advantage-title"]}>
-                      {t(`advantages.${item}.title`)}
-                    </p>
-                    <p className={styles["advantage-description"]}>
-                      {t(`advantages.${item}.description`, {
-                        amount: new Intl.NumberFormat("ru-RU").format(
-                          advantages[item]
-                        ),
-                        count: advantages[item],
-                      })}
-                    </p>
-                  </div>
-                </motion.li>
+                  delay={0.1 * index}
+                  title={t(`advantages.${item}.title`)}
+                  description={t(`advantages.${item}.description`, {
+                    amount: new Intl.NumberFormat("ru-RU").format(
+                      advantages[item]
+                    ),
+                    count: advantages[item],
+                  })}
+                  success
+                />
               ))}
               {type === "platinum" && (
-                <motion.li
-                  className={styles.item}
-                  animate={{
-                    x: [100, 0],
-                    opacity: [0, 1],
-                  }}
-                  transition={{
-                    duration: 0.2,
-                    delay: 0.1 * CARD_ADVANTAGES.length,
-                  }}
-                >
-                  <SuccessIcon />
-                  <div>
-                    <p className={styles["advantage-title"]}>
-                      Особые привелегии в Telegram
-                    </p>
-                  </div>
-                </motion.li>
+                <Item
+                  delay={0.1 * CARD_ADVANTAGES.length}
+                  title="Особые привелегии в Telegram"
+                  success
+                />
+              )}
+            </ul>
+          </div>
+        )}
+        {requirements && (
+          <div className={styles.section}>
+            <h3 className={styles.title}>Условия активации</h3>
+            <ul className={styles.list}>
+              {advantages.nft_requirement && (
+                <Item
+                  delay={0}
+                  title={t(`requirements.nft.title`, {
+                    amount: advantages.nft_requirement,
+                  })}
+                  description={t(`requirements.nft.description`)}
+                  success={requirements.nft_count_is_completed}
+                />
+              )}
+              {advantages.stacking_requirement && (
+                <Item
+                  delay={0.1}
+                  title={t(`requirements.stacking.title`)}
+                  description={t(`requirements.stacking.description`, {
+                    amount: advantages.stacking_requirement,
+                  })}
+                  success={requirements.stacked_usdt_is_completed}
+                />
+              )}
+              {type === "platinum" && (
+                <Item
+                  delay={0.2}
+                  title={t(`requirements.platinum.title`)}
+                  description={t(`requirements.nft.description`)}
+                  success={requirements.platinum_nft}
+                />
               )}
             </ul>
           </div>

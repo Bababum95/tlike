@@ -55,10 +55,22 @@ const cardSlice = createSlice({
               like_fee: Number(item.like_fee),
               love_fee: Number(item.love_fee),
               ton_fee: Number(item.ton_fee),
-              stacking_requirement: item.stacking_requirement,
-              nft_requirement: item.nft_requirement,
+              stacking_requirement: item.stacking_requirement
+                ? Number(item.stacking_requirement)
+                : null,
+              nft_requirement: item.nft_requirement
+                ? Number(item.nft_requirement)
+                : null,
             };
           });
+        }
+
+        if (payload.requirements_for_gold) {
+          state.requirements.gold = payload.requirements_for_gold;
+        }
+
+        if (payload.requirements_for_platinum) {
+          state.requirements.platinum = payload.requirements_for_platinum;
         }
       })
       .addCase(getStatus.rejected, (state) => {

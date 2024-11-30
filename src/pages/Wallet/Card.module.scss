@@ -88,6 +88,7 @@ h3.title {
   svg {
     width: 28px;
     height: 28px;
+    flex-shrink: 0;
   }
 
   &:not(:last-child) {
@@ -95,7 +96,7 @@ h3.title {
   }
 }
 
-.advantage-title {
+.item-title {
   margin: 0;
   font-weight: 600;
   font-size: 14px;
@@ -106,7 +107,7 @@ h3.title {
   }
 }
 
-.advantage-description {
+.item-description {
   margin: 0;
   font-weight: 700;
   font-size: 12px;
