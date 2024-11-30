@@ -3,7 +3,7 @@ import { initData } from "@telegram-apps/sdk-react";
 import classNames from "classnames";
 
 import { defaultAvatar } from "@images";
-import { useAppDispatch, useAppSelector } from "@hooks";
+import { useAppDispatch } from "@hooks";
 import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./User.module.scss";
@@ -19,7 +19,7 @@ export const User: FC<Props> = ({
   direction = "row",
   size = "s",
 }) => {
-  const photo = useAppSelector((state) => state.user.photo);
+  // const photo = useAppSelector((state) => state.user.photo);
   const user = initData.user();
   const dispatch = useAppDispatch();
 

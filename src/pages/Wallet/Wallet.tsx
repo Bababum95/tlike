@@ -24,16 +24,16 @@ export const Wallet = () => {
   }, []);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: -20, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        key="wallet"
-        className={styles.page}
-      >
-        <Page>
+    <Page>
+      <AnimatePresence>
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          key="wallet"
+          className={styles.page}
+        >
           <header className={styles.header}>
             <User size="m" showIcon />
             <Link to="/wallet/history" className={styles.history}>
@@ -65,8 +65,8 @@ export const Wallet = () => {
             ))}
           </ul>
           <Card />
-        </Page>
-      </motion.div>
-    </AnimatePresence>
+        </motion.div>
+      </AnimatePresence>
+    </Page>
   );
 };
