@@ -19,7 +19,6 @@ export const User: FC<Props> = ({
   direction = "row",
   size = "s",
 }) => {
-  // const photo = useAppSelector((state) => state.user.photo);
   const user = initData.user();
   const dispatch = useAppDispatch();
 

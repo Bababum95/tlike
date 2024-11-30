@@ -381,7 +381,7 @@ const userSlice = createSlice({
           action.payload.wallet && action.payload.wallet !== ""
             ? action.payload.wallet
             : null;
-        if (action.payload.photo) state.photo = action.payload.photo;
+        // if (action.payload.photo) state.photo = action.payload.photo;
         state.status = "successed";
       })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

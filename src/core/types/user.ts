@@ -53,7 +53,7 @@ export type UserType = {
     love_nft: number;
     love_upgrades: number;
   };
-  photo?: string;
+  // photo?: string;
   token: string;
   type: "old" | "new";
   language: "en" | "ru";
