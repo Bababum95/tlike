@@ -1,10 +1,9 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { motion, AnimatePresence, stagger, useAnimate } from "motion/react";
 
-import type { CardType } from "@types";
-import { Link, User, Page, BalanceItem, TabBar } from "@/components";
+import { Link, User, Page, BalanceItem } from "@/components";
 import { HistoryIcon } from "@images";
 import { TOKENS } from "@/core/config";
 
@@ -14,7 +13,6 @@ import styles from "./Wallet.module.scss";
 export const Wallet = () => {
   const { t } = useTranslation("wallet");
   const [scope, animate] = useAnimate();
-  const [card, setCard] = useState<CardType>("silver");
   const depositRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -66,26 +64,7 @@ export const Wallet = () => {
               <BalanceItem name={key} key={key} Element="li" />
             ))}
           </ul>
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.5 }}
-            key="card"
-            className={styles.card}
-          >
-            <h2 className={styles.title}>Карта</h2>
-            <TabBar
-              type="button"
-              active={card}
-              onClick={(id) => setCard(id as CardType)}
-              links={[
-                { label: "Silver", id: "silver" },
-                { label: "Gold", id: "gold" },
-                { label: "Platinum", id: "platinum" },
-              ]}
-            />
-            <Card type={card} />
-          </motion.div>
+          <Card />
         </Page>
       </motion.div>
     </AnimatePresence>

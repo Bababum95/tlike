@@ -8,7 +8,7 @@ export { Friends as FriendsPage } from "./Friends/Friends";
 export { Earn as EarnPage } from "./Earn/Earn";
 
 export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
-export { Wallet as WalletPage, Card as WalletCard } from "./Wallet";
+export { Wallet as WalletPage } from "./Wallet/Wallet";
 export { History as HistoryPage } from "./History/History";
 export { Settings as SettingsPage } from "./Settings/Settings";
 export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";

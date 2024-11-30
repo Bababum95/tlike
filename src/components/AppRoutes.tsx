@@ -9,12 +9,11 @@ import { routes, type Route as RouteType } from "@/core/routes";
  * @param {RouteType[]} routes - List of route definitions to render. Each route contains:
  *   - `path` (string): The URL path for the route.
  *   - `Component` (ComponentType): The component to render for this route.
- *   - `children` ({ path?: string; Component: ComponentType; index?: boolean; props?: object }[] | undefined):
+ *   - `children` ({ path?: string; Component: ComponentType; index?: boolean; }[] | undefined):
  *     An array of nested route objects, each with:
  *       - `path` (string | undefined): The URL path for the nested route.
  *       - `Component` (ComponentType): The component to render for the nested route.
  *       - `index` (boolean | undefined): Marks the nested route as an index route if true.
- *       - `props` (object | undefined): Additional props to pass to the component of the nested route.
  *
  * @returns {JSX.Element[]} Array of <Route> elements, recursively rendered for each route and its children.
  */
@@ -22,13 +21,8 @@ const renderRoutes = (routes: RouteType[]): JSX.Element[] => {
   return routes.map(({ path, Component, children }) => (
     <Route key={path} element={<Component />} path={path}>
       {children &&
-        children.map(({ path, Component, index, props }, i) => (
-          <Route
-            key={i}
-            element={<Component {...props} />}
-            path={path}
-            index={index}
-          />
+        children.map(({ path, Component, index }, i) => (
+          <Route key={i} element={<Component />} path={path} index={index} />
         ))}
     </Route>
   ));

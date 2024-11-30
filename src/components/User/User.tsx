@@ -32,7 +32,11 @@ export const User: FC<Props> = ({
     <div
       className={classNames(styles.container, styles[direction], styles[size])}
     >
-      <img className={styles.image} src={photo || defaultAvatar} alt="User" />
+      <img
+        className={styles.image}
+        src={user?.photoUrl || defaultAvatar}
+        alt="User"
+      />
       <div className={styles.info}>
         <p className={styles.name}>@{user?.username || "unknown"}</p>
         <p
