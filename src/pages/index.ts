@@ -1,17 +1,23 @@
+// Main Pages
+export {
+  Earn as EarnPage,
+  EarnCalendar as EarnCalendarPage,
+  EarnFortune as EarnFortunePage,
+  EarnTasks as EarnTasksPage,
+} from "./Earn";
+export { Friends as FriendsPage } from "./Friends/Friends";
 export { Main as MainPage } from "./Main/Main";
 export {
   Mine as MinePage,
   MineIndex as MineIndexPage,
   MineUpgrades as MineUpgradesPage,
 } from "./Mine";
-export { Friends as FriendsPage } from "./Friends/Friends";
-export { Earn as EarnPage, EarnTasks as EarnTasksPage } from "./Earn";
 
-export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
-export { Wallet as WalletPage } from "./Wallet/Wallet";
+// Other Pages
 export { History as HistoryPage } from "./History/History";
-export { Settings as SettingsPage } from "./Settings/Settings";
-export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";
-export { Transfer as TransferPage } from "./Transfer/Transfer";
-export { Fortune as FortunePage } from "./Fortune/Fortune";
+export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
 export { Referal as ReferalPage } from "./Referal/Referal";
+export { Settings as SettingsPage } from "./Settings/Settings";
+export { Transfer as TransferPage } from "./Transfer/Transfer";
+export { Wallet as WalletPage } from "./Wallet/Wallet";
+export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";

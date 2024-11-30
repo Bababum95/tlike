@@ -3,7 +3,7 @@ import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import classNames from "classnames";
 
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
-import { Navigation, Balance, Toast, Page } from "@/components";
+import { Navigation, Balance, Toast, Page, Slider } from "@/components";
 import { markNotificationsAsRead } from "@/core/store/slices/history";
 import {
   minerAnimation,
@@ -13,7 +13,6 @@ import {
 } from "@images";
 
 import { Header } from "./Header";
-import { Slider } from "./Slider";
 import styles from "./Main.module.scss";
 
 const isProd = import.meta.env.PROD;

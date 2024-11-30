@@ -26,7 +26,7 @@ export const Tasks = () => {
   }, [showFirework]);
 
   return (
-    <>
+    <main className={styles.main}>
       <h2 className={styles.title}>{t("story.title")}</h2>
       <div className={styles.story}>
         <p className={styles["story-text"]}>{t("story.text")}</p>
@@ -83,7 +83,7 @@ export const Tasks = () => {
       {showFirework && (
         <Realistic onInit={({ conductor }) => conductor.shoot()} />
       )}
-    </>
+    </main>
   );
 };
 

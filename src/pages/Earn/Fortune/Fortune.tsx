@@ -165,21 +165,30 @@ export const Fortune = () => {
   }, [fortuneStore.spin_available, fortuneStore.nextSpinTime]);
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <motion.ul className={styles.wheel}>
         {FORTUNE_WHEEL.map((item, index) => (
           <motion.li
             key={item.id}
+            animate={{
+              opacity: [0, 1],
+              scale: [0.8, 1],
+            }}
+            transition={{
+              duration: 0.15,
+              delay: index * 0.06,
+            }}
             className={classNames(styles.item, {
               [styles.active]: index === activeIndex,
             })}
           >
+            <div className={styles.background} />
             <span>{item.value}</span>
             <img src={item.icon} alt={item.value} width={56} height={48} />
           </motion.li>
         ))}
       </motion.ul>
-      <h1 className={styles.title}>{t("title")}</h1>
+      <h1 className={styles.title}>{t("fortune")}</h1>
       <p className={styles.text}>{t("fortune-text")}</p>
       <button
         onClick={() => spin("free")}
@@ -278,6 +287,6 @@ export const Fortune = () => {
           {t("confirm")}
         </button>
       </Toast>
-    </div>
+    </main>
   );
 };

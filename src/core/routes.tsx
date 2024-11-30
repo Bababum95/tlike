@@ -8,13 +8,14 @@ import {
   MineUpgradesPage,
   FriendsPage,
   EarnPage,
+  EarnCalendarPage,
+  EarnFortunePage,
   EarnTasksPage,
   WalletPage,
   HistoryPage,
   SettingsPage,
   WithdrawPage,
   TransferPage,
-  FortunePage,
   ReferalPage,
 } from "@/pages";
 import { EarnIcon, FriendsIcon, MainIcon, MineIcon } from "@/assets/images";
@@ -50,7 +51,8 @@ export const mainRoutes: Route[] = [
     title: "earn",
     children: [
       { index: true, Component: EarnTasksPage },
-      { path: "fortune", Component: FortunePage },
+      { path: "fortune", Component: EarnFortunePage },
+      { path: "calendar", Component: EarnCalendarPage },
     ],
   },
   {

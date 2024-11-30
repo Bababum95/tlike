@@ -10,7 +10,7 @@ export const Earn = () => {
 
   return (
     <Page back={false}>
-      <div className={styles.page}>
+      <header className={styles.header}>
         <TabBar
           type="link"
           links={[
@@ -19,8 +19,8 @@ export const Earn = () => {
             { label: t("fortune"), path: "/earn/fortune" },
           ]}
         />
+      </header>
         <Outlet />
-      </div>
       <Navigation />
     </Page>
   );
