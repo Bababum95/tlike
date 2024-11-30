@@ -6,19 +6,34 @@ import { Link } from "@/components";
 
 import styles from "./TabBar.module.scss";
 
-type Props = {
+type LinkProps = {
+  type: "link";
   links: {
     label: string;
     path: string;
   }[];
 };
 
-export const TabBar: FC<Props> = ({ links }) => {
+type ButtonProps = {
+  type: "button";
+  onClick: (id: string) => void;
+  active: string;
+  links: {
+    label: string;
+    id: string;
+  }[];
+};
+
+type Props = LinkProps | ButtonProps;
+
+export const TabBar: FC<Props> = (props) => {
+  const { type, links } = props;
   const location = useLocation();
-  const width = 100 / links.length;
-  const isActivePath = links.findIndex(
-    ({ path }) => path === location.pathname
-  );
+  const width = 100 / props.links.length;
+  const isActive =
+    type === "link"
+      ? links.findIndex((link) => link.path === location.pathname)
+      : links.findIndex((link) => link.id === props.active);
 
   return (
     <nav className={styles.nav}>
@@ -27,14 +42,24 @@ export const TabBar: FC<Props> = ({ links }) => {
         className={styles.background}
         style={{
           width: `calc(${width}% - 4px)`,
-          left: `max(${width}% * ${isActivePath}, 2px)`,
+          left: `max(${width}% * ${isActive}, 2px)`,
         }}
       />
-      {links.map(({ label, path }) => (
-        <Link key={path} className={styles.link} to={path}>
-          {label}
-        </Link>
-      ))}
+      {type === "link"
+        ? links.map(({ label, path }) => (
+            <Link key={path} className={styles.link} to={path}>
+              {label}
+            </Link>
+          ))
+        : links.map(({ label, id }) => (
+            <button
+              key={id}
+              className={styles.link}
+              onClick={() => props.onClick(id)}
+            >
+              {label}
+            </button>
+          ))}
     </nav>
   );
 };

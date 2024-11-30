@@ -2,10 +2,12 @@ import { FC } from "react";
 import { motion } from "motion/react";
 import classNames from "classnames";
 
+import type { CardType } from "@types";
+
 import styles from "./Card.module.scss";
 
 type Props = {
-  type?: "silver" | "gold" | "platinum";
+  type?: CardType;
 };
 
 export const Card: FC<Props> = ({ type = "silver" }) => {
@@ -44,11 +46,11 @@ export const Card: FC<Props> = ({ type = "silver" }) => {
             <p className={styles.value}>123456789</p>
           </div>
         </div>
-        <div>
-          <h3 className={styles.title}>
-            {type === "silver" ? "Параметры карты" : "Преимущества карты"}
-          </h3>
-        </div>
+      </div>
+      <div>
+        <h3 className={styles.title}>
+          {type === "silver" ? "Параметры карты" : "Преимущества карты"}
+        </h3>
       </div>
     </motion.div>
   );

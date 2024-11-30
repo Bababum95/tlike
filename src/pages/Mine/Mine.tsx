@@ -16,6 +16,7 @@ export const Mine: FC = () => {
           <User />
           <div className={styles.tabs}>
             <TabBar
+              type="link"
               links={[
                 { label: t("mining"), path: "/mine" },
                 { label: t("upgrades"), path: "/mine/upgrades" },
