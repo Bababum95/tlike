@@ -5,6 +5,7 @@ import classNames from "classnames";
 
 import type { CardType } from "@types";
 import { TabBar } from "@/components";
+import { SuccessIcon } from "@images";
 
 import styles from "./Card.module.scss";
 
@@ -69,10 +70,15 @@ export const Card: FC<Props> = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className={styles.section}>
           <h3 className={styles.title}>
             {type === "silver" ? "Параметры карты" : "Преимущества карты"}
           </h3>
+          <ul>
+            <li>
+              <SuccessIcon />
+            </li>
+          </ul>
         </div>
       </motion.div>
     </motion.div>

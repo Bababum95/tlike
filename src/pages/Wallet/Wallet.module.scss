@@ -14,6 +14,7 @@
 }
 
 .button {
+  @include border-gradient(8px);
   width: calc(50% - 3px);
   color: #fff;
   background-color: $section;
@@ -25,7 +26,6 @@
   font-size: 15px;
   line-height: 147%;
   letter-spacing: 0.01em;
-  @include border-gradient(8px);
   padding: 8px;
 }
 

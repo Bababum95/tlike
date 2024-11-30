@@ -1,6 +1,6 @@
 .container {
   @include flex-column;
-  min-height: max(100svh, 735px);
+  min-height: max(100dvh, 735px);
   padding-bottom: 100px;
 }
 

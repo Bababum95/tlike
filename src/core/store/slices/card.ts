@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { api } from "@/core/api";
 import { RootState } from "@/core/store";
+import { CardStateType } from "@/core/types";
 
 export const getStatus = createAsyncThunk(
   "card/getStatus",
@@ -25,14 +26,32 @@ export const getStatus = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState: CardStateType = {
   status: "idle",
+  current: "silver",
+  advantage: {},
+  requirements: {},
 };
 
 const cardSlice = createSlice({
   name: "card",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getStatus.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getStatus.fulfilled, (state, { payload }) => {
+        state.status = "successed";
+        if (payload.current_card) {
+          state.current = payload.current_card.toLoverCase();
+        }
+      })
+      .addCase(getStatus.rejected, (state) => {
+        state.status = "failed";
+      });
+  },
 });
 
 export default cardSlice.reducer;
