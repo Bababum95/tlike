@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import { default as cardReducer } from "./slices/card";
 import { default as fortuneReducer } from "./slices/fortune";
 import { default as historyReducer } from "./slices/history";
 import { default as noticeReducer } from "./slices/notice";
@@ -8,6 +9,7 @@ import { default as userReducer } from "./slices/user";
 
 export const store = configureStore({
   reducer: {
+    card: cardReducer,
     fortune: fortuneReducer,
     history: historyReducer,
     notice: noticeReducer,

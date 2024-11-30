@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@hooks";
 import { PRELOAD_IMAGES_LIST, PRELOAD_VIDEOS_LIST } from "@config";
 import { Loader, Notice, AppRoutes } from "@/components";
 import { mainRoutes } from "@/core/routes";
+import { getStatus as getCardStatus } from "@/core/store/slices/card";
 import {
   addBalance,
   connectWallet,
@@ -104,6 +105,7 @@ export const App: FC = (): JSX.Element => {
         dispatch(getProjectStat()),
         dispatch(referralStat()),
         dispatch(getNotifications()),
+        dispatch(getCardStatus()),
       ]).finally(() => setProgress(100));
 
       dispatch(getCommission());

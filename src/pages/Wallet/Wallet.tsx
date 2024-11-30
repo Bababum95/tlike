@@ -79,9 +79,7 @@ export const Wallet = () => {
                 { label: "Platinum", path: "/wallet/platinum" },
               ]}
             />
-            <div>
-              <Outlet />
-            </div>
+            <Outlet />
           </motion.div>
         </Page>
       </motion.div>
