@@ -133,3 +133,11 @@ export const PRELOAD_IMAGES_LIST = [
 ];
 
 export const PRELOAD_VIDEOS_LIST = [minerAnimation, onboardingAnimation];
+
+export const CARD_ADVANTAGES = [
+  "conversion_fee",
+  "usdt_fee",
+  "ton_fee",
+  "like_fee",
+  "love_fee",
+] as const;

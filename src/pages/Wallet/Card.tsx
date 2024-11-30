@@ -1,11 +1,14 @@
 import { FC, useState } from "react";
 import { motion } from "motion/react";
 import { initData } from "@telegram-apps/sdk-react";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import type { CardType } from "@types";
 import { TabBar } from "@/components";
 import { SuccessIcon } from "@images";
+import { useAppSelector } from "@hooks";
+import { CARD_ADVANTAGES } from "@config";
 
 import styles from "./Card.module.scss";
 
@@ -14,8 +17,12 @@ type Props = {
 };
 
 export const Card: FC<Props> = () => {
+  const { t } = useTranslation("card");
   const user = initData.user();
-  const [type, setType] = useState<CardType>("silver");
+  const card = useAppSelector((state) => state.card);
+
+  const [type, setType] = useState<CardType>(card.current);
+  const advantages = card.advantages[type];
 
   return (
     <motion.div
@@ -24,7 +31,7 @@ export const Card: FC<Props> = () => {
       transition={{ duration: 0.3, delay: 0.5 }}
       key="card"
     >
-      <h2 className={styles.title}>Карта</h2>
+      <h2 className={styles.title}>{t("title")}</h2>
       <TabBar
         type="button"
         active={type}
@@ -70,16 +77,64 @@ export const Card: FC<Props> = () => {
             </div>
           </div>
         </div>
-        <div className={styles.section}>
-          <h3 className={styles.title}>
-            {type === "silver" ? "Параметры карты" : "Преимущества карты"}
-          </h3>
-          <ul>
-            <li>
-              <SuccessIcon />
-            </li>
-          </ul>
-        </div>
+        {advantages && (
+          <div className={styles.section}>
+            <h3 className={styles.title}>
+              {type === "silver" ? "Параметры карты" : "Преимущества карты"}
+            </h3>
+            <ul className={styles.list}>
+              {CARD_ADVANTAGES.map((item, index) => (
+                <motion.li
+                  key={item + type}
+                  className={styles.item}
+                  animate={{
+                    x: [100, 0],
+                    opacity: [0, 1],
+                  }}
+                  transition={{
+                    duration: 0.2,
+                    delay: 0.1 * index,
+                  }}
+                >
+                  <SuccessIcon />
+                  <div>
+                    <p className={styles["advantage-title"]}>
+                      {t(`advantages.${item}.title`)}
+                    </p>
+                    <p className={styles["advantage-description"]}>
+                      {t(`advantages.${item}.description`, {
+                        amount: new Intl.NumberFormat("ru-RU").format(
+                          advantages[item]
+                        ),
+                        count: advantages[item],
+                      })}
+                    </p>
+                  </div>
+                </motion.li>
+              ))}
+              {type === "platinum" && (
+                <motion.li
+                  className={styles.item}
+                  animate={{
+                    x: [100, 0],
+                    opacity: [0, 1],
+                  }}
+                  transition={{
+                    duration: 0.2,
+                    delay: 0.1 * CARD_ADVANTAGES.length,
+                  }}
+                >
+                  <SuccessIcon />
+                  <div>
+                    <p className={styles["advantage-title"]}>
+                      Особые привелегии в Telegram
+                    </p>
+                  </div>
+                </motion.li>
+              )}
+            </ul>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );

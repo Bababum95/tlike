@@ -5,17 +5,16 @@ export type CardType = "silver" | "gold" | "platinum";
 export type CardStateType = {
   status: stateStatus;
   current: CardType;
-  advantage: {
+  advantages: {
     [key: string]: {
       card_type: string;
-      conversion_fee: string;
-      usdt_fee: string;
-      like_fee: string;
-      love_fee: string;
-      ton_fee: string;
+      conversion_fee: number;
+      usdt_fee: number;
+      like_fee: number;
+      love_fee: number;
+      ton_fee: number;
       stacking_requirement: string | null;
       nft_requirement: number | null;
-      like_transfer_fee: string;
     };
   };
   requirements: {

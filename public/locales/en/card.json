@@ -1,0 +1,27 @@
+{
+  "title": "Card",
+  "advantages": {
+    "conversion_fee": {
+      "title": "Комиссия за конвертацию",
+      "description": "{{amount}} % от суммы"
+    },
+    "usdt_fee": {
+      "title": "Комиссия за отправку USDT",
+      "description": "{{amount}} USDT независимо от суммы"
+    },
+    "ton_fee": {
+      "title": "Комиссия за отправку TON",
+      "description": "{{amount}} TON независимо от суммы"
+    },
+    "like_fee": {
+      "title": "Комиссия за отправку Like",
+      "description_zero": "Нет комиссии за Like !",
+      "description_other": "{{amount}} Like независимо от суммы"
+    },
+    "love_fee": {
+      "title": "Комиссия за отправку Love",
+      "description_zero": "Нет комиссии за Like !",
+      "description_other": "{{amount}} % независимо от суммы"
+    }
+  }
+}

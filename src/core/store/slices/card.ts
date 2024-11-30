@@ -14,8 +14,6 @@ export const getStatus = createAsyncThunk(
         headers: { "x-auth-token": token },
       });
 
-      console.log(response);
-
       if (response.status === 200) {
         return response.data;
       }
@@ -29,7 +27,7 @@ export const getStatus = createAsyncThunk(
 const initialState: CardStateType = {
   status: "idle",
   current: "silver",
-  advantage: {},
+  advantages: {},
   requirements: {},
 };
 
@@ -45,7 +43,22 @@ const cardSlice = createSlice({
       .addCase(getStatus.fulfilled, (state, { payload }) => {
         state.status = "successed";
         if (payload.current_card) {
-          state.current = payload.current_card.toLoverCase();
+          state.current = payload.current_card.toLowerCase();
+        }
+
+        if (payload.card_info) {
+          payload.card_info.forEach((item: any) => {
+            state.advantages[item.card_type.toLowerCase()] = {
+              card_type: item.card_type,
+              conversion_fee: Number(item.conversion_fee),
+              usdt_fee: Number(item.usdt_fee),
+              like_fee: Number(item.like_fee),
+              love_fee: Number(item.love_fee),
+              ton_fee: Number(item.ton_fee),
+              stacking_requirement: item.stacking_requirement,
+              nft_requirement: item.nft_requirement,
+            };
+          });
         }
       })
       .addCase(getStatus.rejected, (state) => {
