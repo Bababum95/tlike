@@ -38,7 +38,7 @@ export const Main = () => {
           data-wf-ignore="true"
           data-object-fit="cover"
           preload="auto"
-          poster={user.mining_speed.like > 0 ? "" : minerOffImage}
+          poster={user.mining_speed.like > 0 ? minerOffImage : minerOffImage}
         >
           <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
         </video>
