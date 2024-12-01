@@ -33,7 +33,7 @@ export const Upgrade: FC<Props> = ({ id, value, count, costs, handleBuy }) => {
         preload="auto"
         width={155}
         height={155}
-        poster={count > 0 ? "" : `/images/upgrades/${id}.webp`}
+        poster={`/images/upgrades/${id}.webp`}
         ref={video}
       >
         <source

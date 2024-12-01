@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+import type { CardStateType } from "@types";
 import { api } from "@/core/api";
 import { RootState } from "@/core/store";
-import { CardStateType } from "@/core/types";
 
 export const getStatus = createAsyncThunk(
   "card/getStatus",

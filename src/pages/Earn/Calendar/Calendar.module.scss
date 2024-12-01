@@ -1,0 +1,86 @@
+.wrapper {
+  padding: 0 16px;
+}
+
+.calendar {
+  @include border-gradient;
+  background-color: $section;
+  border-radius: 16px;
+  position: relative;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  list-style: none;
+  padding: 8px;
+  margin: 0;
+  width: 100%;
+}
+
+.item {
+  @include flex-column;
+  @include border-gradient;
+  align-items: center;
+  position: relative;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 16px;
+  z-index: 1;
+
+  img {
+    object-fit: contain;
+  }
+
+  &.current,
+  &.claimed {
+    .background {
+      background-color: $primary;
+    }
+  }
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $section;
+  border-radius: 16px;
+  z-index: -1;
+}
+
+.day {
+  font-size: 10px;
+  margin: 0;
+}
+
+.amount {
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0;
+}
+
+.claim {
+  @include border-gradient;
+  background-color: $section;
+  border-radius: 16px;
+  position: relative;
+  padding: 14px;
+  margin: 20px 0;
+}
+
+.text {
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.button {
+  @include primary-button;
+  width: 100%;
+}

@@ -5,6 +5,7 @@ import { default as fortuneReducer } from "./slices/fortune";
 import { default as historyReducer } from "./slices/history";
 import { default as noticeReducer } from "./slices/notice";
 import { default as projectReducer } from "./slices/project";
+import { default as taskReducer } from "./slices/task";
 import { default as userReducer } from "./slices/user";
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     history: historyReducer,
     notice: noticeReducer,
     project: projectReducer,
+    task: taskReducer,
     user: userReducer,
   },
 });

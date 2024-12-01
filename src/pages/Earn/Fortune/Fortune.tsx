@@ -165,7 +165,11 @@ export const Fortune = () => {
   }, [fortuneStore.spin_available, fortuneStore.nextSpinTime]);
 
   return (
-    <main className={styles.page}>
+    <motion.main
+      className={styles.page}
+      animate={{ opacity: [0, 1], y: [70, 0] }}
+      transition={{ duration: 0.3 }}
+    >
       <motion.ul className={styles.wheel}>
         {FORTUNE_WHEEL.map((item, index) => (
           <motion.li
@@ -239,12 +243,12 @@ export const Fortune = () => {
           <img
             src={FORTUNE_WHEEL[activeIndex].icon}
             alt={FORTUNE_WHEEL[activeIndex].value}
-            width={56}
-            height={48}
-            className={styles["toast-icon"]}
+            width={102}
+            height={110}
+            className="toast-icon"
           />
-          <p className={styles["toast-title"]}>{t("you-won")}</p>
-          <p className={styles["toast-value"]}>
+          <p className="toast-title">{t("you-won")}</p>
+          <p className="toast-value">
             {giftInfo
               ? `${giftInfo.amount} ${giftInfo.currency}`
               : FORTUNE_WHEEL[activeIndex].value}
@@ -252,8 +256,8 @@ export const Fortune = () => {
           {giftInfo &&
             giftInfo.currency !== "Love" &&
             giftInfo.currency !== "Like" && (
-              <div className={styles["toast-address"]}>
-                <p className={styles["toast-hiint"]}>{t("win-hint")}</p>
+              <div className="toast-address">
+                <p className="toast-hiint">{t("win-hint")}</p>
                 <Input
                   label={t("address")}
                   value={`${address.slice(0, 15)}.......${address.slice(-15)}`}
@@ -274,8 +278,8 @@ export const Fortune = () => {
         <Realistic onInit={({ conductor }) => conductor.shoot()} />
       )}
       <Toast isOpen={toastIsOpen.by.open} onClose={closeToast}>
-        <p className={styles["toast-title"]}>{t("buy-spin")}</p>
-        <p className={styles["toast-value"]}>
+        <p className="toast-title">{t("buy-spin")}</p>
+        <p className="toast-value">
           {toastIsOpen.by.currency === "Like" ? "10 LIKE" : "5 000 LOVE"}
         </p>
         <button
@@ -287,6 +291,6 @@ export const Fortune = () => {
           {t("confirm")}
         </button>
       </Toast>
-    </main>
+    </motion.main>
   );
 };

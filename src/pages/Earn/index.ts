@@ -1,3 +1,4 @@
+// Layout
 export { Earn } from "./Earn";
 
 // Outlets

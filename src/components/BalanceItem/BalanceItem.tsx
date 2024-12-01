@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import type { BalancesType } from "@types";
 import { useAppSelector } from "@hooks";
-import { TOKENS } from "@/core/config";
+import { TOKENS } from "@config";
 
 import styles from "./BalanceItem.module.scss";
 

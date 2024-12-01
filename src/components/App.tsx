@@ -26,6 +26,7 @@ import {
 } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
+import { getTasks } from "@/core/store/thunks";
 import { preloadUtils } from "@/core/utils/preloadUtils";
 import { getCommission, getProjectStat } from "@/core/store/slices/project";
 import { getNotifications } from "@/core/store/slices/history";
@@ -97,6 +98,8 @@ export const App: FC = (): JSX.Element => {
       }
 
       Promise.all([
+        dispatch(getTasks()),
+
         dispatch(checkTime()),
         dispatch(fetchReferral()),
         dispatch(getNFT()),

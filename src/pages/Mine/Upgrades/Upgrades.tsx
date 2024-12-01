@@ -105,6 +105,7 @@ export const Upgrades = () => {
                   preload="auto"
                   width={157}
                   height={157}
+                  poster={`/images/upgrades/${toast.id}.webp`}
                 >
                   <source
                     src={`/animations/upgrades/${toast.id}.webm`}

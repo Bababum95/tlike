@@ -1,0 +1,54 @@
+.toast {
+  &-icon {
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
+
+  &-title {
+    @include h2;
+    margin: 4px auto;
+    text-align: center;
+  }
+
+  &-description {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 143%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: $hint;
+    margin: 8px 0;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  &-value {
+    margin: 0 auto 14px;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: linear-gradient(49deg, #007aff 0%, #93c6ff 56%, #007aff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &-address {
+    margin: 18px auto 28px;
+    padding: 0 22px;
+  }
+
+  &-hiint {
+    margin: 0 auto 36px;
+    max-width: 180px;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: $hint;
+  }
+}
