@@ -31,7 +31,7 @@ export const Main = () => {
         <video
           className={styles.miner}
           src={minerAnimation}
-          autoPlay={user.mining_speed.like > 0}
+          autoPlay
           loop
           muted
           playsInline
