@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import type { TaskStateType } from "@/core/types";
 
-import { getTasks } from "@/core/store/thunks";
+import { getTasks, activateCalendarMission } from "@/core/store/thunks";
 
 const initialState: TaskStateType = {
   status: "idle",
@@ -32,6 +32,9 @@ const taskSlice = createSlice({
           next_claim_date: payload.calendar.next_claim_date,
           list: payload.calendar.calendar,
         };
+      })
+      .addCase(activateCalendarMission.fulfilled, (state) => {
+        state.calendar.can_claim_today = false;
       });
   },
 });

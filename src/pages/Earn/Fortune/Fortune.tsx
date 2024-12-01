@@ -197,9 +197,10 @@ export const Fortune = () => {
       <button
         onClick={() => spin("free")}
         className={classNames(
+          "primary-button",
           styles.spin,
-          { [styles.disabled]: !fortuneStore.spin_available },
-          { [styles.loading]: isSpinning }
+          { disabled: !fortuneStore.spin_available },
+          { loading: isSpinning }
         )}
         disabled={!fortuneStore.spin_available}
       >
@@ -213,16 +214,16 @@ export const Fortune = () => {
           <p className={styles.text}>{t("buy-spin-hint")}</p>
           <div className={styles.buttons}>
             <button
-              className={classNames(styles.button, {
-                [styles.disabled]: user.balances.like < 10,
+              className={classNames("primary-button full", {
+                disabled: user.balances.like < 10,
               })}
               onClick={() => openBySpinToast("Like")}
             >
               10 LIKE
             </button>
             <button
-              className={classNames(styles.button, {
-                [styles.disabled]: user.balances.love < 5000,
+              className={classNames("primary-button full", {
+                disabled: user.balances.love < 5000,
               })}
               onClick={() => openBySpinToast("Love")}
             >
@@ -234,7 +235,7 @@ export const Fortune = () => {
       <div className={styles.nft}>
         <h2 className={styles.title}>{t("nft-title")}</h2>
         <p className={styles.text}>{t("nft-text")}</p>
-        <button className={styles.button} onClick={byNft}>
+        <button className={"primary-button full"} onClick={byNft}>
           {t("nft-button")}
         </button>
       </div>
@@ -265,7 +266,7 @@ export const Fortune = () => {
                 />
               </div>
             )}
-          <button onClick={closeToast} className={styles.button}>
+          <button onClick={closeToast} className="primary-button full">
             {giftInfo &&
             giftInfo.currency !== "Love" &&
             giftInfo.currency !== "Like"
@@ -284,8 +285,8 @@ export const Fortune = () => {
         </p>
         <button
           onClick={() => spin("paid")}
-          className={classNames(styles.button, {
-            [styles.loading]: toastIsOpen.by.loading,
+          className={classNames("primary-button full", {
+            loading: toastIsOpen.by.loading,
           })}
         >
           {t("confirm")}

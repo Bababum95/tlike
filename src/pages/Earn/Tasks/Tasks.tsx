@@ -30,7 +30,7 @@ export const Tasks = () => {
       <h2 className={styles.title}>{t("story.title")}</h2>
       <div className={styles.story}>
         <p className={styles["story-text"]}>{t("story.text")}</p>
-        <button className={styles["story-button"]}>{t("story.button")}</button>
+        <button className="primary-button full">{t("story.button")}</button>
       </div>
       {missions && missions.length > 0 && (
         <>
@@ -119,7 +119,7 @@ const EarnToast: FC<EarnToastProps> = ({
   return (
     <div className={styles.toast}>
       <motion.div
-        className={styles["toast-icon"]}
+        className={"toast-icon"}
         initial={{ scale: 0.8 }}
         animate={{ scale: [0.8, 1.1, 1] }}
       >
@@ -131,9 +131,9 @@ const EarnToast: FC<EarnToastProps> = ({
           height={24}
         />
       </motion.div>
-      <p className={styles["toast-title"]}>{toast.description}</p>
-      <p className={styles["toast-text"]}>
-        {toast.award_amount} {toast.award_currency}
+      <p className={"toast-title"}>{toast.description}</p>
+      <p className={"toast-value"}>
+        + {toast.award_amount} {toast.award_currency}
       </p>
       <button
         className={classNames(styles["toast-button"], {

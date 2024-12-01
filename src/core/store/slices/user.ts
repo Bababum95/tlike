@@ -8,6 +8,8 @@ import type { UserStateType } from "@types";
 import { RootState } from "@/core/store";
 import { api } from "@/core/api";
 
+import { activateCalendarMission } from "@/core/store/thunks";
+
 const initialState: UserStateType = {
   status: "idle",
   error: null,
@@ -473,6 +475,11 @@ const userSlice = createSlice({
       })
       .addCase(transferLike.fulfilled, (state, action) => {
         state.balances.like -= Number(action.meta.arg.amount);
+      })
+      .addCase(activateCalendarMission.fulfilled, (state, { payload }) => {
+        if (payload.award?.amount) {
+          state.balances.love += payload.award.amount;
+        }
       });
   },
 });

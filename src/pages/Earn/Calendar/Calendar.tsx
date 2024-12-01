@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { TOKENS } from "@config";
-import { useAppSelector } from "@hooks";
+import { useAppSelector, useAppDispatch } from "@hooks";
 import { Slider, Toast } from "@/components";
+
+import { activateCalendarMission } from "@/core/store/thunks";
+import { timeUtils } from "@/core/utils/timeUtils";
 
 import styles from "./Calendar.module.scss";
 
 export const Calendar = () => {
-  const { t } = useTranslation("earn");
   const { calendar } = useAppSelector((state) => state.task);
-  const [toastIsOpen, setToastIsOpen] = useState(false);
+  const { t } = useTranslation("earn");
+  const dispatch = useAppDispatch();
+
+  const [toastIsOpen, setToastIsOpen] = useState<boolean>(false);
+  const [nextClaimTime, setNextClaimTime] = useState<string>(
+    timeUtils.getCountdown(calendar.next_claim_date)
+  );
+
   const currentDay = calendar.list.find(
     (item) => item.calendar_day === calendar.current_day
   );
@@ -20,6 +29,25 @@ export const Calendar = () => {
   const closeToast = () => {
     setToastIsOpen(false);
   };
+
+  const handleClaim = async (evt: React.MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    const button = evt.target as HTMLButtonElement;
+    button.classList.add("loading");
+
+    await dispatch(activateCalendarMission());
+
+    button.classList.remove("loading");
+    setToastIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (calendar.can_claim_today) return;
+
+    setTimeout(() => {
+      setNextClaimTime(timeUtils.getCountdown(calendar.next_claim_date));
+    }, 1000);
+  }, [calendar.can_claim_today, nextClaimTime]);
 
   return (
     <motion.main
@@ -71,10 +99,12 @@ export const Calendar = () => {
             Забирайте награду каждый день за вход в приложение
           </p>
           <button
-            className={styles.button}
+            className={classNames("primary-button full", {
+              disabled: !calendar.can_claim_today,
+            })}
             onClick={() => setToastIsOpen(true)}
           >
-            Получить
+            {calendar.can_claim_today ? "Получить" : nextClaimTime}
           </button>
         </div>
       </div>
@@ -92,14 +122,18 @@ export const Calendar = () => {
           className="toast-icon"
         />
         <p className="toast-description">
-          Награда за <span>{calendar.current_day} {t("day")}</span>!
+          Награда за{" "}
+          <span>
+            {calendar.current_day} {t("day")}
+          </span>
+          !
         </p>
         <p className="toast-value">
           +{" "}
           {new Intl.NumberFormat("ru-RU").format(currentDay?.award_amount || 0)}{" "}
           {currentDay?.award_currency}
         </p>
-        <button onClick={closeToast} className={styles.button}>
+        <button onClick={handleClaim} className="primary-button full">
           Забрать
         </button>
       </Toast>

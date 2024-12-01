@@ -93,15 +93,6 @@
 .spin {
   width: calc(100% - 16px);
   margin: 24px 8px 0;
-  @include primary-button;
-
-  &.disabled {
-    @include primary-disabled-button;
-  }
-
-  &.loading {
-    @include loader-button;
-  }
 }
 
 .nft {
@@ -117,21 +108,10 @@
     color: $hint;
   }
 
-  .button {
-    margin-top: 24px;
-  }
-}
-
-.button {
-  width: 100%;
-  @include primary-button;
-
-  &.loading {
-    @include loader-button;
-  }
-
-  &.disabled {
-    @include primary-disabled-button;
+  :global {
+    .primary-button {
+      margin-top: 24px;
+    }
   }
 }
 

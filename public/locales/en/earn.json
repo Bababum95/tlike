@@ -14,13 +14,14 @@
   "take-reward": "Take reward",
   "win-hint": "We will send your prize shortly to the address listed below.",
   "address": "Address",
-  "tasks": "Задания",
-  "calendar": "Календарь",
+  "tasks": "Tasks",
+  "calendar": "Calendar",
   "fortune": "Fortune Wheel",
   "day": "day",
+  "get": "get",
   "story": {
-    "title": "Выставляй пост и получай бонусы",
-    "text": "Новые возможности с NFT майнингом",
-    "button": "Опубликовать"
+    "title": "Share a post and earn rewards!",
+    "text": "New features with NFT mining",
+    "button": "Publish"
   }
 }

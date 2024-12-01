@@ -1,0 +1,19 @@
+.primary-button {
+  @include primary-button;
+
+  &.full {
+    width: 100%;
+  }
+
+  &.loading {
+    @include loader-button;
+
+    &:after {
+      animation: spin 1s infinite;
+    }
+  }
+
+  &.disabled {
+    @include primary-disabled-button;
+  }
+}

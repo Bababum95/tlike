@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "@/core/api";
 import { RootState } from "@/core/store";
 import { FortuneStateType } from "@types";
+import { timeUtils } from "@/core/utils/timeUtils";
 
 export const checkTime = createAsyncThunk(
   "fortune/checkTime",
@@ -31,21 +32,14 @@ const setNextTime = (state: FortuneStateType) => {
 
   const initialTime = new Date(state.last_spin_time);
   const futureTime = new Date(initialTime.getTime() + 6 * 60 * 60 * 1000);
-  const currentTime = new Date();
-  const timeDifference = futureTime.getTime() - currentTime.getTime();
 
-  if (timeDifference > 0) {
-    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    const minutes = Math.floor(
-      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-    );
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+  const countdown = (state.nextSpinTime = timeUtils.getCountdown(
+    futureTime.toISOString()
+  ));
 
-    state.nextSpinTime = `${String(hours).padStart(2, "0")}:${String(
-      minutes
-    ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-  } else {
-    state.nextSpinTime = "00:00:00";
+  state.nextSpinTime = countdown;
+
+  if (countdown === "00:00:00") {
     state.spin_available = true;
   }
 };
