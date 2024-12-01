@@ -114,7 +114,13 @@ export const PRELOAD_IMAGES_LIST = [
   fortuneWheelPreviewImage,
 ];
 
-export const PRELOAD_VIDEOS_LIST = [minerAnimation, onboardingAnimation];
+export const PRELOAD_VIDEOS_LIST = [
+  minerAnimation,
+  onboardingAnimation,
+  "/animations/card/silver.webm",
+  "/animations/card/gold.webm",
+  "/animations/card/platinum.webm",
+];
 
 export const CARD_ADVANTAGES = [
   "conversion_fee",
