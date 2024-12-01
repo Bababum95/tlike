@@ -1,10 +1,11 @@
 .item {
   @include flex-layout;
+  @include border-gradient;
   position: relative;
+  z-index: 1;
   list-style: none;
   width: 100%;
   padding: 14px;
-  @include border-gradient;
 }
 
 .background {
