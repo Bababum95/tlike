@@ -7,7 +7,7 @@ import { Navigation, Balance, Toast, Page, Slider } from "@/components";
 import { markNotificationsAsRead } from "@/core/store/slices/history";
 import {
   minerAnimation,
-  minerOffImage,
+  // minerOffImage,
   ConnectWalletIcon,
   GiftIcon,
 } from "@images";
@@ -38,7 +38,7 @@ export const Main = () => {
           data-wf-ignore="true"
           data-object-fit="cover"
           preload="auto"
-          poster={user.mining_speed.like > 0 ? minerOffImage : minerOffImage}
+          poster={user.mining_speed.like > 0 ? '' : ''}
         >
           <source src={minerAnimation} type="video/mp4" data-wf-ignore="true" />
         </video>
