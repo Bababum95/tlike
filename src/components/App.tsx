@@ -20,7 +20,6 @@ import {
   fetchReferral,
   fetchUser,
   getInventory,
-  getMissions,
   getNFT,
   referralStat,
 } from "@/core/store/slices/user";
@@ -104,7 +103,6 @@ export const App: FC = (): JSX.Element => {
         dispatch(fetchReferral()),
         dispatch(getNFT()),
         dispatch(getInventory()),
-        dispatch(getMissions()),
         dispatch(getProjectStat()),
         dispatch(referralStat()),
         dispatch(getNotifications()),

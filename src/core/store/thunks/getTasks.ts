@@ -9,16 +9,31 @@ export const getTasks = createAsyncThunk(
     const state = getState() as RootState;
     const { token } = state.user;
     try {
-      const response = await api.get("missions/calendar", {
-        headers: { "x-auth-token": token },
-      });
+      const [calendarResponse, initialResponse] = await Promise.all([
+        api.get("/missions/calendar", {
+          headers: { "x-auth-token": token },
+        }),
+        api.get("/missions", { headers: { "x-auth-token": token } }),
+      ]);
 
-      if (response.status === 200) {
-        const calendar = Array.isArray(response.data) ? response.data[0] : null;
+      const output: { calendar: any; initial: any } = {
+        calendar: null,
+        initial: null,
+      };
 
-        return { calendar };
+      if (calendarResponse.status === 200) {
+        const calendar = Array.isArray(calendarResponse.data)
+          ? calendarResponse.data[0]
+          : null;
+
+        output.calendar = calendar;
       }
-      return rejectWithValue(response.data);
+
+      if (initialResponse.status === 200) {
+        output.initial = initialResponse.data;
+      }
+
+      return output;
     } catch (err) {
       return rejectWithValue(err);
     }

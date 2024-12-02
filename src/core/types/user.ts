@@ -34,18 +34,6 @@ export type UpgradeType = {
   count: number;
 };
 
-export type MissionType = {
-  id: number;
-  description: string;
-  award_amount: number;
-  award_currency: string;
-  icon_name: string;
-  mission_actived: boolean;
-  activation_date: string;
-  redirect_url: string;
-  loading?: boolean;
-};
-
 export type UserType = {
   balances: BalancesType;
   mining_speed: {
@@ -53,7 +41,6 @@ export type UserType = {
     love_nft: number;
     love_upgrades: number;
   };
-  // photo?: string;
   token: string;
   type: "old" | "new";
   language: "en" | "ru";
@@ -67,7 +54,6 @@ export type UserType = {
     increase_value: string;
     item_name: string;
   }[];
-  missions: MissionType[];
   nfts: NFTType[];
   referal?: {
     amount: number;

@@ -19,5 +19,9 @@ export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
 export { Referal as ReferalPage } from "./Referal/Referal";
 export { Settings as SettingsPage } from "./Settings/Settings";
 export { Transfer as TransferPage } from "./Transfer/Transfer";
-export { Wallet as WalletPage } from "./Wallet/Wallet";
+export {
+  Wallet as WalletPage,
+  Deposit as DepositPage,
+  DepositStepOne as DepositStepOnePage,
+} from "./Wallet";
 export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";

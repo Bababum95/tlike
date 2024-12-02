@@ -1,0 +1,9 @@
+.option {
+  @include flex-layout(space-between, center);
+  width: 100%;
+}
+
+.token {
+  @include flex-layout(flex-start, center);
+  gap: 8px;
+}

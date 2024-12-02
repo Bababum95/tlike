@@ -15,6 +15,8 @@ export { List } from "./List/List";
 export { Loader } from "./Loader/Loader";
 export { Navigation } from "./Navigation/Navigation";
 export { Notice } from "./Notice/Notice";
+export { Select } from "./Select/Select";
+export { SelectBalance } from "./SelectBalance/SelectBalance";
 export { Slider } from "./Slider/Slider";
 export { TabBar } from "./TabBar/TabBar";
 export { Toast } from "./Toast/Toast";

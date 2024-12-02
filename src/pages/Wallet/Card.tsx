@@ -80,7 +80,8 @@ export const Card = () => {
       >
         <div className={classNames(styles.card, styles[type])}>
           <video
-            src={`/animations/card/${type}.webm`}
+            src={`/animations/cards/${type}.webm`}
+            poster={`/images/cards/${type}.webp`}
             autoPlay={true}
             loop
             muted
@@ -90,7 +91,7 @@ export const Card = () => {
             preload="auto"
           >
             <source
-              src={`/animations/card/${type}.webm`}
+              src={`/animations/cards/${type}.webm`}
               type="video/webm"
               data-wf-ignore="true"
             />

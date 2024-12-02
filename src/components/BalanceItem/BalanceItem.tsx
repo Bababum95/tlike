@@ -24,7 +24,7 @@ export const BalanceItem: FC<Props> = ({
   maximumFractionDigits = 9,
 }) => {
   const { t } = useTranslation("common");
-  const user = useAppSelector((state) => state.user);
+  const balances = useAppSelector((state) => state.user).balances;
   const token = TOKENS.find((t) => t.key === name);
   const withMining = mining !== undefined;
 
@@ -44,7 +44,7 @@ export const BalanceItem: FC<Props> = ({
         </p>
         <p className={styles.value}>
           {new Intl.NumberFormat("ru-RU", { maximumFractionDigits }).format(
-            user.balances[name]
+            balances[name]
           )}{" "}
           {withMining && token.name}
         </p>

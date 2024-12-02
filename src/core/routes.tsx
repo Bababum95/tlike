@@ -12,6 +12,8 @@ import {
   EarnFortunePage,
   EarnTasksPage,
   WalletPage,
+  DepositPage,
+  DepositStepOnePage,
   HistoryPage,
   SettingsPage,
   WithdrawPage,
@@ -71,5 +73,10 @@ export const routes: Route[] = [
   { path: "/wallet/history", Component: HistoryPage },
   { path: "/wallet/withdraw", Component: WithdrawPage },
   { path: "/wallet/transfer", Component: TransferPage },
+  {
+    path: "/wallet/deposit",
+    Component: DepositPage,
+    children: [{ index: true, Component: DepositStepOnePage }],
+  },
   { path: "/settings", Component: SettingsPage },
 ];

@@ -1,0 +1,12 @@
+.container {
+  @include flex-column;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 20px 22px;
+}
+
+.title {
+  font-size: 20px;
+  margin: 0 0 40px;
+}
+

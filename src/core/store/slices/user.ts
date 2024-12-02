@@ -8,13 +8,12 @@ import type { UserStateType } from "@types";
 import { RootState } from "@/core/store";
 import { api } from "@/core/api";
 
-import { activateCalendarMission } from "@/core/store/thunks";
+import { activateCalendarMission, checkTask } from "@/core/store/thunks";
 
 const initialState: UserStateType = {
   status: "idle",
   error: null,
   inventory: [],
-  missions: [],
   balances: {
     like: 0,
     love: 0,
@@ -135,50 +134,6 @@ export const referralStat = createAsyncThunk(
       const response = await api.get("/referral/stat", {
         headers: { "x-auth-token": token },
       });
-      if (response.status === 200) {
-        return response.data;
-      }
-      return rejectWithValue(response.data);
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  }
-);
-
-export const getMissions = createAsyncThunk(
-  "user/getMissions",
-  async (_, { rejectWithValue, getState }) => {
-    const state = getState() as RootState;
-    const { token } = state.user;
-
-    try {
-      const response = await api.get("/missions", {
-        headers: {
-          "x-auth-token": token,
-        },
-      });
-      if (response.status === 200) {
-        return response.data;
-      }
-      return rejectWithValue(response.data);
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  }
-);
-
-export const missionActivate = createAsyncThunk(
-  "user/missionActivate",
-  async ({ id }: { id: number }, { rejectWithValue, getState }) => {
-    const state = getState() as RootState;
-    const { token } = state.user;
-
-    try {
-      const response = await api.post(
-        "/missions",
-        { mission_id: id },
-        { headers: { "x-auth-token": token } }
-      );
       if (response.status === 200) {
         return response.data;
       }
@@ -353,25 +308,11 @@ const userSlice = createSlice({
         }
       });
     },
-    endMissionLoading: (state, action) => {
-      state.missions.forEach((mission, index) => {
-        if (mission.id === action.payload.id) {
-          state.missions[index].loading = false;
-        }
-      });
-    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
         state.status = "loading";
-      })
-      .addCase(missionActivate.pending, (state, action) => {
-        state.missions.forEach((mission, index) => {
-          if (mission.id === action.meta.arg.id) {
-            state.missions[index].loading = true;
-          }
-        });
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.balances = action.payload.balances;
@@ -383,7 +324,6 @@ const userSlice = createSlice({
           action.payload.wallet && action.payload.wallet !== ""
             ? action.payload.wallet
             : null;
-        // if (action.payload.photo) state.photo = action.payload.photo;
         state.status = "successed";
       })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -400,22 +340,11 @@ const userSlice = createSlice({
       .addCase(connectWallet.rejected, (_, action) => {
         console.log(action.payload);
       })
-      .addCase(getMissions.fulfilled, (state, action) => {
-        state.missions = action.payload;
-      })
       .addCase(getNFT.fulfilled, (state, action) => {
         state.nfts = action.payload;
       })
-      .addCase(missionActivate.fulfilled, (state, action) => {
-        if (action.payload.mission_activated) {
-          state.missions.forEach((mission, index) => {
-            if (mission.id === action.meta.arg.id) {
-              state.missions[index].mission_actived = true;
-            }
-          });
-          state.balances.love =
-            state.balances.love + action.payload.award.amount;
-        }
+      .addCase(checkTask.fulfilled, (state, action) => {
+        state.balances.love = state.balances.love + action.payload.award.amount;
       })
       .addCase(fetchReferral.fulfilled, (state, action) => {
         if (action.payload.status === "non-used") {
@@ -485,10 +414,5 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {
-  setWallet,
-  setOld,
-  addBalance,
-  changeStatusNFT,
-  endMissionLoading,
-} = userSlice.actions;
+export const { setWallet, setOld, addBalance, changeStatusNFT } =
+  userSlice.actions;

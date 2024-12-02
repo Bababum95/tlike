@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { motion, AnimatePresence, stagger, useAnimate } from "motion/react";
@@ -13,7 +13,6 @@ import styles from "./Wallet.module.scss";
 export const Wallet = () => {
   const { t } = useTranslation("wallet");
   const [scope, animate] = useAnimate();
-  const depositRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     animate(
@@ -42,15 +41,10 @@ export const Wallet = () => {
           </header>
           <TonConnectButton className={styles.wallet} />
           <div className={styles.buttons}>
-            <button
-              className={styles.button}
-              onClick={() => {
-                depositRef.current?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              {t("deposit")}
-            </button>
             <button className={styles.button}>{t("withdraw")}</button>
+            <Link to="/wallet/deposit" className={styles.button}>
+              {t("deposit")}
+            </Link>
             <Link to="/wallet/transfer" className={styles.button}>
               {t("transfer")}
             </Link>

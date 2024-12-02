@@ -16,4 +16,8 @@
   &.disabled {
     @include primary-disabled-button;
   }
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
 }

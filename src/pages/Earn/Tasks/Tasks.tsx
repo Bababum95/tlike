@@ -7,14 +7,14 @@ import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
 import { Item, List, Toast } from "@/components";
 import { useAppDispatch, useAppSelector } from "@hooks";
-import { missionActivate, endMissionLoading } from "@/core/store/slices/user";
+import { startTask, checkTask } from "@/core/store/thunks";
 import { ChevronRightIcon, SuccessIcon } from "@images";
 
 import styles from "./Tasks.module.scss";
 
 export const Tasks = () => {
   const { t } = useTranslation("earn");
-  const missions = useAppSelector((state) => state.user.missions);
+  const { initial } = useAppSelector((state) => state.task);
   const [toast, setToast] = useState<null | number>(null);
   const [showFirework, setShowFirework] = useState(false);
 
@@ -32,36 +32,32 @@ export const Tasks = () => {
         <p className={styles["story-text"]}>{t("story.text")}</p>
         <button className="primary-button full">{t("story.button")}</button>
       </div>
-      {missions && missions.length > 0 && (
+      {initial && initial.length > 0 && (
         <>
           <h2 className={styles.title}>{t("task-list")}</h2>
           <List>
-            {missions.map((mission, index) => (
+            {initial.map((mission, index) => (
               <Item
                 key={mission.id}
                 extraClass={classNames(styles.mission, {
-                  [styles.active]: mission.mission_actived && !mission.loading,
+                  [styles.active]:
+                    mission.mission_actived && mission.status === "successed",
                 })}
                 title={mission.description}
                 text={`+ ${mission.award_amount} ${mission.award_currency}`}
                 icon={
-                  <motion.img
-                    initial={{ scale: 0.8 }}
-                    animate={{ scale: [0.8, 1.1, 1] }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 24,
-                    }}
-                    src={mission.icon_name}
-                    alt={mission.description}
-                    width={24}
-                    height={24}
-                  />
+                  <span className={styles.icon}>
+                    <img
+                      src={mission.icon_name}
+                      alt={mission.description}
+                      width={24}
+                      height={24}
+                    />
+                  </span>
                 }
                 onClick={() => setToast(index)}
               >
-                {mission.mission_actived && !mission.loading ? (
+                {mission.mission_actived && mission.status === "successed" ? (
                   <SuccessIcon />
                 ) : (
                   <ChevronRightIcon />
@@ -99,56 +95,61 @@ const EarnToast: FC<EarnToastProps> = ({
   onMissionComplete,
 }) => {
   const dispatch = useAppDispatch();
-  const missions = useAppSelector((state) => state.user.missions);
-  const toast = missions[missionIndex];
+  const { initial } = useAppSelector((state) => state.task);
+  const toast = initial[missionIndex];
 
   const subscribe = async () => {
     if (!toast.mission_actived) {
-      dispatch(missionActivate({ id: toast.id }));
+      dispatch(startTask({ id: toast.id, type: "initial" }));
       openLink(toast.redirect_url, { tryInstantView: true });
-
-      setTimeout(() => {
-        dispatch(endMissionLoading({ id: toast.id }));
-        onMissionComplete();
-      }, 10000);
     } else {
       openLink(toast.redirect_url, { tryInstantView: true });
+    }
+  };
+
+  const check = async () => {
+    const response = await dispatch(
+      checkTask({ id: toast.id, type: "initial" })
+    ).unwrap();
+    console.log(response, response.type);
+    if (response.type === "fulfilled") {
+      onMissionComplete();
+      onClose();
     }
   };
 
   return (
     <div className={styles.toast}>
       <motion.div
-        className={"toast-icon"}
+        className={styles["toast-icon"]}
         initial={{ scale: 0.8 }}
         animate={{ scale: [0.8, 1.1, 1] }}
       >
         <img
           src={toast.icon_name}
           alt={toast.description}
-          className={styles.icon}
-          width={24}
-          height={24}
+          width={55}
+          height={55}
         />
       </motion.div>
-      <p className={"toast-title"}>{toast.description}</p>
-      <p className={"toast-value"}>
+      <p className="toast-title">{toast.description}</p>
+      <p className="toast-value">
         + {toast.award_amount} {toast.award_currency}
       </p>
       <button
-        className={classNames(styles["toast-button"], {
-          [styles.loading]: toast.loading,
-        })}
         onClick={subscribe}
+        className={classNames("primary-button full", {
+          loading: toast.status === "loading",
+        })}
       >
         Subscribe
       </button>
       <button
-        className={classNames(styles["toast-button"], {
-          [styles.disabled]: toast.mission_actived || toast.loading,
+        className={classNames("primary-button full", {
+          disabled: toast.status !== "can-check",
+          loading: toast.status === "checking",
         })}
-        onClick={onClose}
-        disabled={toast.mission_actived}
+        onClick={check}
       >
         Check
       </button>

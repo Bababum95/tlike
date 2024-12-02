@@ -1,5 +1,25 @@
 import { stateStatus } from "./abstract";
 
+export type TaskStatusType =
+  | "idle"
+  | "loading"
+  | "can-check"
+  | "checking"
+  | "successed";
+
+type TaskType = {
+  id: number;
+  description: string;
+  award_amount: number;
+  award_currency: string;
+  icon_name: string;
+  mission_actived: boolean;
+  activation_date: string;
+  redirect_url: string;
+  status: TaskStatusType;
+  mission_type: "link" | "telegram_check";
+};
+
 export type TaskStateType = {
   status: stateStatus;
   calendar: {
@@ -14,4 +34,5 @@ export type TaskStateType = {
       claimed: boolean;
     }[];
   };
+  initial: TaskType[];
 };
