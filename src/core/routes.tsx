@@ -14,6 +14,7 @@ import {
   WalletPage,
   DepositPage,
   DepositStepOnePage,
+  DepositStepTwoPage,
   HistoryPage,
   SettingsPage,
   WithdrawPage,
@@ -76,7 +77,10 @@ export const routes: Route[] = [
   {
     path: "/wallet/deposit",
     Component: DepositPage,
-    children: [{ index: true, Component: DepositStepOnePage }],
+    children: [
+      { index: true, Component: DepositStepOnePage },
+      { path: "step-two", Component: DepositStepTwoPage },
+    ],
   },
   { path: "/settings", Component: SettingsPage },
 ];

@@ -1,0 +1,75 @@
+.qr {
+  margin: 0 auto 40px;
+  width: 200px;
+}
+
+.item {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.01em;
+  margin: 0 0 8px;
+}
+
+.value {
+  @include flex-layout(flex-start, center);
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 12px 16px;
+  height: 56px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 200%;
+  letter-spacing: 0.01em;
+  color: $hint;
+
+  p {
+    @include text-overflow(1);
+    margin: 0;
+    word-break: break-word;
+  }
+
+  &.network {
+    text-transform: uppercase;
+  }
+}
+
+.wrapper {
+  @include flex-layout(flex-start, center);
+  width: 100%;
+  gap: 8px;
+}
+
+.copy {
+  @include flex-center;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  width: 56px;
+  height: 56px;
+  background-color: transparent;
+  flex-shrink: 0;
+  color: $hint;
+  transition: all 0.1s linear;
+
+  &:active {
+    scale: 0.9;
+  }
+}
+
+.notice {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 143%;
+  letter-spacing: 0.01em;
+  margin: 8px 0 0;
+  color: $hint;
+}
+
+.red {
+  color: #ff3b30;
+}

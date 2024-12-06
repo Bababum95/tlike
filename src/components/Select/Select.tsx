@@ -9,7 +9,8 @@ import styles from "./Select.module.scss";
 type Props = {
   label?: string;
   value: string;
-  handleChange: (value: string) => void;
+  handleChange?: (value: string) => void;
+  readonly?: boolean;
   options: {
     label: React.ReactNode;
     value: string;
@@ -25,6 +26,7 @@ export const Select: FC<Props> = ({
   options,
   value,
   handleChange,
+  readonly,
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selected = options.find(
@@ -67,6 +69,9 @@ export const Select: FC<Props> = ({
             },
             close: { height: 56 },
           }}
+          onClick={() => {
+            if (!readonly && !isOpen) open();
+          }}
         >
           {options.map(({ label, value }) => (
             <motion.li
@@ -81,10 +86,10 @@ export const Select: FC<Props> = ({
               animate={isOpen || selected?.value === value ? "open" : "close"}
               transition={{ duration: 0.2 }}
               onClick={() => {
-                if (isOpen && value !== selected?.value) handleChange(value);
-                if (!isOpen) {
-                  open();
-                } else {
+                if (isOpen) {
+                  if (value !== selected?.value && handleChange) {
+                    handleChange(value);
+                  }
                   close();
                 }
               }}
@@ -93,18 +98,20 @@ export const Select: FC<Props> = ({
             </motion.li>
           ))}
         </motion.ul>
-        <motion.div
-          className={styles.arrow}
-          variants={{
-            open: { rotate: 270 },
-            close: { rotate: 90 },
-          }}
-          initial="close"
-          transition={{ duration: 0.2 }}
-          animate={isOpen ? "open" : "close"}
-        >
-          <ChevronRightIcon />
-        </motion.div>
+        {!readonly && (
+          <motion.div
+            className={styles.arrow}
+            variants={{
+              open: { rotate: 270 },
+              close: { rotate: 90 },
+            }}
+            initial="close"
+            transition={{ duration: 0.2 }}
+            animate={isOpen ? "open" : "close"}
+          >
+            <ChevronRightIcon />
+          </motion.div>
+        )}
       </div>
     </div>
   );

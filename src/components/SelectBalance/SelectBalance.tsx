@@ -8,10 +8,12 @@ import styles from "./SelectBalance.module.scss";
 
 type Props = {
   value: string;
-  handleChange: (value: string) => void;
+  handleChange?: (value: string) => void;
+  readonly?: boolean;
+  label?: string;
 };
 
-export const SelectBalance: FC<Props> = ({ value, handleChange }) => {
+export const SelectBalance: FC<Props> = ({ value, handleChange, readonly, label }) => {
   const balances = useAppSelector((state) => state.user).balances;
 
   const options = TOKENS.map(({ key, name, icon }) => ({
@@ -37,10 +39,11 @@ export const SelectBalance: FC<Props> = ({ value, handleChange }) => {
 
   return (
     <Select
-      label="Выбор баланса"
+      label={label}
       options={options}
       value={value}
       handleChange={handleChange}
+      readonly={readonly}
     />
   );
 };

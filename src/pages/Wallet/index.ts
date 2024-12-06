@@ -1,2 +1,2 @@
 export { Wallet } from "./Wallet";
-export { Deposit, DepositStepOne } from "./Deposit";
+export { Deposit, DepositStepOne, DepositStepTwo } from "./Deposit";
