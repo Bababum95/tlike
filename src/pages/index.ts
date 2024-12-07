@@ -21,6 +21,7 @@ export { Settings as SettingsPage } from "./Settings/Settings";
 export { Transfer as TransferPage } from "./Transfer/Transfer";
 export {
   Wallet as WalletPage,
+  Conversion as ConversionPage,
   Deposit as DepositPage,
   DepositStepOne as DepositStepOnePage,
   DepositStepTwo as DepositStepTwoPage,

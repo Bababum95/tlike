@@ -48,8 +48,8 @@ export const Wallet = () => {
             <Link to="/wallet/transfer" className={styles.button}>
               {t("transfer")}
             </Link>
-            <Link to="/wallet/transfer" className={styles.button}>
-              {t("transfer")}
+            <Link to="/wallet/conversion" className={styles.button}>
+              {t("conversion")}
             </Link>
           </div>
           <h2 className={styles.title}>{t("balance")}</h2>

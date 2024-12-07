@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 import classNames from "classnames";
 
 import { SelectBalance, Select, Input } from "@/components";
-import { useAppSelector } from "@hooks";
+import { useAppDispatch, useAppSelector } from "@hooks";
 import { api } from "@/core/api";
+import { setNotice } from "@/core/store/slices/notice";
 
 import styles from "./StepOne.module.scss";
 
 export const StepOne = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.user.token);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +22,9 @@ export const StepOne = () => {
     address: "",
   });
 
-  const request = async () => {
+  const handleContinue = async () => {
+    setIsLoading(true);
+
     try {
       const network = value.network;
 
@@ -27,27 +32,23 @@ export const StepOne = () => {
         method: network === "tron" ? "post" : "get",
         url: `/deposit/onchain/${network}`,
         headers: { "x-auth-token": token },
-        data: { wallet_adress: value.address },
+        data: { wallet_address: value.address },
       });
 
-      return {
-        wallet: response.data[`deposit_wallet_${network}`],
-        comment: response.data[`deposit_comment_${network}`],
-        qrLink: response.data.qr_link,
-      };
+      navigate("/wallet/deposit/step-two", {
+        state: {
+          ...value,
+          wallet: response.data[`deposit_wallet_${network}`],
+          comment: response.data[`deposit_comment_${network}`],
+          qrLink: response.data.qr_link,
+        },
+      });
     } catch (error) {
-      throw error;
-    }
-  };
-
-  const handleContinue = async () => {
-    setIsLoading(true);
-
-    try {
-      const data = await request();
-      navigate("/wallet/deposit/step-two", { state: { ...value, ...data } });
-    } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        dispatch(setNotice({ message: error.response?.data.message, status: "error" }));
+      } else {
+        console.log(error);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -12,6 +12,7 @@ import {
   EarnFortunePage,
   EarnTasksPage,
   WalletPage,
+  ConversionPage,
   DepositPage,
   DepositStepOnePage,
   DepositStepTwoPage,
@@ -82,5 +83,6 @@ export const routes: Route[] = [
       { path: "step-two", Component: DepositStepTwoPage },
     ],
   },
+  { path: "/wallet/conversion", Component: ConversionPage },
   { path: "/settings", Component: SettingsPage },
 ];

@@ -47,7 +47,7 @@ export const Header: FC = () => {
                 includeMargin
                 marginSize={1}
                 imageSettings={{
-                  src: "https://tonlike.com/logo.png",
+                  src: "/logo.png",
                   height: 54,
                   width: 54,
                   opacity: 1,

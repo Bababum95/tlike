@@ -79,7 +79,7 @@ const projectSlice = createSlice({
       })
       .addCase(getCommission.fulfilled, (state, action) => {
         state.status = "successed";
-        state.commission = Number(action.payload.commission);
+        state.commission = action.payload.commission;
       });
   },
 });
