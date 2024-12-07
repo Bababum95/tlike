@@ -87,6 +87,12 @@ export const Withdraw = () => {
     }
   };
 
+  const getTokennInfo = () => {
+    return commissions.find(
+      (item) => item.currency.toLowerCase() === values.token.toLowerCase()
+    );
+  };
+
   const onSubmit = async () => {
     setLoading((prev) => ({ ...prev, transfer: true }));
     dispatch(
@@ -100,9 +106,12 @@ export const Withdraw = () => {
     if (loading.address) return;
 
     try {
+      const tokenInfo = getTokennInfo();
+      if (!tokenInfo) throw new Error("Token info not found");
+
       const response = await dispatch(
         withdraw({
-          currency: "Like",
+          currency: tokenInfo.currency,
           amount: Number(values.total),
           receiver: values.address,
           network: values.network.toUpperCase(),
@@ -117,12 +126,6 @@ export const Withdraw = () => {
       setLoading((prev) => ({ ...prev, transfer: false }));
       setToastIsOpen(false);
     }
-  };
-
-  const getTokennInfo = () => {
-    return commissions.find(
-      (item) => item.currency.toLowerCase() === values.token.toLowerCase()
-    );
   };
 
   const openToast = () => {

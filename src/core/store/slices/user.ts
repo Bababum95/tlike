@@ -4,7 +4,7 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
-import type { UserStateType } from "@types";
+import type { BalancesType, UserStateType } from "@types";
 import { RootState } from "@/core/store";
 import { api } from "@/core/api";
 
@@ -376,7 +376,12 @@ const userSlice = createSlice({
         state.balances.love -= Number(action.meta.arg.amount);
       })
       .addCase(withdraw.fulfilled, (state, action) => {
-        state.balances.like -= Number(action.meta.arg.amount);
+        const token = action.meta.arg.currency.toLowerCase();
+        if (token in state.balances) {
+          state.balances[token as keyof BalancesType] -= Number(
+            action.meta.arg.amount
+          );
+        }
       })
       .addCase(activateCalendarMission.fulfilled, (state, { payload }) => {
         if (payload.award?.amount) {
