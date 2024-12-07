@@ -1,4 +1,4 @@
-import { stateStatus } from "./abstract";
+import { StateStatusType } from "./abstract";
 
 type TransferType = {
   amount: number;
@@ -62,7 +62,7 @@ type FortuneType = {
 type HistoryItem = TransferType | TasksType | FortuneType;
 
 export type HistoryStateType = {
-  status: stateStatus;
+  status: StateStatusType;
   records: HistoryItem[];
   notifications: NotificationType[];
   total_pages: number;

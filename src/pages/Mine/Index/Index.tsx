@@ -99,11 +99,11 @@ const NFT: FC<{ nft: NFTType }> = ({ nft }) => {
             active: response.data.nft.active,
           })
         );
-        dispatch(setNotice({ status: "success", message: "Success!" }));
+        dispatch(setNotice({ status: "successed", message: "Success!" }));
       }
     } catch (err) {
       console.log(err);
-      dispatch(setNotice({ status: "error", message: "Error!" }));
+      dispatch(setNotice({ status: "failed", message: "Error!" }));
     } finally {
       setLoading(false);
     }

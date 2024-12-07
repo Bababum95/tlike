@@ -1,7 +1,7 @@
-import { stateStatus } from "./abstract";
+import { StateStatusType } from "./abstract";
 
 export type ProjectStateType = {
-  status: stateStatus;
+  status: StateStatusType;
   stat: {
     active_users: string;
     like_mined: number;
@@ -10,5 +10,11 @@ export type ProjectStateType = {
     like_burned: number;
     next_halving: string;
   };
-  commission: number;
+  commissions: {
+    currency: string;
+    network: "TON" | "TRC20";
+    id: number;
+    fixed_fee: number;
+    min_withdrawal: number;
+  }[];
 };

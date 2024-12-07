@@ -25,5 +25,5 @@ export {
   Deposit as DepositPage,
   DepositStepOne as DepositStepOnePage,
   DepositStepTwo as DepositStepTwoPage,
+  Withdraw as WithdrawPage,
 } from "./Wallet";
-export { Withdraw as WithdrawPage } from "./Withdraw/Withdraw";

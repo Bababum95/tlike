@@ -20,7 +20,7 @@ export const Friends = () => {
 
   const copy = () => {
     navigator.clipboard.writeText(url);
-    dispatch(setNotice({ status: "success", message: "Copied!" }));
+    dispatch(setNotice({ status: "successed", message: "Copied!" }));
   };
 
   const Invite = () => (

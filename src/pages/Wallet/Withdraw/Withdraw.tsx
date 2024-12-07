@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { useAppSelector, useAppDispatch } from "@/core/hooks";
-import { Input, Toast } from "@/components";
+import { Input, Toast, SelectBalance } from "@/components";
 import { api } from "@/core/api";
+import { withdraw } from "@/core/store/thunks";
 import { setNotice } from "@/core/store/slices/notice";
-import { transferLike } from "@/core/store/slices/user";
 
+import { Tax } from "./Tax";
 import styles from "./Withdraw.module.scss";
 
 type Errors = {
@@ -18,7 +19,7 @@ type Errors = {
 export const Withdraw = () => {
   const { t } = useTranslation("wallet");
   const user = useAppSelector((state) => state.user);
-  const commission = useAppSelector((state) => state.project.commission);
+  const commissions = useAppSelector((state) => state.project.commissions);
   const dispatch = useAppDispatch();
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -28,6 +29,8 @@ export const Withdraw = () => {
   const [values, setValues] = useState({
     address: "",
     total: "",
+    token: "like",
+    network: "ton",
   });
   const [errors, setErrors] = useState<Errors>({
     address: null,
@@ -70,7 +73,7 @@ export const Withdraw = () => {
       }
     } catch (err) {
       setErrors({ ...errors, address: "Wrong adress" });
-      dispatch(setNotice({ status: "error", message: "Wrong adress" }));
+      dispatch(setNotice({ status: "failed", message: "Wrong adress" }));
       setIsValid({ address: false, button: false });
       if (loading.transfer) setLoading({ transfer: false, address: false });
     }
@@ -90,16 +93,16 @@ export const Withdraw = () => {
 
     try {
       await dispatch(
-        transferLike({
+        withdraw({
           currency: "Like",
           amount: Number(values.total),
           receiver: values.address,
+          network: values.network,
         })
       ).unwrap();
-      setValues({ address: "", total: "" });
-      dispatch(setNotice({ status: "success", message: "Success!" }));
+      setValues((prev) => ({ ...prev, address: "", total: "" }));
     } catch (err) {
-      dispatch(setNotice({ status: "error", message: err }));
+      console.log(err);
     } finally {
       setLoading((prev) => ({ ...prev, transfer: false }));
       setToastIsOpen(false);
@@ -128,7 +131,15 @@ export const Withdraw = () => {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Like {t("withdraw")}</h1>
+      <h1 className={styles.title}>{t("withdraw")}</h1>
+      <SelectBalance
+        value={values.token}
+        handleChange={(token) => {
+          const network = token === "usdt" ? values.network : "ton";
+          setValues((prev) => ({ ...prev, token, network }));
+        }}
+      />
+
       <Input
         label={t("address")}
         placeholder={t("address-placeholder")}
@@ -138,6 +149,7 @@ export const Withdraw = () => {
         error={errors.address}
         onBlur={idValidation}
       />
+      <div className={styles.divider} />
       <Input
         label={t("total")}
         placeholder={t("total-placeholder")}
@@ -158,9 +170,8 @@ export const Withdraw = () => {
           Max
         </button>
       </Input>
-      <Input label={t("tax")} placeholder={commission.toFixed(0)} readOnly>
-        <span className={styles.currency}>LIKE</span>
-      </Input>
+      <div className={styles.divider} />
+      <Tax title={t("tax")} token={values.token} />
       <button className={styles.submit} onClick={openToast}>
         {t("withdraw")}
       </button>
@@ -175,11 +186,9 @@ export const Withdraw = () => {
         </div>
         <div className={styles.row}>
           <p>{t("tax")}</p>
-          <p>{commission} LIKE</p>
         </div>
         <div className={classNames(styles.row, styles.total)}>
           <p>{t("withdraw-total")}</p>
-          <p>{Number(values.total) - commission} LIKE</p>
         </div>
         <p className={styles.hint}>{t("withdraw-hint")}</p>
         <button

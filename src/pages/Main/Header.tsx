@@ -19,7 +19,7 @@ export const Header: FC = () => {
 
   const copy = () => {
     navigator.clipboard.writeText(String(user?.id));
-    dispatch(setNotice({ status: "success", message: "Copied to clipboard" }));
+    dispatch(setNotice({ status: "successed", message: "Copied to clipboard" }));
   };
 
   return (

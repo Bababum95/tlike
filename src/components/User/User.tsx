@@ -24,7 +24,7 @@ export const User: FC<Props> = ({
 
   const copy = () => {
     navigator.clipboard.writeText(String(user?.id));
-    dispatch(setNotice({ status: "success", message: "Copied!" }));
+    dispatch(setNotice({ status: "successed", message: "Copied!" }));
   };
 
   return (

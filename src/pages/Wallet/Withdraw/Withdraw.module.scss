@@ -6,32 +6,20 @@
 
 .title {
   @include h2;
-  margin: 0 2px 4px;
+  margin: 0 2px 20px;
 }
 
 .max {
   position: absolute;
   right: 16px;
-  bottom: 12px;
+  bottom: 18px;
   background-color: $bg;
   padding: 0;
   border: none;
-  line-height: 150%;
   letter-spacing: 0.01em;
   color: $primary;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.currency {
-  position: absolute;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0.01em;
-  color: $hint;
-  right: 16px;
-  bottom: 12px;
+  font-size: 12px;
 }
 
 .submit {
@@ -70,4 +58,8 @@
   text-align: center;
   color: $hint;
   margin: 14px 0;
+}
+
+.divider {
+  margin-bottom: 20px;
 }

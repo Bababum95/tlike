@@ -28,9 +28,9 @@ export const Referal = () => {
 
     try {
       await dispatch(referralActivate()).unwrap();
-      dispatch(setNotice({ status: "success", message: "Success!" }));
+      dispatch(setNotice({ status: "successed", message: "Success!" }));
     } catch (err) {
-      dispatch(setNotice({ status: "error", message: err }));
+      dispatch(setNotice({ status: "failed", message: err as string }));
     } finally {
       navigate("/onboarding", { replace: true });
     }

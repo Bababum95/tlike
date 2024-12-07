@@ -1,28 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { api } from "@/core/api";
 import { RootState } from "@/core/store";
+import { api } from "@/core/api";
 
-export const checkTask = createAsyncThunk(
-  "task/checkTask",
-  async (
-    { id }: { id: number; type: "initial" },
-    { rejectWithValue, getState }
-  ) => {
+type Params = {
+  currency: string;
+  amount: number;
+  receiver: string;
+  network: string;
+};
+
+export const withdraw = createAsyncThunk(
+  "user/withdraw",
+  async (data: Params, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const { token } = state.user;
-
     try {
-      const response = await api.post(
-        "/missions",
-        { mission_id: id },
-        { headers: { "x-auth-token": token } }
-      );
-      if (response.status === 200) {
-        return response.data;
-      }
-      return rejectWithValue(response.data);
+      const response = await api.post("/transfer/onchain/check", data, {
+        headers: { "x-auth-token": token },
+      });
+      return response.data;
     } catch (err) {
       if (err instanceof AxiosError) {
         if (err.response?.data?.message) {

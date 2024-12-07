@@ -24,8 +24,8 @@ export const Notice: FC = () => {
 
   return (
     <div className={styles.notice}>
-      {noticeStore.status === "error" && <ErrorIcon />}
-      {noticeStore.status === "success" && <SuccessIcon />}
+      {noticeStore.status === "failed" && <ErrorIcon />}
+      {noticeStore.status === "successed" && <SuccessIcon />}
       {noticeStore.status === "loading" && <span className={styles.spiner} />}
       <span>{noticeStore.message}</span>
     </div>

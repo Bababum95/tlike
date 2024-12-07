@@ -19,7 +19,9 @@ export const StepTwo = () => {
 
   const copy = (value: string) => {
     navigator.clipboard.writeText(value);
-    dispatch(setNotice({ status: "success", message: "Copied to clipboard" }));
+    dispatch(
+      setNotice({ status: "successed", message: "Copied to clipboard" })
+    );
   };
 
   return (

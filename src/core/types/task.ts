@@ -1,4 +1,4 @@
-import { stateStatus } from "./abstract";
+import { StateStatusType } from "./abstract";
 
 export type TaskStatusType =
   | "idle"
@@ -21,7 +21,7 @@ type TaskType = {
 };
 
 export type TaskStateType = {
-  status: stateStatus;
+  status: StateStatusType;
   calendar: {
     can_claim_today: boolean;
     current_day: number;

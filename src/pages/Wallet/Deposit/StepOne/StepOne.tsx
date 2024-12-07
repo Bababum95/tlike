@@ -45,7 +45,9 @@ export const StepOne = () => {
       });
     } catch (error) {
       if (error instanceof AxiosError) {
-        dispatch(setNotice({ message: error.response?.data.message, status: "error" }));
+        dispatch(
+          setNotice({ message: error.response?.data.message, status: "failed" })
+        );
       } else {
         console.log(error);
       }

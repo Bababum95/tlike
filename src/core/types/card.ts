@@ -1,9 +1,9 @@
-import { stateStatus } from "./abstract";
+import { StateStatusType } from "./abstract";
 
 export type CardType = "silver" | "gold" | "platinum";
 
 export type CardStateType = {
-  status: stateStatus;
+  status: StateStatusType;
   current: CardType;
   advantages: {
     [key: string]: {

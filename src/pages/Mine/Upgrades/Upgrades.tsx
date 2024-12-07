@@ -31,14 +31,14 @@ export const Upgrades = () => {
 
     try {
       await dispatch(fetchByUpgrade({ id: toast.id })).unwrap();
-      dispatch(setNotice({ status: "success", message: "Success!" }));
+      dispatch(setNotice({ status: "successed", message: "Success!" }));
       setShowConfetti(true);
 
       setTimeout(() => {
         setShowConfetti(false);
       }, 2000);
     } catch (err) {
-      dispatch(setNotice({ status: "error", message: err }));
+      dispatch(setNotice({ status: "failed", message: err as string }));
     } finally {
       setLoading(false);
       setToast(null);

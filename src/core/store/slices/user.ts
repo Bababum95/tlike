@@ -8,7 +8,11 @@ import type { UserStateType } from "@types";
 import { RootState } from "@/core/store";
 import { api } from "@/core/api";
 
-import { activateCalendarMission, checkTask } from "@/core/store/thunks";
+import {
+  activateCalendarMission,
+  checkTask,
+  withdraw,
+} from "@/core/store/thunks";
 
 const initialState: UserStateType = {
   status: "idle",
@@ -247,37 +251,6 @@ export const transferLove = createAsyncThunk(
   }
 );
 
-export const transferLike = createAsyncThunk(
-  "user/transferLike",
-  async (
-    data: { currency: string; amount: number; receiver: string },
-    { getState, rejectWithValue }
-  ) => {
-    const state = getState() as RootState;
-    const { token } = state.user;
-    try {
-      const response = await api.post("/transfer/onchain/check", data, {
-        headers: { "x-auth-token": token },
-      });
-      return response.data;
-    } catch (err) {
-      if (err instanceof Error) {
-        const errorWithResponse = err as {
-          response?: { data?: { message?: string } };
-        };
-
-        if (errorWithResponse.response?.data?.message) {
-          return rejectWithValue(errorWithResponse.response.data.message);
-        }
-
-        return rejectWithValue(err.message);
-      }
-
-      return rejectWithValue("Error!");
-    }
-  }
-);
-
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -402,7 +375,7 @@ const userSlice = createSlice({
       .addCase(transferLove.fulfilled, (state, action) => {
         state.balances.love -= Number(action.meta.arg.amount);
       })
-      .addCase(transferLike.fulfilled, (state, action) => {
+      .addCase(withdraw.fulfilled, (state, action) => {
         state.balances.like -= Number(action.meta.arg.amount);
       })
       .addCase(activateCalendarMission.fulfilled, (state, { payload }) => {

@@ -50,6 +50,7 @@ export const getCommission = createAsyncThunk(
 
 const initialState: ProjectStateType = {
   status: "idle",
+  commissions: [],
   stat: {
     active_users: "1",
     like_mined: 0,
@@ -58,7 +59,6 @@ const initialState: ProjectStateType = {
     like_burned: 0,
     next_halving: "",
   },
-  commission: 600,
 };
 
 const projectSlice = createSlice({
@@ -79,7 +79,7 @@ const projectSlice = createSlice({
       })
       .addCase(getCommission.fulfilled, (state, action) => {
         state.status = "successed";
-        state.commission = action.payload.commission;
+        state.commissions = action.payload.commission;
       });
   },
 });

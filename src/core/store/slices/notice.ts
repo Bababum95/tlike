@@ -1,33 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { checkTask } from "@/core/store/thunks";
+import { checkTask, withdraw } from "@/core/store/thunks";
+import type { NoticeStateType } from "@types";
 
-const initialState = {
+const initialState: NoticeStateType = {
   status: "idle",
   message: "",
+};
+
+const setError = (state: NoticeStateType, message: any) => {
+  state.status = "failed";
+  if (typeof message === "string") {
+    state.message = message;
+  } else {
+    state.message = "Error!";
+  }
 };
 
 const noticeSlice = createSlice({
   name: "notice",
   initialState,
   reducers: {
-    setNotice: (state, action) => {
-      state.status = action.payload.status;
-      state.message = action.payload.message;
+    setNotice: (state, { payload }: { payload: NoticeStateType }) => {
+      state.status = payload.status;
+      state.message = payload.message;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(checkTask.rejected, (state, action) => {
-      state.status = "error";
-
-      const payload = action.payload as any;
-
-      if (payload.response?.data?.message) {
-        state.message = payload.response.data.message;
-      } else {
-        state.message = "An unknown error occurred.";
-      }
-    });
+    builder
+      .addCase(checkTask.rejected, (state, action) => {
+        setError(state, action.payload);
+      })
+      .addCase(withdraw.fulfilled, (state) => {
+        state.status = "successed";
+        state.message = "Success!";
+      })
+      .addCase(withdraw.rejected, (state, action) => {
+        setError(state, action.payload);
+      });
   },
 });
 

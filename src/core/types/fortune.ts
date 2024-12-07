@@ -1,7 +1,7 @@
-import { stateStatus } from "./abstract";
+import { StateStatusType } from "./abstract";
 
 export type FortuneStateType = {
-  status: stateStatus;
+  status: StateStatusType;
   spin_available: boolean;
   last_spin_time?: string;
   nextSpinTime?: string;

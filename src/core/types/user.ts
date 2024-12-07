@@ -1,4 +1,4 @@
-import { stateStatus } from "./abstract";
+import { StateStatusType } from "./abstract";
 
 export type BalancesType = {
   like: number;
@@ -67,6 +67,6 @@ export type UserType = {
 };
 
 export type UserStateType = {
-  status: stateStatus;
+  status: StateStatusType;
   error: null | string;
 } & UserType;

@@ -78,7 +78,7 @@ export const Transfer = () => {
       }
     } catch (err) {
       setErrors({ ...errors, id: "ID does not exist" });
-      dispatch(setNotice({ status: "error", message: "ID does not exist" }));
+      dispatch(setNotice({ status: "failed", message: "ID does not exist" }));
       setIsValid({ id: false, button: false });
       if (loading.transfer) {
         setLoading({ transfer: false, validId: false });
@@ -107,9 +107,9 @@ export const Transfer = () => {
         })
       ).unwrap();
       setValues({ id: "", total: "" });
-      dispatch(setNotice({ status: "success", message: "Success!" }));
+      dispatch(setNotice({ status: "successed", message: "Success!" }));
     } catch (err) {
-      dispatch(setNotice({ status: "error", message: err }));
+      dispatch(setNotice({ status: "failed", message: err as string }));
     } finally {
       setLoading((prev) => ({ ...prev, transfer: false }));
       setToastIsOpen(false);

@@ -112,7 +112,7 @@ export const App: FC = (): JSX.Element => {
       dispatch(getCommission());
       i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
-      dispatch(setNotice({ status: "error", message: user.error }));
+      dispatch(setNotice({ status: "failed", message: user.error || "Error!" }));
     }
   }, [user.status, dispatch, tonConnectUI, wallet, i18n]);
 
