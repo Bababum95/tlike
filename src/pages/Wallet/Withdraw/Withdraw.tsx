@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import classNames from "classnames";
 
+import type { BalancesType } from "@types";
+import { Input, SelectBalance, Select } from "@/components";
 import { useAppSelector, useAppDispatch } from "@/core/hooks";
-import { Input, Toast, SelectBalance } from "@/components";
 import { api } from "@/core/api";
 import { withdraw } from "@/core/store/thunks";
 import { setNotice } from "@/core/store/slices/notice";
 
+import { ConfirmationToast } from "./ConfirmationToast";
 import { Tax } from "./Tax";
 import styles from "./Withdraw.module.scss";
 
@@ -26,7 +27,12 @@ export const Withdraw = () => {
     address: false,
     button: false,
   });
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<{
+    address: string;
+    total: string;
+    token: keyof BalancesType;
+    network: string;
+  }>({
     address: "",
     total: "",
     token: "like",
@@ -43,7 +49,7 @@ export const Withdraw = () => {
 
   useEffect(() => {
     const total = Number(values.total);
-    if (total > user.balances.like) {
+    if (total > user.balances[values.token]) {
       setErrors({ ...errors, total: t("error-not-enough") });
       setIsValid((prev) => ({ ...prev, button: false }));
     } else if (
@@ -58,9 +64,11 @@ export const Withdraw = () => {
 
   const idValidation = async () => {
     setLoading((prev) => ({ ...prev, validId: true }));
+    const url =
+      values.network === "ton" ? "withdraw/wallet" : "withdraw/wallet/tron";
 
     try {
-      const response = await api.get("withdraw/wallet", {
+      const response = await api.get(url, {
         params: { id: values.address },
         headers: { "x-auth-token": user.token },
       });
@@ -92,15 +100,17 @@ export const Withdraw = () => {
     if (loading.address) return;
 
     try {
-      await dispatch(
+      const response = await dispatch(
         withdraw({
           currency: "Like",
           amount: Number(values.total),
           receiver: values.address,
-          network: values.network,
+          network: values.network.toUpperCase(),
         })
       ).unwrap();
-      setValues((prev) => ({ ...prev, address: "", total: "" }));
+      if (response.meta.requestStatus === "fulfilled") {
+        setValues((prev) => ({ ...prev, address: "", total: "" }));
+      }
     } catch (err) {
       console.log(err);
     } finally {
@@ -109,12 +119,28 @@ export const Withdraw = () => {
     }
   };
 
+  const getTokennInfo = () => {
+    return commissions.find(
+      (item) => item.currency.toLowerCase() === values.token.toLowerCase()
+    );
+  };
+
   const openToast = () => {
     if (!values.address || !values.total) return;
 
+    const tokenInfo = getTokennInfo();
+
+    if (!tokenInfo) return;
+
     const total = Number(values.total);
-    if (total < 2000) {
-      setErrors({ ...errors, total: t("error-min") });
+    if (total < tokenInfo.min_withdrawal) {
+      setErrors({
+        ...errors,
+        total: t("error-min", {
+          token: tokenInfo.currency,
+          amount: tokenInfo.min_withdrawal,
+        }),
+      });
       setIsValid((prev) => ({ ...prev, button: false }));
       return;
     }
@@ -129,20 +155,36 @@ export const Withdraw = () => {
     setValues({ ...values, [name]: value });
   };
 
+  const handleChangeToken = (token: string) => {
+    const network = token === "usdt" ? values.network : "ton";
+    setErrors({ ...errors, total: null });
+    setValues((prev) => ({
+      ...prev,
+      network,
+      token: token as keyof BalancesType,
+    }));
+  };
+
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>{t("withdraw")}</h1>
-      <SelectBalance
-        value={values.token}
-        handleChange={(token) => {
-          const network = token === "usdt" ? values.network : "ton";
-          setValues((prev) => ({ ...prev, token, network }));
-        }}
+      <SelectBalance value={values.token} handleChange={handleChangeToken} />
+      <Select
+        label="Сеть"
+        value={values.network}
+        readonly={values.token !== "usdt"}
+        handleChange={(network) => setValues((prev) => ({ ...prev, network }))}
+        options={[
+          { label: "Toncoin", value: "ton" },
+          { label: "TRC20", value: "trc20" },
+        ]}
       />
 
       <Input
         label={t("address")}
-        placeholder={t("address-placeholder")}
+        placeholder={t("address-placeholder", {
+          network: values.network.toUpperCase(),
+        })}
         value={values.address}
         name="address"
         onChange={onChange}
@@ -152,55 +194,60 @@ export const Withdraw = () => {
       <div className={styles.divider} />
       <Input
         label={t("total")}
-        placeholder={t("total-placeholder")}
+        placeholder={t("total-placeholder", {
+          token: values.token.toUpperCase(),
+        })}
         value={values.total}
         name="total"
         onChange={onChange}
         error={errors.total}
+        type="number"
+        onBlur={() => {
+          const tokenInfo = getTokennInfo();
+          if (tokenInfo && Number(values.total) < tokenInfo.min_withdrawal) {
+            setErrors({
+              ...errors,
+              total: t("error-min", {
+                token: tokenInfo.currency,
+                amount: tokenInfo.min_withdrawal,
+              }),
+            });
+          }
+        }}
       >
         <button
           className={styles.max}
-          onClick={() =>
+          onClick={() => {
+            setErrors({ ...errors, total: null });
             setValues({
               ...values,
-              total: Math.floor(user.balances.like).toFixed(0),
-            })
-          }
+              total: user.balances[values.token].toString(),
+            });
+          }}
         >
           Max
         </button>
       </Input>
       <div className={styles.divider} />
       <Tax title={t("tax")} token={values.token} />
-      <button className={styles.submit} onClick={openToast}>
+      <button
+        className={styles.submit}
+        onClick={openToast}
+        disabled={!isValid.button}
+      >
         {t("withdraw")}
       </button>
-      <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
-        <div className={styles.row}>
-          <p>{t("to")}</p>
-          <p>{`${values.address.slice(0, 4)}...${values.address.slice(-4)}`}</p>
-        </div>
-        <div className={styles.row}>
-          <p>{t("withdraw")}</p>
-          <p>{values.total} LIKE</p>
-        </div>
-        <div className={styles.row}>
-          <p>{t("tax")}</p>
-        </div>
-        <div className={classNames(styles.row, styles.total)}>
-          <p>{t("withdraw-total")}</p>
-        </div>
-        <p className={styles.hint}>{t("withdraw-hint")}</p>
-        <button
-          className={classNames(styles.submit, {
-            [styles.loading]: loading.transfer,
-          })}
-          onClick={onSubmit}
-          disabled={!isValid.button}
-        >
-          {t("withdraw")}
-        </button>
-      </Toast>
+      <ConfirmationToast
+        isOpen={toastIsOpen}
+        onClose={() => setToastIsOpen(false)}
+        onSubmit={onSubmit}
+        address={`${values.address.slice(0, 4)}...${values.address.slice(-4)}`}
+        total={values.total}
+        token={values.token}
+        network={values.network.toUpperCase()}
+        disabled={!isValid.button}
+        loading={loading.transfer}
+      />
     </div>
   );
 };

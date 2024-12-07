@@ -41,7 +41,9 @@ export const Wallet = () => {
           </header>
           <TonConnectButton className={styles.wallet} />
           <div className={styles.buttons}>
-            <button className={styles.button}>{t("withdraw")}</button>
+            <Link to="/wallet/withdraw" className={styles.button}>
+              {t("withdraw")}
+            </Link>
             <Link to="/wallet/deposit" className={styles.button}>
               {t("deposit")}
             </Link>

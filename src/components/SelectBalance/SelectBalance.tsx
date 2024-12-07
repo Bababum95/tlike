@@ -13,7 +13,12 @@ type Props = {
   label?: string;
 };
 
-export const SelectBalance: FC<Props> = ({ value, handleChange, readonly, label }) => {
+export const SelectBalance: FC<Props> = ({
+  value,
+  handleChange,
+  readonly,
+  label,
+}) => {
   const balances = useAppSelector((state) => state.user).balances;
 
   const options = TOKENS.map(({ key, name, icon }) => ({
@@ -30,7 +35,9 @@ export const SelectBalance: FC<Props> = ({ value, handleChange, readonly, label 
           {name}
         </div>
         <span className={styles.value}>
-          {new Intl.NumberFormat("ru-RU").format(balances[key])}
+          {new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 9 }).format(
+            balances[key]
+          )}
         </span>
       </div>
     ),
