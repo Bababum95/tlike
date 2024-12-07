@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { BalancesType } from "@types";
-import { Input, SelectBalance, Select } from "@/components";
+import { Input, SelectBalance, Select, Page } from "@/components";
 import { useAppSelector, useAppDispatch } from "@/core/hooks";
 import { api } from "@/core/api";
 import { withdraw } from "@/core/store/thunks";
@@ -169,88 +169,94 @@ export const Withdraw = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <h1 className={styles.title}>{t("withdraw")}</h1>
-      <SelectBalance value={values.token} handleChange={handleChangeToken} />
-      <Select
-        label="Сеть"
-        value={values.network}
-        readonly={values.token !== "usdt"}
-        handleChange={(network) => setValues((prev) => ({ ...prev, network }))}
-        options={[
-          { label: "Toncoin", value: "ton" },
-          { label: "TRC20", value: "trc20" },
-        ]}
-      />
-
-      <Input
-        label={t("address")}
-        placeholder={t("address-placeholder", {
-          network: values.network.toUpperCase(),
-        })}
-        value={values.address}
-        name="address"
-        onChange={onChange}
-        error={errors.address}
-        onBlur={idValidation}
-      />
-      <div className={styles.divider} />
-      <Input
-        label={t("total")}
-        placeholder={t("total-placeholder", {
-          token: values.token.toUpperCase(),
-        })}
-        value={values.total}
-        name="total"
-        onChange={onChange}
-        error={errors.total}
-        type="number"
-        onBlur={() => {
-          const tokenInfo = getTokennInfo();
-          if (tokenInfo && Number(values.total) < tokenInfo.min_withdrawal) {
-            setErrors({
-              ...errors,
-              total: t("error-min", {
-                token: tokenInfo.currency,
-                amount: tokenInfo.min_withdrawal,
-              }),
-            });
+    <Page>
+      <div className={styles.page}>
+        <h1 className={styles.title}>{t("withdraw")}</h1>
+        <SelectBalance value={values.token} handleChange={handleChangeToken} />
+        <Select
+          label="Сеть"
+          value={values.network}
+          readonly={values.token !== "usdt"}
+          handleChange={(network) =>
+            setValues((prev) => ({ ...prev, network }))
           }
-        }}
-      >
-        <button
-          className={styles.max}
-          onClick={() => {
-            setErrors({ ...errors, total: null });
-            setValues({
-              ...values,
-              total: user.balances[values.token].toString(),
-            });
+          options={[
+            { label: "Toncoin", value: "ton" },
+            { label: "TRC20", value: "trc20" },
+          ]}
+        />
+
+        <Input
+          label={t("address")}
+          placeholder={t("address-placeholder", {
+            network: values.network.toUpperCase(),
+          })}
+          value={values.address}
+          name="address"
+          onChange={onChange}
+          error={errors.address}
+          onBlur={idValidation}
+        />
+        <div className={styles.divider} />
+        <Input
+          label={t("total")}
+          placeholder={t("total-placeholder", {
+            token: values.token.toUpperCase(),
+          })}
+          value={values.total}
+          name="total"
+          onChange={onChange}
+          error={errors.total}
+          type="number"
+          onBlur={() => {
+            const tokenInfo = getTokennInfo();
+            if (tokenInfo && Number(values.total) < tokenInfo.min_withdrawal) {
+              setErrors({
+                ...errors,
+                total: t("error-min", {
+                  token: tokenInfo.currency,
+                  amount: tokenInfo.min_withdrawal,
+                }),
+              });
+            }
           }}
         >
-          Max
+          <button
+            className={styles.max}
+            onClick={() => {
+              setErrors({ ...errors, total: null });
+              setValues({
+                ...values,
+                total: user.balances[values.token].toString(),
+              });
+            }}
+          >
+            Max
+          </button>
+        </Input>
+        <div className={styles.divider} />
+        <Tax title={t("tax")} token={values.token} />
+        <button
+          className={styles.submit}
+          onClick={openToast}
+          disabled={!isValid.button}
+        >
+          {t("withdraw")}
         </button>
-      </Input>
-      <div className={styles.divider} />
-      <Tax title={t("tax")} token={values.token} />
-      <button
-        className={styles.submit}
-        onClick={openToast}
-        disabled={!isValid.button}
-      >
-        {t("withdraw")}
-      </button>
-      <ConfirmationToast
-        isOpen={toastIsOpen}
-        onClose={() => setToastIsOpen(false)}
-        onSubmit={onSubmit}
-        address={`${values.address.slice(0, 4)}...${values.address.slice(-4)}`}
-        total={values.total}
-        token={values.token}
-        network={values.network.toUpperCase()}
-        disabled={!isValid.button}
-        loading={loading.transfer}
-      />
-    </div>
+        <ConfirmationToast
+          isOpen={toastIsOpen}
+          onClose={() => setToastIsOpen(false)}
+          onSubmit={onSubmit}
+          address={`${values.address.slice(0, 4)}...${values.address.slice(
+            -4
+          )}`}
+          total={values.total}
+          token={values.token}
+          network={values.network.toUpperCase()}
+          disabled={!isValid.button}
+          loading={loading.transfer}
+        />
+      </div>
+    </Page>
   );
 };
