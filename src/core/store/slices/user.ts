@@ -17,7 +17,14 @@ import {
 const initialState: UserStateType = {
   status: "idle",
   error: null,
+  token: "",
+  type: "old",
+  language: "en",
+  nfts: [],
   inventory: [],
+  upgrades: [],
+  referrals: [],
+  wallet: null,
   balances: {
     like: 0,
     love: 0,
@@ -29,13 +36,6 @@ const initialState: UserStateType = {
     love_nft: 0,
     love_upgrades: 0,
   },
-  token: "",
-  type: "old",
-  language: "en",
-  nfts: [],
-  upgrades: [],
-  referrals: [],
-  wallet: null,
 };
 
 export const fetchUser = createAsyncThunk(

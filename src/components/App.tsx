@@ -25,7 +25,7 @@ import {
 } from "@/core/store/slices/user";
 import { setNotice } from "@/core/store/slices/notice";
 import { checkTime } from "@/core/store/slices/fortune";
-import { getTasks } from "@/core/store/thunks";
+import { getTasks, getStackingInfo } from "@/core/store/thunks";
 import { preloadUtils } from "@/core/utils/preloadUtils";
 import { getCommission, getProjectStat } from "@/core/store/slices/project";
 import { getNotifications } from "@/core/store/slices/history";
@@ -107,12 +107,15 @@ export const App: FC = (): JSX.Element => {
         dispatch(referralStat()),
         dispatch(getNotifications()),
         dispatch(getCardStatus()),
+        dispatch(getStackingInfo()),
       ]).finally(() => setProgress(100));
 
       dispatch(getCommission());
       i18n.changeLanguage(user.language);
     } else if (user.status === "failed") {
-      dispatch(setNotice({ status: "failed", message: user.error || "Error!" }));
+      dispatch(
+        setNotice({ status: "failed", message: user.error || "Error!" })
+      );
     }
   }, [user.status, dispatch, tonConnectUI, wallet, i18n]);
 

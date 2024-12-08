@@ -1,21 +1,22 @@
 // ReactSVG
+export { ChevronRightIcon } from "./ReactSVG/ChevronRightIcon";
+export { ConnectWalletIcon } from "./ReactSVG/ConnectWalletIcon";
+export { CopyIcon } from "./ReactSVG/CopyIcon";
 export { EarnIcon } from "./ReactSVG/EarnIcon";
+export { ErrorIcon } from "./ReactSVG/ErrorIcon";
 export { FriendsIcon } from "./ReactSVG/FriendsIcon";
 export { FriendIcon } from "./ReactSVG/FriendIcon";
-export { MainIcon } from "./ReactSVG/MainIcon";
-export { MineIcon } from "./ReactSVG/MineIcon";
-export { WalletIcon } from "./ReactSVG/WalletIcon";
-export { SettingIcon } from "./ReactSVG/SettingIcon";
-export { ChevronRightIcon } from "./ReactSVG/ChevronRightIcon";
-export { CopyIcon } from "./ReactSVG/CopyIcon";
+export { GiftIcon } from "./ReactSVG/GiftIcon";
 export { HistoryIcon } from "./ReactSVG/HistoryIcon";
 export { LikeIcon } from "./ReactSVG/LikeIcon";
 export { LoveIcon } from "./ReactSVG/LoveIcon";
-export { ErrorIcon } from "./ReactSVG/ErrorIcon";
-export { SuccessIcon } from "./ReactSVG/SuccessIcon";
+export { MainIcon } from "./ReactSVG/MainIcon";
+export { MineIcon } from "./ReactSVG/MineIcon";
 export { QRCodeIcon } from "./ReactSVG/QRCodeIcon";
-export { GiftIcon } from "./ReactSVG/GiftIcon";
-export { ConnectWalletIcon } from "./ReactSVG/ConnectWalletIcon";
+export { SettingIcon } from "./ReactSVG/SettingIcon";
+export { StackingIcon } from "./ReactSVG/StackingIcon";
+export { SuccessIcon } from "./ReactSVG/SuccessIcon";
+export { WalletIcon } from "./ReactSVG/WalletIcon";
 // socials
 export { TelegramLogoIcon } from "./ReactSVG/socials/TelegramLogoIcon";
 export { XLogoIcon } from "./ReactSVG/socials/XLogoIcon";

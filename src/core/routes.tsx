@@ -21,8 +21,15 @@ import {
   WithdrawPage,
   TransferPage,
   ReferalPage,
+  StackingPage,
 } from "@/pages";
-import { EarnIcon, FriendsIcon, MainIcon, MineIcon } from "@/assets/images";
+import {
+  EarnIcon,
+  FriendsIcon,
+  MainIcon,
+  MineIcon,
+  StackingIcon,
+} from "@/assets/images";
 
 export type Route = {
   path: string;
@@ -64,6 +71,12 @@ export const mainRoutes: Route[] = [
     Component: FriendsPage,
     icon: <FriendsIcon />,
     title: "friends",
+  },
+  {
+    path: "/stacking",
+    Component: StackingPage,
+    icon: <StackingIcon />,
+    title: "stacking",
   },
 ];
 

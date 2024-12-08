@@ -20,7 +20,7 @@ export const Earn = () => {
           ]}
         />
       </header>
-        <Outlet />
+      <Outlet />
       <Navigation />
     </Page>
   );

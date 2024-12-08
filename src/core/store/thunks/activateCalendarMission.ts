@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "@/core/api";
 import { RootState } from "@/core/store";
 
-interface CalendarMissionResponse {
+type CalendarMissionResponse = {
   status: string;
   calendar_mission_activated: boolean;
   award?: {
@@ -11,7 +11,7 @@ interface CalendarMissionResponse {
     currency: string;
     current_day: number;
   };
-}
+};
 
 export const activateCalendarMission = createAsyncThunk(
   "task/activateCalendarMission",
