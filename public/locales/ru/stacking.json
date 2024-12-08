@@ -1,9 +1,11 @@
 {
   "title": "Stacking",
+  "earn-more": "Зарабатывайте больше с каждым стейкингом!",
+  "continue": "Продолжить",
   "features": {
-    "earn": "Earn <span>from 6% to 17%</span> per year.",
-    "time": "You start <span>earning</span> right away",
-    "gift": "Rewards are automatically credited to your deposit <span>every 14 days</span>",
-    "lock": "Simple and transparent income generation conditions"
+    "earn": "Зарабатывайте <span>от 6% до 17%</span> в год.",
+    "time": "Вы сразу начинаете <span>зарабатывать</span>",
+    "gift": "Вознаграждения автоматически зачисляются на ваш депозит <span>каждые 14 дней</span>",
+    "lock": "Простые и прозрачные условия получения дохода"
   }
 }

@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+import { StackingStateType } from "@types";
+
+const initialState: StackingStateType = {
   status: "idle",
+  preview: true,
 };
 
 const stackingSlice = createSlice({

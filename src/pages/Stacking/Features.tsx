@@ -15,11 +15,7 @@ export const Features = () => {
       { opacity: [0, 1], y: [100, 0] },
       { delay: stagger(0.15), duration: 0.25, type: "tween" }
     );
-    await animate(
-      "button",
-      { opacity: [0, 1] },
-      { duration: 0.25, type: "tween" }
-    );
+    animate("button", { opacity: 1 }, { duration: 0.25, type: "tween" });
   };
 
   useEffect(() => {
@@ -44,7 +40,7 @@ export const Features = () => {
         ))}
       </ul>
       <motion.button initial={{ opacity: 0 }} className="primary-button full">
-        Продолжить
+        {t("continue")}
       </motion.button>
     </div>
   );
