@@ -37,7 +37,6 @@ export const StepOne = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         className={styles.header}
-        layoutId="header"
       >
         <h1 className={styles.title}>{t("title")}</h1>
         <h2 className={styles.title}>{t("earn-more")}</h2>

@@ -18,7 +18,11 @@ export { History as HistoryPage } from "./History/History";
 export { Onboarding as OnboardingPage } from "./Onboarding/Onboarding";
 export { Referal as ReferalPage } from "./Referal/Referal";
 export { Settings as SettingsPage } from "./Settings/Settings";
-export { Stacking as StackingPage } from "./Stacking/Stacking";
+export {
+  Stacking as StackingPage,
+  StackingInfo as StackingInfoPage,
+  StackingToken as StackingTokenPage,
+} from "./Stacking";
 export { Transfer as TransferPage } from "./Transfer/Transfer";
 export {
   Wallet as WalletPage,

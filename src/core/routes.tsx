@@ -22,6 +22,8 @@ import {
   TransferPage,
   ReferalPage,
   StackingPage,
+  StackingTokenPage,
+  StackingInfoPage,
 } from "@/pages";
 import {
   EarnIcon,
@@ -98,4 +100,6 @@ export const routes: Route[] = [
   },
   { path: "/wallet/conversion", Component: ConversionPage },
   { path: "/settings", Component: SettingsPage },
+  { path: "/stacking/info", Component: StackingInfoPage },
+  { path: "/stacking/:token", Component: StackingTokenPage },
 ];

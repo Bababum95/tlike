@@ -21,7 +21,6 @@ export const StepTwo: FC<Props> = ({ settings }) => {
         animate={{ x: [50, -15, 0] }}
         transition={{ duration: 0.3 }}
         className={styles.header}
-        layoutId="header"
       >
         <h1 className={styles.title}>{t("title")}</h1>
       </motion.header>
@@ -41,6 +40,7 @@ export const StepTwo: FC<Props> = ({ settings }) => {
               key={index}
               title={`${t("title")} ${setting.currency}`}
               text={text}
+              link={`/stacking/${token}`}
               icon={
                 <img
                   src={`/images/tokens/${token}.webp`}
