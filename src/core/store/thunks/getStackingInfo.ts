@@ -14,7 +14,6 @@ export const getStackingInfo = createAsyncThunk(
         headers: { "x-auth-token": token },
       });
 
-      console.log(response.data);
       return response.data;
     } catch (err) {
       if (err instanceof AxiosError) {

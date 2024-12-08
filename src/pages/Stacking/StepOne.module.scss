@@ -1,0 +1,48 @@
+.header {
+  @include flex-column;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 130%;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+h2.title {
+  margin: 30px 0;
+}
+
+.features {
+  margin: 0 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  @include flex-layout(flex-start, center);
+  gap: 24px;
+  height: 80px;
+  padding: 14px;
+  border-radius: 16px;
+  padding: 14px;
+  background-color: #1f2d50;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+
+.text {
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  margin: 0;
+
+  span {
+    color: $primary;
+    font-weight: 600;
+  }
+}

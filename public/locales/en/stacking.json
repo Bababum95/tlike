@@ -2,6 +2,8 @@
   "title": "Stacking",
   "earn-more": "Earn more with each stacking!",
   "continue": "Continue",
+  "from-per-year": "From {{amount}}% per annum",
+  "get-like-love": "Get Like and Love tokens!",
   "features": {
     "earn": "Earn <span>from 6% to 17%</span> per year.",
     "time": "You start <span>earning</span> right away",

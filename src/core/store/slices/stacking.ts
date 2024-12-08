@@ -1,18 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { StackingStateType } from "@types";
+import type { StackingStateType } from "@types";
+import { getStackingInfo } from "@/core/store/thunks";
 
 const initialState: StackingStateType = {
   status: "idle",
   preview: true,
+  settings: [],
 };
 
 const stackingSlice = createSlice({
   name: "stacking",
   initialState,
-  reducers: {},
-  //   extraReducers: (builder) => {},
+  reducers: {
+    hidePreview: (state) => {
+      state.preview = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getStackingInfo.fulfilled, (state, action) => {
+      state.settings = action.payload.stacking_settings;
+    });
+  },
 });
 
 export default stackingSlice.reducer;
-// export const {  } = taskSlice.actions;
+export const { hidePreview } = stackingSlice.actions;
