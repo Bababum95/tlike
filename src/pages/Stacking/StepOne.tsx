@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, stagger, useAnimate } from "motion/react";
-import classNames from "classnames";
 
 import { useAppDispatch } from "@hooks";
 import { hidePreview } from "@/core/store/slices/stacking";
@@ -62,7 +61,7 @@ export const StepOne = () => {
         variants={{ show: { opacity: 1 }, hidden: { opacity: 0 } }}
         // initial="hidden"
         animate={showButton ? "show" : "hidden"}
-        className={classNames("primary-button full", styles.hidden)}
+        className="primary-button full"
         onClick={handleContinue}
         type="button"
       >
