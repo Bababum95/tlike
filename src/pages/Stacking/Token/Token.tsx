@@ -20,14 +20,14 @@ const getEstimatedAmounts = (
 ): string => {
   if (!rate.min || !value) return "--";
   let output: string;
-  const min = value * (rate.min / 100) * (period / 365) * rate.exchange_rate;
+  const min = value * (rate.min / 100) * (period / 365) / rate.exchange_rate;
 
   output = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 }).format(
     min
   );
 
   if (rate.max) {
-    const max = value * (rate.max / 100) * (period / 365) * rate.exchange_rate;
+    const max = value * (rate.max / 100) * (period / 365) / rate.exchange_rate;
 
     if (max < 0.01) return "--";
 
