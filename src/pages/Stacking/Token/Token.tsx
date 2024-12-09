@@ -1,13 +1,43 @@
 import { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-import type { BalancesType } from "@types";
+import type { BalancesType, StackingRate } from "@types";
 import { useAppSelector } from "@hooks";
 import { BalanceItem, Input, Navigation, Page } from "@/components";
 
 import styles from "./Token.module.scss";
-import classNames from "classnames";
+
+const today = new Date();
+const stackingDate = today.toLocaleDateString("ru-RU").replace(/\./g, "-");
+const endDate = new Date(today);
+
+const getEstimatedAmounts = (
+  value: number,
+  rate: StackingRate,
+  period: number
+): string => {
+  if (!rate.min || !value) return "--";
+  let output: string;
+  const min = value * (rate.min / 100) * (period / 365) * rate.exchange_rate;
+
+  output = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 }).format(
+    min
+  );
+
+  if (rate.max) {
+    const max = value * (rate.max / 100) * (period / 365) * rate.exchange_rate;
+
+    if (max < 0.01) return "--";
+
+    output += `-${new Intl.NumberFormat("ru-RU", {
+      maximumFractionDigits: 2,
+    }).format(max)}`;
+  }
+
+  return output;
+};
 
 export const Token = () => {
   const [value, setValue] = useState("");
@@ -24,9 +54,6 @@ export const Token = () => {
     return <Navigate to="/stacking" />;
   }
 
-  const today = new Date();
-  const stackingDate = today.toLocaleDateString("ru-RU").replace(/\./g, "-");
-  const endDate = new Date(today);
   endDate.setDate(today.getDate() + stackingInfo.period_days);
   const stackingEndDate = endDate
     .toLocaleDateString("ru-RU")
@@ -93,7 +120,11 @@ export const Token = () => {
                     <li className={styles.item} key={rate.currency}>
                       <p className={styles.label}>{rate.currency}</p>
                       <p className={styles.value}>
-                        {`${rate.min}-${rate.max}%`}
+                        {getEstimatedAmounts(
+                          Number(value),
+                          rate,
+                          stackingInfo.period_days
+                        )}
                       </p>
                     </li>
                   )

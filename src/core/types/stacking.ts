@@ -3,7 +3,7 @@ import { StateStatusType } from "./abstract";
 /**
  * Represents the rate settings for a specific currency.
  */
-type Rate = {
+export type StackingRate = {
   /**
    * The currency name for which this rate applies.
    */
@@ -20,6 +20,11 @@ type Rate = {
    * If no maximum exists, this field will be null.
    */
   max: number | null;
+
+  /**
+   * The exchange rate for the currency.
+   */
+  exchange_rate: number;
 };
 
 /**
@@ -44,7 +49,7 @@ export type StackingSettings = {
   /**
    * A list of exchange rates that are applicable to this stacking configuration.
    */
-  rates: Rate[];
+  rates: StackingRate[];
 
   /**
    * The minimum stake value required to participate in stacking.
