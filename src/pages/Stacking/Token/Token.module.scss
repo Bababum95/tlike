@@ -55,3 +55,37 @@ h1.title {
   list-style: none;
   width: 100%;
 }
+
+.toast {
+  .title {
+    text-align: center;
+  }
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 157%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: $hint;
+  margin: 14px 0;
+}
+
+.checkbox {
+  @include flex-center;
+  margin-bottom: 20px;
+  padding-right: 28px;
+
+  .text {
+    color: #fff;
+    max-width: 200px;
+    margin: 0 auto;
+    line-height: 14px;
+  }
+
+  .link {
+    color: $primary;
+    text-decoration: underline;
+  }
+}

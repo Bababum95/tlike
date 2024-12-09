@@ -11,6 +11,11 @@
   "estimated-amount": "Estimated amount to receive:",
   "days": "days",
   "start-stacking": "Start Stacking",
+  "attention": "Attention",
+  "toast-text": "By confirming, you accept the terms of the stacking, and your assets will be blocked for 14 days without the possibility of cancellation",
+  "read": "I have read and accept",
+  "staking-conditions": "Stacking conditions",
+  "confirm": "Confirm",
   "features": {
     "earn": "Earn <span>from 6% to 17%</span> per year.",
     "time": "You start <span>earning</span> right away",

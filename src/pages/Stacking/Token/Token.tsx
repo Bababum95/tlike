@@ -5,7 +5,14 @@ import classNames from "classnames";
 
 import type { BalancesType, StackingRate } from "@types";
 import { useAppSelector } from "@hooks";
-import { BalanceItem, Input, Navigation, Page } from "@/components";
+import {
+  BalanceItem,
+  Input,
+  Navigation,
+  Page,
+  Toast,
+  Link,
+} from "@/components";
 
 import styles from "./Token.module.scss";
 
@@ -20,14 +27,15 @@ const getEstimatedAmounts = (
 ): string => {
   if (!rate.min || !value) return "--";
   let output: string;
-  const min = value * (rate.min / 100) * (period / 365) / rate.exchange_rate;
+  const min = (value * (rate.min / 100) * (period / 365)) / rate.exchange_rate;
 
   output = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 }).format(
     min
   );
 
   if (rate.max) {
-    const max = value * (rate.max / 100) * (period / 365) / rate.exchange_rate;
+    const max =
+      (value * (rate.max / 100) * (period / 365)) / rate.exchange_rate;
 
     if (max < 0.01) return "--";
 
@@ -41,6 +49,7 @@ const getEstimatedAmounts = (
 
 export const Token = () => {
   const [value, setValue] = useState("");
+  const [toastIsOpen, setToastIsOpen] = useState(false);
   const { token } = useParams<{ token: keyof BalancesType }>();
   const { t } = useTranslation("stacking");
   const stackingStore = useAppSelector((state) => state.stacking);
@@ -133,15 +142,38 @@ export const Token = () => {
           </li>
         </ul>
         <button
+          type="button"
+          onClick={() => setToastIsOpen(true)}
           className={classNames("primary-button full", {
             disabled: Number(value) < stackingInfo.min_stake,
           })}
-          type="button"
         >
           {t("start-stacking")}
         </button>
       </div>
       <Navigation />
+      <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
+        <div className={styles.toast}>
+          <h2 className={styles.title}>{t("attention")}</h2>
+          <p className={styles.text}>{t("toast-text")}</p>
+          <label className={styles.checkbox}>
+            <input type="checkbox" className={styles.input} />
+            <p className={styles.text}>
+              {t("read")}{" "}
+              <Link to="/stacking/info" className={styles.link}>
+                {t("staking-conditions")}
+              </Link>
+            </p>
+          </label>
+          <button
+            type="button"
+            onClick={() => setToastIsOpen(false)}
+            className="primary-button full"
+          >
+            {t("confirm")}
+          </button>
+        </div>
+      </Toast>
     </Page>
   );
 };
