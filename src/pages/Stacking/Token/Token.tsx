@@ -23,7 +23,13 @@ export const Token = () => {
     return <Navigate to="/stacking" />;
   }
 
-  console.log(stackingInfo);
+  const today = new Date();
+  const stackingDate = today.toLocaleDateString("ru-RU").replace(/\./g, "-");
+  const endDate = new Date(today);
+  endDate.setDate(today.getDate() + stackingInfo.period_days);
+  const stackingEndDate = endDate
+    .toLocaleDateString("ru-RU")
+    .replace(/\./g, "-");
 
   return (
     <Page>
@@ -32,6 +38,7 @@ export const Token = () => {
           {t("title")} {stackingInfo.currency}
         </h1>
         <BalanceItem name={token} />
+        <div className={styles.space} />
         <Input
           label="Забранировать сумму"
           placeholder={`Минимум ${stackingInfo.min_stake} ${stackingInfo.currency}`}
@@ -41,7 +48,7 @@ export const Token = () => {
           type="number"
         >
           <button
-            className={styles.max}
+            className="max"
             onClick={() => {
               setValue(balances[token].toString());
             }}
@@ -49,6 +56,53 @@ export const Token = () => {
             Max
           </button>
         </Input>
+
+        <ul className={styles.list}>
+          {stackingInfo.rates.map(
+            (rate) =>
+              rate.min && (
+                <li className={styles.item} key={rate.currency}>
+                  <p className={styles.label}>
+                    {t("annum")} {rate.currency}
+                  </p>
+                  <p className={styles.value}>{`${rate.min}-${rate.max}%`}</p>
+                </li>
+              )
+          )}
+          <li className={styles.item}>
+            <p className={styles.label}>{t("stacking-date")}</p>
+            <p className={styles.value}>{stackingDate}</p>
+          </li>
+          <li className={styles.item}>
+            <p className={styles.label}>{t("stacking-time")}</p>
+            <p className={styles.value}>
+              {stackingInfo.period_days} {t("days")}
+            </p>
+          </li>
+          <li className={styles.item}>
+            <p className={styles.label}>{t("stacking-end-date")}</p>
+            <p className={styles.value}>{stackingEndDate}</p>
+          </li>
+          <li className={styles.item}>
+            <p className={styles.title}>{t("estimated-amount")}</p>
+
+            <ul className={styles.estimated}>
+              {stackingInfo.rates.map(
+                (rate) =>
+                  rate.min && (
+                    <li className={styles.item} key={rate.currency}>
+                      <p className={styles.label}>
+                        {t("annum")} {rate.currency}
+                      </p>
+                      <p
+                        className={styles.value}
+                      >{`${rate.min}-${rate.max}%`}</p>
+                    </li>
+                  )
+              )}
+            </ul>
+          </li>
+        </ul>
       </div>
       <Navigation />
     </Page>

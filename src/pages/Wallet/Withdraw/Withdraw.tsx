@@ -222,7 +222,7 @@ export const Withdraw = () => {
           }}
         >
           <button
-            className={styles.max}
+            className="max"
             onClick={() => {
               setErrors({ ...errors, total: null });
               setValues({

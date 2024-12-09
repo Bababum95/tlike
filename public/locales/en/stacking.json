@@ -4,6 +4,12 @@
   "continue": "Continue",
   "from-per-year": "From {{amount}}% per annum",
   "get-like-love": "Get Like and Love tokens!",
+  "annum": "Annual income",
+  "stacking-date": "The date of the staking",
+  "stacking-time": "The time of staking",
+  "stacking-end-date": "Completion date",
+  "estimated-amount": "Estimated amount to receive:",
+  "days": "days",
   "features": {
     "earn": "Earn <span>from 6% to 17%</span> per year.",
     "time": "You start <span>earning</span> right away",
