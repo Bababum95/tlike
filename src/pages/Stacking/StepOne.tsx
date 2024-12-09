@@ -7,6 +7,7 @@ import { hidePreview } from "@/core/store/slices/stacking";
 
 import { FEATURES } from "./config";
 import styles from "./StepOne.module.scss";
+import classNames from "classnames";
 
 export const StepOne = () => {
   const { t } = useTranslation("stacking");
@@ -57,16 +58,15 @@ export const StepOne = () => {
           </li>
         ))}
       </ul>
-      <motion.button
-        variants={{ show: { opacity: 1 }, hidden: { opacity: 0 } }}
-        // initial="hidden"
-        animate={showButton ? "show" : "hidden"}
-        className="primary-button full"
+      <button
+        className={classNames("primary-button full", {
+          [styles.hidden]: !showButton,
+        })}
         onClick={handleContinue}
         type="button"
       >
         {t("continue")}
-      </motion.button>
+      </button>
     </div>
   );
 };
