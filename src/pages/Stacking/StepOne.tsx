@@ -59,10 +59,7 @@ export const StepOne = () => {
         ))}
       </ul>
       <motion.button
-        variants={{
-          show: { opacity: 1 },
-          hidden: { opacity: 0 },
-        }}
+        variants={{ show: { opacity: 1 }, hidden: { opacity: 0 } }}
         initial="hidden"
         animate={showButton ? "show" : "hidden"}
         className={classNames("primary-button full", styles.hidden)}

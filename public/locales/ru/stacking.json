@@ -4,6 +4,13 @@
   "continue": "Продолжить",
   "from-per-year": "От {{amount}}% годовых",
   "get-like-love": "Получайте Like и Love!",
+  "annum": "Годовая доходность",
+  "stacking-date": "Дата стейкинга",
+  "stacking-time": "Время стейкинга",
+  "stacking-end-date": "Дата завершения",
+  "estimated-amount": "Примерная сумма к получению:",
+  "days": "дней",
+  "start-stacking": "Начать стейкинг",
   "features": {
     "earn": "Зарабатывайте <span>от 6% до 17%</span> в год.",
     "time": "Вы сразу начинаете <span>зарабатывать</span>",

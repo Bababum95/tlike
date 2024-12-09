@@ -7,6 +7,7 @@ import { useAppSelector } from "@hooks";
 import { BalanceItem, Input, Navigation, Page } from "@/components";
 
 import styles from "./Token.module.scss";
+import classNames from "classnames";
 
 export const Token = () => {
   const [value, setValue] = useState("");
@@ -34,7 +35,7 @@ export const Token = () => {
   return (
     <Page>
       <div className={styles.page}>
-        <h1>
+        <h1 className={styles.title}>
           {t("title")} {stackingInfo.currency}
         </h1>
         <BalanceItem name={token} />
@@ -85,24 +86,29 @@ export const Token = () => {
           </li>
           <li className={styles.item}>
             <p className={styles.title}>{t("estimated-amount")}</p>
-
             <ul className={styles.estimated}>
               {stackingInfo.rates.map(
                 (rate) =>
                   rate.min && (
                     <li className={styles.item} key={rate.currency}>
-                      <p className={styles.label}>
-                        {t("annum")} {rate.currency}
+                      <p className={styles.label}>{rate.currency}</p>
+                      <p className={styles.value}>
+                        {`${rate.min}-${rate.max}%`}
                       </p>
-                      <p
-                        className={styles.value}
-                      >{`${rate.min}-${rate.max}%`}</p>
                     </li>
                   )
               )}
             </ul>
           </li>
         </ul>
+        <button
+          className={classNames("primary-button full", {
+            disabled: Number(value) < stackingInfo.min_stake,
+          })}
+          type="button"
+        >
+          {t("start-stacking")}
+        </button>
       </div>
       <Navigation />
     </Page>
