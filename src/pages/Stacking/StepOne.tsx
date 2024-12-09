@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, stagger, useAnimate } from "motion/react";
 import classNames from "classnames";
@@ -13,6 +13,7 @@ export const StepOne = () => {
   const { t } = useTranslation("stacking");
   const dispatch = useAppDispatch();
   const [scope, animate] = useAnimate();
+  const [showButton, setShowButton] = useState(false);
 
   const enterAnimation = async () => {
     await animate(
@@ -20,7 +21,7 @@ export const StepOne = () => {
       { opacity: [0, 1], y: [100, 0] },
       { delay: stagger(0.15), duration: 0.25, type: "tween" }
     );
-    animate("button", { opacity: 1 }, { duration: 0.25, type: "tween" });
+    setShowButton(true);
   };
 
   useEffect(() => {
@@ -57,13 +58,19 @@ export const StepOne = () => {
           </li>
         ))}
       </ul>
-      <button
+      <motion.button
+        variants={{
+          show: { opacity: 1 },
+          hidden: { opacity: 0 },
+        }}
+        initial="hidden"
+        animate={showButton ? "show" : "hidden"}
         className={classNames("primary-button full", styles.hidden)}
         onClick={handleContinue}
         type="button"
       >
         {t("continue")}
-      </button>
+      </motion.button>
     </div>
   );
 };
