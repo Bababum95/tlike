@@ -50,6 +50,7 @@ const getEstimatedAmounts = (
 export const Token = () => {
   const [value, setValue] = useState("");
   const [toastIsOpen, setToastIsOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const { token } = useParams<{ token: keyof BalancesType }>();
   const { t } = useTranslation("stacking");
   const stackingStore = useAppSelector((state) => state.stacking);
@@ -153,11 +154,17 @@ export const Token = () => {
       </div>
       <Navigation />
       <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
-        <div className={styles.toast}>
+        <form className={styles.toast}>
           <h2 className={styles.title}>{t("attention")}</h2>
           <p className={styles.text}>{t("toast-text")}</p>
           <label className={styles.checkbox}>
-            <input type="checkbox" className={styles.input} />
+            <input
+              required
+              type="checkbox"
+              className={styles.input}
+              checked={isChecked}
+              onChange={() => setIsChecked(!isChecked)}
+            />
             <p className={styles.text}>
               {t("read")}{" "}
               <Link to="/stacking/info" className={styles.link}>
@@ -166,13 +173,14 @@ export const Token = () => {
             </p>
           </label>
           <button
-            type="button"
-            onClick={() => setToastIsOpen(false)}
-            className="primary-button full"
+            type="submit"
+            className={classNames("primary-button full", {
+              disabled: !isChecked,
+            })}
           >
             {t("confirm")}
           </button>
-        </div>
+        </form>
       </Toast>
     </Page>
   );

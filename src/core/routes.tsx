@@ -11,6 +11,7 @@ import {
   EarnCalendarPage,
   EarnFortunePage,
   EarnTasksPage,
+  GamesPage,
   WalletPage,
   ConversionPage,
   DepositPage,
@@ -28,6 +29,7 @@ import {
 import {
   EarnIcon,
   FriendsIcon,
+  GamesIcon,
   MainIcon,
   MineIcon,
   StackingIcon,
@@ -79,6 +81,12 @@ export const mainRoutes: Route[] = [
     Component: StackingPage,
     icon: <StackingIcon />,
     title: "stacking",
+  },
+  {
+    path: "/games/*",
+    Component: GamesPage,
+    icon: <GamesIcon />,
+    title: "games",
   },
 ];
 

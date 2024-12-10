@@ -19,7 +19,11 @@ type Props = {
  *
  * @returns {JSX.Element} The rendered Toast component.
  */
-export const Toast: FC<Props> = ({ isOpen, onClose, children }) => {
+export const Toast: FC<Props> = ({
+  isOpen,
+  onClose,
+  children,
+}): JSX.Element => {
   return (
     <>
       <motion.div

@@ -6,6 +6,7 @@ export { EarnIcon } from "./ReactSVG/EarnIcon";
 export { ErrorIcon } from "./ReactSVG/ErrorIcon";
 export { FriendsIcon } from "./ReactSVG/FriendsIcon";
 export { FriendIcon } from "./ReactSVG/FriendIcon";
+export { GamesIcon } from "./ReactSVG/GamesIcon";
 export { GiftIcon } from "./ReactSVG/GiftIcon";
 export { HistoryIcon } from "./ReactSVG/HistoryIcon";
 export { LikeIcon } from "./ReactSVG/LikeIcon";
