@@ -11,6 +11,7 @@ import { api } from "@/core/api";
 import {
   activateCalendarMission,
   checkTask,
+  startStacking,
   withdraw,
 } from "@/core/store/thunks";
 
@@ -376,6 +377,14 @@ const userSlice = createSlice({
         state.balances.love -= Number(action.meta.arg.amount);
       })
       .addCase(withdraw.fulfilled, (state, action) => {
+        const token = action.meta.arg.currency.toLowerCase();
+        if (token in state.balances) {
+          state.balances[token as keyof BalancesType] -= Number(
+            action.meta.arg.amount
+          );
+        }
+      })
+      .addCase(startStacking.fulfilled, (state, action) => {
         const token = action.meta.arg.currency.toLowerCase();
         if (token in state.balances) {
           state.balances[token as keyof BalancesType] -= Number(

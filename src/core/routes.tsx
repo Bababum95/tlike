@@ -12,6 +12,7 @@ import {
   EarnFortunePage,
   EarnTasksPage,
   GamesPage,
+  GameOpenChestPage,
   WalletPage,
   ConversionPage,
   DepositPage,
@@ -83,7 +84,7 @@ export const mainRoutes: Route[] = [
     title: "stacking",
   },
   {
-    path: "/games/*",
+    path: "/games",
     Component: GamesPage,
     icon: <GamesIcon />,
     title: "games",
@@ -110,4 +111,5 @@ export const routes: Route[] = [
   { path: "/settings", Component: SettingsPage },
   { path: "/stacking/info", Component: StackingInfoPage },
   { path: "/stacking/:token", Component: StackingTokenPage },
+  { path: "/games/open-chest", Component: GameOpenChestPage },
 ];

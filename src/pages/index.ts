@@ -6,7 +6,10 @@ export {
   EarnTasks as EarnTasksPage,
 } from "./Earn";
 export { Friends as FriendsPage } from "./Friends/Friends";
-export { Games as GamesPage } from "./Games/Games";
+export {
+  Games as GamesPage,
+  GameOpenChest as GameOpenChestPage,
+} from "./Games";
 export { Main as MainPage } from "./Main/Main";
 export {
   Mine as MinePage,

@@ -1,0 +1,25 @@
+.loader {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 72px;
+    height: 72px;
+    border: solid 2px;
+    border-color: $primary $primary transparent transparent;
+    border-radius: 100%;
+    transition: 0.3s ease;
+    transform-origin: 0 0;
+    :global {
+      animation: spin 1s infinite;
+    }
+  }
+}

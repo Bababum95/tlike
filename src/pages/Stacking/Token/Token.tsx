@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import type { BalancesType, StackingRate } from "@types";
-import { useAppSelector } from "@hooks";
+import { useAppSelector, useAppDispatch } from "@hooks";
 import {
   BalanceItem,
   Input,
@@ -13,6 +13,7 @@ import {
   Toast,
   Link,
 } from "@/components";
+import { startStacking } from "@/core/store/thunks";
 
 import styles from "./Token.module.scss";
 
@@ -51,23 +52,45 @@ export const Token = () => {
   const [value, setValue] = useState("");
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { token } = useParams<{ token: keyof BalancesType }>();
   const { t } = useTranslation("stacking");
   const stackingStore = useAppSelector((state) => state.stacking);
   const balances = useAppSelector((state) => state.user.balances);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const stackingInfo = stackingStore.settings.find(
     (t) => t.currency.toLowerCase() === token
   );
 
   if (!stackingInfo || !token || !balances[token]) {
-    return <Navigate to="/stacking" />;
+    navigate("/stacking");
+    return;
   }
 
   endDate.setDate(today.getDate() + stackingInfo.period_days);
   const stackingEndDate = endDate
     .toLocaleDateString("ru-RU")
     .replace(/\./g, "-");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isChecked) return;
+
+    setIsLoading(true);
+
+    const result = await dispatch(
+      startStacking({ currency: stackingInfo.currency, amount: Number(value) })
+    );
+
+    if (result.meta.requestStatus === "fulfilled") {
+      navigate("/stacking");
+    }
+
+    setIsLoading(false);
+    setToastIsOpen(false);
+  };
 
   return (
     <Page>
@@ -154,7 +177,7 @@ export const Token = () => {
       </div>
       <Navigation />
       <Toast isOpen={toastIsOpen} onClose={() => setToastIsOpen(false)}>
-        <form className={styles.toast}>
+        <form className={styles.toast} onSubmit={handleSubmit}>
           <h2 className={styles.title}>{t("attention")}</h2>
           <p className={styles.text}>{t("toast-text")}</p>
           <label className={styles.checkbox}>
@@ -176,6 +199,7 @@ export const Token = () => {
             type="submit"
             className={classNames("primary-button full", {
               disabled: !isChecked,
+              loading: isLoading,
             })}
           >
             {t("confirm")}

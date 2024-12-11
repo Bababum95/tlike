@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { StackingStateType } from "@types";
-import { getStackingInfo } from "@/core/store/thunks";
+import { getStackingInfo, startStacking } from "@/core/store/thunks";
 
 const initialState: StackingStateType = {
   status: "idle",
   preview: true,
   settings: [],
+  open: [],
 };
 
 const stackingSlice = createSlice({
@@ -18,9 +19,14 @@ const stackingSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getStackingInfo.fulfilled, (state, action) => {
-      state.settings = action.payload.stacking_settings;
-    });
+    builder
+      .addCase(getStackingInfo.fulfilled, (state, action) => {
+        state.settings = action.payload.stacking_settings;
+        state.open = action.payload.open_stackings;
+      })
+      .addCase(startStacking.fulfilled, (state, action) => {
+        state.status = "idle";
+      });
   },
 });
 

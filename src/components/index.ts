@@ -18,6 +18,7 @@ export { Notice } from "./Notice/Notice";
 export { Select } from "./Select/Select";
 export { SelectBalance } from "./SelectBalance/SelectBalance";
 export { Slider } from "./Slider/Slider";
+export { Spiner } from "./Spiner/Spiner";
 export { TabBar } from "./TabBar/TabBar";
 export { Toast } from "./Toast/Toast";
 export { User } from "./User/User";

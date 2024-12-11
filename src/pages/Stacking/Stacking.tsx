@@ -17,7 +17,10 @@ export const Stacking = () => {
           {stackingStore.preview ? (
             <StepOne />
           ) : (
-            <StepTwo settings={stackingStore.settings} />
+            <StepTwo
+              settings={stackingStore.settings}
+              openStackings={stackingStore.open}
+            />
           )}
         </div>
       </AnimatePresence>

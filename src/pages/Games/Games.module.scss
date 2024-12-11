@@ -1,0 +1,24 @@
+.page {
+  padding: 20px 24px 100px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  @include border-gradient;
+  border-radius: 16px;
+}
+
+.image {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+}
+
+.button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 190px;
+}

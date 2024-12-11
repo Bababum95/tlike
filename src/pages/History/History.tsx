@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import classNames from "classnames";
 
 import { ChevronRightIcon } from "@images";
-import { Empty } from "@/components";
+import { Empty, Spiner } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
 import { getHistory } from "@/core/store/slices/history";
 
@@ -45,7 +45,7 @@ export const History = () => {
     <div className={styles.page}>
       <h1 className={styles.title}>{t("transaction-history")}</h1>
       {(historyStore.status === "loading" ||
-        historyStore.status === "idle") && <div className={styles.loader} />}
+        historyStore.status === "idle") && <Spiner />}
       {historyStore.records.length ? (
         <>
           <motion.ul
