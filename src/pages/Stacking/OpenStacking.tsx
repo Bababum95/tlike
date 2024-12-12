@@ -18,13 +18,19 @@ import styles from "./OpenStacking.module.scss";
 const getFormattedDate = (date: string): string => {
   const dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleDateString("ru-RU").replace(/\./g, "-");
-  const hours = dateObj.getHours();
-  const minutes = dateObj.getMinutes();
+  let hours: number | string = dateObj.getHours();
+  let minutes: number | string = dateObj.getMinutes();
+
+  if (hours < 10) hours = `0${hours}`;
+  if (minutes < 10) minutes = `0${minutes}`;
 
   return `${formattedDate}, ${hours}:${minutes}`;
 };
 
-type Props = OpenStackingType & { delay?: number };
+type Props = OpenStackingType & {
+  delay?: number;
+  onClaim: (id: number) => Promise<void>;
+};
 
 export const OpenStacking: FC<Props> = ({
   session_id,
@@ -35,11 +41,19 @@ export const OpenStacking: FC<Props> = ({
   rewards,
   is_completed,
   delay = 0,
+  onClaim,
 }) => {
   const { t } = useTranslation("stacking");
+  const [loading, setLoading] = useState<boolean>(false);
   const [claimTime, setClaimTime] = useState<string>(
     timeUtils.getCountdown(end_date)
   );
+
+  const handleClaim = async () => {
+    setLoading(true);
+    await onClaim(session_id);
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (is_completed || claimTime === "00:00:00") return;
@@ -97,10 +111,12 @@ export const OpenStacking: FC<Props> = ({
       </div>
       <button
         className={classNames("primary-button full", {
-          disabled: !is_completed,
+          disabled: !is_completed && claimTime !== "00:00:00",
+          loading,
         })}
+        onClick={handleClaim}
       >
-        {is_completed ? "Забрать" : claimTime}
+        {is_completed || claimTime === "00:00:00" ? "Забрать" : claimTime}
       </button>
     </motion.li>
   );

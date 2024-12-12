@@ -13,6 +13,7 @@ import {
   checkTask,
   startStacking,
   withdraw,
+  claimStacking,
 } from "@/core/store/thunks";
 
 const initialState: UserStateType = {
@@ -391,6 +392,21 @@ const userSlice = createSlice({
             action.meta.arg.amount
           );
         }
+      })
+      .addCase(claimStacking.fulfilled, (state, action) => {
+        const token = action.payload.currency.toLowerCase();
+        if (token in state.balances) {
+          state.balances[token as keyof BalancesType] +=
+            action.payload.staked_amount;
+        }
+        action.payload.rewards.forEach(
+          (reward: { currency: string; amount?: number | null }) => {
+            const token = reward.currency.toLowerCase();
+            if (token in state.balances && reward.amount) {
+              state.balances[token as keyof BalancesType] += reward.amount;
+            }
+          }
+        );
       })
       .addCase(activateCalendarMission.fulfilled, (state, { payload }) => {
         if (payload.award?.amount) {

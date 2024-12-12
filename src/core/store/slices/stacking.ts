@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { StackingStateType } from "@types";
-import { getStackingInfo, startStacking } from "@/core/store/thunks";
+import {
+  claimStacking,
+  getStackingInfo,
+  startStacking,
+} from "@/core/store/thunks";
 
 const initialState: StackingStateType = {
   status: "idle",
@@ -27,6 +31,12 @@ const stackingSlice = createSlice({
       .addCase(startStacking.fulfilled, (state, action) => {
         state.status = "idle";
         console.log(action.payload);
+      })
+      .addCase(claimStacking.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.open = state.open.filter(
+          (item) => item.session_id !== action.payload.session_id
+        );
       });
   },
 });

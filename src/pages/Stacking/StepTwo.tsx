@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
 
@@ -6,8 +6,10 @@ import type {
   StackingSettings,
   OpenStacking as OpenStackingType,
 } from "@types";
-import { ChevronRightIcon } from "@images";
-import { Item, List } from "@/components";
+import { useAppDispatch } from "@hooks";
+import { ChevronRightIcon, SuccessIcon } from "@images";
+import { Item, List, Toast } from "@/components";
+import { claimStacking } from "@/core/store/thunks";
 
 import { OpenStacking } from "./OpenStacking";
 import styles from "./StepTwo.module.scss";
@@ -18,7 +20,20 @@ type Props = {
 };
 
 export const StepTwo: FC<Props> = ({ settings, openStackings }) => {
+  const [claimToast, setClaimToast] = useState<boolean>(false);
   const { t } = useTranslation("stacking");
+  const dispatch = useAppDispatch();
+
+  const closeToast = () => {
+    setClaimToast(false);
+  };
+
+  const handleClaim = async (id: number) => {
+    const result = await dispatch(claimStacking(id));
+    if (result.meta.requestStatus === "fulfilled") {
+      setClaimToast(true);
+    }
+  };
 
   return (
     <div>
@@ -71,12 +86,26 @@ export const StepTwo: FC<Props> = ({ settings, openStackings }) => {
               <OpenStacking
                 key={stacking.session_id}
                 delay={index * 0.1}
+                onClaim={handleClaim}
                 {...stacking}
               />
             ))}
           </ul>
         </motion.section>
       )}
+      <Toast isOpen={claimToast} onClose={closeToast}>
+        <div className={styles.toast}>
+          <SuccessIcon />
+          <p>Ваш баланс пополнен!</p>
+          <button
+            className="primary-button full"
+            onClick={closeToast}
+            type="button"
+          >
+            Продолжить
+          </button>
+        </div>
+      </Toast>
     </div>
   );
 };
