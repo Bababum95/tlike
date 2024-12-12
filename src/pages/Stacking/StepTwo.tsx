@@ -2,15 +2,19 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
 
-import type { StackingSettings, OpenStacking } from "@types";
+import type {
+  StackingSettings,
+  OpenStacking as OpenStackingType,
+} from "@types";
 import { ChevronRightIcon } from "@images";
 import { Item, List } from "@/components";
 
+import { OpenStacking } from "./OpenStacking";
 import styles from "./StepTwo.module.scss";
 
 type Props = {
   settings: StackingSettings[];
-  openStackings: OpenStacking[];
+  openStackings: OpenStackingType[];
 };
 
 export const StepTwo: FC<Props> = ({ settings, openStackings }) => {
@@ -64,20 +68,7 @@ export const StepTwo: FC<Props> = ({ settings, openStackings }) => {
           <h2 className={styles.title}>Open stackings</h2>
           <ul className={styles.list}>
             {openStackings.map((stacking) => (
-              <li key={stacking.session_id} className={styles.item}>
-                <div className={styles.header}>
-                  <img
-                    src={`/images/tokens/${stacking.currency.toLowerCase()}.webp`}
-                    width={26}
-                    height={28}
-                    className={styles.icon}
-                  />
-                  <p className={styles.title}>{t("title")}</p>
-                  <p className={styles.amount}>
-                    {stacking.staked_amount} {stacking.currency}
-                  </p>
-                </div>
-              </li>
+              <OpenStacking key={stacking.session_id} {...stacking} />
             ))}
           </ul>
         </motion.section>

@@ -44,9 +44,11 @@ export const Calendar = () => {
   useEffect(() => {
     if (calendar.can_claim_today) return;
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setNextClaimTime(timeUtils.getCountdown(calendar.next_claim_date));
     }, 1000);
+
+    return () => clearTimeout(timer);
   }, [calendar.can_claim_today, nextClaimTime]);
 
   return (
