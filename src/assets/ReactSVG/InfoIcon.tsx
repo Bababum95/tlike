@@ -1,9 +1,5 @@
-import React from 'react'
-
 const InfoIcon = () => {
-  return (
-    <div>InfoIcon</div>
-  )
-}
+  return <div>InfoIcon</div>;
+};
 
-export default InfoIcon
+export default InfoIcon;
