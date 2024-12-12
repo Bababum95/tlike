@@ -10,6 +10,17 @@
   }
 }
 
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $section;
+  border-radius: 16px;
+  z-index: -1;
+}
+
 .row {
   @include flex-layout(space-between, center);
   gap: 14px;

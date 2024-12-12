@@ -67,8 +67,12 @@ export const StepTwo: FC<Props> = ({ settings, openStackings }) => {
         >
           <h2 className={styles.title}>Open stackings</h2>
           <ul className={styles.list}>
-            {openStackings.map((stacking) => (
-              <OpenStacking key={stacking.session_id} {...stacking} />
+            {openStackings.map((stacking, index) => (
+              <OpenStacking
+                key={stacking.session_id}
+                delay={index * 0.1}
+                {...stacking}
+              />
             ))}
           </ul>
         </motion.section>

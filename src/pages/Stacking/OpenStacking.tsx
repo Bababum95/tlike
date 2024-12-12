@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "motion/react";
 import classNames from "classnames";
 
 import type { OpenStacking as OpenStackingType } from "@types";
@@ -23,7 +24,9 @@ const getFormattedDate = (date: string): string => {
   return `${formattedDate}, ${hours}:${minutes}`;
 };
 
-export const OpenStacking: FC<OpenStackingType> = ({
+type Props = OpenStackingType & { delay?: number };
+
+export const OpenStacking: FC<Props> = ({
   session_id,
   currency,
   staked_amount,
@@ -31,6 +34,7 @@ export const OpenStacking: FC<OpenStackingType> = ({
   end_date,
   rewards,
   is_completed,
+  delay = 0,
 }) => {
   const { t } = useTranslation("stacking");
   const [claimTime, setClaimTime] = useState<string>(
@@ -48,7 +52,13 @@ export const OpenStacking: FC<OpenStackingType> = ({
   }, [end_date, is_completed, claimTime]);
 
   return (
-    <li key={session_id} className={styles.item}>
+    <motion.li
+      key={session_id}
+      className={styles.item}
+      animate={{ opacity: [0, 1], y: [100, 0], scale: [0.8, 1] }}
+      transition={{ duration: 0.25, delay: 0.15 + delay, type: "tween" }}
+    >
+      <div className={styles.background} />
       <div className={styles.row}>
         <img
           src={`/images/tokens/${currency.toLowerCase()}.webp`}
@@ -92,6 +102,6 @@ export const OpenStacking: FC<OpenStackingType> = ({
       >
         {is_completed ? "Забрать" : claimTime}
       </button>
-    </li>
+    </motion.li>
   );
 };
