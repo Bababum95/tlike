@@ -30,7 +30,7 @@ const stackingSlice = createSlice({
       })
       .addCase(startStacking.fulfilled, (state, action) => {
         state.status = "idle";
-        console.log(action.payload);
+        state.open.push(action.payload);
       })
       .addCase(claimStacking.fulfilled, (state, action) => {
         state.status = "idle";
