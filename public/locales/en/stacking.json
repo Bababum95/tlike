@@ -16,6 +16,10 @@
   "read": "I have read and accept",
   "staking-conditions": "Stacking conditions",
   "confirm": "Confirm",
+  "start": "Beginning",
+  "end": "Ending",
+  "reserve-amount": "Book an amount",
+  "min": "Minimum",
   "features": {
     "earn": "Earn <span>from 6% to 17%</span> per year.",
     "time": "You start <span>earning</span> right away",

@@ -19,6 +19,9 @@
   "fortune": "Fortune Wheel",
   "day": "day",
   "get": "get",
+  "take": "Take",
+  "claim": "Pick up a reward each day for logging into the app",
+  "toast-description": "Reward for <span>day {{ day }}</span>!",
   "story": {
     "title": "Share a post and earn rewards!",
     "text": "New features with NFT mining",

@@ -101,8 +101,8 @@ export const Token = () => {
         <BalanceItem name={token} />
         <div className={styles.space} />
         <Input
-          label="Забранировать сумму"
-          placeholder={`Минимум ${stackingInfo.min_stake} ${stackingInfo.currency}`}
+          label={t("reserve-amount")}
+          placeholder={`${t("min")} ${stackingInfo.min_stake} ${stackingInfo.currency}`}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           max={balances[token]}

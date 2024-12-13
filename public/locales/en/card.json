@@ -1,40 +1,43 @@
 {
   "title": "Card",
+  "parameters": "card Parameters",
+  "card-advantages": "Card advantages",
+  "activation-conditions": "Activation conditions",
   "advantages": {
     "conversion_fee": {
-      "title": "Комиссия за конвертацию",
-      "description": "{{amount}} % от суммы"
+      "title": "Conversion fee",
+      "description": "{{amount}} % of the amount"
     },
     "usdt_fee": {
-      "title": "Комиссия за отправку USDT",
-      "description": "{{amount}} USDT независимо от суммы"
+      "title": "The commission for sending USDT",
+      "description": "{{amount}} USDT regardless of the amount"
     },
     "ton_fee": {
-      "title": "Комиссия за отправку TON",
-      "description": "{{amount}} TON независимо от суммы"
+      "title": "The commission for sending a TON",
+      "description": "{{amount}} TON regardless of the amount"
     },
     "like_fee": {
-      "title": "Комиссия за отправку Like",
-      "description_zero": "Нет комиссии за Like !",
-      "description_other": "{{amount}} Like независимо от суммы"
+      "title": "Commission for sending Like",
+      "description_zero": "No commission for Like!",
+      "description_other": "{{amount}} Like regardless of the amount"
     },
     "love_fee": {
-      "title": "Комиссия за отправку Love",
-      "description_zero": "Нет комиссии за Like !",
-      "description_other": "{{amount}} % независимо от суммы"
+      "title": "The commission for sending Love",
+      "description_zero": "No commission for Like!",
+      "description_other": "{{amount}} % regardless of the amount"
     }
   },
   "requirements": {
     "nft": {
-      "title": "Владение минимум нашими {{amount}} NFT",
-      "description": "NFT должны находиться непосредственно в кошельке"
+      "title": "Ownership of at least our {{amount}} NFT",
+      "description": "The NFT must be located directly in the wallet"
     },
     "stacking": {
-      "title": "Активная механика стейкинга",
-      "description": "Стейкинг USDT на сумму от {{amount}}$ и выше"
+      "title": "Active staking mechanics",
+      "description": "USDT staking in the amount of $ {{amount}} and above"
     },
     "platinum": {
-      "title": "Наличие NFT \"Platinum card\" в кошельке"
+      "title": "The presence of the NFT \"Platinum card\" in the wallet"
     }
   }
 }

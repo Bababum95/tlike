@@ -87,11 +87,11 @@ export const OpenStacking: FC<Props> = ({
       </div>
       <div className={styles.time}>
         <div className={styles.row}>
-          <p className={styles.label}>Начало:</p>
+          <p className={styles.label}>{t("start")}:</p>
           <p className={styles.value}>{getFormattedDate(start_date)}</p>
         </div>
         <div className={styles.row}>
-          <p className={styles.label}>Окончание:</p>
+          <p className={styles.label}>{t("end")}:</p>
           <p className={styles.value}>{getFormattedDate(end_date)}</p>
         </div>
       </div>

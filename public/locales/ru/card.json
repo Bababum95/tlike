@@ -1,5 +1,8 @@
 {
-  "title": "Card",
+  "title": "Карта",
+  "parameters": "Параметры карты",
+  "card-advantages": "Преимущества карты",
+  "activation-conditions": "Условия активации",
   "advantages": {
     "conversion_fee": {
       "title": "Комиссия за конвертацию",

@@ -123,7 +123,7 @@ export const Card = () => {
         {advantages && (
           <div className={styles.section}>
             <h3 className={styles.title}>
-              {type === "silver" ? "Параметры карты" : "Преимущества карты"}
+              {type === "silver" ? t("parameters") : t("card-advantages")}
             </h3>
             <ul className={styles.list}>
               {CARD_ADVANTAGES.map((item, index) => (
@@ -152,7 +152,7 @@ export const Card = () => {
         )}
         {requirements && (
           <div className={styles.section}>
-            <h3 className={styles.title}>Условия активации</h3>
+            <h3 className={styles.title}>{t("activation-conditions")}</h3>
             <ul className={styles.list}>
               {advantages.nft_requirement && (
                 <Item

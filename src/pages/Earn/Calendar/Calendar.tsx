@@ -97,16 +97,14 @@ export const Calendar = () => {
           </ul>
         </div>
         <div className={styles.claim}>
-          <p className={styles.text}>
-            Забирайте награду каждый день за вход в приложение
-          </p>
+          <p className={styles.text}>{t("claim")}</p>
           <button
             className={classNames("primary-button full", {
               disabled: !calendar.can_claim_today,
             })}
             onClick={() => setToastIsOpen(true)}
           >
-            {calendar.can_claim_today ? "Получить" : nextClaimTime}
+            {calendar.can_claim_today ? t("get") : nextClaimTime}
           </button>
         </div>
       </div>
@@ -123,20 +121,19 @@ export const Calendar = () => {
           height={110}
           className="toast-icon"
         />
-        <p className="toast-description">
-          Награда за{" "}
-          <span>
-            {calendar.current_day} {t("day")}
-          </span>
-          !
-        </p>
+        <p
+          className="toast-description"
+          dangerouslySetInnerHTML={{
+            __html: t("toast-description", { day: calendar.current_day }),
+          }}
+        />
         <p className="toast-value">
           +{" "}
           {new Intl.NumberFormat("ru-RU").format(currentDay?.award_amount || 0)}{" "}
           {currentDay?.award_currency}
         </p>
         <button onClick={handleClaim} className="primary-button full">
-          Забрать
+          {t("take")}
         </button>
       </Toast>
     </motion.main>
