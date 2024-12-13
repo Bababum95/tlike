@@ -12,6 +12,20 @@ import { CARD_ADVANTAGES } from "@config";
 
 import styles from "./Card.module.scss";
 
+type LabelProps = {
+  text: string;
+  success: boolean;
+};
+
+const Label: FC<LabelProps> = ({ text, success }) => {
+  return (
+    <span className={styles.tab}>
+      <span>{text}</span>
+      {success && <SuccessIcon />}
+    </span>
+  );
+};
+
 type ItemProps = {
   delay: number;
   title: string;
@@ -65,9 +79,9 @@ export const Card = () => {
         active={type}
         onClick={(id) => setType(id as CardType)}
         links={[
-          { label: "Silver", id: "silver" },
-          { label: "Gold", id: "gold" },
-          { label: "Platinum", id: "platinum" },
+          { label: <Label text="Silver" success={true} />, id: "silver" },
+          { label: <Label text="Gold" success={false} />, id: "gold" },
+          { label: <Label text="Platinum" success={false} />, id: "platinum" },
         ]}
       />
       <motion.div

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
+import { useParams } from "react-router-dom";
 import classNames from "classnames";
 
 import { ChevronRightIcon } from "@images";
@@ -29,11 +30,12 @@ const formatedDate = (dateStr: string) => {
 export const History = () => {
   const [page, setPage] = useState(1);
   const { t } = useTranslation("wallet");
+  const { type } = useParams<{ type?: string }>();
   const dispatch = useAppDispatch();
   const historyStore = useAppSelector((state) => state.history);
 
   useEffect(() => {
-    dispatch(getHistory({ page }));
+    dispatch(getHistory({ page, type }));
     scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 

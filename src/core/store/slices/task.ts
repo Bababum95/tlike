@@ -12,6 +12,7 @@ import {
 const initialState: TaskStateType = {
   status: "idle",
   initial: [],
+  daily: [],
   calendar: {
     can_claim_today: false,
     current_day: 1,

@@ -7,8 +7,8 @@ import type {
   OpenStacking as OpenStackingType,
 } from "@types";
 import { useAppDispatch } from "@hooks";
-import { ChevronRightIcon, SuccessIcon } from "@images";
-import { Item, List, Toast } from "@/components";
+import { ChevronRightIcon, InfoIcon, SuccessIcon, HistoryIcon } from "@images";
+import { Item, List, Toast, Link } from "@/components";
 import { claimStacking } from "@/core/store/thunks";
 
 import { OpenStacking } from "./OpenStacking";
@@ -43,6 +43,14 @@ export const StepTwo: FC<Props> = ({ settings, openStackings }) => {
         className={styles.header}
       >
         <h1 className={styles.title}>{t("title")}</h1>
+        <div className={styles.navigation}>
+          <Link to="/stacking/info">
+            <InfoIcon />
+          </Link>
+          <Link to="/wallet/history">
+            <HistoryIcon />
+          </Link>
+        </div>
       </motion.header>
       <List>
         {settings.map((setting, index) => {

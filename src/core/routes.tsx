@@ -96,7 +96,7 @@ export const routes: Route[] = [
   { path: "/onboarding", Component: OnboardingPage },
   { path: "/referal", Component: ReferalPage },
   { path: "/wallet", Component: WalletPage },
-  { path: "/wallet/history", Component: HistoryPage },
+  { path: "/wallet/history/:type?", Component: HistoryPage },
   { path: "/wallet/withdraw", Component: WithdrawPage },
   { path: "/wallet/transfer", Component: TransferPage },
   {

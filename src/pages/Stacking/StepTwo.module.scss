@@ -1,4 +1,5 @@
 .header {
+  @include flex-layout(space-between, center);
   margin-bottom: 20px;
 }
 
@@ -8,6 +9,11 @@
   font-size: 20px;
   line-height: 130%;
   letter-spacing: 0.01em;
+}
+
+.navigation {
+  @include flex-layout(flex-end, center);
+  gap: 14px;
 }
 
 .section {

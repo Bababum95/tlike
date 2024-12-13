@@ -6,7 +6,7 @@ import { HistoryStateType } from "@/core/types";
 
 export const getHistory = createAsyncThunk(
   "history/getHistory",
-  async ({ page }: { page: number }, { getState, rejectWithValue }) => {
+  async ({ page }: { page: number; type?: string }, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const { token } = state.user;
     try {

@@ -1,0 +1,33 @@
+.page {
+  padding: 20px 24px 100px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 130%;
+  letter-spacing: 0.01em;
+}
+
+.content {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: 0.01em;
+
+  h2 {
+    font-weight: 700;
+    font-size: inherit;
+
+    &:not(:first-child) {
+      margin: 20px 0 0;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style: disc;
+  }
+}

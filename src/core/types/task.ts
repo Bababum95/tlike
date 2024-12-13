@@ -17,7 +17,7 @@ type TaskType = {
   activation_date: string;
   redirect_url: string;
   status: TaskStatusType;
-  mission_type: "link" | "telegram_check";
+  mission_type: "link" | "telegram_check" | "story" | "code";
 };
 
 export type TaskStateType = {
@@ -35,4 +35,5 @@ export type TaskStateType = {
     }[];
   };
   initial: TaskType[];
+  daily: TaskType[];
 };

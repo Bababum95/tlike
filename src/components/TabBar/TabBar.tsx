@@ -1,4 +1,4 @@
-import { FC, useId } from "react";
+import { type FC, type ReactNode, useId } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 
@@ -9,7 +9,7 @@ import styles from "./TabBar.module.scss";
 type LinkProps = {
   type: "link";
   links: {
-    label: string;
+    label: ReactNode;
     path: string;
   }[];
 };
@@ -19,7 +19,7 @@ type ButtonProps = {
   onClick: (id: string) => void;
   active: string;
   links: {
-    label: string;
+    label: ReactNode;
     id: string;
   }[];
 };

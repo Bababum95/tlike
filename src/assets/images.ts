@@ -9,6 +9,7 @@ export { FriendIcon } from "./ReactSVG/FriendIcon";
 export { GamesIcon } from "./ReactSVG/GamesIcon";
 export { GiftIcon } from "./ReactSVG/GiftIcon";
 export { HistoryIcon } from "./ReactSVG/HistoryIcon";
+export { InfoIcon } from "./ReactSVG/InfoIcon";
 export { LikeIcon } from "./ReactSVG/LikeIcon";
 export { LoveIcon } from "./ReactSVG/LoveIcon";
 export { MainIcon } from "./ReactSVG/MainIcon";
